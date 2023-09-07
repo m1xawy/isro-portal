@@ -22,15 +22,7 @@
             <main>
                 <div class="py-12">
                     <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                        <div class="lg:flex lg:flex-wrap m-4">
-                            <div class="md:w-2/3 p-4">
-                                @yield('content')
-                            </div>
-
-                            <aside class="md:w-1/3 p-4">
-                                @include('partials.sidebar')
-                            </aside>
-                        </div>
+                        @yield('content')
                     </div>
                 </div>
             </main>
