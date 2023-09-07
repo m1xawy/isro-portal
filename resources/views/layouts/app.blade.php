@@ -5,11 +5,22 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
-        <title>{{ config('app.name', 'Laravel') }} - @yield('title')</title>
+        <title>{{ nova_get_setting('server_name', config('app.name', 'Laravel')) }} - @yield('title')</title>
+        <meta name="description" content="{{ nova_get_setting('server_desc', '') }}">
+        <link rel="shortcut icon" href="{{ asset(Storage::url(nova_get_setting('server_favicon'))) }}">
 
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">
         <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
+
+        <!-- SEO -->
+        <meta property="og:url" content="{{ nova_get_setting('server_url') }}" />
+        <meta property="og:locale" content="{{ language()->getCode() }}" />
+        <meta property="og:type" content="website" />
+        <meta property="og:site_name" content="{{ nova_get_setting('server_name', config('app.name', 'Laravel')) }}"/>
+        <meta property="og:title" content="{{ nova_get_setting('server_name', config('app.name', 'Laravel')) }} - @yield('title')" />
+        <meta property="og:image" content="{{ asset(Storage::url(nova_get_setting('server_logo'))) }}" />
+        <meta property="og:image:secure_url" content="{{ asset(Storage::url(nova_get_setting('server_logo'))) }}" />
 
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])

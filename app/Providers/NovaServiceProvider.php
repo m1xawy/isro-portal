@@ -4,8 +4,12 @@ namespace App\Providers;
 
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Gate;
+use Laravel\Nova\Fields\Image;
+use Laravel\Nova\Fields\Number;
+use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Nova;
 use Laravel\Nova\NovaApplicationServiceProvider;
+use Outl1ne\NovaSettings\NovaSettings;
 
 class NovaServiceProvider extends NovaApplicationServiceProvider
 {
@@ -26,6 +30,17 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
             ');
         });
 
+        NovaSettings::addSettingsFields([
+            Text::make('Server Name', 'server_name'),
+            Text::make('Description', 'server_desc'),
+            Text::make('Server Url', 'server_url'),
+            Image::make('Favicon', 'server_favicon'),
+            Image::make('Logo', 'server_logo'),
+        ], [], 'General');
+
+        NovaSettings::addSettingsFields([
+            Number::make('Ranking Cache', 'ranking_cache'),
+        ], [], 'Cache');
     }
 
     /**
@@ -74,7 +89,9 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
      */
     public function tools()
     {
-        return [];
+        return [
+            new NovaSettings,
+        ];
     }
 
     /**
