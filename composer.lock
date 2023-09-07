@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f7333ada43e002c010fb862c418b3df7",
+    "content-hash": "20b055588228f00dfa7c6a17eeb46b6e",
     "packages": [
         {
             "name": "akaunting/laravel-language",
@@ -3230,6 +3230,56 @@
             "time": "2023-08-13T19:53:39+00:00"
         },
         {
+            "name": "nova-kit/nova-packages-tool",
+            "version": "v1.11.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/nova-kit/nova-packages-tool.git",
+                "reference": "b1286a662527c8e030145103e92fdc0762393e1e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/nova-kit/nova-packages-tool/zipball/b1286a662527c8e030145103e92fdc0762393e1e",
+                "reference": "b1286a662527c8e030145103e92fdc0762393e1e",
+                "shasum": ""
+            },
+            "require": {
+                "laravel/nova": ">=4.26.0 <4.27.0",
+                "php": "^7.3 || ^8.0"
+            },
+            "require-dev": {
+                "orchestra/testbench": "^6.24 || ^7.0 || ^8.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "NovaKit\\NovaPackagesTool\\LaravelServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "NovaKit\\NovaPackagesTool\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Mior Muhammad Zaki",
+                    "email": "crynobone@gmail.com"
+                }
+            ],
+            "description": "Tool for Laravel Nova Packages Development",
+            "support": {
+                "source": "https://github.com/nova-kit/nova-packages-tool/tree/v1.11.0"
+            },
+            "time": "2023-06-27T21:32:23+00:00"
+        },
+        {
             "name": "nunomaduro/termwind",
             "version": "v1.15.1",
             "source": {
@@ -3409,6 +3459,147 @@
             "time": "2023-09-05T06:39:07+00:00"
         },
         {
+            "name": "outl1ne/nova-multiselect-filter",
+            "version": "4.0.8",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/outl1ne/nova-multiselect-filter.git",
+                "reference": "13da4158177dcdfc7c389e99195af2642cf68761"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/outl1ne/nova-multiselect-filter/zipball/13da4158177dcdfc7c389e99195af2642cf68761",
+                "reference": "13da4158177dcdfc7c389e99195af2642cf68761",
+                "shasum": ""
+            },
+            "require": {
+                "laravel/nova": "^4.0",
+                "outl1ne/nova-translations-loader": "^5.0.0",
+                "php": ">=8.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Outl1ne\\NovaMultiselectFilter\\FilterServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Outl1ne\\NovaMultiselectFilter\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Kaspar Rosin",
+                    "email": "kaspar.rosin@gmail.com",
+                    "role": "Developer"
+                },
+                {
+                    "name": "Tarvo Reinpalu",
+                    "email": "tarvoreinpalu@gmail.com",
+                    "role": "Developer"
+                },
+                {
+                    "name": "Outl1ne",
+                    "email": "info@optimistdigital.com",
+                    "role": "Maintainer"
+                }
+            ],
+            "description": "Multiselect filter for Laravel Nova.",
+            "keywords": [
+                "filter",
+                "laravel",
+                "laravel-nova",
+                "multiselect",
+                "nova",
+                "select"
+            ],
+            "support": {
+                "issues": "https://github.com/outl1ne/nova-multiselect-filter/issues",
+                "source": "https://github.com/outl1ne/nova-multiselect-filter/tree/4.0.8"
+            },
+            "time": "2023-07-24T08:40:51+00:00"
+        },
+        {
+            "name": "outl1ne/nova-page-manager",
+            "version": "5.9.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/outl1ne/nova-page-manager.git",
+                "reference": "46a9beeae4c55204b88c84f7dd6ce3283e77a8ad"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/outl1ne/nova-page-manager/zipball/46a9beeae4c55204b88c84f7dd6ce3283e77a8ad",
+                "reference": "46a9beeae4c55204b88c84f7dd6ce3283e77a8ad",
+                "shasum": ""
+            },
+            "require": {
+                "laravel/nova": "^4.13",
+                "outl1ne/nova-multiselect-filter": "^4.0.2",
+                "outl1ne/nova-translatable": "^2.0.4",
+                "outl1ne/nova-translations-loader": "^5.0",
+                "php": ">=8.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Outl1ne\\PageManager\\NPMServiceProvider"
+                    ],
+                    "aliases": {
+                        "NPMCache": "Outl1ne\\PageManager\\Facades\\NPMCache"
+                    }
+                }
+            },
+            "autoload": {
+                "files": [],
+                "psr-4": {
+                    "Outl1ne\\PageManager\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Tarvo Reinpalu",
+                    "email": "tarvoreinpalu@gmail.com",
+                    "role": "Developer"
+                },
+                {
+                    "name": "Outl1ne",
+                    "email": "info@outl1ne.com",
+                    "role": "Maintainer"
+                }
+            ],
+            "description": "Page(s) and region(s) manager for Laravel Nova.",
+            "keywords": [
+                "laravel",
+                "manager",
+                "nova",
+                "page"
+            ],
+            "support": {
+                "issues": "https://github.com/outl1ne/nova-page-manager/issues",
+                "source": "https://github.com/outl1ne/nova-page-manager/tree/5.9.0"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/outl1ne",
+                    "type": "github"
+                }
+            ],
+            "time": "2023-07-03T10:16:09+00:00"
+        },
+        {
             "name": "outl1ne/nova-settings",
             "version": "5.2.1",
             "source": {
@@ -3469,6 +3660,69 @@
                 }
             ],
             "time": "2023-08-10T08:38:43+00:00"
+        },
+        {
+            "name": "outl1ne/nova-translatable",
+            "version": "2.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/outl1ne/nova-translatable.git",
+                "reference": "321158d9e4d2bbf0800884946d0bea446ce495ab"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/outl1ne/nova-translatable/zipball/321158d9e4d2bbf0800884946d0bea446ce495ab",
+                "reference": "321158d9e4d2bbf0800884946d0bea446ce495ab",
+                "shasum": ""
+            },
+            "require": {
+                "laravel/nova": "^4.12",
+                "nova-kit/nova-packages-tool": "^1.0",
+                "php": ">=8.0",
+                "spatie/laravel-translatable": "^4.0 || ^5.0 || ^6.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Outl1ne\\NovaTranslatable\\FieldServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Outl1ne\\NovaTranslatable\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Tarvo Reinpalu",
+                    "email": "tarvoreinpalu@gmail.com",
+                    "role": "Developer"
+                },
+                {
+                    "name": "Outl1ne",
+                    "email": "info@outl1ne.com",
+                    "role": "Maintainer"
+                }
+            ],
+            "description": "A laravel-translatable extension for Laravel Nova.",
+            "keywords": [
+                "i18n",
+                "laravel",
+                "nova",
+                "translatable",
+                "translate"
+            ],
+            "support": {
+                "issues": "https://github.com/outl1ne/nova-translatable/issues",
+                "source": "https://github.com/outl1ne/nova-translatable/tree/2.2.0"
+            },
+            "time": "2023-06-30T09:22:48+00:00"
         },
         {
             "name": "outl1ne/nova-translations-loader",
@@ -4425,6 +4679,148 @@
                 }
             ],
             "time": "2023-09-01T06:07:32+00:00"
+        },
+        {
+            "name": "spatie/laravel-package-tools",
+            "version": "1.16.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/spatie/laravel-package-tools.git",
+                "reference": "cc7c991555a37f9fa6b814aa03af73f88026a83d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/spatie/laravel-package-tools/zipball/cc7c991555a37f9fa6b814aa03af73f88026a83d",
+                "reference": "cc7c991555a37f9fa6b814aa03af73f88026a83d",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/contracts": "^9.28|^10.0",
+                "php": "^8.0"
+            },
+            "require-dev": {
+                "mockery/mockery": "^1.5",
+                "orchestra/testbench": "^7.7|^8.0",
+                "pestphp/pest": "^1.22",
+                "phpunit/phpunit": "^9.5.24",
+                "spatie/pest-plugin-test-time": "^1.1"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Spatie\\LaravelPackageTools\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Freek Van der Herten",
+                    "email": "freek@spatie.be",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Tools for creating Laravel packages",
+            "homepage": "https://github.com/spatie/laravel-package-tools",
+            "keywords": [
+                "laravel-package-tools",
+                "spatie"
+            ],
+            "support": {
+                "issues": "https://github.com/spatie/laravel-package-tools/issues",
+                "source": "https://github.com/spatie/laravel-package-tools/tree/1.16.1"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/spatie",
+                    "type": "github"
+                }
+            ],
+            "time": "2023-08-23T09:04:39+00:00"
+        },
+        {
+            "name": "spatie/laravel-translatable",
+            "version": "6.5.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/spatie/laravel-translatable.git",
+                "reference": "1906a3f1492c4b4b99d9f150b67cca4b697d85d7"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/spatie/laravel-translatable/zipball/1906a3f1492c4b4b99d9f150b67cca4b697d85d7",
+                "reference": "1906a3f1492c4b4b99d9f150b67cca4b697d85d7",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/database": "^9.0|^10.0",
+                "illuminate/support": "^9.0|^10.0",
+                "php": "^8.0",
+                "spatie/laravel-package-tools": "^1.11"
+            },
+            "require-dev": {
+                "mockery/mockery": "^1.4",
+                "orchestra/testbench": "^7.0|^8.0",
+                "pestphp/pest": "^1.20"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Spatie\\Translatable\\TranslatableServiceProvider"
+                    ]
+                },
+                "aliases": {
+                    "Translatable": "Spatie\\Translatable\\Facades\\Translatable"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Spatie\\Translatable\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Freek Van der Herten",
+                    "email": "freek@spatie.be",
+                    "homepage": "https://spatie.be",
+                    "role": "Developer"
+                },
+                {
+                    "name": "Sebastian De Deyne",
+                    "email": "sebastian@spatie.be",
+                    "homepage": "https://spatie.be",
+                    "role": "Developer"
+                }
+            ],
+            "description": "A trait to make an Eloquent model hold translations",
+            "homepage": "https://github.com/spatie/laravel-translatable",
+            "keywords": [
+                "eloquent",
+                "i8n",
+                "laravel-translatable",
+                "model",
+                "multilingual",
+                "spatie",
+                "translate"
+            ],
+            "support": {
+                "issues": "https://github.com/spatie/laravel-translatable/issues",
+                "source": "https://github.com/spatie/laravel-translatable/tree/6.5.3"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/spatie",
+                    "type": "github"
+                }
+            ],
+            "time": "2023-07-19T19:21:38+00:00"
         },
         {
             "name": "spatie/once",

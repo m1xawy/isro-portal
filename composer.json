@@ -14,6 +14,7 @@
         "laravel/sanctum": "^3.2",
         "laravel/tinker": "^2.8",
         "murdercode/nova4-tinymce-editor": "^1.2",
+        "outl1ne/nova-page-manager": "^5.9",
         "outl1ne/nova-settings": "^5.2"
     },
     "require-dev": {

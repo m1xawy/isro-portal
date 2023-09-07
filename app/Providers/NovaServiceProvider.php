@@ -10,6 +10,7 @@ use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Nova;
 use Laravel\Nova\NovaApplicationServiceProvider;
 use Outl1ne\NovaSettings\NovaSettings;
+use Outl1ne\PageManager\PageManager;
 
 class NovaServiceProvider extends NovaApplicationServiceProvider
 {
@@ -91,6 +92,7 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
     {
         return [
             new NovaSettings,
+            new PageManager,
         ];
     }
 
