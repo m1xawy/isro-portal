@@ -169,6 +169,7 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\NovaServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+        Akaunting\Language\Provider::class,
     ])->toArray(),
 
     /*
@@ -183,7 +184,7 @@ return [
     */
 
     'aliases' => Facade::defaultAliases()->merge([
-        // 'Example' => App\Facades\Example::class,
+        'Language'   => Akaunting\Language\Facade::class,
     ])->toArray(),
 
 ];

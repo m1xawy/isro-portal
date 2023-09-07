@@ -21,6 +21,7 @@
             <!-- Settings Dropdown -->
             <div class="hidden sm:flex sm:items-center sm:ml-6">
                 <x-theme-switch/>
+                <x-lang-switch/>
 
                 @if (Route::has('login'))
                     @auth
