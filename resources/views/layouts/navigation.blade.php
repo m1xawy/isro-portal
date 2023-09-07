@@ -6,7 +6,11 @@
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
                     <a href="{{ url('/') }}">
-                        <img src="{{ asset(Storage::url(nova_get_setting('server_logo'))) }}" alt="{{ nova_get_setting('server_name', config('app.name', 'Laravel')) }}" width="100">
+                        @if (nova_get_setting('server_logo'))
+                            <img src="{{ asset(Storage::url(nova_get_setting('server_logo', ''))) }}" alt="{{ nova_get_setting('server_name', config('app.name', 'Laravel')) }}" width="150">
+                        @else
+                            <x-application-logo class="block h-9 w-auto fill-current text-gray-800 dark:text-gray-200" />
+                        @endif
                     </a>
                 </div>
 
@@ -32,11 +36,17 @@
                         </x-slot>
 
                         <x-slot name="content">
-                            @foreach (Outl1ne\PageManager\Helpers\NPMHelpers::getPages() as $page)
-                                <x-dropdown-link :href="'/page/'.$page['slug']['en']">
-                                    {{ $page['name']['en'] }}
+                            @if (count(Outl1ne\PageManager\Helpers\NPMHelpers::getPages()) > 0)
+                                @foreach (Outl1ne\PageManager\Helpers\NPMHelpers::getPages() as $page)
+                                    <x-dropdown-link :href="'/page/'.$page['slug']['en']">
+                                        {{ $page['name']['en'] }}
+                                    </x-dropdown-link>
+                                @endforeach
+                            @else
+                                <x-dropdown-link>
+                                    {{ __('No Pages') }}
                                 </x-dropdown-link>
-                            @endforeach
+                            @endif
                         </x-slot>
                     </x-dropdown>
                 </div>
@@ -90,18 +100,12 @@
                         </x-slot>
                     </x-dropdown>
                     @else
-                        <div class="flex">
-                            <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                                <x-nav-link :href="route('login')">
-                                    {{ __('Log in') }}
-                                </x-nav-link>
-                            </div>
+                        <div class="hidden sm:flex sm:items-center sm:ml-6">
+                            <a href="{{ route('login') }}" class="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white">{{ __('Log in') }}</a>
+                        </div>
+                        <div class="hidden sm:flex sm:items-center">
                             @if (Route::has('register'))
-                                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                                    <x-nav-link :href="route('register')">
-                                        {{ __('Register') }}
-                                    </x-nav-link>
-                                </div>
+                                <a href="{{ route('register') }}" class="ml-4 font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white">{{ __('Register') }}</a>
                             @endif
                         </div>
                     @endauth

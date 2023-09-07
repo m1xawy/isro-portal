@@ -7,7 +7,7 @@
 
         <title>{{ nova_get_setting('server_name', config('app.name', 'Laravel')) }} - @yield('title')</title>
         <meta name="description" content="{{ nova_get_setting('server_desc', '') }}">
-        <link rel="shortcut icon" href="{{ asset(Storage::url(nova_get_setting('server_favicon'))) }}">
+        <link rel="shortcut icon" href="{{ asset(Storage::url(nova_get_setting('server_favicon', ''))) }}">
 
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">
@@ -19,8 +19,8 @@
         <meta property="og:type" content="website" />
         <meta property="og:site_name" content="{{ nova_get_setting('server_name', config('app.name', 'Laravel')) }}"/>
         <meta property="og:title" content="{{ nova_get_setting('server_name', config('app.name', 'Laravel')) }} - @yield('title')" />
-        <meta property="og:image" content="{{ asset(Storage::url(nova_get_setting('server_logo'))) }}" />
-        <meta property="og:image:secure_url" content="{{ asset(Storage::url(nova_get_setting('server_logo'))) }}" />
+        <meta property="og:image" content="{{ asset(Storage::url(nova_get_setting('server_logo', ''))) }}" />
+        <meta property="og:image:secure_url" content="{{ asset(Storage::url(nova_get_setting('server_logo', ''))) }}" />
 
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
