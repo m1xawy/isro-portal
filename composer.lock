@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "20b055588228f00dfa7c6a17eeb46b6e",
+    "content-hash": "48448baba94266632f1f1f29a52a1086",
     "packages": [
         {
             "name": "akaunting/laravel-language",
@@ -67,6 +67,71 @@
                 "source": "https://github.com/akaunting/laravel-language/tree/1.0.22"
             },
             "time": "2022-08-05T07:33:12+00:00"
+        },
+        {
+            "name": "alexwenzel/nova-dependency-container",
+            "version": "1.10",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/alexwenzel/nova-dependency-container.git",
+                "reference": "7a7448483904ccf4dd8636b67988ec617f9c70ac"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/alexwenzel/nova-dependency-container/zipball/7a7448483904ccf4dd8636b67988ec617f9c70ac",
+                "reference": "7a7448483904ccf4dd8636b67988ec617f9c70ac",
+                "shasum": ""
+            },
+            "require": {
+                "laravel/framework": "^8.0|^9.0|^10.0",
+                "laravel/nova": "^4.0",
+                "php": "^8.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Alexwenzel\\DependencyContainer\\FieldServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Alexwenzel\\DependencyContainer\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "alexwenzel",
+                    "email": "alexander.wenzel.berlin@gmail.com"
+                },
+                {
+                    "name": "Epartment E-commerce",
+                    "email": "support@epartment.nl"
+                }
+            ],
+            "description": "A Laravel Nova 4 form container for grouping fields that depend on other field values.",
+            "keywords": [
+                "field",
+                "laravel",
+                "nova",
+                "nova-4"
+            ],
+            "support": {
+                "issues": "https://github.com/alexwenzel/nova-dependency-container/issues",
+                "source": "https://github.com/alexwenzel/nova-dependency-container/tree/1.10"
+            },
+            "funding": [
+                {
+                    "url": "https://www.paypal.com/donate/?hosted_button_id=LHJQRG9FXSYCU",
+                    "type": "custom"
+                }
+            ],
+            "time": "2023-03-12T13:02:43+00:00"
         },
         {
             "name": "brick/math",
@@ -1505,6 +1570,53 @@
                 }
             ],
             "time": "2023-01-17T01:02:51+00:00"
+        },
+        {
+            "name": "inspheric/nova-defaultable",
+            "version": "v1.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/inspheric/nova-defaultable-fields.git",
+                "reference": "e1d9efbcab0b94d983f81d5f10f217551fcfad25"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/inspheric/nova-defaultable-fields/zipball/e1d9efbcab0b94d983f81d5f10f217551fcfad25",
+                "reference": "e1d9efbcab0b94d983f81d5f10f217551fcfad25",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.1.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Inspheric\\NovaDefaultable\\DefaultableServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Inspheric\\NovaDefaultable\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "Default values for Nova fields when creating resources.",
+            "keywords": [
+                "default",
+                "field",
+                "laravel",
+                "nova"
+            ],
+            "support": {
+                "issues": "https://github.com/inspheric/nova-defaultable-fields/issues",
+                "source": "https://github.com/inspheric/nova-defaultable-fields/tree/master"
+            },
+            "time": "2019-05-29T15:38:50+00:00"
         },
         {
             "name": "jaybizzle/crawler-detect",
@@ -7274,6 +7386,56 @@
                 "source": "https://github.com/tijsverkoyen/CssToInlineStyles/tree/2.2.6"
             },
             "time": "2023-01-03T09:29:04+00:00"
+        },
+        {
+            "name": "timothyasp/nova-color-field",
+            "version": "v2.0.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/timothyasp/nova-color-field.git",
+                "reference": "54c767647fb67be1fab9e1a68ee3e114087e7b08"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/timothyasp/nova-color-field/zipball/54c767647fb67be1fab9e1a68ee3e114087e7b08",
+                "reference": "54c767647fb67be1fab9e1a68ee3e114087e7b08",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.1.0"
+            },
+            "require-dev": {
+                "laravel/nova": "~4.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Timothyasp\\Color\\FieldServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Timothyasp\\Color\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "A Laravel Nova Color Picker field.",
+            "keywords": [
+                "color picker",
+                "field",
+                "laravel",
+                "nova"
+            ],
+            "support": {
+                "issues": "https://github.com/timothyasp/nova-color-field/issues",
+                "source": "https://github.com/timothyasp/nova-color-field/tree/v2.0.2"
+            },
+            "time": "2023-07-05T17:10:55+00:00"
         },
         {
             "name": "vlucas/phpdotenv",

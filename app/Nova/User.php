@@ -66,7 +66,7 @@ class User extends Resource
 
             Select::make('Role')->options([
                 'admin' => 'Admin',
-                'author' => 'Author',
+                'user' => 'User',
             ]),
         ];
     }

@@ -1,0 +1,37 @@
+
+:is(.dark a) {
+    color:  rgb(255 153 69 / 1);
+}
+:is(.dark .dark\:text-white) {
+    color: rgb(255 255 255 / 1);
+}
+:is(.dark .dark\:text-gray-300) {
+    color: rgb(255 244 235 / 1);
+}
+:is(.dark .dark\:text-gray-400) {
+    color: rgb(255 210 173 / 1);
+}
+
+:is(.dark .dark\:bg-gray-200) {
+    background-color: rgb(255 244 235 / 1);
+}
+:is(.dark .dark\:bg-gray-700) {
+    background-color: rgb(67 43 23 / 1);
+}
+:is(.dark .dark\:bg-gray-800) {
+    background-color: rgb(34 22 12 / 1);
+}
+
+:is(.dark .dark\:bg-gray-900) {
+    background-color: rgb(21 15 9 / 1);
+}
+
+:is(.dark .dark\:hover\:bg-gray-800:hover) {
+    background-color: rgb(34 22 12 / 1);
+}
+:is(.dark .dark\:hover\:text-gray-300:hover) {
+    color: rgb(255 244 235 / 1);
+}
+:is(.dark .dark\:border-gray-700) {
+    border-color: rgb(67 43 23 / 1);
+}

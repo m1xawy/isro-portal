@@ -1,6 +1,10 @@
 @extends('layouts.app')
 @section('title', __('Home'))
 
+@section('header')
+    @include('partials.slider')
+@stop
+
 @section('content')
     <div class="space-y-6">
         @forelse($posts as $post)

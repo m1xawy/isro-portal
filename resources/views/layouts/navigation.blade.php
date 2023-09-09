@@ -7,7 +7,7 @@
                 <div class="shrink-0 flex items-center">
                     <a href="{{ url('/') }}">
                         @if (nova_get_setting('server_logo'))
-                            <img src="{{ asset(Storage::url(nova_get_setting('server_logo', ''))) }}" alt="{{ nova_get_setting('server_name', config('app.name', 'Laravel')) }}" width="150">
+                            <img src="{{ asset(Storage::url(nova_get_setting('server_logo', ''))) }}" class="w-40 mr-0" alt="{{ nova_get_setting('server_name', config('app.name', 'Laravel')) }}">
                         @else
                             <x-application-logo class="block h-9 w-auto fill-current text-gray-800 dark:text-gray-200" />
                         @endif
@@ -54,8 +54,12 @@
 
             <!-- Settings Dropdown -->
             <div class="hidden sm:flex sm:items-center sm:ml-6">
-                <x-theme-switch/>
-                <x-lang-switch/>
+                @if(nova_get_setting('theme_mode') == 'switch')
+                    <x-theme-switch/>
+                @endif
+                @if(nova_get_setting('site_lang') == 'switch')
+                    <x-lang-switch/>
+                @endif
 
                 @if (Route::has('login'))
                     @auth

@@ -25,30 +25,49 @@
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
 
+        <!-- Custom -->
         <script type="text/javascript" src="{{ asset('js/theme-switch.js') }}"></script>
+
+        @if(nova_get_setting('theme_mode') == 'customize')
+            @include('partials.appearance-settings')
+        @endif
+
+        @yield('styles')
     </head>
-    <body class="font-sans antialiased">
-        <div class="min-h-screen bg-gray-100 dark:bg-gray-900">
-            @include('layouts.navigation')
+    <body class="font-sans antialiased min-h-screen bg-gray-100 dark:bg-gray-900">
+        @include('layouts.navigation')
 
-            <!-- Page Content -->
-            <main>
-                <div class="py-12">
-                    <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                        <div class="lg:flex lg:flex-wrap m-4">
-                            <div class="md:w-2/3 p-4">
-                                @yield('content')
-                            </div>
+        @section('header')
+            <header class="bg-gray-600 dark:bg-gray-800 shadow relative block w-full bg-center bg-cover bg-no-repeat bg-blend-multiply" style="background-image: url({{ asset(Storage::url(nova_get_setting('color_background_image', ''))) }})">
+                <div class="max-w-7xl mx-auto py-14 px-4 sm:px-6 lg:px-8">
+                    <h2 class="font-semibold text-xl text-white dark:text-white leading-tight mx-8">
+                        @yield('title')
+                    </h2>
 
-                            <aside class="md:w-1/3 p-4">
-                                @include('partials.sidebar')
-                            </aside>
+                    @include('partials.breadcrumb')
+                </div>
+            </header>
+        @show
+
+        <!-- Page Content -->
+        <main>
+            <div class="py-12">
+                <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+                    <div class="lg:flex lg:flex-wrap m-4">
+                        <div class="md:w-2/3 p-4">
+                            @yield('content')
                         </div>
+
+                        <aside class="md:w-1/3 p-4">
+                            @include('partials.sidebar')
+                        </aside>
                     </div>
                 </div>
-            </main>
+            </div>
+        </main>
 
-            @include('layouts.footer')
-        </div>
+        @include('layouts.footer')
+
+        @yield('scripts')
     </body>
 </html>
