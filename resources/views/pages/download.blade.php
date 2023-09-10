@@ -3,12 +3,12 @@
 
 @section('content')
     <div class="space-y-6">
-        @forelse($downloads as $download)
-            <div class="lg:flex lg:flex-wrap m-4">
+        <div class="lg:flex lg:flex-wrap space-x-6">
+            @forelse($downloads as $download)
                 <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg md:w-1/4 p-4">
                     <div class="text-gray-900 dark:text-gray-100">
                         @if ( $download->icon )
-                            <img class="object-cover object-center w-full lg:h-48 md:h-36" src="{{ Storage::url($download->icon) }}" alt="{{ $download->name }}">
+                            <img class="object-contain object-center w-full lg:h-48 md:h-36" src="{{ Storage::url($download->icon) }}" alt="{{ $download->name }}">
                         @endif
                         <div class="p-6 text-center">
                             <h1 class="mb-2 text-2xl font-medium text-gray-900 dark:text-gray-100">{{ $download->name }}</h1>
@@ -17,18 +17,20 @@
                         </div>
                     </div>
                 </div>
-            </div>
-        @empty
-            <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 text-gray-900 dark:text-gray-100">
-                    No Downloads available
+            @empty
+                <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
+                    <div class="p-6 text-gray-900 dark:text-gray-100">
+                        No Downloads available
+                    </div>
                 </div>
-            </div>
-        @endforelse
+            @endforelse
+        </div>
 
+        <div class="text-gray-900 dark:text-gray-100 text-center mt-3">
+            <h1>System Requirements</h1>
+        </div>
         <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
             <div class="p-6 text-gray-900 dark:text-gray-100">
-                <h1>Sysytem Requirements</h1>
 
                 <div class="relative overflow-x-auto">
                     <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">

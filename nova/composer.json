@@ -1,0 +1,115 @@
+{
+  "name": "laravel/nova",
+  "description": "A wonderful administration interface for Laravel.",
+  "keywords": [
+    "laravel",
+    "admin"
+  ],
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Taylor Otwell",
+      "email": "taylor@laravel.com"
+    }
+  ],
+  "require": {
+    "php": "^7.3|^8.0",
+    "brick/money": "^0.5.0|^0.6.0|^0.7.0|^0.8.0",
+    "doctrine/dbal": "^2.13.3|^3.1.2",
+    "illuminate/support": "^8.83.4|^9.3.1|^10.0",
+    "inertiajs/inertia-laravel": "^0.4.5|^0.5.2|^0.6.0",
+    "laravel/ui": "^3.3|^4.0",
+    "nesbot/carbon": "^2.53.1",
+    "rap2hpoutre/fast-excel": "^3.2|^4.1|^5.0",
+    "spatie/once": "^1.1|^2.0|^3.0",
+    "symfony/console": "^5.4|^6.0",
+    "symfony/finder": "^5.4|^6.0",
+    "symfony/polyfill-intl-icu": "^1.22.1",
+    "symfony/process": "^5.4|^6.0",
+    "ext-json": "*"
+  },
+  "require-dev": {
+    "laravel/nova-dusk-suite": "8.4.x-dev|9.4.x-dev|10.4.x-dev",
+    "laravel/pint": "^1.6",
+    "laravel/scout": "^9.8|^10.0",
+    "mockery/mockery": "^1.4.4",
+    "nunomaduro/larastan": "^1.0.1|^2.5.1",
+    "orchestra/testbench-dusk": "^6.24|^7.21|^8.0",
+    "phpunit/phpunit": "^9.6|^10.1",
+    "predis/predis": "^1.1.9|^2.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "Laravel\\Nova\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Laravel\\Nova\\Tests\\": "tests/"
+    }
+  },
+  "extra": {
+    "branch-alias": {
+      "dev-master": "3.x-dev"
+    },
+    "laravel": {
+      "providers": [
+        "Laravel\\Nova\\NovaCoreServiceProvider"
+      ],
+      "aliases": {
+        "Nova": "Laravel\\Nova\\Nova"
+      }
+    }
+  },
+  "config": {
+    "allow-plugins": {
+      "composer/package-versions-deprecated": true,
+      "php-http/discovery": true
+    },
+    "preferred-install": {
+      "laravel/nova-dusk-suite": "source",
+      "*": "auto"
+    },
+    "sort-packages": true
+  },
+  "scripts": {
+    "dusk:prepare": [
+      "./vendor/bin/dusk-updater detect --auto-update",
+      "@php -r \"file_exists('phpunit.dusk.xml') || copy('phpunit.dusk.xml.dist', 'phpunit.dusk.xml'); \"",
+      "@php -r \"if (file_exists('.env.dusk')) { copy('.env.dusk', 'vendor/laravel/nova-dusk-suite/.env'); } else { copy('.env.dusk.example', 'vendor/laravel/nova-dusk-suite/.env'); }\"",
+      "./vendor/bin/testbench-dusk package:discover"
+    ],
+    "dusk:dev-assets": [
+      "TAILWIND_MODE=build npm run dev",
+      "./vendor/bin/testbench-dusk nova:publish --force"
+    ],
+    "dusk:assets": [
+      "TAILWIND_MODE=build npm run prod",
+      "./vendor/bin/testbench-dusk nova:publish --force"
+    ],
+    "dusk:test": [
+      "./vendor/bin/testbench-dusk package:dusk-purge",
+      "./vendor/bin/phpunit -c phpunit.dusk.xml"
+    ],
+    "test:local": [
+      "./vendor/bin/testbench-dusk package:dusk-purge",
+      "./vendor/bin/phpunit -c phpunit.xml --group date-field,datetime-field,external-network --testdox",
+      "./vendor/bin/phpunit -c phpunit.dusk.xml --group date-field,datetime-field,external-network --testdox"
+    ],
+    "dusk:filter": [
+      "./vendor/bin/testbench-dusk package:dusk-purge && ./vendor/bin/phpunit -c phpunit.dusk.xml --filter"
+    ]
+  },
+  "suggest": {
+    "ext-intl": "Required to format Currency field"
+  },
+  "repositories": [
+    {
+      "type": "vcs",
+      "url": "https://github.com/laravel/nova-dusk-suite"
+    }
+  ],
+  "minimum-stability": "dev",
+  "prefer-stable": true,
+  "version": "4.26.3"
+}

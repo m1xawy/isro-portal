@@ -37,9 +37,11 @@
     </div>
     <!-- Slider indicators -->
     <div class="absolute z-30 flex space-x-3 -translate-x-1/2 bottom-5 left-1/2">
-        @foreach($sliders as $slider)
-            <button type="button" class="w-3 h-3 rounded-full" aria-current="true" aria-label="Slide {{ $slider->id }}" data-carousel-slide-to="{{ $slider->id }}"></button>
-        @endforeach
+        @if (count($sliders) > 0)
+            @foreach($sliders as $slider)
+                <button type="button" class="w-3 h-3 rounded-full" aria-current="true" aria-label="Slide {{ $slider->id }}" data-carousel-slide-to="{{ $slider->id }}"></button>
+            @endforeach
+        @endif
     </div>
     <!-- Slider controls -->
     <button type="button" class="absolute top-0 left-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none" data-carousel-prev>

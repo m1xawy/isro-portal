@@ -42,7 +42,7 @@
                         </x-slot>
 
                         <x-slot name="content">
-                            @if (count(Outl1ne\PageManager\Helpers\NPMHelpers::getPages()) > 0)
+                            @if (count(Outl1ne\PageManager\Helpers\NPMHelpers::getPages()))
                                 @foreach (Outl1ne\PageManager\Helpers\NPMHelpers::getPages() as $page)
                                     <x-dropdown-link :href="'/page/'.$page['slug']['en']">
                                         {{ $page['name']['en'] }}
