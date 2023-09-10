@@ -11,22 +11,28 @@
                     <h2 class="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">Resources</h2>
                     <ul class="text-gray-500 dark:text-gray-400 font-medium">
                         <li class="mb-4">
-                            <a href="https://flowbite.com/" class="hover:underline">Flowbite</a>
+                            <a href="/" class="hover:underline">Home</a>
                         </li>
                         <li>
-                            <a href="https://tailwindcss.com/" class="hover:underline">Tailwind CSS</a>
+                            <a href="/register" class="hover:underline">Sign up</a>
                         </li>
                     </ul>
                 </div>
                 <div>
-                    <h2 class="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">Follow us</h2>
+                    <h2 class="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">Backlinks</h2>
                     <ul class="text-gray-500 dark:text-gray-400 font-medium">
-                        <li class="mb-4">
-                            <a href="https://github.com/themesberg/flowbite" class="hover:underline ">Github</a>
-                        </li>
-                        <li>
-                            <a href="https://discord.gg/4eeurUVvTy" class="hover:underline">Discord</a>
-                        </li>
+                        @if (count($backlinks))
+                            @foreach($backlinks as $backlink)
+                                <li>
+                                    <a href="{{ $backlink->url }}" class="hover:underline">
+                                        @if ( $backlink->icon )
+                                            <img class="inline-block w-4" src="{{ Storage::url($backlink->icon) }}" alt="{{ $backlink->name }}">
+                                        @endif
+                                        {{ $backlink->name }}
+                                    </a>
+                                </li>
+                            @endforeach
+                        @endif
                     </ul>
                 </div>
                 <div>

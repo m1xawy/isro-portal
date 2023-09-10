@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Models\Backlink;
 use App\Models\Slider;
 use App\Models\Social;
 use Illuminate\Support\Facades\View;
@@ -24,8 +25,10 @@ class AppServiceProvider extends ServiceProvider
     {
         $sliders = Slider::all();
         $socials = Social::all();
+        $backlinks = Backlink::all();
 
         View::share('sliders', $sliders);
         View::share('socials', $socials);
+        View::share('backlinks', $backlinks);
     }
 }

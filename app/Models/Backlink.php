@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Backlink extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'title', 'url', 'icon',
+    ];
 }

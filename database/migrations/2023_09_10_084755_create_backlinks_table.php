@@ -13,6 +13,9 @@ return new class extends Migration
     {
         Schema::create('backlinks', function (Blueprint $table) {
             $table->id();
+            $table->string('name');
+            $table->string('url');
+            $table->char('icon')->nullable();
             $table->timestamps();
         });
     }
