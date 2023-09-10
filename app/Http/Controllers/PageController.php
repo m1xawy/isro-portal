@@ -13,7 +13,7 @@ class PageController extends Controller
 
         foreach ($pages as $page){
             if ($page['slug']['en'] == $slug) {
-                return view('pages.view', [
+                return view('pages.page', [
                     'page' => $page,
                 ]);
             }
