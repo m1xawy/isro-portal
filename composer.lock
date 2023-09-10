@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "48448baba94266632f1f1f29a52a1086",
+    "content-hash": "6c1f249f2f9a9fac6efbd3ed331ae805",
     "packages": [
         {
             "name": "akaunting/laravel-language",
@@ -67,6 +67,62 @@
                 "source": "https://github.com/akaunting/laravel-language/tree/1.0.22"
             },
             "time": "2022-08-05T07:33:12+00:00"
+        },
+        {
+            "name": "alexazartsev/heroicon",
+            "version": "v2.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/AlexAzartsev/heroicon.git",
+                "reference": "669bacdecf5597c29e2578428c9f5aa60c627b8c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/AlexAzartsev/heroicon/zipball/669bacdecf5597c29e2578428c9f5aa60c627b8c",
+                "reference": "669bacdecf5597c29e2578428c9f5aa60c627b8c",
+                "shasum": ""
+            },
+            "require": {
+                "laravel/nova": "^4.0",
+                "php": ">=7.1.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "AlexAzartsev\\Heroicon\\FieldServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "AlexAzartsev\\Heroicon\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Alex Azartsev",
+                    "email": "alex.azarsecond@gmail.com",
+                    "homepage": "https://github.com/AlexAzartsev/heroicon",
+                    "role": "Developer"
+                }
+            ],
+            "description": "A Laravel Nova field for managing icons.",
+            "keywords": [
+                "Heroicons",
+                "laravel",
+                "nova",
+                "svg"
+            ],
+            "support": {
+                "issues": "https://github.com/AlexAzartsev/heroicon/issues",
+                "source": "https://github.com/AlexAzartsev/heroicon/tree/v2.0.0"
+            },
+            "time": "2022-08-10T13:59:04+00:00"
         },
         {
             "name": "alexwenzel/nova-dependency-container",

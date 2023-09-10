@@ -7,6 +7,7 @@
     "require": {
         "php": "^8.1",
         "akaunting/laravel-language": "^1.0",
+        "alexazartsev/heroicon": "^2.0",
         "alexwenzel/nova-dependency-container": "^1.10",
         "guzzlehttp/guzzle": "^7.2",
         "inspheric/nova-defaultable": "^1.2",

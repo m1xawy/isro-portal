@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Models\Slider;
+use App\Models\Social;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 
@@ -22,6 +23,9 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         $sliders = Slider::all();
+        $socials = Social::all();
+
         View::share('sliders', $sliders);
+        View::share('socials', $socials);
     }
 }

@@ -16,6 +16,7 @@ use Outl1ne\PageManager\PageManager;
 use Alexwenzel\DependencyContainer\HasDependencies;
 use Alexwenzel\DependencyContainer\DependencyContainer;
 use Alexwenzel\DependencyContainer\ActionHasDependencies;
+use AlexAzartsev\Heroicon\Heroicon;
 
 class NovaServiceProvider extends NovaApplicationServiceProvider
 {
@@ -37,6 +38,8 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
                 </div>
             ');
         });
+
+        Heroicon::registerGlobalIconSet('social', 'Social Icons', public_path('/images/icons'));
 
         NovaSettings::addSettingsFields([
             Text::make('Server Name', 'server_name')->default('Silkroad'),
