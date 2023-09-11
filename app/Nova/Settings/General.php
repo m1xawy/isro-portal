@@ -79,7 +79,7 @@ class General
                                 Text::make('Title', 'slider_title'),
                                 Text::make('Description', 'slider_desc'),
                                 URL::make('URL', 'slider_url'),
-                                Image::make('Image', 'slider_image')->disk(env('FILESYSTEM_DRIVER'))->prunable()->hideFromIndex(),
+                                URL::make('Image URL', 'slider_image'),
                             ]),
                     ]),
 
@@ -87,17 +87,17 @@ class General
                         Flexible::make('Social', 'socials')
                             ->addLayout('Social', 'social', [
                                 Heroicon::make('Icon', 'social_icon'),
-                                Text::make('Name', 'social_name')->rules('required', 'max:80'),
-                                URL::make('URL', 'social_url')->rules('required'),
+                                Text::make('Name', 'social_name'),
+                                URL::make('URL', 'social_url'),
                             ]),
                     ]),
 
                     new Tab('Back links', [
                         Flexible::make('Backlinks', 'backlinks')
                             ->addLayout('Backlinks', 'backlinks', [
-                                Image::make('Icon', 'backlink_icon')->disk(env('FILESYSTEM_DRIVER'))->prunable(),
-                                Text::make('Name', 'backlink_name')->rules('required', 'max:80'),
-                                URL::make('URL', 'backlink_url')->rules('required'),
+                                Text::make('Name', 'backlink_name'),
+                                URL::make('URL', 'backlink_url'),
+                                URL::make('Icon URL', 'backlink_icon'),
                             ]),
                     ]),
 

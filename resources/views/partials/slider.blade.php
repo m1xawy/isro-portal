@@ -9,7 +9,7 @@
             @foreach($sliders as $slider)
                 <!-- Item 1 -->
                 <div class="hidden duration-1000 ease-in-out" data-carousel-item>
-                    <section class="absolute block w-full bg-center bg-cover bg-no-repeat bg-gray-700 bg-blend-multiply" @if (isset($slider->attributes->slider_image)) style="background-image: url({{ Storage::url($slider->attributes->slider_image) }})" @endif>
+                    <section class="absolute block w-full bg-center bg-cover bg-no-repeat bg-gray-700 bg-blend-multiply" @if (isset($slider->attributes->slider_image)) style="background-image: url({{ $slider->attributes->slider_image }})" @endif>
                         <div class="px-4 mx-auto max-w-screen-xl text-left py-24 lg:py-24">
                             <h1 class="mb-4 text-4xl font-extrabold tracking-tight leading-none text-white md:text-5xl lg:text-6xl dark:text-white mx-8">{{ $slider->attributes->slider_title }}</h1>
                             <p class="mb-8 text-lg font-normal text-gray-400 lg:text-xl dark:text-gray-400 mx-8">{{ $slider->attributes->slider_desc }}</p>
