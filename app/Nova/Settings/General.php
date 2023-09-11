@@ -45,6 +45,7 @@ class General
                     ]),
 
                     new Tab('Appearance', [
+                        Boolean::make('BreadCrumb Enable', 'breadcrumb_enable'),
                         Select::make('Site Theme', 'site_theme')->options(['default_theme' => 'Default', 'add_new' => 'Add new']),
 
                         DependencyContainer::make([
