@@ -2,13 +2,13 @@
 
 namespace App\Providers;
 
+use AlexAzartsev\Heroicon\Heroicon;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Gate;
 use Laravel\Nova\Nova;
 use Laravel\Nova\NovaApplicationServiceProvider;
 use Outl1ne\NovaSettings\NovaSettings;
 use Outl1ne\PageManager\PageManager;
-use AlexAzartsev\Heroicon\Heroicon;
 
 class NovaServiceProvider extends NovaApplicationServiceProvider
 {
@@ -32,7 +32,7 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
         Heroicon::registerGlobalIconSet('social', 'Social Icons', public_path('/images/icons'));
 
         new \App\Nova\Settings\General;
-        new \App\Nova\Settings\Appearance;
+        new \App\Nova\Settings\Register;
     }
 
     /**

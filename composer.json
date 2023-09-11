@@ -20,7 +20,8 @@
         "murdercode/nova4-tinymce-editor": "^1.2",
         "outl1ne/nova-page-manager": "^5.9",
         "outl1ne/nova-settings": "^5.2",
-        "timothyasp/nova-color-field": "^2.0"
+        "timothyasp/nova-color-field": "^2.0",
+        "whitecube/nova-flexible-content": "^1.0"
     },
     "require-dev": {
         "fakerphp/faker": "^1.9.1",
