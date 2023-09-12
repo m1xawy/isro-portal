@@ -10,10 +10,13 @@ class Char extends Model
     use HasFactory;
 
     protected $connection = 'shard';
+
     public $timestamps = false;
 
     protected $table = 'dbo._Char';
+
     protected $primaryKey = 'CharID';
+
     protected $fillable = [
         'CharID',
         'Deleted',
@@ -23,10 +26,24 @@ class Char extends Model
         'LastLogout',
         'RemainGold'
     ];
+
     protected $dates = [
         'LastLogout'
     ];
+
     protected $dateFormat = 'Y-m-d H:i:s';
+
+    public function getGuildMemberUser()
+    {
+        return $this->hasOne(GuildMember::class, 'CharID', 'CharID');
+    }
+
+    public function getGuildUser()
+    {
+        $query = $this->hasOne(Guild::class, 'ID', 'GuildID');
+        $query->where('ID', '!=', 0);
+        return $query;
+    }
 
     public function getAccountUser()
     {

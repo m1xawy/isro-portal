@@ -30,6 +30,11 @@ class MuUser extends Model
         'password'
     ];
 
+    public function getChangedSilk()
+    {
+        return $this->belongsTo(ChangedSilk::class, 'JID', 'JID');
+    }
+
     public function getWebUser()
     {
         return $this->hasOne(User::class, 'jid', 'JID');

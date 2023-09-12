@@ -9,9 +9,9 @@
         </thead>
         <tbody>
 
-        <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 text-center">
-            <td class="px-6 py-4" colspan="3">No Ranking available</td>
-        </tr>
+            <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 text-center">
+                <td class="px-6 py-4" colspan="3">No Ranking available</td>
+            </tr>
 
         </tbody>
     </table>

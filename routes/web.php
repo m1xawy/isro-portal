@@ -30,6 +30,9 @@ Route::group(['middleware' => 'language'], function () {
     Route::get('/downloads', [DownloadController::class, 'index'])->name('pages.download');
 
     Route::get('/ranking', [RankingController::class, 'index'])->name('ranking.index');
+    Route::get('/ranking/character/{name}', [RankingController::class, 'character_view'])->name('ranking.character.view');
+    Route::get('/ranking/guild/{name}', [RankingController::class, 'guild_view'])->name('ranking.guild.view');
+
     Route::get('/ranking/player', [RankingController::class, 'player'])->name('ranking.player');
     Route::get('/ranking/guild', [RankingController::class, 'guild'])->name('ranking.guild');
     Route::get('/ranking/unique', [RankingController::class, 'unique'])->name('ranking.unique');

@@ -3,6 +3,7 @@
 namespace App\Models\SRO\Account;
 
 use App\Models\SRO\Portal\MuUser;
+use App\Models\SRO\Shard\Char;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -34,6 +35,11 @@ class TbUser extends Model
     protected $hidden = [
         'password'
     ];
+
+    public function getShardUser()
+    {
+        return $this->belongsToMany(Char::class, '_User', 'UserJID', 'CharID');
+    }
 
     public function getPortalUser()
     {
