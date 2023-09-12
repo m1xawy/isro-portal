@@ -14,7 +14,7 @@
                             <h1 class="mb-4 text-4xl font-extrabold tracking-tight leading-none text-white md:text-5xl lg:text-6xl dark:text-white mx-8">{{ $slider->attributes->slider_title }}</h1>
                             <p class="mb-8 text-lg font-normal text-gray-400 lg:text-xl dark:text-gray-400 mx-8">{{ $slider->attributes->slider_desc }}</p>
                             <div class="flex flex-col space-y-4 sm:flex-row sm:space-y-0 sm:space-x-4 mx-8">
-                                <a href="{{ $slider->attributes->slider_url }}" class="inline-flex justify-center items-center py-3 px-5 text-base font-medium text-center text-white rounded-lg bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:focus:ring-blue-900">
+                                <a href="{{ $slider->attributes->slider_url }}" class="inline-flex justify-center items-center py-3 px-5 text-base font-medium text-center text-white bg-indigo-700 hover:bg-indigo-800 focus:ring-4 focus:ring-indigo-300 dark:focus:ring-indigo-900">
                                     Learn more
                                 </a>
                             </div>
@@ -30,7 +30,7 @@
                         <h1 class="mb-4 text-4xl font-extrabold tracking-tight leading-none text-white md:text-5xl lg:text-6xl dark:text-white mx-8">Title</h1>
                         <p class="mb-8 text-lg font-normal text-gray-400 lg:text-xl dark:text-gray-400 mx-8">Description</p>
                         <div class="flex flex-col space-y-4 sm:flex-row sm:space-y-0 sm:space-x-4 mx-8">
-                            <a href="#" class="inline-flex justify-center items-center py-3 px-5 text-base font-medium text-center text-white rounded-lg bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:focus:ring-blue-900">
+                            <a href="#" class="inline-flex justify-center items-center py-3 px-5 text-base font-medium text-center text-white bg-indigo-700 hover:bg-indigo-800 focus:ring-4 focus:ring-indigo-300 dark:focus:ring-indigo-900">
                                 Learn more
                             </a>
                         </div>
