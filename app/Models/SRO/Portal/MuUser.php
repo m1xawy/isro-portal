@@ -11,9 +11,11 @@ class MuUser extends Model
     use HasFactory;
 
     protected $connection = 'portal';
+
     public $timestamps = false;
 
     protected $table = 'dbo.MU_User';
+
     protected $primaryKey = 'JID';
 
     protected $fillable = [
@@ -30,9 +32,14 @@ class MuUser extends Model
         'password'
     ];
 
+    public function getEmailUser()
+    {
+        return $this->hasOne(MuEmail::class, 'JID', 'JID');
+    }
+
     public function getChangedSilk()
     {
-        return $this->belongsTo(ChangedSilk::class, 'JID', 'JID');
+        return $this->belongsTo(AphChangedSilk::class, 'JID', 'JID');
     }
 
     public function getWebUser()

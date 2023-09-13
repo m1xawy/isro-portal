@@ -5,7 +5,7 @@ namespace App\Models\SRO\Portal;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class ChangedSilk extends Model
+class MuJoiningInfo extends Model
 {
     use HasFactory;
 
@@ -13,15 +13,15 @@ class ChangedSilk extends Model
 
     public $timestamps = false;
 
-    protected $table = 'dbo.APH_ChangedSilk';
+    protected $table = 'dbo.MU_JoiningInfo';
 
-    protected $primaryKey = 'CSID';
+    protected $primaryKey = 'JID';
 
     protected $fillable = [
         'JID',
-        'RemainedSilk',
-        'ChangedSilk',
-        'SilkType',
-        'SellingTypeID'
+        'UserIP',
+        'JoiningDate',
+        'CountryCode',
+        'JoiningPath'
     ];
 }

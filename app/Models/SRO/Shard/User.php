@@ -3,7 +3,7 @@
 namespace App\Models\SRO\Shard;
 
 use App\Models\SRO\Account\TbUser;
-use App\Models\SRO\Portal\ChangedSilk;
+use App\Models\SRO\Portal\AphChangedSilk;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -27,6 +27,6 @@ class User extends Model
 
     public function getChangedSilk()
     {
-        return $this->belongsTo(ChangedSilk::class, 'UserJID', 'JID');
+        return $this->belongsTo(AphChangedSilk::class, 'UserJID', 'JID');
     }
 }
