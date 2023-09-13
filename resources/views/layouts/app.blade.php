@@ -19,13 +19,13 @@
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
 
+        <!-- Theme Mode Switcher Scripts -->
+        @include('partials.theme-mode-scripts')
+
         <!-- Custom settings colors -->
         @if(nova_get_setting('theme_mode') == 'customize')
             @include('partials.appearance-settings')
         @endif
-
-        <!-- Language Switcher Scripts -->
-        @include('partials.language-scripts')
 
         <!-- Inline Styles -->
         @yield('styles')

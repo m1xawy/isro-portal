@@ -1,7 +1,26 @@
+@php
+    switch (nova_get_setting('theme_mode')) {
+        case 'light':
+            $defaultTheme = 'default';
+            break;
+        case 'dark':
+            $defaultTheme = 'dark';
+            break;
+        default:
+            $defaultTheme = 'auto';
+            break;
+    }
+@endphp
+
 <script>
     const HSThemeAppearance = {
         init() {
-            const defaultTheme = 'default'
+
+            @php if($defaultTheme !== 'auto') : @endphp
+                localStorage.removeItem('hs_theme')
+            @php endif; @endphp
+
+            const defaultTheme = "{{ $defaultTheme }}"
             let theme = localStorage.getItem('hs_theme') || defaultTheme
 
             if (document.querySelector('html').classList.contains('dark')) return
