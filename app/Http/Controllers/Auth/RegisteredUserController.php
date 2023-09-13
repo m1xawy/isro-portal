@@ -10,6 +10,7 @@ use App\Models\SRO\Portal\MuEmail;
 use App\Models\SRO\Portal\MuhAlteredInfo;
 use App\Models\SRO\Portal\MuJoiningInfo;
 use App\Models\SRO\Portal\MuUser;
+use App\Models\SRO\Portal\MuVIPInfo;
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\Registered;
@@ -44,92 +45,29 @@ class RegisteredUserController extends Controller
             'password' => ['required', 'confirmed', 'min:6', 'max:32'],
         ]);
 
-        /*
-         * TODO: The code want be more clean.
-         * Can't find the best way for getting Binary IP
-         * Also about CountryCode it needs hard code
-         * */
+        $countryCode = 'ZZ';
+        $userIP = ($request->ip() == "::1") ? '127.0.0.1' : $request->ip();
+        $lastJIDQuery = ';SELECT TOP 1 JID FROM [GB_JoymaxPortal].[dbo].[MU_User] ORDER BY JID DESC;';
 
-        //dd(ip2long($request->ip()));
+        $returnCode = DB::select("EXEC [SILKROAD_R_ACCOUNT].[dbo].[_Rigid_Register_User]
+            '".$request->username."',
+            '".md5($request->password)."',
+            '".$request->email."',
+            '".$countryCode."',
+            '".$userIP."'
+            ".$lastJIDQuery." "
+        );
 
-        //$userIP = ($request->ip() == "::1") ? '127.0.0.1' : $request->ip();
-        //$userBinIP = collect(DB::select("SELECT [GB_JoymaxPortal].[dbo].[F_MakeIPStringToIPBinary]('".$userIP."') AS UserBinIP"))->first()->UserBinIP;
-        //$countryCode = collect(DB::select("SELECT [GB_JoymaxPortal].[dbo].[F_GetCountryCodeByIPString]('".$userIP."') AS CountryCode"))->first()->CountryCode;
-
-        $mu_user = MuUser::create([
-            'UserID' => $request->username,
-            'UserPwd' => md5($request->password),
-            'Gender' => 'M',
-            'Birthday' => now(),
-            'NickName' => $request->username,
-            'CountryCode' => 'EG',
-            'AbusingCount' => 0,
-        ]);
-
-        TbUser::create([
-            'PortalJID' => $mu_user->JID,
-            'StrUserID' => $request->username,
-            'ServiceCompany' => 11,
-            'password' => md5($request->password),
-            'Active' => 1,
-            'UserIP' => $request->ip(),
-            'CountryCode' => 'EG',
-            'VisitDate' => now(),
-            'RegDate' => now(),
-            'sec_primary' => 3,
-            'sec_content' => 3,
-            'sec_grade' => 0,
-        ]);
-
-        MuhAlteredInfo::create([
-            'JID' => $mu_user->JID,
-            'AlterationDate' => now(),
-            'LastName' => $request->username,
-            'FirstName' => $request->username,
-            'EmailAddr' => $request->email,
-            'EmailReceptionStatus' => 'Y',
-            'EmailCertificationStatus' => 'Y',
-            'UserIP' => ip2long($request->ip()),
-            'CountryCode' => 'EG',
-            'NickName' => $request->username,
-            'ATypeCode' => 1,
-            'CountryCodeChangingStatus' => 'N',
-        ]);
-
-        AphChangedSilk::create([
-            'JID' => $mu_user->JID,
-            'RemainedSilk' => 0,
-            'ChangedSilk' => 0,
-            'SilkType' => 3,
-            'SellingTypeID' => 2,
-            'ChangeDate' => now(),
-            'AvailableDate' => now()->subYear(10),
-            'AvailableStatus' => 'Y',
-        ]);
-
-        MuEmail::create([
-            'JID' => $mu_user->JID,
-            'EmailAddr' => $request->email,
-        ]);
-
-        AuhAgreedService::create([
-            'JID' => $mu_user->JID,
-            'ServiceCode' => 2,
-            'StartDate' => now(),
-            'EndDate' => now()->subYear(10),
-            'UserIP' => ip2long($request->ip()),
-        ]);
-
-        MuJoiningInfo::create([
-            'JID' => $mu_user->JID,
-            'UserIP' => ip2long($request->ip()),
-            'JoiningDate' => now(),
-            'CountryCode' => 'EG',
-            'JoiningPath' => 'JOYMAX',
+        MuVIPInfo::create([
+            'JID' => $returnCode[0]->JID,
+            'VIPUserType' => 2,
+            'VIPLv' => 1,
+            'UpdateDate' => now(),
+            'ExpireDate' => now()->subMonth(1),
         ]);
 
         $user = User::create([
-            'jid' => $mu_user->JID,
+            'jid' => $returnCode[0]->JID,
             'username' => $request->username,
             'email' => $request->email,
             'password' => Hash::make($request->password),
