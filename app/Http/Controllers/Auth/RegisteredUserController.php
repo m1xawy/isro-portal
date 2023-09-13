@@ -45,6 +45,12 @@ class RegisteredUserController extends Controller
             'password' => ['required', 'confirmed', 'min:6', 'max:32'],
         ]);
 
+        /*
+         * TODO: The code want be more clean.
+         * Can't find the best way for getting Binary IP
+         * Also about CountryCode it needs hard code
+         * */
+
         $countryCode = 'ZZ';
         $userIP = ($request->ip() == "::1") ? '127.0.0.1' : $request->ip();
         $lastJIDQuery = ';SELECT TOP 1 JID FROM [GB_JoymaxPortal].[dbo].[MU_User] ORDER BY JID DESC;';
@@ -63,7 +69,7 @@ class RegisteredUserController extends Controller
             'VIPUserType' => 2,
             'VIPLv' => 1,
             'UpdateDate' => now(),
-            'ExpireDate' => now()->subMonth(1),
+            'ExpireDate' => now()->addMonth(1),
         ]);
 
         $user = User::create([
@@ -77,6 +83,6 @@ class RegisteredUserController extends Controller
 
         Auth::login($user);
 
-        return redirect(RouteServiceProvider::HOME);
+        return redirect('/profile');
     }
 }
