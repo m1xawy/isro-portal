@@ -49,45 +49,47 @@ class User extends Authenticatable
 
     public function getJCash()
     {
-        $JCash = DB::select("
+        $JCash = collect(DB::select("
+            Declare @ReturnValue Int
             Declare @PremiumSilk Int
-            ,@Silk Int
-            ,@VipLevel Int
-            ,@UsageMonth Int
-            ,@Usage3Month Int;
+            Declare @Silk Int;
+            Declare @VipLevel Int
+            Declare @UsageMonth Int
+            Declare @Usage3Month Int;
+            SET NOCOUNT ON;
 
-            EXEC [GB_JoymaxPortal].[dbo].[B_GetJCash] ".$this->jid."
-            ,@PremiumSilk Output
-            ,@Silk Output
-            ,@VipLevel Output
-            ,@UsageMonth Output
-            ,@Usage3Month Output;
+            Execute @ReturnValue = [GB_JoymaxPortal].[dbo].[B_GetJCash]
+                ".$this->jid.",
+                @PremiumSilk Output,
+                @Silk Output,
+                @VipLevel Output,
+                @UsageMonth Output,
+                @Usage3Month Output;
 
-            Select @PremiumSilk as 'PremiumSilk'
-            ,@Silk as 'Silk'
-            ,@VipLevel as 'VIP'
-            ,@UsageMonth as 'UsageMonth'
-            ,@Usage3Month as 'Usage3Month'
+            Select
+                @ReturnValue AS 'ErrorCode',
+                @PremiumSilk AS 'PremiumSilk',
+                @Silk AS 'Silk'
             "
-        );
+        ))->first();
 
-        if($JCash) {
-            return $JCash[0];
+        if($JCash->ErrorCode != 0) {
+            return null;
         }
 
-        return null;
+        return $JCash;
     }
 
     public function getVIPInfo()
     {
         //$vip_config = config('vip-info');
-        $vip_info = DB::select("Select * From [GB_JoymaxPortal].[dbo].[MU_VIP_Info] with(nolock) Where JID = ".$this->jid." AND ExpireDate >= GETDATE()");
+        $vip_info = collect(DB::select("Select * From [GB_JoymaxPortal].[dbo].[MU_VIP_Info] with(nolock) Where JID = ".$this->jid." AND ExpireDate >= GETDATE()"))->first();
 
-        if($vip_info) {
-            return $vip_info[0];
+        if(!$vip_info) {
+            return null;
         }
 
-        return null;
+        return $vip_info;
     }
 
     public function getMuUser()

@@ -40,8 +40,8 @@ class RegisteredUserController extends Controller
     public function store(Request $request): RedirectResponse
     {
         $request->validate([
-            'username' => ['required', 'string', 'min:6', 'max:32', 'unique:'.User::class, 'unique:'.MuUser::class.',UserID', 'unique:'.TbUser::class.',StrUserID'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:'.MuEmail::class.',EmailAddr'],
+            'username' => ['required', 'regex:/^[A-Za-z0-9]*$/', 'min:6', 'max:30', 'unique:'.User::class, 'unique:'.MuUser::class.',UserID', 'unique:'.TbUser::class.',StrUserID'],
+            'email' => ['required', 'string', 'email', 'max:70', 'unique:'.MuEmail::class.',EmailAddr'],
             'password' => ['required', 'confirmed', 'min:6', 'max:32'],
         ]);
 
@@ -51,21 +51,56 @@ class RegisteredUserController extends Controller
          * Also about CountryCode it needs hard code
          * */
 
-        $countryCode = 'ZZ';
-        $userIP = ($request->ip() == "::1") ? '127.0.0.1' : $request->ip();
-        $lastJIDQuery = ';SELECT TOP 1 JID FROM [GB_JoymaxPortal].[dbo].[MU_User] ORDER BY JID DESC;';
+        $returnCode = collect(DB::select("
+            Declare @ReturnValue Int
+            Declare @ARCode SmallInt
+            Declare @JID Int;
+            SET NOCOUNT ON;
 
-        $returnCode = DB::select("EXEC [SILKROAD_R_ACCOUNT].[dbo].[_Rigid_Register_User]
-            '".$request->username."',
-            '".md5($request->password)."',
-            '".$request->email."',
-            '".$countryCode."',
-            '".$userIP."'
-            ".$lastJIDQuery." "
-        );
+            Exec @ReturnValue = [GB_JoymaxPortal].[dbo].[A_RegisterNewUser]
+                '".$request->username."',
+                '".md5($request->password)."',
+                'M',
+                '2000-12-12',
+                'Han',
+                'Doc',
+                '".$request->email."',
+                0x00000000,
+                'J".$request->username."',
+                'J',
+                @ARCode Output,
+                @JID Output;
+
+            Select
+                @ReturnValue AS 'ErrorCode',
+                @ARCode AS 'ARCode',
+                @JID AS 'JID'
+            "
+        ))->first();
+
+        if($returnCode->ErrorCode != 0) {
+            return back()->withErrors(['username' => ["An error [".strtoupper($returnCode->ErrorCode)."] occured."]]);
+        }
+
+        $portalJID = $returnCode->JID;
+
+        TbUser::create([
+            'PortalJID' => $portalJID,
+            'StrUserID' => $request->username,
+            'ServiceCompany' => 11,
+            'password' => md5($request->password),
+            'Active' => 1,
+            'UserIP' => $request->ip(),
+            'CountryCode' => 'EG',
+            'VisitDate' => now(),
+            'RegDate' => now(),
+            'sec_primary' => 3,
+            'sec_content' => 3,
+            'sec_grade' => 0,
+        ]);
 
         MuVIPInfo::create([
-            'JID' => $returnCode[0]->JID,
+            'JID' => $portalJID,
             'VIPUserType' => 2,
             'VIPLv' => 1,
             'UpdateDate' => now(),
@@ -73,7 +108,7 @@ class RegisteredUserController extends Controller
         ]);
 
         $user = User::create([
-            'jid' => $returnCode[0]->JID,
+            'jid' => $portalJID,
             'username' => $request->username,
             'email' => $request->email,
             'password' => Hash::make($request->password),
