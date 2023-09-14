@@ -5,6 +5,7 @@
     <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
         <div class="p-6 text-gray-900 dark:text-gray-100">
             <h2 class="text-lg font-medium text-gray-900 dark:text-gray-100 py-4">Account Info</h2>
+
             <div class="relative overflow-x-auto">
                 <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
                     <tbody>
@@ -29,7 +30,7 @@
                             Premium Silk
                         </th>
                         <td class="px-6 py-4">
-                            {{ $GetJCash[0]->PremiumSilk }}
+                            {{ $user->getJCash()->PremiumSilk }}
                         </td>
                     </tr>
                     <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
@@ -37,7 +38,7 @@
                             Silk
                         </th>
                         <td class="px-6 py-4">
-                            {{ $GetJCash[0]->Silk }}
+                            {{ $user->getJCash()->Silk }}
                         </td>
                     </tr>
                     <tr class="bg-white dark:bg-gray-800">
@@ -45,8 +46,8 @@
                             VIP
                         </th>
                         <td class="px-6 py-4">
-                            @php if($GetVIPInfo->VIPUserType > 0) : @endphp
-                                <img src="{{ asset('images/ingame/viplevel_'.$GetVIPInfo->VIPLv.'.jpg') }}" class="inline-block w-6 mr-1"><span>{{ $VIPInfo['level'][$GetVIPInfo->VIPUserType] }}</span>
+                            @php if($user->getVIPInfo() !== null && $user->getVIPInfo()->VIPUserType > 0) : @endphp
+                                <img src="{{ asset('images/ingame/viplevel_'.$user->getVIPInfo()->VIPLv.'.jpg') }}" class="inline-block w-6 mr-1"><span>{{ config('vip-info')['level'][$user->getVIPInfo()->VIPUserType] }}</span>
                             @php else : @endphp
                                 None
                             @php endif; @endphp

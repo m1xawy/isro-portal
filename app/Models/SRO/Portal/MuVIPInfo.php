@@ -2,6 +2,7 @@
 
 namespace App\Models\SRO\Portal;
 
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
