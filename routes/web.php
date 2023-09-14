@@ -36,8 +36,10 @@ Route::group(['middleware' => 'language'], function () {
     Route::middleware('auth')->group(function () {
         Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
         Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('profile.edit');
-        Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-        Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+        Route::patch('/profile/edit', [ProfileController::class, 'update'])->name('profile.update');
+        Route::delete('/profile/edit', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+        Route::get('/profile/donate', [ProfileController::class, 'donate'])->name('profile.donate');
     });
 
     require __DIR__.'/auth.php';

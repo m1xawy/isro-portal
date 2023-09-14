@@ -93,6 +93,14 @@
                                     {{ __('Profile') }}
                                 </x-dropdown-link>
 
+                                <x-dropdown-link :href="route('profile.edit')">
+                                    {{ __('Update Password') }}
+                                </x-dropdown-link>
+
+                                <x-dropdown-link :href="route('profile.donate')">
+                                    {{ __('Donate') }}
+                                </x-dropdown-link>
+
                                 @if (Auth::user()->role == 'admin')
                                     <x-dropdown-link :href="url('/admin')">
                                         {{ __('Admin panel') }}
@@ -154,6 +162,14 @@
                     <div class="mt-3 space-y-1">
                         <x-responsive-nav-link :href="route('profile')">
                             {{ __('Profile') }}
+                        </x-responsive-nav-link>
+
+                        <x-responsive-nav-link :href="route('profile.edit')">
+                            {{ __('Update Password') }}
+                        </x-responsive-nav-link>
+
+                        <x-responsive-nav-link :href="route('profile.donate')">
+                            {{ __('Donate') }}
                         </x-responsive-nav-link>
 
                         @if (Auth::user()->role == 'admin')
