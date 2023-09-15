@@ -82,14 +82,14 @@ class User extends Authenticatable
 
     public function getVIPInfo()
     {
-        //$vip_config = config('vip-info');
-        $vip_info = collect(DB::select("Select * From [GB_JoymaxPortal].[dbo].[MU_VIP_Info] with(nolock) Where JID = ".$this->jid." AND ExpireDate >= GETDATE()"))->first();
+        //$VIPConfig = config('vip-info');
+        $VIPInfo = collect(DB::select("Select * From [GB_JoymaxPortal].[dbo].[MU_VIP_Info] with(nolock) Where JID = ".$this->jid." AND ExpireDate >= GETDATE()"))->first();
 
-        if(!$vip_info) {
+        if(!$VIPInfo) {
             return null;
         }
 
-        return $vip_info;
+        return $VIPInfo;
     }
 
     public function getMuUser()

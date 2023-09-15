@@ -49,7 +49,9 @@
                         </div>
 
                         <aside class="md:w-1/3 p-4">
-                            @include('partials.sidebar')
+                            <div class="space-y-6">
+                                @include('partials.sidebar')
+                            </div>
                         </aside>
                     </div>
                 </div>
