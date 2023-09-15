@@ -1,15 +1,15 @@
 @php
-    $backlinks = json_decode(nova_get_setting('backlinks'));
-    $socials = json_decode(nova_get_setting('socials'));
+    $backlinks = json_decode(setting('backlinks'));
+    $socials = json_decode(setting('socials'));
 @endphp
 
 <footer class="bg-white dark:bg-gray-800">
     <div class="mx-auto w-full max-w-screen-xl p-4 py-6 lg:py-8">
         <div class="md:flex md:justify-between">
             <div class="mb-6 md:mb-0">
-                <a href="{{ nova_get_setting('server_url', config('app.url')) }}" class="flex items-center">
-                    @if (!empty(nova_get_setting('server_logo')))
-                        <img src="{{ asset(Storage::url(nova_get_setting('server_logo', ''))) }}" class="w-40 mr-3" alt="{{ nova_get_setting('server_name', config('app.name')) }}"/>
+                <a href="{{ setting('server_url', config('app.url')) }}" class="flex items-center">
+                    @if (!empty(setting('server_logo')))
+                        <img src="{{ asset(Storage::url(setting('server_logo', ''))) }}" class="w-40 mr-3" alt="{{ setting('server_name', config('app.name')) }}"/>
                     @else
                         <x-application-logo class="block h-9 w-auto fill-current text-gray-800 dark:text-gray-200"/>
                     @endif
@@ -62,7 +62,7 @@
         </div>
         <hr class="my-6 border-gray-200 sm:mx-auto dark:border-gray-700 lg:my-8"/>
         <div class="sm:flex sm:items-center sm:justify-between">
-            <span class="text-sm text-gray-500 sm:text-center dark:text-gray-400">© 2023 <a href="{{ nova_get_setting('server_url', config('app.url')) }}" class="hover:underline">{{ nova_get_setting('server_name', config('app.name')) }}</a>. All Rights Reserved. · Coded by <a class="link-default" href="https://mix-shop.tech/">m1xawy</a></span>
+            <span class="text-sm text-gray-500 sm:text-center dark:text-gray-400">© 2023 <a href="{{ setting('server_url', config('app.url')) }}" class="hover:underline">{{ setting('server_name', config('app.name')) }}</a>. All Rights Reserved. · Coded by <a class="link-default" href="https://mix-shop.tech/">m1xawy</a></span>
             <div class="socials flex mt-4 space-x-5 sm:justify-center sm:mt-0">
                 <style>.socials a svg {width: 1rem;height: 1rem;}</style>
                 @if (isset($socials) && count($socials))

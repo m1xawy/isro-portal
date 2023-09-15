@@ -1,7 +1,7 @@
-@if (nova_get_setting('breadcrumb_enable') !== null && nova_get_setting('breadcrumb_enable'))
+@if (setting('breadcrumb_enable') !== null && setting('breadcrumb_enable'))
     <header
         class="bg-gray-600 dark:bg-gray-800 shadow relative block w-full bg-center bg-cover bg-fixed bg-no-repeat bg-blend-multiply"
-        style="background-image: url({{ asset(Storage::url(nova_get_setting('color_background_image', ''))) }})">
+        style="background-image: url({{ asset(Storage::url(setting('color_background_image', ''))) }})">
         <div class="max-w-7xl mx-auto py-14 px-4 sm:px-6 lg:px-8">
             <h2 class="font-semibold text-xl text-white dark:text-white leading-tight mx-8">
                 @yield('title')

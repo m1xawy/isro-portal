@@ -5,9 +5,9 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
-        <title>{{ nova_get_setting('server_name', config('app.name', 'Laravel')) }} - @yield('title')</title>
-        <meta name="description" content="{{ nova_get_setting('server_desc', '') }}">
-        <link rel="shortcut icon" href="{{ asset(Storage::url(nova_get_setting('server_favicon', ''))) }}">
+        <title>{{ setting('server_name', config('app.name', 'Laravel')) }} - @yield('title')</title>
+        <meta name="description" content="{{ setting('server_desc', '') }}">
+        <link rel="shortcut icon" href="{{ asset(Storage::url(setting('server_favicon', ''))) }}">
 
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">
@@ -23,7 +23,7 @@
         @include('partials.theme-mode-scripts')
 
         <!-- Custom settings colors -->
-        @if(nova_get_setting('theme_mode') == 'customize')
+        @if(setting('theme_mode') == 'customize')
             @include('partials.appearance-settings')
         @endif
 

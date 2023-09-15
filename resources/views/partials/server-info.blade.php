@@ -1,5 +1,5 @@
 @php
-    $server_info = json_decode(nova_get_setting('server_info'))
+    $server_info = json_decode(setting('server_info'))
 @endphp
 
 @if (isset($server_info) &&  count($server_info))

@@ -1,5 +1,5 @@
 @php
-    $sliders = json_decode(nova_get_setting('slider'))
+    $sliders = json_decode(setting('slider'))
 @endphp
 
 <div id="default-carousel" class="relative w-full" data-carousel="slide">

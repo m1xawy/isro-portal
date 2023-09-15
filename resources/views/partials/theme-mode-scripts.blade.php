@@ -1,5 +1,5 @@
 @php
-    switch (nova_get_setting('theme_mode')) {
+    switch (setting('theme_mode')) {
         case 'light':
             $defaultTheme = 'default';
             break;
