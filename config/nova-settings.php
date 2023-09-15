@@ -15,7 +15,7 @@ return [
     /**
      * Reload the entire page on save. Useful when updating any Nova UI related settings.
      */
-    'reload_page_on_save' => false,
+    'reload_page_on_save' => true,
 
     /**
      * We need to know which eloquent model should be used to retrieve your permissions.
