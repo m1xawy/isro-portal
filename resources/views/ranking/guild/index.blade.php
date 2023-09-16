@@ -24,7 +24,7 @@
                             <div class="md:w-1/4">
                                 <div class="w-full">
                                     <div class="flex flex-col items-center pb-0">
-                                        <h2 class="mb-3 text-4xl font-bold text-gray-900 dark:text-white" style="color: #ffc345">{{ $guilds->Name }}</h2>
+                                        <h2 class="mb-3 text-xl font-bold text-gray-900 dark:text-white" style="color: #ffc345">Name</h2>
                                         <span class="text-xs font-bold uppercase text-gray-900 dark:text-white">Leader</span>
                                     </div>
                                 </div>
@@ -58,6 +58,7 @@
                 </div>
 
                 @include('ranking.guild.guild-members')
+                @include('ranking.guild.guild-alliances')
 
             </div>
         </div>
