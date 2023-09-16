@@ -43,14 +43,22 @@ class RankingController extends Controller
 
     public function character_view($name)
     {
-        $characters = Char::where('CharName16', $name)->first();
-        if ($characters) {
-            return view('ranking.character.index', [
-                'characters' => $characters
-            ]);
-        }
+        $charID = cache()->remember('char_id_' . $name, setting('cache_info_char', 600), function() use ($name) {
+            return Char::select('CharID')->where('CharName16', $name)->first()->CharID ?? null;
+        });
 
-        abort(404);
+        if ($charID) {
+            $charUniqueHistory = (new Char)->getCharUniqueHistory($charID);
+
+            $characters = (new Char)->getCharInfo($name);
+            if ($characters) {
+                return view('ranking.character.index', [
+                    'characters' => $characters,
+                    'charUniqueHistory' => $charUniqueHistory
+                ]);
+            }
+        }
+        return redirect()->back();
     }
 
     public function guild_view($name)
@@ -62,6 +70,6 @@ class RankingController extends Controller
             ]);
         }
 
-        abort(404);
+        return redirect()->back();
     }
 }

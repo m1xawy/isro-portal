@@ -31,6 +31,6 @@ class PostController extends Controller
             ]);
         }
 
-        abort(404);
+        return redirect()->back();
     }
 }

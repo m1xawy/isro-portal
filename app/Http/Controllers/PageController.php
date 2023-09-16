@@ -21,6 +21,6 @@ class PageController extends Controller
             }
         }
 
-        abort(404);
+        return redirect()->back();
     }
 }

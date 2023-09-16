@@ -30,7 +30,7 @@
                             @php $i = 1; @endphp
                             @forelse($rankings as $ranking)
                                 <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                                    <th scope="row">
+                                    <th class="w-0" scope="row">
                                         @switch($i)
                                             @case(1)
                                                 <img src="{{ asset('images/ingame/rank1.png') }}" style="vertical-align:text-top" alt="Rank 1"/>
