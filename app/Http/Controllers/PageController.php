@@ -9,7 +9,9 @@ class PageController extends Controller
 {
     public function show($slug)
     {
-        $pages = NPMHelpers::getPages();
+        $pages = cache()->remember('page', setting('cache_page', 600), function() {
+            return NPMHelpers::getPages();
+        });
 
         foreach ($pages as $page){
             if ($page['slug']['en'] == $slug) {

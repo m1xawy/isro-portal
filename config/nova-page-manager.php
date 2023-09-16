@@ -13,7 +13,7 @@ return [
     */
 
     'pages_table' => 'pages',
-    //'regions_table' => 'regions',
+    'regions_table' => 'regions',
 
     /*
     |--------------------------------------------------------------------------
@@ -31,12 +31,12 @@ return [
                 'unique' => false, // Whether more than one page can be created with this template
             ],
         ],
-        //'regions' => [
+        'regions' => [
             // 'header' => [
             //     'class' => 'App\Nova\Templates\HeaderRegionTemplate',
             //     'unique' => true,
             // ],
-        //],
+        ],
     ],
 
 
@@ -53,7 +53,7 @@ return [
     |
     */
 
-    'page_seo_fields' => false,
+    'page_seo_fields' => true,
 
 
     /*
@@ -83,8 +83,8 @@ return [
     |
     */
 
-    //'region_model' => \Outl1ne\PageManager\Models\Region::class,
-    //'region_resource' => \Outl1ne\PageManager\Nova\Resources\Region::class,
+    'region_model' => \Outl1ne\PageManager\Models\Region::class,
+    'region_resource' => \Outl1ne\PageManager\Nova\Resources\Region::class,
     'page_model' => \Outl1ne\PageManager\Models\Page::class,
     'page_resource' => \Outl1ne\PageManager\Nova\Resources\Page::class,
 

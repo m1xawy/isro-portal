@@ -1,11 +1,11 @@
 @php
-    $sliders = json_decode(setting('slider'))
+    $sliders = cache()->remember('slider', setting('cache_setting', 600), function() { return json_decode(setting('slider')); });
 @endphp
 
 <div id="default-carousel" class="relative w-full" data-carousel="slide">
     <!-- Carousel wrapper -->
     <div class="relative h-96 overflow-hidden rounded-lg md:h-96">
-        @if (isset($sliders) &&  count($sliders))
+        @if (!empty($sliders))
             @foreach($sliders as $slider)
                 <!-- Item 1 -->
                 <div class="hidden duration-1000 ease-in-out" data-carousel-item>
@@ -39,7 +39,7 @@
             </div>
         @endif
     </div>
-    @if (isset($sliders) && count($sliders) > 1)
+    @if (!empty($sliders) && count($sliders) > 1)
         <!-- Slider indicators -->
         <div class="absolute z-30 flex space-x-3 -translate-x-1/2 bottom-5 left-1/2">
             @foreach($sliders as $key => $slider)

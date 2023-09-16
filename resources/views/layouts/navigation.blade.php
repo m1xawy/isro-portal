@@ -1,3 +1,8 @@
+@php
+    $server_lang = cache()->remember('server_lang', setting('cache_setting', 600), function() { return setting('server_lang'); });
+    $get_pages = cache()->remember('get_pages', $seconds = 10, function() { return Outl1ne\PageManager\Helpers\NPMHelpers::getPages(); });
+@endphp
+
 <nav x-data="{ open: false }" class="bg-white dark:bg-gray-800 border-b border-gray-100 dark:border-gray-700">
     <!-- Primary Navigation Menu -->
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -6,8 +11,8 @@
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
                     <a href="{{ url('/') }}">
-                        @if (setting('server_logo'))
-                            <img src="{{ asset(Storage::url(setting('server_logo', ''))) }}" class="w-40 mr-0" alt="{{ setting('server_name', config('app.name')) }}">
+                        @if ($server_logo)
+                            <img src="{{ asset(Storage::url($server_logo)) }}" class="w-40 mr-0" alt="{{ $server_name }}">
                         @else
                             <x-application-logo class="block h-9 w-auto fill-current text-gray-800 dark:text-gray-200"/>
                         @endif
@@ -48,8 +53,8 @@
                         </x-slot>
 
                         <x-slot name="content">
-                            @if (count(Outl1ne\PageManager\Helpers\NPMHelpers::getPages()))
-                                @foreach (Outl1ne\PageManager\Helpers\NPMHelpers::getPages() as $page)
+                            @if (count($get_pages))
+                                @foreach ($get_pages as $page)
                                     <x-dropdown-link :href="'/page/'.$page['slug']['en']">
                                         {{ $page['name']['en'] }}
                                     </x-dropdown-link>
@@ -66,10 +71,10 @@
 
             <!-- Settings Dropdown -->
             <div class="hidden sm:flex sm:items-center sm:ml-6">
-                @if(setting('theme_mode') === null || setting('theme_mode') === 'switch')
+                @if($theme_mode === null || $theme_mode === 'switch')
                     <x-theme-switch/>
                 @endif
-                @if(setting('server_lang') === null || setting('server_lang') === 'switch')
+                @if($server_lang === null || $server_lang === 'switch')
                     <x-lang-switch/>
                 @endif
 

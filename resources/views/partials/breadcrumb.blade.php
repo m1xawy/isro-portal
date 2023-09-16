@@ -1,7 +1,12 @@
-@if (setting('breadcrumb_enable') !== null && setting('breadcrumb_enable'))
+@php
+    $breadcrumb_enable = cache()->remember('breadcrumb_enable', setting('cache_setting', 600), function() { return setting('breadcrumb_enable'); });
+    $color_background_image = cache()->remember('color_background_image', setting('cache_setting', 600), function() { return setting('color_background_image', ''); });
+@endphp
+
+@if ($breadcrumb_enable === 1)
     <header
         class="bg-gray-600 dark:bg-gray-800 shadow relative block w-full bg-center bg-cover bg-fixed bg-no-repeat bg-blend-multiply"
-        style="background-image: url({{ asset(Storage::url(setting('color_background_image', ''))) }})">
+        style="background-image: url({{ asset(Storage::url($color_background_image)) }})">
         <div class="max-w-7xl mx-auto py-14 px-4 sm:px-6 lg:px-8">
             <h2 class="font-semibold text-xl text-white dark:text-white leading-tight mx-8">
                 @yield('title')

@@ -10,8 +10,7 @@ class PostController extends Controller
 {
     public function index()
     {
-        $expire = now()->addSeconds(setting('cache_news', 60));
-        $posts = cache()->remember('posts', $expire, function() {
+        $posts = cache()->remember('posts', setting('cache_news', 600), function() {
             return Post::where('published_at', '<=', now())->get();
         });
 
@@ -22,8 +21,7 @@ class PostController extends Controller
 
     public function show($slug)
     {
-        $expire = now()->addSeconds(setting('cache_news', 60));
-        $post = cache()->remember('posts.view', $expire, function() use ($slug) {
+        $post = cache()->remember('posts.view', setting('cache_news', 600), function() use ($slug) {
             return Post::where('slug', $slug)->first();
         });
 

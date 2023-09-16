@@ -9,7 +9,10 @@ class DownloadController extends Controller
 {
     public function index()
     {
-        $downloads = Download::all();
+        $downloads = cache()->remember('download', setting('cache_download', 600), function() {
+            return Download::all();
+        });
+
         return view('pages.download', [
             'downloads' => $downloads,
         ]);

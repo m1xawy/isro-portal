@@ -1,5 +1,6 @@
 @php
-    switch (setting('theme_mode')) {
+    $theme_mode = cache()->remember('theme_mode', $seconds = 10, function() { return setting('theme_mode'); });
+    switch ($theme_mode) {
         case 'light':
             $defaultTheme = 'default';
             break;
