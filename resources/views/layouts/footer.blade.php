@@ -62,7 +62,7 @@
         </div>
         <hr class="my-6 border-gray-200 sm:mx-auto dark:border-gray-700 lg:my-8"/>
         <div class="sm:flex sm:items-center sm:justify-between">
-            <span class="text-sm text-gray-500 sm:text-center dark:text-gray-400">© 2023 <a href="{{ cache()->remember('server_url', 600, function() { return setting('server_url', config('app.url')); }) }}" class="hover:underline">{{ cache()->remember('server_name', 600, function() { return setting('server_name', config('app.name', 'Laravel')); }) }}</a>. All Rights Reserved. · Coded by <a class="link-default" href="https://mix-shop.tech/">m1xawy</a></span>
+            <span class="text-sm text-gray-500 sm:text-center dark:text-gray-400">© 2023 <a href="{{ cache()->remember('server_url', 600, function() { return setting('server_url', config('app.url')); }) }}" class="hover:underline">{{ cache()->remember('server_name', 600, function() { return setting('server_name', config('app.name', 'Laravel')); }) }}</a>. All Rights Reserved. · Coded by <a class="link-default" href="https://mix-shop.tech/" target="_blank">m1xawy</a></span>
             <div class="socials flex mt-4 space-x-5 sm:justify-center sm:mt-0">
                 <style>.socials a svg {width: 1rem;height: 1rem;}</style>
                 @if (!empty($socials))

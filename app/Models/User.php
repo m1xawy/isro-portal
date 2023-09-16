@@ -49,7 +49,7 @@ class User extends Authenticatable
 
     public function getJCash()
     {
-        $JCash = cache()->remember('j_cash', $seconds = 10, function() {
+        $JCash = cache()->remember('j_cash', $seconds = 60, function() {
             return collect(DB::select("
             Declare @ReturnValue Int
             Declare @PremiumSilk Int
@@ -84,11 +84,11 @@ class User extends Authenticatable
 
     public function getVIPInfo()
     {
-        $VIPInfo = cache()->remember('vip_info', $seconds = 10, function() {
+        $VIPInfo = cache()->remember('vip_info', $seconds = 60, function() {
             return collect(DB::select("Select * From [GB_JoymaxPortal].[dbo].[MU_VIP_Info] with(nolock) Where JID = ".$this->jid." AND ExpireDate >= GETDATE()"))->first();
         });
 
-        if(!$VIPInfo) {
+        if(empty($VIPInfo)) {
             return null;
         }
 

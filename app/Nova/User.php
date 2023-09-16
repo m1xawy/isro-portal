@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Validation\Rules;
 use Laravel\Nova\Fields\Gravatar;
 use Laravel\Nova\Fields\ID;
+use Laravel\Nova\Fields\Number;
 use Laravel\Nova\Fields\Password;
 use Laravel\Nova\Fields\Select;
 use Laravel\Nova\Fields\Text;
@@ -25,7 +26,7 @@ class User extends Resource
      *
      * @var string
      */
-    public static $title = 'name';
+    public static $title = 'username';
 
     /**
      * The columns that should be searched.
@@ -33,7 +34,7 @@ class User extends Resource
      * @var array
      */
     public static $search = [
-        'id', 'name', 'email',
+        'id', 'jid', 'username', 'email',
     ];
 
     /**
@@ -46,10 +47,11 @@ class User extends Resource
     {
         return [
             ID::make()->sortable(),
+            Number::make('JID'),
 
             Gravatar::make()->maxWidth(50),
 
-            Text::make('Name')
+            Text::make('Username')
                 ->sortable()
                 ->rules('required', 'max:255'),
 

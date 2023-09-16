@@ -4,6 +4,7 @@ namespace App\Models\SRO\Shard;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 class Char extends Model
 {
@@ -32,6 +33,169 @@ class Char extends Model
     ];
 
     protected $dateFormat = 'Y-m-d H:i:s';
+
+    public function getPlayerRanking()
+    {
+        $playerRanking = cache()->remember('player_ranking', setting('cache_ranking_player', 600), function() {
+            return collect(DB::select("
+                    SELECT TOP(25)
+                        _Char.CharID, _Char.CharName16, _Char.CurLevel, _Char.RefObjID, _Guild.ID, _Guild.Name,
+
+                        + (CAST((sum(_Items.OptLevel))
+                        + SUM(_RefObjItem.ItemClass)
+                        + SUM(_RefObjCommon.Rarity)
+                        + (CASE WHEN sum(_BindingOptionWithItem.nOptValue) > 0 THEN sum(_BindingOptionWithItem.nOptValue) ELSE 0 END) as INT))
+                        AS ItemPoints
+
+                    FROM
+                        SILKROAD_R_SHARD.._Char
+                        JOIN SILKROAD_R_SHARD.._Guild ON _Char.GuildID = _Guild.ID
+                        JOIN SILKROAD_R_SHARD.._Inventory ON _Char.CharID = _Inventory.CharID
+                        JOIN SILKROAD_R_SHARD.._Items ON _Inventory.ItemID = _Items.ID64
+                        LEFT JOIN SILKROAD_R_SHARD.._BindingOptionWithItem ON _Inventory.ItemID = _BindingOptionWithItem.nItemDBID
+                        JOIN SILKROAD_R_SHARD.._RefObjCommon ON _Items.RefItemID = _RefObjCommon.ID
+                        JOIN SILKROAD_R_SHARD.._RefObjItem ON _RefObjCommon.Link = _RefObjItem.ID
+
+                    WHERE
+                        _Inventory.Slot between 0 and 12
+                        and _Inventory.Slot NOT IN (7, 8)
+                        and _Inventory.ItemID > 0
+                        and _Char.CharName16 NOT LIKE '%[[]GM]%'
+                        AND _Char.deleted = 0
+                        AND _Char.CharID > 0
+
+                    GROUP BY
+                        _Char.CharID,
+                        _Char.CharName16,
+                        _Char.CurLevel,
+                        _Char.RefObjID,
+                        _Guild.ID,
+                        _Guild.Name
+
+                    ORDER BY
+                        ItemPoints DESC,
+                        _Char.CurLevel DESC
+            "
+            ));
+        });
+
+        if(empty($playerRanking)) {
+            return null;
+        }
+
+        return $playerRanking;
+    }
+
+    public function getGuildRanking()
+    {
+        $guildRanking = cache()->remember('guild_ranking', setting('cache_ranking_guild', 600), function() {
+            return collect(DB::select("
+                    SELECT TOP(25)
+                         _Guild.ID, _Guild.Name,  _Guild.Lvl, _Guild.GatheredSP,
+
+                        (select CharID from SILKROAD_R_SHARD.._GuildMember where GuildID = _Guild.ID and MemberClass = 0) as MasterID,
+                        (select CharName from SILKROAD_R_SHARD.._GuildMember where GuildID = _Guild.ID and MemberClass = 0) as MasterName,
+                        (select COUNT(CharID) from SILKROAD_R_SHARD.._GuildMember where GuildID = _Guild.ID) AS TotalMember,
+
+                        + (CAST((sum(_Items.OptLevel))
+                        + SUM(_RefObjItem.ItemClass)
+                        + SUM(_RefObjCommon.Rarity)
+                        + (CASE WHEN sum(_BindingOptionWithItem.nOptValue) > 0 THEN sum(_BindingOptionWithItem.nOptValue) ELSE 0 END) as INT))
+                        AS ItemPoints
+
+                    FROM
+                        SILKROAD_R_SHARD.._Guild
+                        JOIN SILKROAD_R_SHARD.._GuildMember ON _Guild.ID = _GuildMember.GuildID
+                        JOIN SILKROAD_R_SHARD.._Inventory ON _GuildMember.CharID = _Inventory.CharID
+                        JOIN SILKROAD_R_SHARD.._Items ON _Inventory.ItemID = _Items.ID64
+                        LEFT JOIN SILKROAD_R_SHARD.._BindingOptionWithItem ON _Inventory.ItemID = _BindingOptionWithItem.nItemDBID
+                        JOIN SILKROAD_R_SHARD.._RefObjCommon ON _Items.RefItemID = _RefObjCommon.ID
+                        JOIN SILKROAD_R_SHARD.._RefObjItem ON _RefObjCommon.Link = _RefObjItem.ID
+
+                    WHERE
+                        _Inventory.Slot between 0 and 12
+                        and _Inventory.Slot NOT IN (7, 8)
+                        and _Inventory.ItemID > 0
+                        AND _Guild.ID > 0
+
+                    GROUP BY
+                        _Guild.ID,
+                        _Guild.Name,
+                        _Guild.Lvl,
+                        _Guild.GatheredSP
+
+                    ORDER BY
+                        ItemPoints DESC,
+                        _Guild.Lvl DESC,
+                        _Guild.GatheredSP DESC
+            "
+            ));
+        });
+
+        if(empty($guildRanking)) {
+            return null;
+        }
+
+        return $guildRanking;
+    }
+
+    public function getUniqueRanking()
+    {
+        $unique_list_settings = cache()->remember('ranking_unique_list', setting('cache_ranking_unique', 600), function() { return json_decode(setting('ranking_unique_list')); });
+        foreach ($unique_list_settings as $unique_settings) {
+            $settings_uniques_id_list[] = $unique_settings->attributes->ranking_unique_id;
+            $settings_uniques_point_list[] = "+ (CASE WHEN _CharUniqueKill.MobID = " . $unique_settings->attributes->ranking_unique_id . " THEN +" . $unique_settings->attributes->ranking_unique_point . " ELSE 0 END)";
+        }
+        $uniques_id_list = implode(', ', $settings_uniques_id_list);
+        $uniques_point_list = implode(' ', $settings_uniques_point_list);
+
+        $uniqueRanking = cache()->remember('unique_ranking', setting('cache_ranking_unique', 600), function() use ($uniques_id_list, $uniques_point_list) {
+            return collect(DB::select("
+                   SELECT TOP (25)
+                        _CharUniqueKill.CharID,
+                        _CharUniqueKill.MobID,
+                        _Char.CharName16,
+                        _Char.CurLevel,
+                        _Char.RefObjID,
+                        _Guild.ID,
+                        _Guild.Name,
+
+                        (SELECT SUM(CAST(
+                        $uniques_point_list
+                        AS INT))) AS Points
+
+                    FROM
+                        SILKROAD_R_SHARD.._CharUniqueKill
+                        JOIN SILKROAD_R_SHARD.._Char ON _Char.CharID = _CharUniqueKill.CharID
+                        JOIN SILKROAD_R_SHARD.._Guild ON _Char.GuildID = _Guild.ID
+
+                    WHERE
+                        _CharUniqueKill.MobID IN ($uniques_id_list)
+                        AND _Char.CharName16 NOT LIKE '%[[]GM]%'
+                        AND _Char.deleted = 0
+                        AND _Char.CharID > 0
+
+                    GROUP BY
+                        _CharUniqueKill.CharID,
+                        _CharUniqueKill.MobID,
+                        _Char.CharName16,
+                        _Char.CurLevel,
+                        _Char.RefObjID,
+                        _Guild.ID,
+                        _Guild.Name
+
+                    ORDER BY
+                        Points DESC
+            "
+            ));
+        });
+
+        if(empty($uniqueRanking)) {
+            return null;
+        }
+
+        return $uniqueRanking;
+    }
 
     public function getGuildMemberUser()
     {

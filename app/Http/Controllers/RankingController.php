@@ -11,9 +11,33 @@ class RankingController extends Controller
 {
     public function index()
     {
-        $rankings = Char::paginate(25);
+        $rankings = (new Char)->getPlayerRanking();
         return view('ranking.index', [
             'rankings' => $rankings,
+        ]);
+    }
+
+    public function player()
+    {
+        $players = (new Char)->getPlayerRanking();
+        return view('ranking.ranking.player', [
+            'players' => $players,
+        ]);
+    }
+
+    public function guild()
+    {
+        $guilds = (new Char)->getGuildRanking();
+        return view('ranking.ranking.guild', [
+            'guilds' => $guilds,
+        ]);
+    }
+
+    public function unique()
+    {
+        $uniques = (new Char)->getUniqueRanking();
+        return view('ranking.ranking.unique', [
+            'uniques' => $uniques,
         ]);
     }
 
@@ -39,29 +63,5 @@ class RankingController extends Controller
         }
 
         abort(404);
-    }
-
-    public function player()
-    {
-        $players = Char::paginate(25);
-        return view('ranking.ranking.player', [
-            'players' => $players,
-        ]);
-    }
-
-    public function guild()
-    {
-        $guilds = Guild::paginate(25);
-        return view('ranking.ranking.guild', [
-            'guilds' => $guilds,
-        ]);
-    }
-
-    public function unique()
-    {
-        $uniques = CharUniqueKill::paginate(25);
-        return view('ranking.ranking.unique', [
-            'uniques' => $uniques,
-        ]);
     }
 }

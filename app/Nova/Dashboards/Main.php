@@ -52,7 +52,8 @@ class Main extends Dashboard
                 ->html(
         "<h1 class='text-red-400'>Message:</h1>
                     <span># This project is totally for free</span><br>
-                    <span># Please Don't be a dick, leave my name in footer</span><br><br>
+                    <span># Please Don't be a dick, leave my name in footer</span><br>
+                    <span># If you're using this in commercial, Please buy Nova license</span><br><br>
 
                     <h1 class='text-red-400'>Links:</h1>
                     <span>Github:</span><a href='https://github.com/m1xawy/isro-portal'>https://github.com/m1xawy/isro-portal</a><br>
