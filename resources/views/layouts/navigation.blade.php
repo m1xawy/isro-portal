@@ -1,6 +1,5 @@
 @php
-    $server_lang = cache()->remember('server_lang', setting('cache_setting', 600), function() { return setting('server_lang'); });
-    $get_pages = cache()->remember('get_pages', $seconds = 10, function() { return Outl1ne\PageManager\Helpers\NPMHelpers::getPages(); });
+    $pages = cache()->remember('pages', setting('cache_page', 600), function() { return Outl1ne\PageManager\Helpers\NPMHelpers::getPages(); });
 @endphp
 
 <nav x-data="{ open: false }" class="bg-white dark:bg-gray-800 border-b border-gray-100 dark:border-gray-700">
@@ -11,8 +10,8 @@
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
                     <a href="{{ url('/') }}">
-                        @if ($server_logo)
-                            <img src="{{ asset(Storage::url($server_logo)) }}" class="w-40 mr-0" alt="{{ $server_name }}">
+                        @if (cache()->remember('server_logo', 600, function() { return setting('server_logo', ''); }))
+                            <img src="{{ asset(Storage::url(cache()->remember('server_logo', 600, function() { return setting('server_logo', ''); }))) }}" class="w-40 mr-0" alt="{{ cache()->remember('server_name', 600, function() { return setting('server_name', config('app.name', 'Laravel')); }) }}">
                         @else
                             <x-application-logo class="block h-9 w-auto fill-current text-gray-800 dark:text-gray-200"/>
                         @endif
@@ -53,8 +52,8 @@
                         </x-slot>
 
                         <x-slot name="content">
-                            @if (count($get_pages))
-                                @foreach ($get_pages as $page)
+                            @if (!empty($pages))
+                                @foreach ($pages as $page)
                                     <x-dropdown-link :href="'/page/'.$page['slug']['en']">
                                         {{ $page['name']['en'] }}
                                     </x-dropdown-link>
@@ -71,10 +70,10 @@
 
             <!-- Settings Dropdown -->
             <div class="hidden sm:flex sm:items-center sm:ml-6">
-                @if($theme_mode === null || $theme_mode === 'switch')
+                @if(empty(setting('theme_mode')) || setting('theme_mode') === 'switch')
                     <x-theme-switch/>
                 @endif
-                @if($server_lang === null || $server_lang === 'switch')
+                @if(empty(setting('server_lang')) || setting('server_lang') === 'switch')
                     <x-lang-switch/>
                 @endif
 

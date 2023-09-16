@@ -1,5 +1,5 @@
 @php
-    $server_info = cache()->remember('server_info', setting('cache_setting', 600), function() { return json_decode(setting('server_info')); });
+    $server_info = cache()->remember('server_info', setting('cache_widget', 600), function() { return json_decode(setting('server_info')); });
 @endphp
 
 <div class="server-info p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg">

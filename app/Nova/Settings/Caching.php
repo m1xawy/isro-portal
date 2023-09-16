@@ -12,7 +12,7 @@ class Caching
     {
         return [
             NovaSettings::addSettingsFields([
-                Number::make('Settings', 'cache_setting')->help('For example, if you write 3600, your page data will be cached for 60 minutes'),
+                Number::make('Widgets', 'cache_widget')->help('For example, if you write 3600, your page data will be cached for 60 minutes'),
                 Number::make('News', 'cache_news')->help('For example, if you write 3600, your page data will be cached for 60 minutes'),
                 Number::make('Download', 'cache_download')->help('For example, if you write 3600, your page data will be cached for 60 minutes'),
                 Number::make('Pages', 'cache_page')->help('For example, if you write 3600, your page data will be cached for 60 minutes'),

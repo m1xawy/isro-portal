@@ -1,12 +1,3 @@
-@php
-    $server_url = cache()->remember('server_url', setting('cache_setting', 600), function() { return setting('server_url', config('app.url')); });
-    $server_name = cache()->remember('server_name', setting('cache_setting', 600), function() { return setting('server_name', config('app.name', 'Laravel')); });
-    $server_desc = cache()->remember('server_desc', setting('cache_setting', 600), function() { return setting('server_desc', ''); });
-    $server_logo = cache()->remember('server_logo', setting('cache_setting', 600), function() { return setting('server_logo', ''); });
-    $server_favicon = cache()->remember('server_favicon', setting('cache_setting', 600), function() { return setting('server_favicon', ''); });
-    $theme_mode = cache()->remember('theme_mode', setting('cache_setting', 600), function() { return setting('theme_mode'); });
-@endphp
-
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
@@ -14,9 +5,9 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
-        <title>{{ $server_name }} - @yield('title')</title>
-        <meta name="description" content="{{ $server_desc }}">
-        <link rel="shortcut icon" href="{{ asset(Storage::url($server_favicon)) }}">
+        <title>{{ cache()->remember('server_name', 600, function() { return setting('server_name', config('app.name', 'Laravel')); }) }} - @yield('title')</title>
+        <meta name="description" content="{{ cache()->remember('server_desc', 600, function() { return setting('server_desc', ''); }) }}">
+        <link rel="shortcut icon" href="{{ asset(Storage::url(cache()->remember('server_favicon', 600, function() { return setting('server_favicon', ''); }))) }}">
 
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">
@@ -32,7 +23,7 @@
         @include('partials.theme-mode-scripts')
 
         <!-- Custom settings colors -->
-        @if($theme_mode == 'customize')
+        @if(setting('theme_mode') == 'customize')
             @include('partials.appearance-settings')
         @endif
 
