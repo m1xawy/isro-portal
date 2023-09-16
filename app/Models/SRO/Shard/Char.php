@@ -197,9 +197,9 @@ class Char extends Model
         return $uniqueRanking;
     }
 
-    public function getCharInfo($charName)
+    public function getCharInfo($charID)
     {
-        $charInfo = cache()->remember('char_info_' . $charName, setting('cache_info_char', 600), function() use ($charName) {
+        $charInfo = cache()->remember('char_info_' . $charID, setting('cache_info_char', 600), function() use ($charID) {
             return collect(DB::select("
                 SELECT
                     CharName16, NickName16, GuildID, RefObjID, CurLevel, HwanLevel, RemainGold, HP, MP, Strength, Intellect, LastLogout,
@@ -222,7 +222,7 @@ class Char extends Model
                     _Inventory.Slot between 0 and 12
                     and _Inventory.Slot NOT IN (7, 8)
                     and _Inventory.ItemID > 0
-                    AND _Char.CharName16 = '" . $charName . "'
+                    AND _Char.CharID = " . $charID . "
 
                 GROUP BY
                     _Char.CharID,
@@ -262,8 +262,7 @@ class Char extends Model
         $uniques_id_list = implode(', ', $settings_uniques_id_list);
 
         $charUniqueHistory = cache()->remember('char_unique_history_' . $charID, setting('cache_info_char', 600), function() use ($uniques_id_list, $charID) {
-            return collect(DB::select("SELECT * FROM [SILKROAD_R_SHARD].[dbo].[_CharUniqueKill] WHERE CharID = " . $charID . " AND MobID IN (" . $uniques_id_list . ") ORDER BY EventDate DESC"
-            ));
+            return collect(DB::select("SELECT * FROM [SILKROAD_R_SHARD].[dbo].[_CharUniqueKill] WHERE CharID = " . $charID . " AND MobID IN (" . $uniques_id_list . ") ORDER BY EventDate DESC"));
         });
 
         if(empty($charUniqueHistory)) {

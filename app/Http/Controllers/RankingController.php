@@ -48,9 +48,10 @@ class RankingController extends Controller
         });
 
         if ($charID) {
+
+            $characters = (new Char)->getCharInfo($charID);
             $charUniqueHistory = (new Char)->getCharUniqueHistory($charID);
 
-            $characters = (new Char)->getCharInfo($name);
             if ($characters) {
                 return view('ranking.character.index', [
                     'characters' => $characters,
@@ -63,11 +64,21 @@ class RankingController extends Controller
 
     public function guild_view($name)
     {
-        $guilds = Guild::where('Name', $name)->first();
-        if ($guilds) {
-            return view('ranking.guild.index', [
-                'guilds' => $guilds
-            ]);
+        $guildID = cache()->remember('guild_id_' . $name, setting('cache_info_guild', 600), function() use ($name) {
+            return Guild::select('ID')->where('Name', $name)->first()->ID ?? null;
+        });
+
+        if ($guildID) {
+
+            $guilds = (new Guild)->getGuildInfo($guildID);
+            $guildMembers = (new Guild)->getGuildInfoMembers($guildID);
+
+            if ($guilds) {
+                return view('ranking.guild.index', [
+                    'guilds' => $guilds,
+                    'guildMembers' => $guildMembers,
+                ]);
+            }
         }
 
         return redirect()->back();
