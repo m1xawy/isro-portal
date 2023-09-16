@@ -51,6 +51,8 @@ class RegisteredUserController extends Controller
          * Also about CountryCode it needs hard code
          * */
 
+        $userBinIP = ($request->ip() == "::1") ? ip2long('127.0.0.1') : ip2long($request->ip()); //Fixing local registration
+
         $returnCode = collect(DB::select("
             Declare @ReturnValue Int
             Declare @ARCode SmallInt
@@ -61,13 +63,13 @@ class RegisteredUserController extends Controller
                 '".$request->username."',
                 '".md5($request->password)."',
                 'M',
-                '2000-12-12',
-                'Han',
-                'Doc',
+                '".now()->subYears(16)."',
+                '".$request->username."',
+                '".$request->username."',
                 '".$request->email."',
-                0x00000000,
+                ".$userBinIP.",
                 'J".$request->username."',
-                'J',
+                'JOYMAX',
                 @ARCode Output,
                 @JID Output;
 
@@ -83,6 +85,12 @@ class RegisteredUserController extends Controller
         }
 
         $portalJID = $returnCode->JID;
+
+        if(setting('register_confirmation_enable', 0) === 1) {
+            MuhAlteredInfo::where('JID',$portalJID)->update(['EmailReceptionStatus'=>'N', 'EmailCertificationStatus'=>'N']);
+        } else {
+            MuhAlteredInfo::where('JID',$portalJID)->update(['EmailReceptionStatus'=>'Y', 'EmailCertificationStatus'=>'Y']);
+        }
 
         TbUser::create([
             'PortalJID' => $portalJID,
@@ -104,7 +112,7 @@ class RegisteredUserController extends Controller
             'VIPUserType' => 2,
             'VIPLv' => 1,
             'UpdateDate' => now(),
-            'ExpireDate' => now()->addMonth(1),
+            'ExpireDate' => now()->addMonths(1),
         ]);
 
         $user = User::create([

@@ -36,6 +36,7 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
         new \App\Nova\Settings\Register;
         new \App\Nova\Settings\Donate;
         new \App\Nova\Settings\Caching;
+        new \App\Nova\Settings\Ranking;
     }
 
     /**

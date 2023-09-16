@@ -9,7 +9,7 @@ class TbUser extends Model
 {
     use HasFactory;
 
-    protected $connection = 'account';
+    protected $connection = 'vsro_account';
 
     public $timestamps = false;
 

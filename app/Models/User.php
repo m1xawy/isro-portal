@@ -49,7 +49,8 @@ class User extends Authenticatable
 
     public function getJCash()
     {
-        $JCash = collect(DB::select("
+        $JCash = cache()->remember('j_cash', $seconds = 10, function() {
+            return collect(DB::select("
             Declare @ReturnValue Int
             Declare @PremiumSilk Int
             Declare @Silk Int;
@@ -71,7 +72,8 @@ class User extends Authenticatable
                 @PremiumSilk AS 'PremiumSilk',
                 @Silk AS 'Silk'
             "
-        ))->first();
+            ))->first();
+        });
 
         if($JCash->ErrorCode != 0) {
             return null;
@@ -82,8 +84,9 @@ class User extends Authenticatable
 
     public function getVIPInfo()
     {
-        //$VIPConfig = config('vip-info');
-        $VIPInfo = collect(DB::select("Select * From [GB_JoymaxPortal].[dbo].[MU_VIP_Info] with(nolock) Where JID = ".$this->jid." AND ExpireDate >= GETDATE()"))->first();
+        $VIPInfo = cache()->remember('vip_info', $seconds = 10, function() {
+            return collect(DB::select("Select * From [GB_JoymaxPortal].[dbo].[MU_VIP_Info] with(nolock) Where JID = ".$this->jid." AND ExpireDate >= GETDATE()"))->first();
+        });
 
         if(!$VIPInfo) {
             return null;

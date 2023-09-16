@@ -9,7 +9,7 @@ class SkSilk extends Model
 {
     use HasFactory;
 
-    protected $connection = 'account';
+    protected $connection = 'vsro_account';
 
     public $timestamps = false;
 
