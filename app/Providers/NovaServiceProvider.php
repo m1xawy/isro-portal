@@ -34,9 +34,9 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
         new \App\Nova\Settings\General;
         new \App\Nova\Settings\Widgets;
         new \App\Nova\Settings\Register;
+        new \App\Nova\Settings\Ranking;
         new \App\Nova\Settings\Donate;
         new \App\Nova\Settings\Caching;
-        new \App\Nova\Settings\Ranking;
     }
 
     /**
@@ -86,8 +86,8 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
     public function tools()
     {
         return [
-            new NovaSettings,
             new PageManager,
+            new NovaSettings,
         ];
     }
 

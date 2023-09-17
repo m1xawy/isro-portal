@@ -272,6 +272,78 @@ class Char extends Model
         return $charUniqueHistory;
     }
 
+    public function getFortressPlayerRanking($limit = 25)
+    {
+        $fortressPlayerRanking = cache()->remember('fortress_player_ranking', setting('cache_fortress_player', 600), function() use ($limit) {
+            return collect(DB::select("
+                    SELECT TOP(" . $limit . ")
+                        _Char.CharID, _Char.CharName16, _Char.RefObjID, _GuildMember.GuildWarKill, _GuildMember.GuildWarKilled
+
+                    FROM
+                        SILKROAD_R_SHARD.._Char
+                        JOIN SILKROAD_R_SHARD.._Guild ON _Char.GuildID = _Guild.ID
+						JOIN SILKROAD_R_SHARD.._GuildMember ON _Guild.ID = _GuildMember.GuildID
+
+                    WHERE
+						_Char.CharName16 NOT LIKE '%[[]GM]%'
+                        AND _Char.deleted = 0
+                        AND _Char.CharID > 0
+
+                    GROUP BY
+                        _Char.CharID,
+                        _Char.CharName16,
+                        _Char.CurLevel,
+                        _Char.RefObjID,
+                        _Guild.ID,
+                        _Guild.Name,
+						_GuildMember.GuildWarKill,
+						_GuildMember.GuildWarKilled
+
+                    ORDER BY
+                        _GuildMember.GuildWarKill DESC
+            "));
+        });
+
+        if(empty($fortressPlayerRanking)) {
+            return null;
+        }
+
+        return $fortressPlayerRanking;
+    }
+
+    public function getFortressGuildRanking($limit = 25)
+    {
+        $fortressGuildRanking = cache()->remember('fortress_guild_ranking', setting('cache_fortress_guild', 600), function() use ($limit) {
+            return collect(DB::select("
+                    SELECT TOP(" . $limit . ")
+                         _Guild.ID, _Guild.Name,
+
+                        (SELECT SUM(GuildWarKill) from SILKROAD_R_SHARD.._GuildMember WHERE GuildID = _Guild.ID) AS TotalKills,
+						(SELECT SUM(GuildWarKilled) from SILKROAD_R_SHARD.._GuildMember WHERE GuildID = _Guild.ID) AS TotalDeath
+
+                    FROM
+                        SILKROAD_R_SHARD.._Guild
+                        JOIN SILKROAD_R_SHARD.._GuildMember ON _Guild.ID = _GuildMember.GuildID
+
+                    WHERE
+                        _Guild.ID > 0
+
+                    GROUP BY
+                        _Guild.ID,
+                        _Guild.Name
+
+                    ORDER BY
+                        TotalKills DESC
+            "));
+        });
+
+        if(empty($fortressGuildRanking)) {
+            return null;
+        }
+
+        return $fortressGuildRanking;
+    }
+
     public function getGuildMemberUser()
     {
         return $this->hasOne(GuildMember::class, 'CharID', 'CharID');

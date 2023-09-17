@@ -32,6 +32,8 @@ Route::group(['middleware' => 'language'], function () {
     Route::get('/ranking/player', [RankingController::class, 'player'])->name('ranking.player');
     Route::get('/ranking/guild', [RankingController::class, 'guild'])->name('ranking.guild');
     Route::get('/ranking/unique', [RankingController::class, 'unique'])->name('ranking.unique');
+    Route::get('/ranking/fortress/player', [RankingController::class, 'fortress_player'])->name('ranking.fortress.player');
+    Route::get('/ranking/fortress/guild', [RankingController::class, 'fortress_guild'])->name('ranking.fortress.guild');
 
     Route::middleware('auth')->group(function () {
         Route::get('/profile', [ProfileController::class, 'index'])->name('profile');

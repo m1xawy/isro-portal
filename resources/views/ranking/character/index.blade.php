@@ -135,6 +135,7 @@
         </div>
     </div>
 
+    @include('ranking.character.partials.character-global-history')
     @include('ranking.character.partials.character-unique-history')
 
 @endsection

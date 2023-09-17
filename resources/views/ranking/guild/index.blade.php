@@ -57,8 +57,8 @@
                     </div>
                 </div>
 
-                @include('ranking.guild.guild-members')
-                @include('ranking.guild.guild-alliances')
+                @include('ranking.guild.partials.guild-members')
+                @include('ranking.guild.partials.guild-alliances')
 
             </div>
         </div>

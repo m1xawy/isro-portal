@@ -36,8 +36,29 @@ class RankingController extends Controller
     public function unique()
     {
         $uniques = (new Char)->getUniqueRanking();
+        $unique_list_settings = cache()->remember('ranking_unique_list', setting('cache_ranking_unique', 600), function() { return json_decode(setting('ranking_unique_list')); });
+
         return view('ranking.ranking.unique', [
             'uniques' => $uniques,
+            'unique_list_settings' => $unique_list_settings,
+        ]);
+    }
+
+    public function fortress_player()
+    {
+        $fortressPlayer = (new Char)->getFortressPlayerRanking();
+
+        return view('ranking.ranking.fortress-player', [
+            'fortressPlayers' => $fortressPlayer,
+        ]);
+    }
+
+    public function fortress_guild()
+    {
+        $fortressGuild = (new Char)->getFortressGuildRanking();
+
+        return view('ranking.ranking.fortress-guild', [
+            'fortressGuilds' => $fortressGuild,
         ]);
     }
 
@@ -72,11 +93,13 @@ class RankingController extends Controller
 
             $guilds = (new Guild)->getGuildInfo($guildID);
             $guildMembers = (new Guild)->getGuildInfoMembers($guildID);
+            $guildAlliances = (new Guild)->getGuildInfoAlliance($guildID);
 
             if ($guilds) {
                 return view('ranking.guild.index', [
                     'guilds' => $guilds,
                     'guildMembers' => $guildMembers,
+                    'guildAlliances' => $guildAlliances,
                 ]);
             }
         }

@@ -12,7 +12,7 @@
                             <th scope="col" class="px-6 py-3">#</th>
                             <th scope="col" class="px-6 py-3">Character Name</th>
                             <th scope="col" class="px-6 py-3">Join Date</th>
-                            <th scope="col" class="px-6 py-3">Class</th>
+                            <th scope="col" class="px-6 py-3">Title</th>
                             <th scope="col" class="px-6 py-3">Donation (GB)</th>
                         </tr>
                     </thead>
@@ -23,7 +23,33 @@
                                 <td class="px-6 py-4">{{ $i }}</td>
                                 <td class="px-6 py-4"><a href="{{ route('ranking.character.view', ['name' => $guildMember->CharName]) }}">{{ $guildMember->CharName }}</a></td>
                                 <td class="px-6 py-4">{{ date('d-m-Y', strtotime($guildMember->JoinDate)) }}</td>
-                                <td class="px-6 py-4">{{ $guildMember->MemberClass == 0 ? 'Leader' : 'Member' }}</td>
+                                <td class="px-6 py-4">
+                                    @switch($guildMember->Permission)
+                                        @case(-1)
+                                            <span>Leader</span>
+                                            @break
+                                        @case(4)
+                                            <span>Member</span>
+                                            @break
+                                        @case(13)
+                                            <span>production manager</span>
+                                            @break
+                                        @case(15)
+                                            <span>education manager</span>
+                                            @break
+                                        @case(20)
+                                            <span>Military Engineer</span>
+                                            @break
+                                        @case(29)
+                                            <span>deputy commander</span>
+                                            @break
+                                        @case(31)
+                                            <span>Commander</span>
+                                            @break
+                                        @default
+                                            <span>Member</span>
+                                    @endswitch
+                                </td>
                                 <td class="px-6 py-4">{{ $guildMember->GP_Donation }}</td>
                             </tr>
                             @php $i++ @endphp
