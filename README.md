@@ -1,65 +1,84 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+## About iSRO Portal
 
-## About Laravel
+iSRO Portal is A free and open-source project for the MMORPG SilkroadR Online (iSRO) Server files
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+- More Dynamic.
+- Edit anything whatever from admin panel.
+- Everything cached.
+- supporting theme mode and all Languages.
+- Less Database requests.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Documentation Link
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+-Updating ..., but you can discover it yourself : )
 
-## Learning Laravel
+### Official Links
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+- **[Documentation Link](#)**
+- **[Themes Store](https://mix-shop.tech/)**
+- **[iSRO Development Discord](https://discord.gg/HuJPdPSKA5)**
+- **[iSRO Portal Discord](#)**
+- **[Youtube Channel](https://www.youtube.com/@m1xawy)**
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+## Quick Installation
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+-First be sure you have already installed iSRO-R Databases
+- Install Laragon Full [https://laragon.org](https://laragon.org/download/)
+- Add PHP ^8.1 or latter [https://php.net](https://windows.php.net/download)
+- Add PHP Sql Server Drivers [https://microsoft.com](https://learn.microsoft.com/en-us/sql/connect/php/download-drivers-php-sql-server)
+- And Sometimes you should install ODBC Driver 17 [https://microsoft.com](https://learn.microsoft.com/en-us/sql/connect/odbc/download-odbc-driver-for-sql-server)
 
-## Laravel Sponsors
+_Lets begin:
+1. Clone the repo
+   ```sh
+   git clone https://github.com/m1xawy/isro-portal.git
+   ```
+2. Install Laravel dependencies
+   ```sh
+   composer install
+   ```
+3. Rename `.env.example` to `.env` and fill it with your website URL and Silkroad database info
+   ```ini
+    APP_NAME=Laravel
+    APP_URL=https://localhost
+   
+    DB_CONNECTION=sqlsrv
+    DB_HOST=192.168.1.101
+    DB_PORT=1433
+    DB_USERNAME=sa
+    DB_PASSWORD=123456
+    DB_DATABASE=SRO_Portal
+    DB_DATABASE_PORTAL=GB_JoymaxPortal
+    DB_DATABASE_ACCOUNT=SILKROAD_R_ACCOUNT
+    DB_DATABASE_SHARD=SILKROAD_R_SHARD
+    DB_DATABASE_LOG=SILKROAD_R_SHARD_LOG
+   ```
+4. Create new database `SRO_Portal` and run Laravel commands for migrate website tables
+   ```sh
+    php artisan migrate
+    php artisan key:generate
+    php artisan storage:link
+   ```
+5. Install NPM packages & Run
+   ```sh
+   npm install
+   npm run build
+   ```
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+6. Change document root of laragon to public folder `isro-portal/public`
 
-### Premium Partners
+Finally, Congratulation!
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+to access admin panel change role `user` to `admin` from users table or execute this query
+   ```sql
+   UPDATE [SRO_Portal].[dbo].[users] SET [role] = 'admin' WHERE [username] = 'mixawy'
+   ```
 
 ## Contributing
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+Message me first.
+-Discord **[m1xawy](https://discord.com/users/462695018751328268)**
 
 ## License
 
