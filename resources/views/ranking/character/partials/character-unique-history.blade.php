@@ -25,17 +25,19 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @forelse($charUniqueHistory as $uniqueHistory)
-                            <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                                <td class="px-6 py-4">{{ $unique_name[$uniqueHistory->MobID] }}</td>
-                                <td class="px-6 py-4">+{{ $unique_point[$uniqueHistory->MobID] }}</td>
-                                <td class="px-6 py-4">{{ $uniqueHistory->EventDate }}</td>
-                            </tr>
-                        @empty
+                        @if (!empty($charUniqueHistory))
+                            @foreach($charUniqueHistory as $uniqueHistory)
+                                <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                                    <td class="px-6 py-4">{{ $unique_name[$uniqueHistory->MobID] }}</td>
+                                    <td class="px-6 py-4">+{{ $unique_point[$uniqueHistory->MobID] }}</td>
+                                    <td class="px-6 py-4">{{ $uniqueHistory->EventDate }}</td>
+                                </tr>
+                            @endforeach
+                        @else
                             <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 text-center">
                                 <td class="px-6 py-4" colspan="3">No Ranking available</td>
                             </tr>
-                        @endforelse
+                        @endif
                     </tbody>
                 </table>
             </div>

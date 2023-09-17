@@ -142,53 +142,56 @@ class Char extends Model
     public function getUniqueRanking($limit = 25)
     {
         $unique_list_settings = cache()->remember('ranking_unique_list', setting('cache_ranking_unique', 600), function() { return json_decode(setting('ranking_unique_list')); });
-        foreach ($unique_list_settings as $unique_settings) {
-            $settings_uniques_id_list[] = $unique_settings->attributes->ranking_unique_id;
-            $settings_uniques_point_list[] = "+ (CASE WHEN _CharUniqueKill.MobID = " . $unique_settings->attributes->ranking_unique_id . " THEN +" . $unique_settings->attributes->ranking_unique_point . " ELSE 0 END)";
+
+        if(!empty($unique_list_settings)) {
+            foreach ($unique_list_settings as $unique_settings) {
+                $settings_uniques_id_list[] = $unique_settings->attributes->ranking_unique_id;
+                $settings_uniques_point_list[] = "+ (CASE WHEN _CharUniqueKill.MobID = " . $unique_settings->attributes->ranking_unique_id . " THEN +" . $unique_settings->attributes->ranking_unique_point . " ELSE 0 END)";
+            }
+            $uniques_id_list = implode(', ', $settings_uniques_id_list);
+            $uniques_point_list = implode(' ', $settings_uniques_point_list);
+
+            $uniqueRanking = cache()->remember('unique_ranking', setting('cache_ranking_unique', 600), function() use ($limit, $uniques_id_list, $uniques_point_list) {
+                return collect(DB::select("
+                       SELECT TOP (" . $limit . ")
+                            _CharUniqueKill.CharID,
+                            _CharUniqueKill.MobID,
+                            _Char.CharName16,
+                            _Char.CurLevel,
+                            _Char.RefObjID,
+                            _Guild.ID,
+                            _Guild.Name,
+
+                            (SELECT SUM(CAST(
+                            " . $uniques_point_list . "
+                            AS INT))) AS Points
+
+                        FROM
+                            SILKROAD_R_SHARD.._CharUniqueKill
+                            JOIN SILKROAD_R_SHARD.._Char ON _Char.CharID = _CharUniqueKill.CharID
+                            JOIN SILKROAD_R_SHARD.._Guild ON _Char.GuildID = _Guild.ID
+
+                        WHERE
+                            _CharUniqueKill.MobID IN (" . $uniques_id_list . ")
+                            AND _Char.CharName16 NOT LIKE '%[[]GM]%'
+                            AND _Char.deleted = 0
+                            AND _Char.CharID > 0
+
+                        GROUP BY
+                            _CharUniqueKill.CharID,
+                            _CharUniqueKill.MobID,
+                            _Char.CharName16,
+                            _Char.CurLevel,
+                            _Char.RefObjID,
+                            _Guild.ID,
+                            _Guild.Name
+
+                        ORDER BY
+                            Points DESC
+                "
+                ));
+            });
         }
-        $uniques_id_list = implode(', ', $settings_uniques_id_list);
-        $uniques_point_list = implode(' ', $settings_uniques_point_list);
-
-        $uniqueRanking = cache()->remember('unique_ranking', setting('cache_ranking_unique', 600), function() use ($limit, $uniques_id_list, $uniques_point_list) {
-            return collect(DB::select("
-                   SELECT TOP (" . $limit . ")
-                        _CharUniqueKill.CharID,
-                        _CharUniqueKill.MobID,
-                        _Char.CharName16,
-                        _Char.CurLevel,
-                        _Char.RefObjID,
-                        _Guild.ID,
-                        _Guild.Name,
-
-                        (SELECT SUM(CAST(
-                        " . $uniques_point_list . "
-                        AS INT))) AS Points
-
-                    FROM
-                        SILKROAD_R_SHARD.._CharUniqueKill
-                        JOIN SILKROAD_R_SHARD.._Char ON _Char.CharID = _CharUniqueKill.CharID
-                        JOIN SILKROAD_R_SHARD.._Guild ON _Char.GuildID = _Guild.ID
-
-                    WHERE
-                        _CharUniqueKill.MobID IN (" . $uniques_id_list . ")
-                        AND _Char.CharName16 NOT LIKE '%[[]GM]%'
-                        AND _Char.deleted = 0
-                        AND _Char.CharID > 0
-
-                    GROUP BY
-                        _CharUniqueKill.CharID,
-                        _CharUniqueKill.MobID,
-                        _Char.CharName16,
-                        _Char.CurLevel,
-                        _Char.RefObjID,
-                        _Guild.ID,
-                        _Guild.Name
-
-                    ORDER BY
-                        Points DESC
-            "
-            ));
-        });
 
         if(empty($uniqueRanking)) {
             return null;
@@ -256,14 +259,16 @@ class Char extends Model
     public function getCharUniqueHistory($charID)
     {
         $unique_list_settings = cache()->remember('ranking_unique_list', setting('cache_ranking_unique', 600), function() { return json_decode(setting('ranking_unique_list')); });
-        foreach ($unique_list_settings as $unique_settings) {
-            $settings_uniques_id_list[] = $unique_settings->attributes->ranking_unique_id;
-        }
-        $uniques_id_list = implode(', ', $settings_uniques_id_list);
+        if(!empty($unique_list_settings)) {
+            foreach ($unique_list_settings as $unique_list) {
+                $uniques_id_lists[] = $unique_list->attributes->ranking_unique_id;
+            }
 
-        $charUniqueHistory = cache()->remember('char_unique_history_' . $charID, setting('cache_info_char', 600), function() use ($uniques_id_list, $charID) {
-            return collect(DB::select("SELECT * FROM [SILKROAD_R_SHARD].[dbo].[_CharUniqueKill] WHERE CharID = " . $charID . " AND MobID IN (" . $uniques_id_list . ") ORDER BY EventDate DESC"));
-        });
+            $uniques_id_list = implode(', ', $uniques_id_lists);
+            $charUniqueHistory = cache()->remember('char_unique_history_' . $charID, setting('cache_info_char', 600), function() use ($uniques_id_list, $charID) {
+                return collect(DB::select("SELECT * FROM [SILKROAD_R_SHARD].[dbo].[_CharUniqueKill] WHERE CharID = " . $charID . " AND MobID IN (" . $uniques_id_list . ") ORDER BY EventDate DESC"));
+            });
+        }
 
         if(empty($charUniqueHistory)) {
             return null;

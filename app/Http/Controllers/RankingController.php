@@ -35,12 +35,17 @@ class RankingController extends Controller
 
     public function unique()
     {
-        $uniques = (new Char)->getUniqueRanking();
         $unique_list_settings = cache()->remember('ranking_unique_list', setting('cache_ranking_unique', 600), function() { return json_decode(setting('ranking_unique_list')); });
+        if(!empty($unique_list_settings)) {
+            $uniques = (new Char)->getUniqueRanking();
+            $unique_lists = $unique_list_settings;
+        }
+        $uniques = [];
+        $unique_lists = [];
 
         return view('ranking.ranking.unique', [
             'uniques' => $uniques,
-            'unique_list_settings' => $unique_list_settings,
+            'unique_lists' => $unique_lists,
         ]);
     }
 

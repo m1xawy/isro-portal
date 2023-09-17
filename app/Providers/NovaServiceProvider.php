@@ -29,7 +29,7 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
             ');
         });
 
-        Heroicon::registerGlobalIconSet('social', 'Social Icons', public_path('/images/icons'));
+        //Heroicon::registerGlobalIconSet('social', 'Social Icons', resource_path('img/icons'));
 
         new \App\Nova\Settings\General;
         new \App\Nova\Settings\Widgets;

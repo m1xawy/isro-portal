@@ -82,10 +82,10 @@
     <div id="accordion-open-body-1" class="hidden_" aria-labelledby="accordion-open-heading-1">
         <div class="p-5 border border-b-0 border-gray-200 dark:border-gray-700 dark:bg-gray-900">
             <p class="mb-2 text-gray-500 dark:text-gray-400 p-2">
-                @forelse($unique_list_settings as $unique_list)
+                @forelse($unique_lists as $unique_list)
                     <span>{{ $unique_list->attributes->ranking_unique_name }} [{{ $unique_list->attributes->ranking_unique_point }} points]</span>,
                 @empty
-                    <span>Unique Ranking Not available</span>
+                    <span>Not available</span>
                 @endforelse
             </p>
         </div>
