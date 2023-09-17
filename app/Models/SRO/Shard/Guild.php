@@ -93,7 +93,7 @@ class Guild extends Model
     public function getGuildInfoAlliance($guildID)
     {
         $guildInfoAlliance = cache()->remember('guild_info_alliance_' . $guildID, setting('cache_info_guild', 600), function() use ($guildID) {
-            return collect(DB::select("SELECT Name from [SILKROAD_R_SHARD].[dbo].[_Guild] WHERE Alliance = (SELECT Alliance FROM [SILKROAD_R_SHARD].[dbo].[_Guild] WHERE ID = " . $guildID . ")"));
+            return collect(DB::select("SELECT Name from [SILKROAD_R_SHARD].[dbo].[_Guild] WHERE Alliance = (SELECT Alliance FROM [SILKROAD_R_SHARD].[dbo].[_Guild] WHERE ID = " . $guildID . " AND Alliance > 0)"));
         });
 
         if(empty($guildInfoAlliance)) {

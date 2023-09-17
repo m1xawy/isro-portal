@@ -68,7 +68,7 @@ class RankingController extends Controller
             return Char::select('CharID')->where('CharName16', $name)->first()->CharID ?? null;
         });
 
-        if ($charID) {
+        if ($charID > 0) {
 
             $characters = (new Char)->getCharInfo($charID);
             $charUniqueHistory = (new Char)->getCharUniqueHistory($charID);
@@ -89,7 +89,7 @@ class RankingController extends Controller
             return Guild::select('ID')->where('Name', $name)->first()->ID ?? null;
         });
 
-        if ($guildID) {
+        if ($guildID > 0) {
 
             $guilds = (new Guild)->getGuildInfo($guildID);
             $guildMembers = (new Guild)->getGuildInfoMembers($guildID);

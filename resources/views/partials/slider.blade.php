@@ -29,11 +29,6 @@
                     <div class="px-4 mx-auto max-w-screen-xl text-left py-24 lg:py-24">
                         <h1 class="mb-4 text-4xl font-extrabold tracking-tight leading-none text-white md:text-5xl lg:text-6xl dark:text-white mx-8">Title</h1>
                         <p class="mb-8 text-lg font-normal text-gray-400 lg:text-xl dark:text-gray-400 mx-8">Description</p>
-                        <div class="flex flex-col space-y-4 sm:flex-row sm:space-y-0 sm:space-x-4 mx-8">
-                            <a href="#" class="inline-flex justify-center items-center py-3 px-5 text-base font-medium text-center text-white bg-indigo-700 hover:bg-indigo-800 focus:ring-4 focus:ring-indigo-300 dark:focus:ring-indigo-900">
-                                Learn more
-                            </a>
-                        </div>
                     </div>
                 </section>
             </div>
