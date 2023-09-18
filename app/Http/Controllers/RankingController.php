@@ -39,9 +39,10 @@ class RankingController extends Controller
         if(!empty($unique_list_settings)) {
             $uniques = (new Char)->getUniqueRanking();
             $unique_lists = $unique_list_settings;
+        } else {
+            $uniques = [];
+            $unique_lists = [];
         }
-        $uniques = [];
-        $unique_lists = [];
 
         return view('ranking.ranking.unique', [
             'uniques' => $uniques,
@@ -70,7 +71,7 @@ class RankingController extends Controller
     public function character_view($name)
     {
         $charID = cache()->remember('char_id_' . $name, setting('cache_info_char', 600), function() use ($name) {
-            return Char::select('CharID')->where('CharName16', $name)->first()->CharID ?? null;
+            return Char::select('CharID')->where('CharName16', $name)->first()->CharID;
         });
 
         if ($charID > 0) {

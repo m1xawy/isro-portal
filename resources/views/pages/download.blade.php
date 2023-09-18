@@ -3,17 +3,17 @@
 
 @section('content')
     <div class="space-y-6">
-        <div class="lg:flex lg:flex-wrap space-x-6">
+        <div class="lg:flex lg:flex-wrap">
             @forelse($downloads as $download)
-                <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg md:w-1/4 p-4">
-                    <div class="text-gray-900 dark:text-gray-100">
+                <div class="md:w-1/4 p-2">
+                    <div class="flex flex-col items-center justify-between bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg text-gray-900 dark:text-gray-100 p-6 h-full">
                         @if ( $download->icon )
-                            <img class="object-contain object-center w-full lg:h-48 md:h-36" src="{{ Storage::url($download->icon) }}" alt="{{ $download->name }}">
+                            <img class="object-contain object-center w-24" src="{{ Storage::url($download->icon) }}" alt="{{ $download->name }}">
                         @endif
-                        <div class="p-6 text-center">
+                        <div class="p-6 text-center ">
                             <h1 class="mb-2 text-2xl font-medium text-gray-900 dark:text-gray-100">{{ $download->name }}</h1>
                             <p class="mb-2 text-sm">{{ $download->desc }}</p>
-                            <a href="{{ $download->url }}" target="_blank" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800 cursor-pointer">Download</a>
+                            <a href="{{ $download->url }}" target="_blank" class="text-white bg-indigo-700-700 hover:bg-indigo-800 focus:ring-4 focus:ring-indigo-300 font-medium text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-indigo-600 dark:hover:bg-indigo-700 focus:outline-none dark:focus:ring-indigo-800 cursor-pointer">Download</a>
                         </div>
                     </div>
                 </div>

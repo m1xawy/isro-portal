@@ -11,7 +11,7 @@ class PostController extends Controller
     public function index()
     {
         $posts = cache()->remember('posts', setting('cache_news', 600), function() {
-            return Post::where('published_at', '<=', now())->get();
+            return Post::where('published_at', '<=', now())->orderBy('published_at', 'DESC')->get();
         });
 
         return view('posts.index', [

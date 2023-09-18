@@ -285,9 +285,8 @@ class Char extends Model
                         _Char.CharID, _Char.CharName16, _Char.RefObjID, _GuildMember.GuildWarKill, _GuildMember.GuildWarKilled
 
                     FROM
-                        SILKROAD_R_SHARD.._Char
-                        JOIN SILKROAD_R_SHARD.._Guild ON _Char.GuildID = _Guild.ID
-						JOIN SILKROAD_R_SHARD.._GuildMember ON _Guild.ID = _GuildMember.GuildID
+                        SILKROAD_R_SHARD.._GuildMember
+						JOIN SILKROAD_R_SHARD.._Char ON _Char.CharID = _GuildMember.CharID
 
                     WHERE
 						_Char.CharName16 NOT LIKE '%[[]GM]%'
@@ -299,8 +298,6 @@ class Char extends Model
                         _Char.CharName16,
                         _Char.CurLevel,
                         _Char.RefObjID,
-                        _Guild.ID,
-                        _Guild.Name,
 						_GuildMember.GuildWarKill,
 						_GuildMember.GuildWarKilled
 

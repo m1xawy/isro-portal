@@ -1,10 +1,12 @@
 @php
     $unique_list_settings = cache()->remember('ranking_unique_list', setting('cache_ranking_unique', 600), function() { return json_decode(setting('ranking_unique_list')); });
 
-    foreach ($unique_list_settings as $unique_settings) {
-        $unique_settings_array[] = $unique_settings->attributes;
-        $unique_name = array_column($unique_settings_array, 'ranking_unique_name', 'ranking_unique_id');
-        $unique_point = array_column($unique_settings_array, 'ranking_unique_point', 'ranking_unique_id');
+    if($unique_list_settings) {
+        foreach ($unique_list_settings as $unique_settings) {
+            $unique_settings_array[] = $unique_settings->attributes;
+            $unique_name = array_column($unique_settings_array, 'ranking_unique_name', 'ranking_unique_id');
+            $unique_point = array_column($unique_settings_array, 'ranking_unique_point', 'ranking_unique_id');
+        }
     }
 @endphp
 

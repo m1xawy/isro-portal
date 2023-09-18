@@ -52,7 +52,7 @@
                         </x-slot>
 
                         <x-slot name="content">
-                            @if (!empty($pages))
+                            @if (!empty($pages) && count($pages) !== 0)
                                 @foreach ($pages as $page)
                                     <x-dropdown-link :href="'/page/'.$page['slug']['en']">
                                         {{ $page['name']['en'] }}
