@@ -34,7 +34,7 @@ class Char extends Model
 
     protected $dateFormat = 'Y-m-d H:i:s';
 
-    public function getPlayerRanking($limit = 25)
+    public static function getPlayerRanking($limit = 25)
     {
         $playerRanking = cache()->remember('player_ranking', setting('cache_ranking_player', 600), function() use ($limit) {
             return collect(DB::select("
@@ -86,7 +86,7 @@ class Char extends Model
         return $playerRanking;
     }
 
-    public function getGuildRanking($limit = 25)
+    public static function getGuildRanking($limit = 25)
     {
         $guildRanking = cache()->remember('guild_ranking', setting('cache_ranking_guild', 600), function() use ($limit) {
             return collect(DB::select("
