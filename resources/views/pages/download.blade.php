@@ -13,7 +13,7 @@
                         <div class="p-6 text-center ">
                             <h1 class="mb-2 text-2xl font-medium text-gray-900 dark:text-gray-100">{{ $download->name }}</h1>
                             <p class="mb-2 text-sm">{{ $download->desc }}</p>
-                            <a href="{{ $download->url }}" target="_blank" class="text-white bg-indigo-700-700 hover:bg-indigo-800 focus:ring-4 focus:ring-indigo-300 font-medium text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-indigo-600 dark:hover:bg-indigo-700 focus:outline-none dark:focus:ring-indigo-800 cursor-pointer">Download</a>
+                            <a href="{{ $download->url }}" target="_blank" class="text-white bg-indigo-700 hover:bg-indigo-800 focus:ring-4 focus:ring-indigo-300 font-medium text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-indigo-600 dark:hover:bg-indigo-700 focus:outline-none dark:focus:ring-indigo-800">Download</a>
                         </div>
                     </div>
                 </div>
