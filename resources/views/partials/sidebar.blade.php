@@ -1,4 +1,5 @@
 @include('partials.online-player')
 @include('partials.server-info')
+@include('partials.fortress')
 @include('partials.server-timers')
 @include('partials.discord-widget')
