@@ -51,6 +51,15 @@
         <!-- Footer -->
         @include('layouts.footer')
 
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js" type="text/javascript" crossorigin="anonymous"></script>
+        <script src="{{ asset('js/main.js') }}"></script>
+
+        <script type="text/javascript">
+            var ServerTime = new Date( {{ now()->format('Y, n, j, G, i, s') }} );
+            var iTimeStamp = {{ now()->format('U') }} - Math.round( + new Date() / 1000 );
+            startClockTimer('#idTimerClock');
+        </script>
+
         <!-- Inline Scripts -->
         @yield('scripts')
     </body>

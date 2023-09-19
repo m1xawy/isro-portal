@@ -4,17 +4,17 @@
 @section('content')
     <div class="space-y-6">
         <div class="lg:flex lg:flex-wrap">
-            <a href="javascript:void(0)" data-url="{{ route('ranking.player') }}" class="text-white bg-indigo-700 hover:bg-indigo-800 focus:ring-4 focus:ring-indigo-300 font-medium text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-indigo-600 dark:hover:bg-indigo-700 focus:outline-none dark:focus:ring-indigo-800 ranking-btn">Player Ranking</a>
-            <a href="javascript:void(0)" data-url="{{ route('ranking.guild') }}" class="text-white bg-indigo-700 hover:bg-indigo-800 focus:ring-4 focus:ring-indigo-300 font-medium text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-indigo-600 dark:hover:bg-indigo-700 focus:outline-none dark:focus:ring-indigo-800 ranking-btn">Guild Ranking</a>
-            <a href="javascript:void(0)" data-url="{{ route('ranking.unique') }}" class="text-white bg-indigo-700 hover:bg-indigo-800 focus:ring-4 focus:ring-indigo-300 font-medium text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-indigo-600 dark:hover:bg-indigo-700 focus:outline-none dark:focus:ring-indigo-800 ranking-btn">Unique Ranking</a>
-            <a href="javascript:void(0)" data-url="{{ route('ranking.fortress.player') }}" class="text-white bg-indigo-700 hover:bg-indigo-800 focus:ring-4 focus:ring-indigo-300 font-medium text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-indigo-600 dark:hover:bg-indigo-700 focus:outline-none dark:focus:ring-indigo-800 ranking-btn">Fortress War (Player)</a>
-            <a href="javascript:void(0)" data-url="{{ route('ranking.fortress.guild') }}" class="text-white bg-indigo-700 hover:bg-indigo-800 focus:ring-4 focus:ring-indigo-300 font-medium text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-indigo-600 dark:hover:bg-indigo-700 focus:outline-none dark:focus:ring-indigo-800 ranking-btn">Fortress War (Guild)</a>
+            <a href="javascript:void(0)" data-link="{{ route('ranking.player') }}" class="ranking-main-button text-white bg-indigo-700 hover:bg-indigo-800 focus:ring-4 focus:ring-indigo-300 font-medium text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-indigo-600 dark:hover:bg-indigo-700 focus:outline-none dark:focus:ring-indigo-800">Player Ranking</a>
+            <a href="javascript:void(0)" data-link="{{ route('ranking.guild') }}" class="ranking-main-button text-white bg-indigo-700 hover:bg-indigo-800 focus:ring-4 focus:ring-indigo-300 font-medium text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-indigo-600 dark:hover:bg-indigo-700 focus:outline-none dark:focus:ring-indigo-800">Guild Ranking</a>
+            <a href="javascript:void(0)" data-link="{{ route('ranking.unique') }}" class="ranking-main-button text-white bg-indigo-700 hover:bg-indigo-800 focus:ring-4 focus:ring-indigo-300 font-medium text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-indigo-600 dark:hover:bg-indigo-700 focus:outline-none dark:focus:ring-indigo-800">Unique Ranking</a>
+            <a href="javascript:void(0)" data-link="{{ route('ranking.fortress.player') }}" class="ranking-main-button text-white bg-indigo-700 hover:bg-indigo-800 focus:ring-4 focus:ring-indigo-300 font-medium text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-indigo-600 dark:hover:bg-indigo-700 focus:outline-none dark:focus:ring-indigo-800">Fortress War (Player)</a>
+            <a href="javascript:void(0)" data-link="{{ route('ranking.fortress.guild') }}" class="ranking-main-button text-white bg-indigo-700 hover:bg-indigo-800 focus:ring-4 focus:ring-indigo-300 font-medium text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-indigo-600 dark:hover:bg-indigo-700 focus:outline-none dark:focus:ring-indigo-800">Fortress War (Guild)</a>
         </div>
 
         <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
             <div class="p-6 text-gray-900 dark:text-gray-100">
 
-                <div id="ranking-data">
+                <div id="content-replace">
                     <div class="relative overflow-x-auto">
                         <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
                             <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
@@ -95,45 +95,4 @@
             </div>
         </div>
     </div>
-@endsection
-
-@section('scripts')
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-
-    <script type="text/javascript">
-        var xhr;
-
-        function paginatorAjax(element, urlData)
-        {
-            ajaxReload();
-            jQuery(element).html($('#spinner').html());
-            xhr = jQuery.ajax({
-                url : urlData,
-                type: "GET",
-                dataType: "html",
-                success : function(data){
-                    jQuery(element).html(data);
-                },
-                error: function(e) {
-                    alert('something wrong, please wait a moment');
-                }
-            });
-        }
-
-        function ajaxReload()
-        {
-            if(xhr && xhr.readystate !== 4){
-                xhr.abort();
-            }
-        }
-
-        $(document).ready(function () {
-            $('body').on('click', '.ranking-btn', function () {
-                var rankURL = $(this).data('url');
-                var element = $('#ranking-data');
-
-                paginatorAjax(element, rankURL);
-            });
-        });
-    </script>
 @endsection

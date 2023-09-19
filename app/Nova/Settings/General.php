@@ -36,7 +36,7 @@ class General
                     ]),
 
                     new Tab('Misc', [
-                        Select::make('Server Time Zone', 'server_timezone')->options(['UTC' => 'UTC', 'Africa/Cairo' => 'Africa/Cairo']),
+                        Select::make('Server Time Zone', 'server_timezone')->options(['UTC' => 'UTC', 'Africa/Cairo' => 'Africa/Cairo', 'Europe/Istanbul' => 'Europe/Istanbul', 'Europe/Berlin' => 'Europe/Berlin']),
                         Select::make('Site Language', 'server_lang')->options(['switch' => 'Switch', 'en' => 'English', 'ar' => 'Arabic']),
                         Select::make('Server files', 'server_files_type')->options(['isro' => 'iSRO', 'vsro' => 'vSRO']),
                         Number::make('News Posts limit', 'server_news_limit'),

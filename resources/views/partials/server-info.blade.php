@@ -20,7 +20,7 @@
                             {{ $info->attributes->server_info_title }}
                         </p>
                     </div>
-                    <div class="inline-flex items-center text-sm font-medium text-gray-900 dark:text-white">
+                    <div class="inline-flex items-center text-sm text-gray-500 dark:text-gray-400 font-medium">
                         {{ $info->attributes->server_info_value }}
                     </div>
                 </div>
