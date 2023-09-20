@@ -105,6 +105,10 @@
                                     {{ __('Donate') }}
                                 </x-dropdown-link>
 
+                                <x-dropdown-link :href="route('profile.donate.history')">
+                                    {{ __('Donate History') }}
+                                </x-dropdown-link>
+
                                 @if (Auth::user()->role == 'admin')
                                     <x-dropdown-link :href="url('/admin')">
                                         {{ __('Admin panel') }}
@@ -174,6 +178,10 @@
 
                         <x-responsive-nav-link :href="route('profile.donate')">
                             {{ __('Donate') }}
+                        </x-responsive-nav-link>
+
+                        <x-responsive-nav-link :href="route('profile.donate.history')">
+                            {{ __('Donate History') }}
                         </x-responsive-nav-link>
 
                         @if (Auth::user()->role == 'admin')

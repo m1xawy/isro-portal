@@ -25,6 +25,13 @@ class ProfileController extends Controller
         ]);
     }
 
+    public function donate_history(Request $request): View
+    {
+        return view('profile.donate-history', [
+            'user' => $request->user(),
+        ]);
+    }
+
     /**
      * Display the user's profile form.
      */

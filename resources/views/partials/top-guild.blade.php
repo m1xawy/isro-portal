@@ -17,7 +17,7 @@
                 </thead>
                 <tbody>
                 @php $i = 1; @endphp
-                @forelse($topGuild->take(10) as $guild)
+                @forelse($topGuild->take(5) as $guild)
                     <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                         <th class="px-6 py-4">
                             @switch($i)

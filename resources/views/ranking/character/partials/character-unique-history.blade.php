@@ -28,7 +28,7 @@
                     </thead>
                     <tbody>
                         @if (!empty($charUniqueHistory))
-                            @foreach($charUniqueHistory as $uniqueHistory)
+                            @foreach($charUniqueHistory->take(5) as $uniqueHistory)
                                 <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                                     <td class="px-6 py-4">{{ $unique_name[$uniqueHistory->MobID] }}</td>
                                     <td class="px-6 py-4">+{{ $unique_point[$uniqueHistory->MobID] }}</td>

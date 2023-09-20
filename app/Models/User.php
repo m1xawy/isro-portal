@@ -70,7 +70,9 @@ class User extends Authenticatable
             Select
                 @ReturnValue AS 'ErrorCode',
                 @PremiumSilk AS 'PremiumSilk',
-                @Silk AS 'Silk'
+                @Silk AS 'Silk',
+                @UsageMonth AS 'MonthUsage',
+                @Usage3Month AS 'ThreeMonthUsage'
             "
             ))->first();
         });

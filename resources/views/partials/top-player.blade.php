@@ -17,7 +17,7 @@
                 </thead>
                 <tbody>
                 @php $i = 1; @endphp
-                @forelse($topPlayer->take(10) as $player)
+                @forelse($topPlayer->take(5) as $player)
                     <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                         <td class="px-6 py-4">
                             @switch($i)

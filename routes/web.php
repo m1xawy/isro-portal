@@ -42,6 +42,7 @@ Route::group(['middleware' => 'language'], function () {
         Route::delete('/profile/edit', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
         Route::get('/profile/donate', [ProfileController::class, 'donate'])->name('profile.donate');
+        Route::get('/profile/donate/history', [ProfileController::class, 'donate_history'])->name('profile.donate.history');
     });
 
     require __DIR__.'/auth.php';
