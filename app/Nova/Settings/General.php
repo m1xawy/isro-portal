@@ -18,11 +18,14 @@ use Laravel\Nova\Panel;
 use Outl1ne\NovaSettings\NovaSettings;
 use Timothyasp\Color\Color;
 use Whitecube\NovaFlexibleContent\Flexible;
+use Illuminate\Support\Facades\File;
 
 class General
 {
     public function __construct()
     {
+        $themes = array_map('basename', File::directories(base_path() . '/themes'));
+
         return [
             NovaSettings::addSettingsFields([
                 new Tabs('General', [
@@ -46,11 +49,11 @@ class General
 
                     new Tab('Appearance', [
                         Boolean::make('BreadCrumb Enable', 'breadcrumb_enable'),
-                        Select::make('Site Theme', 'site_theme')->options(['default_theme' => 'Default', 'add_new' => 'Add new']),
+                        Select::make('Site Theme', 'site_theme')->options(array_combine($themes,$themes))->default('default'),
 
                         DependencyContainer::make([
                             Select::make('Theme Mode', 'theme_mode')->options(['switch' => 'Switch', 'dark' => 'Dark', 'light' => 'Light', 'customize' => 'Customize']),
-                        ])->dependsOn('site_theme', 'default_theme'),
+                        ])->dependsOn('site_theme', 'default'),
 
                         DependencyContainer::make([
                             Text::make('Theme Name', 'theme_name')->help('Enter Theme Name'),
@@ -71,7 +74,7 @@ class General
                             Color::make('Button Color', 'color_button')->chrome()->help('default: #e5e7e'),
                             Color::make('Input Color', 'color_input')->chrome()->help('default: #111827'),
                             Color::make('Hover Color', 'color_hover')->chrome()->help('default: #1f2937'),
-                        ])->dependsOn('site_theme', 'default_theme'),
+                        ])->dependsOn('site_theme', 'default'),
                     ]),
 
                     new Tab('Slider', [
