@@ -109,7 +109,13 @@
                                 </tr>
                                 <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                                     <td class="px-6 py-4">Title:</td>
-                                    <td class="px-6 py-4" style="color: #ffc345">[ {{ config('hwan-level')[$race][$characters->HwanLevel] }} ]</td>
+                                    <td class="px-6 py-4" style="color: #ffc345">
+                                        [
+                                        @php if($characters->HwanLevel > 0) : @endphp
+                                            {{ config('hwan-level')[$race][$characters->HwanLevel] }}
+                                        @php endif; @endphp
+                                        ]
+                                    </td>
                                 </tr>
                                 </tbody>
                             </table>

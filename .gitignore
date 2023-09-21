@@ -17,5 +17,7 @@ yarn-error.log
 /.fleet
 /.idea
 /.vscode
-/themes/alpha
-/themes/frenzy
+/public/themes/alpha/
+/public/themes/frenzy/
+/themes/alpha/
+/themes/frenzy/
