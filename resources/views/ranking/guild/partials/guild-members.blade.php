@@ -24,27 +24,27 @@
                                 <td class="px-6 py-4"><a href="{{ route('ranking.character.view', ['name' => $guildMember->CharName]) }}">{{ $guildMember->CharName }}</a></td>
                                 <td class="px-6 py-4">{{ date('d-m-Y', strtotime($guildMember->JoinDate)) }}</td>
                                 <td class="px-6 py-4">
-                                    @switch($guildMember->Permission)
-                                        @case(-1)
-                                            <span>Leader</span>
-                                            @break
-                                        @case(4)
+                                    @switch($guildMember->SiegeAuthority)
+                                        @case(0)
                                             <span>Member</span>
                                             @break
-                                        @case(13)
-                                            <span>production manager</span>
+                                        @case(1)
+                                            <span>Leader</span>
                                             @break
-                                        @case(15)
-                                            <span>education manager</span>
+                                        @case(2)
+                                            <span>Deputy commander</span>
                                             @break
-                                        @case(20)
-                                            <span>Military Engineer</span>
+                                        @case(4)
+                                            <span>Fortress manager</span>
                                             @break
-                                        @case(29)
-                                            <span>deputy commander</span>
+                                        @case(8)
+                                            <span>Production manager</span>
                                             @break
-                                        @case(31)
-                                            <span>Commander</span>
+                                        @case(16)
+                                            <span>Training manager</span>
+                                            @break
+                                        @case(32)
+                                            <span>Military engineer</span>
                                             @break
                                         @default
                                             <span>Member</span>

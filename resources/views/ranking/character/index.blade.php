@@ -89,17 +89,19 @@
                                     <td class="px-6 py-4">Race:</td>
                                     <td class="px-6 py-4">
                                         @php if($characters->RefObjID > 2000) : @endphp
-                                        <img src="{{ asset('images/ingame/european.png') }}" class="inline-block" style="vertical-align:text-top" alt="Rank 3"/>
-                                        <span>Europe</span>
+                                            <img src="{{ asset('images/ingame/european.png') }}" class="inline-block" style="vertical-align:text-top" alt="Rank 3"/>
+                                            <span>Europe</span>
+                                            @php $race = 'EU'; @endphp
                                         @php else : @endphp
-                                        <img src="{{ asset('images/ingame/chinese.png') }}" class="inline-block" style="vertical-align:text-top" alt="Rank 3"/>
-                                        <span>Chinese</span>
+                                            <img src="{{ asset('images/ingame/chinese.png') }}" class="inline-block" style="vertical-align:text-top" alt="Rank 3"/>
+                                            <span>Chinese</span>
+                                            @php $race = 'CH'; @endphp
                                         @php endif; @endphp
                                     </td>
                                 </tr>
                                 <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                                     <td class="px-6 py-4">Level:</td>
-                                    <td class="px-6 py-4">{{ $characters->CurLevel }} / {{ $characters->CurLevel }}</td>
+                                    <td class="px-6 py-4">{{ $characters->CurLevel }} / 100</td>
                                 </tr>
                                 <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                                     <td class="px-6 py-4">Item Points:</td>
@@ -107,7 +109,7 @@
                                 </tr>
                                 <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                                     <td class="px-6 py-4">Title:</td>
-                                    <td class="px-6 py-4">[ ]</td>
+                                    <td class="px-6 py-4" style="color: #ffc345">[ {{ config('hwan-level')[$race][$characters->HwanLevel] }} ]</td>
                                 </tr>
                                 </tbody>
                             </table>

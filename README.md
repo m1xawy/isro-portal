@@ -75,6 +75,11 @@ to access admin panel change role `user` to `admin` from users table or execute 
    UPDATE [SRO_Portal].[dbo].[users] SET [role] = 'admin' WHERE [username] = 'mixawy'
    ```
 
+Get new updates:
+   ```sh
+   git pull
+   ```
+
 ## Contributing
 
 Message me first.
