@@ -2,8 +2,10 @@
 
 namespace App\Providers;
 
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\DB;
+use Inertia\Ssr\Gateway;
 use Qirolab\Theme\Theme;
 
 class AppServiceProvider extends ServiceProvider
@@ -13,12 +15,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        if(DB::connection()) {
-            $getThemeSetting = DB::table("dbo.nova_settings")->select("value")->where("key","site_theme")->value('value');
-            $getTheme = is_null($getThemeSetting) ? 'default' : $getThemeSetting;
-
-            Theme::set($getTheme);
-        }
+        //
     }
 
     /**
@@ -26,6 +23,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        $this->app->bind(Gateway::class, function ($app) {
+            Theme::set(setting('site_theme', 'default'));
+        });
     }
 }
