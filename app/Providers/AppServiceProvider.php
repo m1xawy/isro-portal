@@ -23,8 +23,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        $this->app->bind(Gateway::class, function ($app) {
+        if (!app()->runningInConsole()) {
             Theme::set(setting('site_theme', 'default'));
-        });
+        }
     }
 }
