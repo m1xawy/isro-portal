@@ -9,6 +9,7 @@ use Eminiarts\Tabs\Tabs;
 use Laravel\Nova\Fields\Boolean;
 use Laravel\Nova\Fields\Select;
 use Laravel\Nova\Fields\Text;
+use Laravel\Nova\Fields\URL;
 use Outl1ne\NovaSettings\NovaSettings;
 use Whitecube\NovaFlexibleContent\Flexible;
 
@@ -37,8 +38,9 @@ class Donate
 
                         Flexible::make('Paypal Price List', 'donate_paypal_price_list')
                             ->addLayout('Paypal Add Package', 'donate_paypal_package_add', [
-                                Heroicon::make('Package Icon', 'donate_paypal_package_icon'),
+                                URL::make('Package Image URL', 'donate_paypal_package_image'),
                                 Text::make('Package Title', 'donate_paypal_package_title'),
+                                Text::make('Package Description', 'donate_paypal_package_desc'),
                                 Text::make('Package Amount', 'donate_paypal_package_amount'),
                                 Text::make('Package Value', 'donate_paypal_package_value'),
                             ]),
@@ -52,8 +54,9 @@ class Donate
 
                         Flexible::make('Maxigame Price List', 'donate_maxigame_price_list')
                             ->addLayout('Maxigame Add Package', 'donate_maxigame_package_add', [
-                                Heroicon::make('Package Icon', 'donate_maxigame_package_icon'),
+                                URL::make('Package Image URL', 'donate_maxigame_package_image'),
                                 Text::make('Package Title', 'donate_maxigame_package_title'),
+                                Text::make('Package Description', 'donate_maxigame_package_desc'),
                                 Text::make('Package Amount', 'donate_maxigame_package_amount'),
                                 Text::make('Package Value', 'donate_maxigame_package_value'),
                             ]),

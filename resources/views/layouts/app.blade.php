@@ -62,6 +62,8 @@
         @include('layouts.footer')
 
         <script src="https://code.jquery.com/jquery-3.6.0.min.js" type="text/javascript" crossorigin="anonymous"></script>
+        <script src="https://unpkg.com/flowbite@1.4.0/dist/flowbite.js"></script>
+
         <script src="{{ asset('js/main.js') }}"></script>
 
         <script type="text/javascript">

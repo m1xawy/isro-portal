@@ -1,0 +1,85 @@
+<div id="tooltip-right-1" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-xs font-medium text-white bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700" style="width: 220px">
+    <h5 class="mb-1 text-sm font-medium text-gray-900 dark:text-white" style="color: #ffc345">Name (Points 0)</h5>
+    <table>
+        <tr>
+            <th style="width: 145px">Unique</th>
+            <th>Kill</th>
+            <th>Point</th>
+        </tr>
+        <tr>
+            <td>Tiger Girl</td>
+            <td>0</td>
+            <td>0</td>
+        </tr>
+        <tr>
+            <td>Cerberus</td>
+            <td>0</td>
+            <td>0</td>
+        </tr>
+        <tr>
+            <td>Captain Ivy</td>
+            <td>0</td>
+            <td>0</td>
+        </tr>
+        <tr>
+            <td>Uruchi</td>
+            <td>0</td>
+            <td>0</td>
+        </tr>
+        <tr>
+            <td>Isyutaru</td>
+            <td>0</td>
+            <td>0</td>
+        </tr>
+        <tr>
+            <td>Lord Yarkan</td>
+            <td>0</td>
+            <td>0</td>
+        </tr>
+        <tr>
+            <td>Demon Shaitan</td>
+            <td>0</td>
+            <td>0</td>
+        </tr>
+        <tr>
+            <td>Selkis</td>
+            <td>0</td>
+            <td>0</td>
+        </tr>
+        <tr>
+            <td>Neith</td>
+            <td>0</td>
+            <td>0</td>
+        </tr>
+        <tr>
+            <td>Medusa</td>
+            <td>0</td>
+            <td>0</td>
+        </tr>
+        <tr>
+            <td>Anubis</td>
+            <td>0</td>
+            <td>0</td>
+        </tr>
+        <tr>
+            <td>Isis</td>
+            <td>0</td>
+            <td>0</td>
+        </tr>
+        <tr>
+            <td>Haroeris</td>
+            <td>0</td>
+            <td>0</td>
+        </tr>
+        <tr>
+            <td>Seth</td>
+            <td>0</td>
+            <td>0</td>
+        </tr>
+        <tr>
+            <td>Roc</td>
+            <td>0</td>
+            <td>0</td>
+        </tr>
+    </table>
+</div>
