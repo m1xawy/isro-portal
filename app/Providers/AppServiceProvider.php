@@ -13,8 +13,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        if(DB::connection()->getDatabaseName())
-        {
+        if(DB::connection()) {
             $getThemeSetting = DB::table("dbo.nova_settings")->select("value")->where("key","site_theme")->value('value');
             $getTheme = is_null($getThemeSetting) ? 'default' : $getThemeSetting;
 
