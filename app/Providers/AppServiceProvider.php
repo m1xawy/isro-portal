@@ -13,10 +13,13 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        $getThemeSetting = DB::table("dbo.nova_settings")->select("value")->where("key","site_theme")->value('value');
-        $getTheme = is_null($getThemeSetting) ? 'default' : $getThemeSetting;
+        if(DB::connection()->getDatabaseName())
+        {
+            $getThemeSetting = DB::table("dbo.nova_settings")->select("value")->where("key","site_theme")->value('value');
+            $getTheme = is_null($getThemeSetting) ? 'default' : $getThemeSetting;
 
-        Theme::set($getTheme);
+            Theme::set($getTheme);
+        }
     }
 
     /**
