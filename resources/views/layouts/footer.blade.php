@@ -33,7 +33,7 @@
                     <ul class="text-gray-500 dark:text-gray-400 font-medium">
                         @if (!empty($backlinks))
                             @foreach($backlinks as $backlink)
-                                <li>
+                                <li class="mb-4">
                                     <a href="{{ $backlink->attributes->backlink_url }}" class="hover:underline">
                                         @if (isset($backlink->attributes->backlink_icon))
                                             <img class="inline-block w-4" src="{{ $backlink->attributes->backlink_icon }}" alt="{{ $backlink->attributes->backlink_name }}">

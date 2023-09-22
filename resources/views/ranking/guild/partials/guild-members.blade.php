@@ -10,6 +10,7 @@
                     <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                         <tr>
                             <th scope="col" class="px-6 py-3">#</th>
+                            <th scope="col" class="px-6 py-3">Race</th>
                             <th scope="col" class="px-6 py-3">Character Name</th>
                             <th scope="col" class="px-6 py-3">Join Date</th>
                             <th scope="col" class="px-6 py-3">Title</th>
@@ -21,6 +22,13 @@
                         @forelse($guildMembers as $guildMember)
                             <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                                 <td class="px-6 py-4">{{ $i }}</td>
+                                <td class="px-6 py-4">
+                                    @php if($guildMember->RefObjID > 2000) : @endphp
+                                    <img src="{{ asset('images/ingame/european.png') }}" style="vertical-align:text-top" alt="Rank 3"/>
+                                    @php else : @endphp
+                                    <img src="{{ asset('images/ingame/chinese.png') }}" style="vertical-align:text-top" alt="Rank 3"/>
+                                    @php endif; @endphp
+                                </td>
                                 <td class="px-6 py-4"><a href="{{ route('ranking.character.view', ['name' => $guildMember->CharName]) }}">{{ $guildMember->CharName }}</a></td>
                                 <td class="px-6 py-4">{{ date('d-m-Y', strtotime($guildMember->JoinDate)) }}</td>
                                 <td class="px-6 py-4">

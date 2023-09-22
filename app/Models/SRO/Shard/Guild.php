@@ -34,6 +34,7 @@ class Guild extends Model
                             Name, Lvl, GatheredSP, FoundationDate,
 
                             (select count (*) from [SILKROAD_R_SHARD].[dbo].[_GuildMember] where GuildID = _Guild.ID) as Members,
+                            (select CharName from [SILKROAD_R_SHARD].[dbo].[_GuildMember] where Permission = -1 AND GuildID = _Guild.ID) as Leader,
                             + (CAST((sum(_Items.OptLevel))
                             + SUM(_RefObjItem.ItemClass)
                             + SUM(_RefObjCommon.Rarity)

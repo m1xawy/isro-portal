@@ -24,9 +24,15 @@ class Widgets
             NovaSettings::addSettingsFields([
                 new Tabs('Sidebar Widgets', [
 
-                    new Tab('Server Info', [
-                        Boolean::make('Server info Enable', 'server_info_enable'),
+                    new Tab('Show / Off', [
+                        Boolean::make('Server info Enable', 'server_info_widget_enable'),
+                        Boolean::make('Server Times Enable', 'server_times_widget_enable'),
+                        Boolean::make('Fortress War Enable', 'server_fortress_widget_enable'),
+                        Boolean::make('Unique History Enable', 'server_unique_widget_enable'),
 
+                    ]),
+
+                    new Tab('Server Info', [
                         Flexible::make('Server info', 'server_info')
                             ->addLayout('Server Info', 'server_info', [
                                 Heroicon::make('Icon', 'server_info_icon'),
@@ -36,8 +42,6 @@ class Widgets
                     ]),
 
                     new Tab('Server Times', [
-                        Boolean::make('Server Times Enable', 'server_times_enable'),
-
                         Flexible::make('Server Times', 'server_times')
                             ->addLayout('Server Times', 'server_times', [
                                 Heroicon::make('Icon', 'server_times_icon'),

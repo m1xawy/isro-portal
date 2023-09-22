@@ -11,7 +11,7 @@
                         <div class="w-full">
                             <div class="flex flex-row items-center pb-1">
                                 <div class="ml-4">
-                                    <h5 class="mb-1 text-xl font-medium text-gray-900 dark:text-white" style="color: #ffc345">{{ $guilds->Name }}</h5>
+                                    <h5 class="mb-1 text-4xl font-medium text-gray-900 dark:text-white" style="color: #ffc345">{{ $guilds->Name }}</h5>
                                     <p class="text-sm text-gray-500 dark:text-gray-400">Foundation Date <span style="color: #ffc345">{{ date('d-m-Y', strtotime($guilds->FoundationDate)) }}</span></p>
                                     <p class="text-sm text-gray-500 dark:text-gray-400">Rank <span style="color: #ffc345">#</span></p>
                                 </div>
@@ -24,7 +24,7 @@
                             <div class="md:w-1/4">
                                 <div class="w-full">
                                     <div class="flex flex-col items-center pb-0">
-                                        <h2 class="mb-3 text-xl font-bold text-gray-900 dark:text-white" style="color: #ffc345">Name</h2>
+                                        <h2 class="mb-3 text-xl font-bold text-gray-900 dark:text-white" style="color: #ffc345">{{ $guilds->Leader }}</h2>
                                         <span class="text-xs font-bold uppercase text-gray-900 dark:text-white">Leader</span>
                                     </div>
                                 </div>
@@ -32,7 +32,7 @@
                             <div class="md:w-1/4">
                                 <div class="w-full">
                                     <div class="flex flex-col items-center pb-0">
-                                        <h2 class="mb-3 text-4xl font-bold text-gray-900 dark:text-white" style="color: #ffc345">{{ $guilds->ItemPoints }}</h2>
+                                        <h2 class="mb-3 text-xl font-bold text-gray-900 dark:text-white" style="color: #ffc345">{{ $guilds->ItemPoints }}</h2>
                                         <span class="text-xs font-bold uppercase text-gray-900 dark:text-white">Item Points</span>
                                     </div>
                                 </div>
