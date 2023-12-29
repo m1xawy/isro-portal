@@ -5,7 +5,11 @@ use App\Http\Controllers\PageController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RankingController;
+use App\Models\SRO\Portal\MuhAlteredInfo;
+use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Foundation\Auth\EmailVerificationRequest;
 
 /*
 |--------------------------------------------------------------------------
@@ -35,7 +39,11 @@ Route::group(['middleware' => 'language'], function () {
     Route::get('/ranking/fortress/player', [RankingController::class, 'fortress_player'])->name('ranking.fortress.player');
     Route::get('/ranking/fortress/guild', [RankingController::class, 'fortress_guild'])->name('ranking.fortress.guild');
 
-    Route::middleware('auth')->group(function () {
+    //TODO: simple way for open and closing verification option [not the best way]
+    $rce = (setting('register_confirmation_enable', 0) == 1 ? 'verified' : 'throttle');
+    Artisan::call('route:clear'); // Need to remove!!
+
+    Route::middleware(['auth', $rce])->group(function () {
         Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
         Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('profile.edit');
         Route::patch('/profile/edit', [ProfileController::class, 'update'])->name('profile.update');

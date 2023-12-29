@@ -86,8 +86,9 @@ class RegisteredUserController extends Controller
 
         $portalJID = $returnCode->JID;
 
-        if(setting('register_confirmation_enable', 0) === 1) {
+        if(setting('register_confirmation_enable', 0) == 1) {
             MuhAlteredInfo::where('JID',$portalJID)->update(['EmailReceptionStatus'=>'N', 'EmailCertificationStatus'=>'N']);
+
         } else {
             MuhAlteredInfo::where('JID',$portalJID)->update(['EmailReceptionStatus'=>'Y', 'EmailCertificationStatus'=>'Y']);
         }
@@ -113,6 +114,17 @@ class RegisteredUserController extends Controller
             'VIPLv' => 1,
             'UpdateDate' => now(),
             'ExpireDate' => now()->addMonths(1),
+        ]);
+
+        AphChangedSilk::create([
+            'JID' => 1, // Portal JID
+            'RemainedSilk' => 0, // Silk Number
+            'ChangedSilk' => 0,
+            'SilkType' => 3, // 1 = Normal Silk | 3 = Premium Silk
+            'SellingTypeID' => 2,
+            'ChangeDate' => now(),
+            'AvailableDate' => now()->addYears(1),
+            'AvailableStatus' => 'Y',
         ]);
 
         $user = User::create([

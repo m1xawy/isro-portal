@@ -24,15 +24,8 @@ class PasswordController extends Controller
             'password' => ['required', 'min:6', 'max:32', 'confirmed'],
         ]);
 
-        $UpdateMuUser = MuUser::where('JID', $request->user()->jid)->update(['UserPwd' => md5($request->user()->password)]);
-        $UpdateTbUser = TbUser::where('PortalJID', $request->user()->jid)->update(['password' => md5($request->user()->password)]);
-
-        if (is_null($UpdateMuUser)) {
-            return back()->with('status', 'Error!');
-        }
-        if (is_null($UpdateTbUser)) {
-            return back()->with('status', 'Error!');
-        }
+        MuUser::where('JID', $request->user()->jid)->update(['UserPwd' => md5($request->password)]);
+        TbUser::where('PortalJID', $request->user()->jid)->update(['password' => md5($request->password)]);
 
         $request->user()->update([
             'password' => Hash::make($validated['password']),

@@ -63,7 +63,7 @@
                         </th>
                         <td class="px-6 py-4">
                             @php if($user->getVIPInfo() !== null && $user->getVIPInfo()->VIPUserType > 0) : @endphp
-                                <img src="{{ asset('images/ingame/viplevel_'.$user->getVIPInfo()->VIPLv.'.jpg') }}" class="inline-block w-6 mr-1"><span>{{ config('vip-info')['level'][$user->getVIPInfo()->VIPUserType] }}</span>
+                                <img src="{{ asset('images/ingame/viplevel_'.$user->getVIPInfo()->VIPLv.'.jpg') }}" class="inline-block w-6 mr-1"><span>{{ config('vip-info')['level'][$user->getVIPInfo()->VIPLv] }}</span>
                             @php else : @endphp
                                 None
                             @php endif; @endphp

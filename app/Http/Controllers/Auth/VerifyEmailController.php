@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\SRO\Portal\MuhAlteredInfo;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\Verified;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
@@ -20,6 +21,8 @@ class VerifyEmailController extends Controller
         }
 
         if ($request->user()->markEmailAsVerified()) {
+
+            MuhAlteredInfo::where('JID',$request->user()->jid)->update(['EmailReceptionStatus'=>'Y', 'EmailCertificationStatus'=>'Y']);
             event(new Verified($request->user()));
         }
 
