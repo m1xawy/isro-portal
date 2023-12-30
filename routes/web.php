@@ -39,11 +39,7 @@ Route::group(['middleware' => 'language'], function () {
     Route::get('/ranking/fortress/player', [RankingController::class, 'fortress_player'])->name('ranking.fortress.player');
     Route::get('/ranking/fortress/guild', [RankingController::class, 'fortress_guild'])->name('ranking.fortress.guild');
 
-    //TODO: simple way for open and closing verification option [not the best way]
-    $rce = (setting('register_confirmation_enable', 0) == 1 ? 'verified' : 'throttle');
-    Artisan::call('route:clear'); // Need to remove!!
-
-    Route::middleware(['auth', $rce])->group(function () {
+    Route::middleware(['auth', isEmailConfirmation()])->group(function () {
         Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
         Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('profile.edit');
         Route::patch('/profile/edit', [ProfileController::class, 'update'])->name('profile.update');
