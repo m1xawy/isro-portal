@@ -18,6 +18,10 @@ class EmailVerificationNotificationController extends Controller
             return redirect()->intended(RouteServiceProvider::HOME);
         }
 
+        if (isEmailConfirmation() == 'throttle') {
+            return redirect()->intended(RouteServiceProvider::HOME);
+        }
+
         $request->user()->sendEmailVerificationNotification();
 
         return back()->with('status', 'verification-link-sent');

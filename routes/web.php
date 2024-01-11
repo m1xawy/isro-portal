@@ -39,6 +39,7 @@ Route::group(['middleware' => 'language'], function () {
     Route::get('/ranking/fortress/player', [RankingController::class, 'fortress_player'])->name('ranking.fortress.player');
     Route::get('/ranking/fortress/guild', [RankingController::class, 'fortress_guild'])->name('ranking.fortress.guild');
 
+    //TODO: simple way to switch middleware if email confirmation is enabled, i need to make custom middleware to handle it better
     Route::middleware(['auth', isEmailConfirmation()])->group(function () {
         Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
         Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('profile.edit');

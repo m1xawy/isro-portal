@@ -40,7 +40,7 @@ class RegisteredUserController extends Controller
     public function store(Request $request): RedirectResponse
     {
         $request->validate([
-            'username' => ['required', 'regex:/^[A-Za-z0-9]*$/', 'min:6', 'max:30', 'unique:'.User::class, 'unique:'.MuUser::class.',UserID', 'unique:'.TbUser::class.',StrUserID'],
+            'username' => ['required', 'regex:/(^([a-zA-z]+)(\d+)([_-]+)?$)/u', 'min:6', 'max:16', 'unique:'.User::class, 'unique:'.MuUser::class.',UserID', 'unique:'.TbUser::class.',StrUserID'],
             'email' => ['required', 'string', 'email', 'max:70', 'unique:'.MuEmail::class.',EmailAddr'],
             'password' => ['required', 'confirmed', 'min:6', 'max:32'],
         ]);
@@ -64,11 +64,11 @@ class RegisteredUserController extends Controller
                 '".md5($request->password)."',
                 'M',
                 '".now()->subYears(16)."',
-                '".$request->username."',
-                '".$request->username."',
+                '".str_replace('/[^ a-Z0-9]/', '', $request->username)."',
+                '".str_replace('/[^ a-Z0-9]/', '', $request->username)."',
                 '".$request->email."',
                 ".$userBinIP.",
-                'J".$request->username."',
+                'J".str_replace('/[^a-Z0-9]/', '', $request->username)."',
                 'JOYMAX',
                 @ARCode Output,
                 @JID Output;
