@@ -41,26 +41,24 @@ class Char extends Model
                     SELECT TOP(" . $limit . ")
                         _Char.CharID, _Char.CharName16, _Char.CurLevel, _Char.RefObjID, _Guild.ID, _Guild.Name,
 
-                        + (CAST((sum(_Items.OptLevel))
+                        (SUM(_Items.OptLevel)
                         + SUM(_RefObjItem.ItemClass)
                         + SUM(_RefObjCommon.Rarity)
-                        + (CASE WHEN sum(_BindingOptionWithItem.nOptValue) > 0 THEN sum(_BindingOptionWithItem.nOptValue) ELSE 0 END) as INT))
+                        + SUM(CASE WHEN _BindingOptionWithItem.nItemDBID IS NULL THEN 0 ELSE _BindingOptionWithItem.nOptValue END))
                         AS ItemPoints
 
                     FROM
                         SILKROAD_R_SHARD.._Char
-                        JOIN SILKROAD_R_SHARD.._Guild ON _Char.GuildID = _Guild.ID
-                        JOIN SILKROAD_R_SHARD.._Inventory ON _Char.CharID = _Inventory.CharID
-                        JOIN SILKROAD_R_SHARD.._Items ON _Inventory.ItemID = _Items.ID64
-                        LEFT JOIN SILKROAD_R_SHARD.._BindingOptionWithItem ON _Inventory.ItemID = _BindingOptionWithItem.nItemDBID
-                        JOIN SILKROAD_R_SHARD.._RefObjCommon ON _Items.RefItemID = _RefObjCommon.ID
-                        JOIN SILKROAD_R_SHARD.._RefObjItem ON _RefObjCommon.Link = _RefObjItem.ID
+                        INNER JOIN SILKROAD_R_SHARD.._Guild ON _Char.GuildID = _Guild.ID
+                        INNER JOIN SILKROAD_R_SHARD.._Inventory ON _Char.CharID = _Inventory.CharID
+                        INNER JOIN SILKROAD_R_SHARD.._Items ON _Inventory.ItemID = _Items.ID64
+                        INNER JOIN SILKROAD_R_SHARD.._RefObjCommon WITH (NOLOCK) ON _Items.RefItemID = _RefObjCommon.ID
+                        INNER JOIN SILKROAD_R_SHARD.._RefObjItem WITH (NOLOCK) ON _RefObjCommon.Link = _RefObjItem.ID
+                        LEFT OUTER JOIN SILKROAD_R_SHARD.._BindingOptionWithItem ON _Inventory.ItemID = _BindingOptionWithItem.nItemDBID
 
                     WHERE
-                        _Inventory.Slot between 0 and 12
-                        and _Inventory.Slot NOT IN (7, 8)
+                        _Inventory.Slot IN(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12)
                         and _Inventory.ItemID > 0
-                        and _Char.CharName16 NOT LIKE '%[[]GM]%'
                         AND _Char.deleted = 0
                         AND _Char.CharID > 0
 
@@ -97,24 +95,23 @@ class Char extends Model
                         (select CharName from SILKROAD_R_SHARD.._GuildMember where GuildID = _Guild.ID and MemberClass = 0) as MasterName,
                         (select COUNT(CharID) from SILKROAD_R_SHARD.._GuildMember where GuildID = _Guild.ID) AS TotalMember,
 
-                        + (CAST((sum(_Items.OptLevel))
+                        (SUM(_Items.OptLevel)
                         + SUM(_RefObjItem.ItemClass)
                         + SUM(_RefObjCommon.Rarity)
-                        + (CASE WHEN sum(_BindingOptionWithItem.nOptValue) > 0 THEN sum(_BindingOptionWithItem.nOptValue) ELSE 0 END) as INT))
+                        + SUM(CASE WHEN _BindingOptionWithItem.nItemDBID IS NULL THEN 0 ELSE _BindingOptionWithItem.nOptValue END))
                         AS ItemPoints
 
                     FROM
                         SILKROAD_R_SHARD.._Guild
-                        JOIN SILKROAD_R_SHARD.._GuildMember ON _Guild.ID = _GuildMember.GuildID
-                        JOIN SILKROAD_R_SHARD.._Inventory ON _GuildMember.CharID = _Inventory.CharID
-                        JOIN SILKROAD_R_SHARD.._Items ON _Inventory.ItemID = _Items.ID64
-                        LEFT JOIN SILKROAD_R_SHARD.._BindingOptionWithItem ON _Inventory.ItemID = _BindingOptionWithItem.nItemDBID
-                        JOIN SILKROAD_R_SHARD.._RefObjCommon ON _Items.RefItemID = _RefObjCommon.ID
-                        JOIN SILKROAD_R_SHARD.._RefObjItem ON _RefObjCommon.Link = _RefObjItem.ID
+                        INNER JOIN SILKROAD_R_SHARD.._GuildMember ON _Guild.ID = _GuildMember.GuildID
+                        INNER JOIN SILKROAD_R_SHARD.._Inventory ON _GuildMember.CharID = _Inventory.CharID
+                        INNER JOIN SILKROAD_R_SHARD.._Items ON _Inventory.ItemID = _Items.ID64
+                        INNER JOIN SILKROAD_R_SHARD.._RefObjCommon ON _Items.RefItemID = _RefObjCommon.ID
+                        INNER JOIN SILKROAD_R_SHARD.._RefObjItem ON _RefObjCommon.Link = _RefObjItem.ID
+                        LEFT OUTER JOIN SILKROAD_R_SHARD.._BindingOptionWithItem ON _Inventory.ItemID = _BindingOptionWithItem.nItemDBID
 
                     WHERE
-                        _Inventory.Slot between 0 and 12
-                        and _Inventory.Slot NOT IN (7, 8)
+                        _Inventory.Slot IN(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12)
                         and _Inventory.ItemID > 0
                         AND _Guild.ID > 0
 
@@ -154,8 +151,7 @@ class Char extends Model
             $uniqueRanking = cache()->remember('unique_ranking', setting('cache_ranking_unique', 600), function() use ($limit, $uniques_id_list, $uniques_point_list) {
                 return collect(DB::select("
                        SELECT TOP (" . $limit . ")
-                            _CharUniqueKill.CharID,
-                            _CharUniqueKill.MobID,
+                            _Char.CharID,
                             _Char.CharName16,
                             _Char.CurLevel,
                             _Char.RefObjID,
@@ -173,13 +169,11 @@ class Char extends Model
 
                         WHERE
                             _CharUniqueKill.MobID IN (" . $uniques_id_list . ")
-                            AND _Char.CharName16 NOT LIKE '%[[]GM]%'
                             AND _Char.deleted = 0
                             AND _Char.CharID > 0
 
                         GROUP BY
-                            _CharUniqueKill.CharID,
-                            _CharUniqueKill.MobID,
+                            _Char.CharID,
                             _Char.CharName16,
                             _Char.CurLevel,
                             _Char.RefObjID,
@@ -205,32 +199,32 @@ class Char extends Model
         $charInfo = cache()->remember('char_info_' . $charID, setting('cache_info_char', 600), function() use ($charID) {
             return collect(DB::select("
                 SELECT
-                    CharName16, NickName16, GuildID, RefObjID, CurLevel, HwanLevel, RemainGold, HP, MP, Strength, Intellect, LastLogout,
-                    (SELECT Name FROM [SILKROAD_R_SHARD].[dbo].[_Guild] WHERE ID = _Char.GuildID) AS GuildName,
-                    + (CAST((sum(_Items.OptLevel))
-                    + SUM(_RefObjItem.ItemClass)
-                    + SUM(_RefObjCommon.Rarity)
-                    + (CASE WHEN sum(_BindingOptionWithItem.nOptValue) > 0 THEN sum(_BindingOptionWithItem.nOptValue) ELSE 0 END) as INT))
-                    AS ItemPoints
+                    CharName16, NickName16, GuildID, RefObjID, CurLevel, HwanLevel, RemainGold, HP, MP, Strength, Intellect, LastLogout, _Guild.ID, (_Guild.Name) AS GuildName,
+
+					(SUM(_Items.OptLevel)
+					+ SUM(_RefObjItem.ItemClass)
+					+ SUM(_RefObjCommon.Rarity)
+					+ SUM(CASE WHEN _BindingOptionWithItem.nItemDBID IS NULL THEN 0 ELSE _BindingOptionWithItem.nOptValue END))
+					AS ItemPoints
 
                 FROM
                     SILKROAD_R_SHARD.._Char
-                    JOIN SILKROAD_R_SHARD.._Inventory ON _Char.CharID = _Inventory.CharID
-                    JOIN SILKROAD_R_SHARD.._Items ON _Inventory.ItemID = _Items.ID64
-                    LEFT JOIN SILKROAD_R_SHARD.._BindingOptionWithItem ON _Inventory.ItemID = _BindingOptionWithItem.nItemDBID
-                    JOIN SILKROAD_R_SHARD.._RefObjCommon ON _Items.RefItemID = _RefObjCommon.ID
-                    JOIN SILKROAD_R_SHARD.._RefObjItem ON _RefObjCommon.Link = _RefObjItem.ID
+                    INNER JOIN SILKROAD_R_SHARD.._Guild ON _Char.GuildID = _Guild.ID
+                    INNER JOIN SILKROAD_R_SHARD.._Inventory ON _Char.CharID = _Inventory.CharID
+                    INNER JOIN SILKROAD_R_SHARD.._Items ON _Inventory.ItemID = _Items.ID64
+					INNER JOIN SILKROAD_R_SHARD.._RefObjCommon WITH (NOLOCK) ON _Items.RefItemID = _RefObjCommon.ID
+					INNER JOIN SILKROAD_R_SHARD.._RefObjItem WITH (NOLOCK) ON _RefObjCommon.Link = _RefObjItem.ID
+                    LEFT OUTER JOIN SILKROAD_R_SHARD.._BindingOptionWithItem ON _Inventory.ItemID = _BindingOptionWithItem.nItemDBID
 
                 WHERE
-                    _Inventory.Slot between 0 and 12
-                    and _Inventory.Slot NOT IN (7, 8)
+                    _Inventory.Slot IN(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12)
                     and _Inventory.ItemID > 0
                     AND _Char.CharID = " . $charID . "
 
                 GROUP BY
                     _Char.CharID,
                     _Char.CharName16,
-                     _Char.NickName16,
+                    _Char.NickName16,
                     _Char.CurLevel,
                     _Char.RefObjID,
                     _Char.GuildID,
@@ -240,7 +234,9 @@ class Char extends Model
                     _Char.MP,
                     _Char.Strength,
                     _Char.Intellect,
-                    _Char.LastLogout
+                    _Char.LastLogout,
+                    _Guild.ID,
+                    _Guild.Name
 
                 ORDER BY
                     ItemPoints DESC,
@@ -289,8 +285,7 @@ class Char extends Model
 						JOIN SILKROAD_R_SHARD.._Char ON _Char.CharID = _GuildMember.CharID
 
                     WHERE
-						_Char.CharName16 NOT LIKE '%[[]GM]%'
-                        AND _Char.deleted = 0
+                        _Char.deleted = 0
                         AND _Char.CharID > 0
 
                     GROUP BY
@@ -361,6 +356,7 @@ class Char extends Model
                        SELECT TOP (". $limit .")
                             _CharUniqueKill.CharID,
 							_Char.CharName16,
+                            _Char.RefObjID,
                             _CharUniqueKill.MobID,
 							_CharUniqueKill.EventDate
 
@@ -370,7 +366,6 @@ class Char extends Model
 
                         WHERE
                             _CharUniqueKill.MobID IN (" . $uniques_id_list . ")
-                            AND _Char.CharName16 NOT LIKE '%[[]GM]%'
                             AND _Char.deleted = 0
                             AND _Char.CharID > 0
 

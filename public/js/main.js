@@ -103,7 +103,10 @@ function paginatorAjax(element, urlData)
     jQuery(element).html($('#spinner').html());
     xhr = jQuery.ajax({
         url : urlData,
-        type: "GET",
+        type: "POST",
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
         dataType: "html",
         success : function(data){
             jQuery(element).html(data);

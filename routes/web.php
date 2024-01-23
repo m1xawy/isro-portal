@@ -33,11 +33,11 @@ Route::group(['middleware' => 'language'], function () {
     Route::get('/ranking/character/{name}', [RankingController::class, 'character_view'])->name('ranking.character.view');
     Route::get('/ranking/guild/{name}', [RankingController::class, 'guild_view'])->name('ranking.guild.view');
 
-    Route::get('/ranking/player', [RankingController::class, 'player'])->name('ranking.player');
-    Route::get('/ranking/guild', [RankingController::class, 'guild'])->name('ranking.guild');
-    Route::get('/ranking/unique', [RankingController::class, 'unique'])->name('ranking.unique');
-    Route::get('/ranking/fortress/player', [RankingController::class, 'fortress_player'])->name('ranking.fortress.player');
-    Route::get('/ranking/fortress/guild', [RankingController::class, 'fortress_guild'])->name('ranking.fortress.guild');
+    Route::any('/ranking/player', [RankingController::class, 'player'])->name('ranking.player');
+    Route::any('/ranking/guild', [RankingController::class, 'guild'])->name('ranking.guild');
+    Route::any('/ranking/unique', [RankingController::class, 'unique'])->name('ranking.unique');
+    Route::any('/ranking/fortress/player', [RankingController::class, 'fortress_player'])->name('ranking.fortress.player');
+    Route::any('/ranking/fortress/guild', [RankingController::class, 'fortress_guild'])->name('ranking.fortress.guild');
 
     //TODO: simple way to switch middleware if email confirmation is enabled, i need to make custom middleware to handle it better
     Route::middleware(['auth', isEmailConfirmation()])->group(function () {

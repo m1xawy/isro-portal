@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ProfileUpdateRequest;
+use App\Models\SRO\Portal\AphChangedSilk;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -27,8 +28,13 @@ class ProfileController extends Controller
 
     public function donate_history(Request $request): View
     {
+        $donateHistory = cache()->remember('donateHistory'.$request->user()->jid, 600, function() use ($request) {
+            return AphChangedSilk::where('JID', $request->user()->jid)->orderBy('ChangeDate', 'DESC')->get();
+        });
+
         return view('profile.donate-history', [
             'user' => $request->user(),
+            'donateHistory' => $donateHistory,
         ]);
     }
 

@@ -40,7 +40,7 @@ class RegisteredUserController extends Controller
     public function store(Request $request): RedirectResponse
     {
         $request->validate([
-            'username' => ['required', 'regex:/(^([a-zA-z]+)(\d+)([_-]+)?$)/u', 'min:6', 'max:16', 'unique:'.User::class, 'unique:'.MuUser::class.',UserID', 'unique:'.TbUser::class.',StrUserID'],
+            'username' => ['required', 'regex:/(^[a-zA-Z]+[0-9\\-_]*$)/u', 'min:6', 'max:16', 'unique:'.User::class, 'unique:'.MuUser::class.',UserID', 'unique:'.TbUser::class.',StrUserID'],
             'email' => ['required', 'string', 'email', 'max:70', 'unique:'.MuEmail::class.',EmailAddr'],
             'password' => ['required', 'confirmed', 'min:6', 'max:32'],
         ]);
@@ -117,10 +117,10 @@ class RegisteredUserController extends Controller
         ]);
 
         AphChangedSilk::create([
-            'JID' => 1, // Portal JID
-            'RemainedSilk' => 0, // Silk Number
+            'JID' => $portalJID,
+            'RemainedSilk' => 0,
             'ChangedSilk' => 0,
-            'SilkType' => 3, // 1 = Normal Silk | 3 = Premium Silk
+            'SilkType' => 3,
             'SellingTypeID' => 2,
             'ChangeDate' => now(),
             'AvailableDate' => now()->addYears(1),

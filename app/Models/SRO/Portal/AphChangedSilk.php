@@ -18,6 +18,8 @@ class AphChangedSilk extends Model
     protected $primaryKey = 'CSID';
 
     protected $fillable = [
+        'InvoiceID',
+        'PTInvoiceID',
         'JID',
         'RemainedSilk',
         'ChangedSilk',

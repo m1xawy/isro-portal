@@ -17,9 +17,3 @@ yarn-error.log
 /.fleet
 /.idea
 /.vscode
-/public/themes/alpha/
-/public/themes/frenzy/
-/public/themes/paragon/
-/themes/alpha/
-/themes/frenzy/
-/themes/paragon/
