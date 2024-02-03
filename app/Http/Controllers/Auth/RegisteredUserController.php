@@ -59,13 +59,10 @@ class RegisteredUserController extends Controller
             Declare @JID Int;
             SET NOCOUNT ON;
 
-            Exec @ReturnValue = [GB_JoymaxPortal].[dbo].[A_RegisterNewUser]
+            Exec @ReturnValue = [GB_JoymaxPortal].[dbo].[A_RegisterNewUserSimple]
                 '".$request->username."',
                 '".md5($request->password)."',
-                'M',
                 '".now()->subYears(16)."',
-                '".str_replace('/[^ a-Z0-9]/', '', $request->username)."',
-                '".str_replace('/[^ a-Z0-9]/', '', $request->username)."',
                 '".$request->email."',
                 ".$userBinIP.",
                 'J".str_replace('/[^a-Z0-9]/', '', $request->username)."',

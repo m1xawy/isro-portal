@@ -273,6 +273,19 @@ class Char extends Model
         return $charUniqueHistory;
     }
 
+    public function getCharGlobalHistory($charID)
+    {
+        $charGlobalHistory = cache()->remember('char_global_history_' . $charID, setting('cache_info_char', 600), function() use ($charID) {
+            return collect(DB::select("SELECT * FROM [SILKROAD_R_SHARD_LOG].[dbo].[_LogChatMessage] WHERE CharName COLLATE Latin1_General_CI_AS = (SELECT CharName16 FROM SILKROAD_R_SHARD.._Char WHERE CharID = " . $charID . ")"));
+        });
+
+        if(empty($charGlobalHistory)) {
+            return null;
+        }
+
+        return $charGlobalHistory;
+    }
+
     public function getFortressPlayerRanking($limit = 25)
     {
         $fortressPlayerRanking = cache()->remember('fortress_player_ranking', setting('cache_fortress_player', 600), function() use ($limit) {

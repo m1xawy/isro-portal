@@ -14,9 +14,18 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 text-center">
-                            <td class="px-6 py-4" colspan="2">No History available</td>
-                        </tr>
+                    @if (!empty($charGlobalHistory))
+                        @forelse($charGlobalHistory->take(5) as $History)
+                            <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                                <td class="px-6 py-4">{{ $History->Comment }}</td>
+                                <td class="px-6 py-4">{{ $History->EventTime }}</td>
+                            </tr>
+                        @empty
+                            <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 text-center">
+                                <td class="px-6 py-4" colspan="2">No History available</td>
+                            </tr>
+                        @endforelse
+                    @endif
                     </tbody>
                 </table>
             </div>
