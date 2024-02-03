@@ -27,6 +27,7 @@ Route::group(['middleware' => 'language'], function () {
     Route::get('/posts/{slug}', [PostController::class, 'show'])->name('post.show');
 
     Route::get('/page/{slug}', [PageController::class, 'show'])->name('pages.show');
+    Route::get('/timers', [PageController::class, 'timers'])->name('pages.timers');
     Route::get('/download', [DownloadController::class, 'index'])->name('pages.download');
 
     Route::get('/ranking', [RankingController::class, 'index'])->name('ranking.index');

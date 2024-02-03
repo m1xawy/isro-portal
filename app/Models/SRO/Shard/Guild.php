@@ -31,7 +31,7 @@ class Guild extends Model
         $guildInfo = cache()->remember('guild_info_' . $guildID, setting('cache_info_guild', 600), function() use ($guildID) {
             return collect(DB::select("
                         SELECT
-                            Name, Lvl, GatheredSP, FoundationDate,
+                            Name, Lvl, GatheredSP, FoundationDate, _GuildCrest.CrestBinary,
 
                             (select count (*) from [SILKROAD_R_SHARD].[dbo].[_GuildMember] where GuildID = _Guild.ID) as Members,
                             (select CharName from [SILKROAD_R_SHARD].[dbo].[_GuildMember] where Permission = -1 AND GuildID = _Guild.ID) as Leader,
@@ -44,6 +44,7 @@ class Guild extends Model
                         FROM
                             SILKROAD_R_SHARD.._Guild
                             JOIN SILKROAD_R_SHARD.._GuildMember ON _Guild.ID = _GuildMember.GuildID
+                            JOIN SILKROAD_R_SHARD.._GuildCrest ON _GuildCrest.GuildID = _Guild.ID
                             JOIN SILKROAD_R_SHARD.._Inventory ON _GuildMember.CharID = _Inventory.CharID
                             JOIN SILKROAD_R_SHARD.._Items ON _Inventory.ItemID = _Items.ID64
                             LEFT JOIN SILKROAD_R_SHARD.._BindingOptionWithItem ON _Inventory.ItemID = _BindingOptionWithItem.nItemDBID
@@ -61,7 +62,8 @@ class Guild extends Model
                             _Guild.Name,
                             _Guild.Lvl,
                             _Guild.GatheredSP,
-                            _Guild.FoundationDate
+                            _Guild.FoundationDate,
+                            _GuildCrest.CrestBinary
 
                         ORDER BY
                             ItemPoints DESC,

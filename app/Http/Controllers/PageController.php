@@ -23,4 +23,15 @@ class PageController extends Controller
 
         return redirect()->back();
     }
+
+    public function timers()
+    {
+        $timers = cache()->remember('page_timers', setting('cache_page', 600), function() {
+            return getServerTimes();
+        });
+
+        return view('pages.timers', [
+            'timers' => $timers,
+        ]);
+    }
 }
