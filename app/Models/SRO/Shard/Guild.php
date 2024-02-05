@@ -29,31 +29,31 @@ class Guild extends Model
     public function getGuildInfo($guildID)
     {
         $guildInfo = cache()->remember('guild_info_' . $guildID, setting('cache_info_guild', 600), function() use ($guildID) {
-            return collect(DB::select("
+            return collect(DB::connection('shard')->select("
                         SELECT
                             Name, Lvl, GatheredSP, FoundationDate, _GuildCrest.CrestBinary,
 
-                            (select count (*) from [SILKROAD_R_SHARD].[dbo].[_GuildMember] where GuildID = _Guild.ID) as Members,
-                            (select CharName from [SILKROAD_R_SHARD].[dbo].[_GuildMember] where Permission = -1 AND GuildID = _Guild.ID) as Leader,
-                            + (CAST((sum(_Items.OptLevel))
+                            (select count (*) from _GuildMember where GuildID = _Guild.ID) as Members,
+                            (select CharName from _GuildMember where Permission = -1 AND GuildID = _Guild.ID) as Leader,
+
+                            (SUM(_Items.OptLevel)
                             + SUM(_RefObjItem.ItemClass)
                             + SUM(_RefObjCommon.Rarity)
-                            + (CASE WHEN sum(_BindingOptionWithItem.nOptValue) > 0 THEN sum(_BindingOptionWithItem.nOptValue) ELSE 0 END) as INT))
+                            + SUM(CASE WHEN _BindingOptionWithItem.nItemDBID IS NULL THEN 0 ELSE _BindingOptionWithItem.nOptValue END))
                             AS ItemPoints
 
                         FROM
-                            SILKROAD_R_SHARD.._Guild
-                            JOIN SILKROAD_R_SHARD.._GuildMember ON _Guild.ID = _GuildMember.GuildID
-                            JOIN SILKROAD_R_SHARD.._GuildCrest ON _GuildCrest.GuildID = _Guild.ID
-                            JOIN SILKROAD_R_SHARD.._Inventory ON _GuildMember.CharID = _Inventory.CharID
-                            JOIN SILKROAD_R_SHARD.._Items ON _Inventory.ItemID = _Items.ID64
-                            LEFT JOIN SILKROAD_R_SHARD.._BindingOptionWithItem ON _Inventory.ItemID = _BindingOptionWithItem.nItemDBID
-                            JOIN SILKROAD_R_SHARD.._RefObjCommon ON _Items.RefItemID = _RefObjCommon.ID
-                            JOIN SILKROAD_R_SHARD.._RefObjItem ON _RefObjCommon.Link = _RefObjItem.ID
+                            _Guild
+                            INNER JOIN _GuildMember ON _Guild.ID = _GuildMember.GuildID
+                            INNER JOIN _GuildCrest ON _GuildCrest.GuildID = _Guild.ID
+                            INNER JOIN _Inventory ON _GuildMember.CharID = _Inventory.CharID
+                            INNER JOIN _Items ON _Inventory.ItemID = _Items.ID64
+                            INNER JOIN _RefObjCommon WITH (NOLOCK) ON _Items.RefItemID = _RefObjCommon.ID
+                            INNER JOIN _RefObjItem WITH (NOLOCK) ON _RefObjCommon.Link = _RefObjItem.ID
+                            LEFT OUTER JOIN _BindingOptionWithItem ON _Inventory.ItemID = _BindingOptionWithItem.nItemDBID
 
                         WHERE
-                            _Inventory.Slot between 0 and 12
-                            and _Inventory.Slot NOT IN (7, 8)
+                            _Inventory.Slot IN(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12)
                             and _Inventory.ItemID > 0
                             AND _Guild.ID = " . $guildID . "
 
@@ -83,7 +83,7 @@ class Guild extends Model
     public function getGuildInfoMembers($guildID)
     {
         $guildInfoMembers = cache()->remember('guild_info_members_' . $guildID, setting('cache_info_guild', 600), function() use ($guildID) {
-            return collect(DB::select("SELECT * FROM [SILKROAD_R_SHARD].[dbo].[_GuildMember] WHERE GuildID = " . $guildID . " ORDER BY MemberClass ASC,Contribution DESC,GuildWarKill DESC,CharLevel DESC,GP_Donation DESC"));
+            return collect(DB::connection('shard')->select("SELECT * FROM _GuildMember WHERE GuildID = " . $guildID . " ORDER BY MemberClass ASC,Contribution DESC,GuildWarKill DESC,CharLevel DESC,GP_Donation DESC"));
         });
 
         if(empty($guildInfoMembers)) {
@@ -96,7 +96,7 @@ class Guild extends Model
     public function getGuildInfoAlliance($guildID)
     {
         $guildInfoAlliance = cache()->remember('guild_info_alliance_' . $guildID, setting('cache_info_guild', 600), function() use ($guildID) {
-            return collect(DB::select("SELECT Name from [SILKROAD_R_SHARD].[dbo].[_Guild] WHERE Alliance = (SELECT Alliance FROM [SILKROAD_R_SHARD].[dbo].[_Guild] WHERE ID = " . $guildID . " AND Alliance > 0)"));
+            return collect(DB::connection('shard')->select("SELECT Name from _Guild WHERE Alliance = (SELECT Alliance FROM _Guild WHERE ID = " . $guildID . " AND Alliance > 0)"));
         });
 
         if(empty($guildInfoAlliance)) {

@@ -78,7 +78,7 @@ class RankingController extends Controller
 
             $characters = (new Char)->getCharInfo($charID);
             $charUniqueHistory = (new Char)->getCharUniqueHistory($charID);
-            $charGlobalHistory = (new Char)->getCharGlobalHistory($charID);
+            $charGlobalHistory = (new Char)->getCharGlobalHistory($name);
 
             if ($characters) {
                 return view('ranking.character.index', [
