@@ -1,3 +1,4 @@
+@if (cache()->remember('server_global_widget_enable', 600, function() { return setting('server_global_widget_enable'); }))
 @php
     $GlobalHistory = cache()->remember('global_history', setting('cache_widget', 600), function() { return getGlobalHistory(); });
 @endphp
@@ -27,3 +28,4 @@
 
     </div>
 </div>
+@endif

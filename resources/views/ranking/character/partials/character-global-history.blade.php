@@ -1,3 +1,4 @@
+@if (cache()->remember('server_global_widget_enable', 600, function() { return setting('server_global_widget_enable'); }))
 <div class="space-y-6">
     <div class="text-gray-900 dark:text-gray-100 text-left mt-3">
         <h1>Global Chat History</h1>
@@ -32,3 +33,4 @@
         </div>
     </div>
 </div>
+@endif

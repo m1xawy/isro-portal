@@ -29,6 +29,8 @@ class Widgets
                         Boolean::make('Server Times Enable', 'server_times_widget_enable'),
                         Boolean::make('Fortress War Enable', 'server_fortress_widget_enable'),
                         Boolean::make('Unique History Enable', 'server_unique_widget_enable'),
+                        Boolean::make('Global History Enable', 'server_global_widget_enable'),
+                        Boolean::make('Discord Widget Enable', 'discord_widget_enable'),
 
                     ]),
 
@@ -51,8 +53,6 @@ class Widgets
                     ]),
 
                     new Tab('Discord Widget', [
-                        Boolean::make('Discord Widget Enable', 'discord_widget_enable'),
-
                         DependencyContainer::make([
                             Text::make('Discord Server ID', 'discord_widget_id'),
                         ])->dependsOn('discord_widget_enable', true),

@@ -1,3 +1,4 @@
+@if (cache()->remember('server_unique_widget_enable', 600, function() { return setting('server_unique_widget_enable'); }))
 @php
     $unique_list_settings = cache()->remember('ranking_unique_list', setting('cache_ranking_unique', 600), function() { return json_decode(setting('ranking_unique_list')); });
 
@@ -46,3 +47,4 @@
         </div>
     </div>
 </div>
+@endif
