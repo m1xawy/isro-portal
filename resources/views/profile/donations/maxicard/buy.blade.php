@@ -40,12 +40,12 @@
 
                     <div>
                         <x-input-label for="code" :value="__('E-Pin Code')" />
-                        <x-text-input id="code" name="code" type="password" class="mt-1 block w-full" />
+                        <x-text-input id="code" name="code" type="text" class="mt-1 block w-full" />
                     </div>
 
                     <div>
                         <x-input-label for="password" :value="__('E-Pin Password')" />
-                        <x-text-input id="password" name="password" type="password" class="mt-1 block w-full" />
+                        <x-text-input id="password" name="password" type="text" class="mt-1 block w-full" />
                     </div>
 
                     <div class="flex items-center gap-4">
