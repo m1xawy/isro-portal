@@ -6,6 +6,7 @@
     "license": "MIT",
     "require": {
         "php": "^8.1",
+        "ext-simplexml": "*",
         "akaunting/laravel-language": "^1.0",
         "alexazartsev/heroicon": "^2.0",
         "alexwenzel/nova-dependency-container": "^1.10",
@@ -17,11 +18,14 @@
         "laravel/nova": "*",
         "laravel/sanctum": "^3.2",
         "laravel/tinker": "^2.8",
+        "league/omnipay": "^3.2",
         "murdercode/nova4-tinymce-editor": "^1.2",
+        "omnipay/paypal": "^3.0",
         "outl1ne/nova-page-manager": "^5.9",
         "outl1ne/nova-settings": "^5.2",
         "qirolab/laravel-themer": "^2.1",
         "stepanenko3/nova-cards": "^1.9",
+        "stripe/stripe-php": "^13.10",
         "timothyasp/nova-color-field": "^2.0",
         "whitecube/nova-flexible-content": "^1.0"
     },

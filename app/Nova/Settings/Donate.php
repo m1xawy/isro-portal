@@ -7,6 +7,7 @@ use Alexwenzel\DependencyContainer\DependencyContainer;
 use Eminiarts\Tabs\Tab;
 use Eminiarts\Tabs\Tabs;
 use Laravel\Nova\Fields\Boolean;
+use Laravel\Nova\Fields\Heading;
 use Laravel\Nova\Fields\Select;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\URL;
@@ -21,6 +22,8 @@ class Donate
             NovaSettings::addSettingsFields([
                 new Tabs('Donation Settings', [
 
+                    Heading::make('Do it manually from database')
+                    /*
                     new Tab('Paypal', [
                         Boolean::make('Paypal Enable', 'donate_paypal_enable'),
 
@@ -61,6 +64,7 @@ class Donate
                                 Text::make('Package Value', 'donate_maxigame_package_value'),
                             ]),
                     ]),
+                    */
 
                 ]),
             ], [], 'Donation'),

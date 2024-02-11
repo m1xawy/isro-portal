@@ -18,5 +18,12 @@ class DatabaseSeeder extends Seeder
         //     'name' => 'Test User',
         //     'email' => 'test@example.com',
         // ]);
+
+        $this->call(DonationMethodsSeeder::class);
+        $this->call(MaxiCardSeeder::class);
+        $this->call(PaypalSeeder::class);
+        $this->call(StripeSeeder::class);
+        $this->call(PayOpSeeder::class);
+        $this->call(CoinbaseSeeder::class);
     }
 }
