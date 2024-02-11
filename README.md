@@ -21,6 +21,10 @@ iSRO Portal is A free and open-source project for the MMORPG SilkroadR Online (i
 - **[iSRO Portal Discord](#)**
 - **[Youtube Channel](https://www.youtube.com/@m1xawy)**
 
+## Installation Video
+
+[![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/jinAoKs_WB4/0.jpg)](https://www.youtube.com/watch?v=jinAoKs_WB4)
+
 ## Quick Installation
 
 -First be sure you have already installed iSRO-R Databases
@@ -31,13 +35,13 @@ iSRO Portal is A free and open-source project for the MMORPG SilkroadR Online (i
 
 _Lets begin:
 1. Clone the repo
-   ```sh
-   git clone https://github.com/m1xawy/isro-portal.git
-   ```
+```sh
+git clone https://github.com/m1xawy/isro-portal.git
+```
 2. Install Laravel dependencies
-   ```sh
-   composer install
-   ```
+```sh
+composer install
+```
 3. Rename `.env.example` to `.env` and fill it with your website URL and Silkroad database info
    ```ini
     APP_NAME=Laravel
@@ -55,16 +59,16 @@ _Lets begin:
     DB_DATABASE_LOG=SILKROAD_R_SHARD_LOG
    ```
 4. Create new database `SRO_Portal` and run Laravel commands for migrate website tables
-   ```sh
-    php artisan migrate
-    php artisan key:generate
-    php artisan storage:link
-   ```
+```sh
+php artisan migrate
+php artisan key:generate
+php artisan storage:link
+```
 5. Install NPM packages & Run
-   ```sh
-   npm install
-   npm run build
-   ```
+```sh
+npm install
+npm run build
+```
 
 6. Change document root of laragon to public folder `isro-portal/public`
 
@@ -76,9 +80,12 @@ to access admin panel change role `user` to `admin` from users table or execute 
    ```
 
 Get new updates:
-   ```sh
-   git pull
-   ```
+```sh
+git pull
+composer update
+php artisan migrate --seed
+php artisan optimize:clear
+```
 
 ## Contributing
 
