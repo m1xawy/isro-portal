@@ -372,3 +372,12 @@ div.image span.plus {
 #idInventorySet .table th, #idInventorySet .table td {
     padding: 0 !important;
 }
+ul.character-build li {
+    display: inline;
+    margin: 0 7px 0 0;
+}
+ul.character-build li img {
+    width: 24px;
+    height: 24px;
+    border: 1px solid #62666f;
+}

@@ -273,6 +273,19 @@ class Char extends Model
         return $charUniqueHistory;
     }
 
+    public function getCharBuildInfo($charID)
+    {
+        $charBuildInfo = cache()->remember('char_info_build_' . $charID, setting('cache_info_char', 600), function() use ($charID) {
+            return collect(DB::connection('shard')->select("SELECT * FROM _CharSkillMastery WHERE Level > 0 AND CharID = " . $charID));
+        });
+
+        if(empty($charBuildInfo)) {
+            return null;
+        }
+
+        return $charBuildInfo;
+    }
+
     public function getCharGlobalHistory($charName)
     {
         $charGlobalHistory = cache()->remember('char_global_history_' . $charName, setting('cache_info_char', 600), function() use ($charName) {

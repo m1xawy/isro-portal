@@ -80,6 +80,7 @@ class RankingController extends Controller
             $characters = (new Char)->getCharInfo($charID);
             $charUniqueHistory = (new Char)->getCharUniqueHistory($charID);
             $charGlobalHistory = (new Char)->getCharGlobalHistory($name);
+            $charBuildInfo = (new Char)->getCharBuildInfo($charID);
 
             $playerInventory = cache()->remember('char_inventory_' . $name, setting('cache_info_char', 600), function() use ($inventoryService, $charID) {
                 return $inventoryService->getInventorySet($charID, 13, 0);
@@ -93,6 +94,7 @@ class RankingController extends Controller
                     'characters' => $characters,
                     'charUniqueHistory' => $charUniqueHistory,
                     'charGlobalHistory' => $charGlobalHistory,
+                    'charBuildInfo' => $charBuildInfo,
                     'playerInventory' => $playerInventory,
                     'playerAvatar' => $playerAvatar
                 ]);
