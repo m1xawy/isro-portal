@@ -16,6 +16,9 @@
         <!-- SEO -->
         @include('partials.head-seo')
 
+        <link href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" rel="stylesheet">
+        <link href="{{ asset('/css/main.css') }}" rel="stylesheet">
+
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
 
@@ -53,6 +56,7 @@
 
         <script src="https://code.jquery.com/jquery-3.6.0.min.js" type="text/javascript" crossorigin="anonymous"></script>
         <script src="https://unpkg.com/flowbite@1.4.0/dist/flowbite.js"></script>
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
 
         <script src="{{ asset('js/main.js') }}"></script>
 

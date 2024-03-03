@@ -25,5 +25,6 @@ class DatabaseSeeder extends Seeder
         $this->call(StripeSeeder::class);
         $this->call(PayOpSeeder::class);
         $this->call(CoinbaseSeeder::class);
+        $this->call(MagOptSeeder::class);
     }
 }

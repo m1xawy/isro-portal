@@ -6,6 +6,7 @@ use App\Models\SRO\Shard\Char;
 use App\Models\SRO\Shard\CharUniqueKill;
 use App\Models\SRO\Shard\Guild;
 use Illuminate\Http\Request;
+use App\Http\Services\SRO\Shard\InventoryService;
 
 class RankingController extends Controller
 {
@@ -68,7 +69,7 @@ class RankingController extends Controller
         ]);
     }
 
-    public function character_view($name)
+    public function character_view($name, InventoryService $inventoryService)
     {
         $charID = cache()->remember('char_id_' . $name, setting('cache_info_char', 600), function() use ($name) {
             return Char::select('CharID')->where('CharName16', $name)->first()->CharID;
@@ -80,11 +81,20 @@ class RankingController extends Controller
             $charUniqueHistory = (new Char)->getCharUniqueHistory($charID);
             $charGlobalHistory = (new Char)->getCharGlobalHistory($name);
 
+            $playerInventory = cache()->remember('char_inventory_' . $name, setting('cache_info_char', 600), function() use ($inventoryService, $charID) {
+                return $inventoryService->getInventorySet($charID, 13, 0);
+            });
+            $playerAvatar = cache()->remember('char_inventory_avatar_' . $name, setting('cache_info_char', 600), function() use ($inventoryService, $charID) {
+                return $inventoryService->getInventoryAvatar($charID);
+            });
+
             if ($characters) {
                 return view('ranking.character.index', [
                     'characters' => $characters,
                     'charUniqueHistory' => $charUniqueHistory,
-                    'charGlobalHistory' => $charGlobalHistory
+                    'charGlobalHistory' => $charGlobalHistory,
+                    'playerInventory' => $playerInventory,
+                    'playerAvatar' => $playerAvatar
                 ]);
             }
         }
