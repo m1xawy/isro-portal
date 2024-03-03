@@ -296,12 +296,12 @@ div.image span.plus {
 }
 
 .inventory-bg {
-    background-image: url(../images/ingame/inventory-bg.png);
+    background-image: url(../images/ingame/inventory-bg-n.png);
     background-size: cover;
 }
 
 #idInventorySet {
-    background-image: url(../images/ingame/inventory_bg.png);
+    background-image: url(../images/ingame/inventory_bg_n.png);
     height: 315px;
     width: 178px;
 }
@@ -368,4 +368,7 @@ div.image span.plus {
 
 .spec .itemslot {
     background: none !important;
+}
+#idInventorySet .table th, #idInventorySet .table td {
+    padding: 0 !important;
 }
