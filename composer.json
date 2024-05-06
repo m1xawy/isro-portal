@@ -27,7 +27,8 @@
         "stepanenko3/nova-cards": "^1.9",
         "stripe/stripe-php": "^13.10",
         "timothyasp/nova-color-field": "^2.0",
-        "whitecube/nova-flexible-content": "^1.0"
+        "whitecube/nova-flexible-content": "^1.0",
+      "ext-gd": "*"
     },
     "require-dev": {
         "fakerphp/faker": "^1.9.1",

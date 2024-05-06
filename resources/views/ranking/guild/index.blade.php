@@ -11,7 +11,10 @@
                         <div class="w-full">
                             <div class="flex flex-row items-center pb-1">
                                 <div class="ml-4">
-                                    <h5 class="mb-1 text-4xl font-medium text-gray-900 dark:text-white" style="color: #ffc345">{{ $guilds->Name }}</h5>
+                                    <h5 class="mb-1 text-4xl font-medium text-gray-900 dark:text-white" style="color: #ffc345">
+                                        <img class="inline-block" src="/ranking/guild-crest/{{ $guilds->Icon }}" alt="" width="32" height="32">
+                                        {{ $guilds->Name }}
+                                    </h5>
                                     <p class="text-sm text-gray-500 dark:text-gray-400">Foundation Date <span style="color: #ffc345">{{ date('d-m-Y', strtotime($guilds->FoundationDate)) }}</span></p>
                                     <p class="text-sm text-gray-500 dark:text-gray-400">Rank <span style="color: #ffc345">#</span></p>
                                 </div>

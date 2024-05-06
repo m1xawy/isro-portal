@@ -39,6 +39,7 @@ Route::group(['middleware' => 'language'], function () {
     Route::get('/ranking', [RankingController::class, 'index'])->name('ranking.index');
     Route::get('/ranking/character/{name}', [RankingController::class, 'character_view'])->name('ranking.character.view');
     Route::get('/ranking/guild/{name}', [RankingController::class, 'guild_view'])->name('ranking.guild.view');
+    Route::any('/ranking/guild-crest/{hex}', [RankingController::class, 'guild_crest'])->name('ranking.guild-crest');
 
     Route::any('/ranking/player', [RankingController::class, 'player'])->name('ranking.player');
     Route::any('/ranking/guild', [RankingController::class, 'guild'])->name('ranking.guild');

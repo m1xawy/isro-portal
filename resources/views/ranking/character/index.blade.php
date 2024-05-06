@@ -16,7 +16,7 @@
                                 <div class="ml-4">
                                     <h5 class="mb-1 text-xl font-medium text-gray-900 dark:text-white">{{ $characters->CharName16 }}</h5>
                                     <span class="text-sm text-gray-500 dark:text-gray-400">Item Points: <span style="color: #ffc345">{{ $characters->ItemPoints }}</span></span>
-                                    <ul class="character-build flex flex-column mt-3">
+                                    <ul class="character-build flex flex-row mt-3">
                                         @foreach($charBuildInfo as $build)
                                             <li><img src="{{ asset('images/ingame/skillmastery/'. config('mastery-build')[$build->MasteryID]['icon']) }}" title="{{ config('mastery-build')[$build->MasteryID]['name'] }}"></li>
                                         @endforeach

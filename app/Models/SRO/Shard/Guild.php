@@ -31,7 +31,9 @@ class Guild extends Model
         $guildInfo = cache()->remember('guild_info_' . $guildID, setting('cache_info_guild', 600), function() use ($guildID) {
             return collect(DB::connection('shard')->select("
                         SELECT
-                            Name, Lvl, GatheredSP, FoundationDate, _GuildCrest.CrestBinary,
+                            Name, Lvl, GatheredSP, FoundationDate,
+
+                            CONVERT(VARCHAR(MAX), _GuildCrest.CrestBinary, 2) AS Icon,
 
                             (select count (*) from _GuildMember where GuildID = _Guild.ID) as Members,
                             (select CharName from _GuildMember where Permission = -1 AND GuildID = _Guild.ID) as Leader,

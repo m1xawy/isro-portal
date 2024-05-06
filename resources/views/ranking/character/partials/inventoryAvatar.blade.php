@@ -1,4 +1,4 @@
-<div id="idInventoryAvatar" class="bg-equipment-avatar flex align-items-center flex-wrap gap-10" style="margin-left: 1.6rem; margin-bottom: 0.6rem">
+<div id="idInventoryAvatar" class="bg-equipment-avatar flex align-items-center flex-wrap gap-0" style="margin-left: 1.6rem; margin-bottom: 0.6rem">
     <div class="slots 1 left hat">
         <div class="itemslot">
             <div class="image"

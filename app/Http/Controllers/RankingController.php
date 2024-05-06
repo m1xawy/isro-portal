@@ -71,9 +71,7 @@ class RankingController extends Controller
 
     public function character_view($name, InventoryService $inventoryService)
     {
-        $charID = cache()->remember('char_id_' . $name, setting('cache_info_char', 600), function() use ($name) {
-            return Char::select('CharID')->where('CharName16', $name)->first()->CharID;
-        });
+        $charID = Char::select('CharID')->where('CharName16', $name)->first()->CharID;
 
         if ($charID > 0) {
 
@@ -105,9 +103,7 @@ class RankingController extends Controller
 
     public function guild_view($name)
     {
-        $guildID = cache()->remember('guild_id_' . $name, setting('cache_info_guild', 600), function() use ($name) {
-            return Guild::select('ID')->where('Name', $name)->first()->ID ?? null;
-        });
+        $guildID = Guild::select('ID')->where('Name', $name)->first()->ID;
 
         if ($guildID > 0) {
 
@@ -125,5 +121,14 @@ class RankingController extends Controller
         }
 
         return redirect()->back();
+    }
+
+    public function guild_crest($hex)
+    {
+        if ($hex) {
+            return drawGuildIconToPNG($hex);
+        }
+
+        abort(404);
     }
 }
