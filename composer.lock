@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "e5e37331f4d18ff369b0c816a5ac3e7b",
+    "content-hash": "861d63188294a55c76ac90cd0254f9b6",
     "packages": [
         {
             "name": "akaunting/laravel-language",
@@ -67,6 +67,57 @@
                 "source": "https://github.com/akaunting/laravel-language/tree/1.0.22"
             },
             "time": "2022-08-05T07:33:12+00:00"
+        },
+        {
+            "name": "akbsit/nova-card-cache",
+            "version": "1.0.11",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/akbsit/nova-card-cache.git",
+                "reference": "5028f93eea9efaba2074e350e226cbb0a8486c16"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/akbsit/nova-card-cache/zipball/5028f93eea9efaba2074e350e226cbb0a8486c16",
+                "reference": "5028f93eea9efaba2074e350e226cbb0a8486c16",
+                "shasum": ""
+            },
+            "require": {
+                "laravel/framework": "^9.0|^10.0|^11.0",
+                "laravel/nova": "^3.0|^4.0",
+                "php": "^8.1"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Akbsit\\NovaCardCache\\CardServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Akbsit\\NovaCardCache\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "Cleaning application cache from laravel nova dashboard card.",
+            "keywords": [
+                "cache",
+                "file",
+                "flush",
+                "laravel",
+                "nova",
+                "redis"
+            ],
+            "support": {
+                "issues": "https://github.com/akbsit/nova-card-cache/issues",
+                "source": "https://github.com/akbsit/nova-card-cache/tree/1.0.11"
+            },
+            "time": "2024-03-23T13:02:00+00:00"
         },
         {
             "name": "alexazartsev/heroicon",
@@ -1214,56 +1265,6 @@
             "time": "2022-10-25T19:58:02+00:00"
         },
         {
-            "name": "erusev/parsedown",
-            "version": "1.7.4",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/erusev/parsedown.git",
-                "reference": "cb17b6477dfff935958ba01325f2e8a2bfa6dab3"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/erusev/parsedown/zipball/cb17b6477dfff935958ba01325f2e8a2bfa6dab3",
-                "reference": "cb17b6477dfff935958ba01325f2e8a2bfa6dab3",
-                "shasum": ""
-            },
-            "require": {
-                "ext-mbstring": "*",
-                "php": ">=5.3.0"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "^4.8.35"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-0": {
-                    "Parsedown": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Emanuil Rusev",
-                    "email": "hello@erusev.com",
-                    "homepage": "http://erusev.com"
-                }
-            ],
-            "description": "Parser for Markdown.",
-            "homepage": "http://parsedown.org",
-            "keywords": [
-                "markdown",
-                "parser"
-            ],
-            "support": {
-                "issues": "https://github.com/erusev/parsedown/issues",
-                "source": "https://github.com/erusev/parsedown/tree/1.7.x"
-            },
-            "time": "2019-12-30T22:54:17+00:00"
-        },
-        {
             "name": "facade/ignition-contracts",
             "version": "1.0.2",
             "source": {
@@ -1861,76 +1862,6 @@
             "time": "2023-12-03T19:50:20+00:00"
         },
         {
-            "name": "hashids/hashids",
-            "version": "4.1.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/vinkla/hashids.git",
-                "reference": "8cab111f78e0bd9c76953b082919fc9e251761be"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/vinkla/hashids/zipball/8cab111f78e0bd9c76953b082919fc9e251761be",
-                "reference": "8cab111f78e0bd9c76953b082919fc9e251761be",
-                "shasum": ""
-            },
-            "require": {
-                "ext-mbstring": "*",
-                "php": "^7.2 || ^8.0"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "^8.0 || ^9.4",
-                "squizlabs/php_codesniffer": "^3.5"
-            },
-            "suggest": {
-                "ext-bcmath": "Required to use BC Math arbitrary precision mathematics (*).",
-                "ext-gmp": "Required to use GNU multiple precision mathematics (*)."
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "4.1-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Hashids\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Ivan Akimov",
-                    "email": "ivan@barreleye.com"
-                },
-                {
-                    "name": "Vincent Klaiber",
-                    "email": "hello@doubledip.se"
-                }
-            ],
-            "description": "Generate short, unique, non-sequential ids (like YouTube and Bitly) from numbers",
-            "homepage": "https://hashids.org/php",
-            "keywords": [
-                "bitly",
-                "decode",
-                "encode",
-                "hash",
-                "hashid",
-                "hashids",
-                "ids",
-                "obfuscate",
-                "youtube"
-            ],
-            "support": {
-                "issues": "https://github.com/vinkla/hashids/issues",
-                "source": "https://github.com/vinkla/hashids/tree/4.1.0"
-            },
-            "time": "2020-11-26T19:24:33+00:00"
-        },
-        {
             "name": "inertiajs/inertia-laravel",
             "version": "v0.6.11",
             "source": {
@@ -2048,6 +1979,62 @@
                 "source": "https://github.com/inspheric/nova-defaultable-fields/tree/master"
             },
             "time": "2019-05-29T15:38:50+00:00"
+        },
+        {
+            "name": "interaction-design-foundation/nova-html-card",
+            "version": "3.3.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/InteractionDesignFoundation/nova-html-card.git",
+                "reference": "09aed5a48d5ab67e15f5064f68c63cb66688e046"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/InteractionDesignFoundation/nova-html-card/zipball/09aed5a48d5ab67e15f5064f68c63cb66688e046",
+                "reference": "09aed5a48d5ab67e15f5064f68c63cb66688e046",
+                "shasum": ""
+            },
+            "require": {
+                "laravel/nova": "^4.20",
+                "php": "^8.1"
+            },
+            "require-dev": {
+                "interaction-design-foundation/coding-standard": "^0.2.0",
+                "orchestra/testbench": "^8.3",
+                "phpunit/phpunit": "^10.5 || ^11.0",
+                "vimeo/psalm": "^5.22"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "InteractionDesignFoundation\\HtmlCard\\CardServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "InteractionDesignFoundation\\HtmlCard\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "A Laravel Nova card to display arbitrary HTML content",
+            "keywords": [
+                "html",
+                "laravel",
+                "laravel-nova-card",
+                "markdown",
+                "nova",
+                "text"
+            ],
+            "support": {
+                "issues": "https://github.com/InteractionDesignFoundation/nova-html-card/issues",
+                "source": "https://github.com/InteractionDesignFoundation/nova-html-card/tree/3.3.0"
+            },
+            "time": "2024-03-12T13:56:50+00:00"
         },
         {
             "name": "jaybizzle/crawler-detect",
@@ -2557,72 +2544,6 @@
             "transport-options": {
                 "relative": true
             }
-        },
-        {
-            "name": "laravel/pint",
-            "version": "v1.13.10",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/laravel/pint.git",
-                "reference": "e2b5060885694ca30ac008c05dc9d47f10ed1abf"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/laravel/pint/zipball/e2b5060885694ca30ac008c05dc9d47f10ed1abf",
-                "reference": "e2b5060885694ca30ac008c05dc9d47f10ed1abf",
-                "shasum": ""
-            },
-            "require": {
-                "ext-json": "*",
-                "ext-mbstring": "*",
-                "ext-tokenizer": "*",
-                "ext-xml": "*",
-                "php": "^8.1.0"
-            },
-            "require-dev": {
-                "friendsofphp/php-cs-fixer": "^3.47.1",
-                "illuminate/view": "^10.41.0",
-                "larastan/larastan": "^2.8.1",
-                "laravel-zero/framework": "^10.3.0",
-                "mockery/mockery": "^1.6.7",
-                "nunomaduro/termwind": "^1.15.1",
-                "pestphp/pest": "^2.31.0"
-            },
-            "bin": [
-                "builds/pint"
-            ],
-            "type": "project",
-            "autoload": {
-                "psr-4": {
-                    "App\\": "app/",
-                    "Database\\Seeders\\": "database/seeders/",
-                    "Database\\Factories\\": "database/factories/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Nuno Maduro",
-                    "email": "enunomaduro@gmail.com"
-                }
-            ],
-            "description": "An opinionated code formatter for PHP.",
-            "homepage": "https://laravel.com",
-            "keywords": [
-                "format",
-                "formatter",
-                "lint",
-                "linter",
-                "php"
-            ],
-            "support": {
-                "issues": "https://github.com/laravel/pint/issues",
-                "source": "https://github.com/laravel/pint"
-            },
-            "time": "2024-01-22T09:04:15+00:00"
         },
         {
             "name": "laravel/prompts",
@@ -4395,6 +4316,55 @@
                 }
             ],
             "time": "2024-01-09T09:30:37+00:00"
+        },
+        {
+            "name": "oriondevelops/nova-greeter",
+            "version": "v0.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/oriondevelops/nova-greeter.git",
+                "reference": "1bc8cd57697c24d71864f8c1b485ec8fa51bd2e1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/oriondevelops/nova-greeter/zipball/1bc8cd57697c24d71864f8c1b485ec8fa51bd2e1",
+                "reference": "1bc8cd57697c24d71864f8c1b485ec8fa51bd2e1",
+                "shasum": ""
+            },
+            "require": {
+                "laravel/nova": "^4.0",
+                "php": "^8.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Orion\\NovaGreeter\\CardServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Orion\\NovaGreeter\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "A Laravel Nova greeter card.",
+            "keywords": [
+                "card",
+                "dashboard",
+                "greeter",
+                "laravel",
+                "nova"
+            ],
+            "support": {
+                "issues": "https://github.com/oriondevelops/nova-greeter/issues",
+                "source": "https://github.com/oriondevelops/nova-greeter/tree/v0.0.1"
+            },
+            "time": "2023-02-21T20:38:53+00:00"
         },
         {
             "name": "outl1ne/nova-multiselect-filter",
@@ -6207,56 +6177,6 @@
             "time": "2023-12-06T10:56:22+00:00"
         },
         {
-            "name": "spatie/macroable",
-            "version": "2.0.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/spatie/macroable.git",
-                "reference": "ec2c320f932e730607aff8052c44183cf3ecb072"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/spatie/macroable/zipball/ec2c320f932e730607aff8052c44183cf3ecb072",
-                "reference": "ec2c320f932e730607aff8052c44183cf3ecb072",
-                "shasum": ""
-            },
-            "require": {
-                "php": "^8.0"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "^8.0|^9.3"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Spatie\\Macroable\\": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Freek Van der Herten",
-                    "email": "freek@spatie.be",
-                    "homepage": "https://spatie.be",
-                    "role": "Developer"
-                }
-            ],
-            "description": "A trait to dynamically add methods to a class",
-            "homepage": "https://github.com/spatie/macroable",
-            "keywords": [
-                "macroable",
-                "spatie"
-            ],
-            "support": {
-                "issues": "https://github.com/spatie/macroable/issues",
-                "source": "https://github.com/spatie/macroable/tree/2.0.0"
-            },
-            "time": "2021-03-26T22:39:02+00:00"
-        },
-        {
             "name": "spatie/once",
             "version": "3.1.0",
             "source": {
@@ -6317,224 +6237,6 @@
                 }
             ],
             "time": "2022-04-21T12:23:20+00:00"
-        },
-        {
-            "name": "spatie/ssl-certificate",
-            "version": "2.6.2",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/spatie/ssl-certificate.git",
-                "reference": "6f4c6ce713cb88c601bcc0cdad149a92cdbc10be"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/spatie/ssl-certificate/zipball/6f4c6ce713cb88c601bcc0cdad149a92cdbc10be",
-                "reference": "6f4c6ce713cb88c601bcc0cdad149a92cdbc10be",
-                "shasum": ""
-            },
-            "require": {
-                "ext-intl": "*",
-                "ext-json": "*",
-                "nesbot/carbon": "^2.68.1",
-                "php": "^8.1",
-                "spatie/macroable": "^2.0"
-            },
-            "require-dev": {
-                "pestphp/pest": "^2.12.2",
-                "spatie/pest-plugin-snapshots": "^2.0.1",
-                "spatie/ray": "^1.37.2"
-            },
-            "type": "library",
-            "autoload": {
-                "files": [
-                    "src/helpers.php"
-                ],
-                "psr-4": {
-                    "Spatie\\SslCertificate\\": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Freek Van der Herten",
-                    "email": "freek@spatie.be",
-                    "homepage": "https://spatie.be",
-                    "role": "Developer"
-                }
-            ],
-            "description": "A class to easily query the properties of an ssl certificate",
-            "homepage": "https://github.com/spatie/ssl-certificate",
-            "keywords": [
-                "spatie",
-                "ssl-certificate"
-            ],
-            "support": {
-                "source": "https://github.com/spatie/ssl-certificate/tree/2.6.2"
-            },
-            "funding": [
-                {
-                    "url": "https://github.com/sponsors/spatie",
-                    "type": "github"
-                },
-                {
-                    "url": "https://spatie.be/open-source/support-us",
-                    "type": "other"
-                }
-            ],
-            "time": "2023-10-17T15:56:46+00:00"
-        },
-        {
-            "name": "stepanenko3/laravel-helpers",
-            "version": "v1.2.3",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/stepanenko3/laravel-helpers.git",
-                "reference": "1bca6cccbf15cb858ba33b4224dd42da40a56462"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/stepanenko3/laravel-helpers/zipball/1bca6cccbf15cb858ba33b4224dd42da40a56462",
-                "reference": "1bca6cccbf15cb858ba33b4224dd42da40a56462",
-                "shasum": ""
-            },
-            "require": {
-                "ext-json": "*",
-                "ext-openssl": "*",
-                "hashids/hashids": "^4.1",
-                "laravel/framework": "^9.0|^10.0",
-                "laravel/pint": "^1.2",
-                "php": ">=8.1",
-                "ramsey/uuid": "^4.0"
-            },
-            "type": "library",
-            "autoload": {
-                "files": [
-                    "src/helpers.php"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "description": "Helpers for laravel",
-            "keywords": [
-                "helpers",
-                "laravel"
-            ],
-            "support": {
-                "issues": "https://github.com/stepanenko3/laravel-helpers/issues",
-                "source": "https://github.com/stepanenko3/laravel-helpers/tree/v1.2.3"
-            },
-            "time": "2023-09-06T06:23:01+00:00"
-        },
-        {
-            "name": "stepanenko3/laravel-system-resources",
-            "version": "v1.0.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/stepanenko3/laravel-system-resources.git",
-                "reference": "4269cfb453ecb302e5cb00bbe1b9ecb5f041445f"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/stepanenko3/laravel-system-resources/zipball/4269cfb453ecb302e5cb00bbe1b9ecb5f041445f",
-                "reference": "4269cfb453ecb302e5cb00bbe1b9ecb5f041445f",
-                "shasum": ""
-            },
-            "require": {
-                "laravel/framework": ">=9.0",
-                "php": ">=8.0"
-            },
-            "type": "library",
-            "extra": {
-                "laravel": {
-                    "providers": [
-                        "Stepanenko3\\LaravelSystemResources\\SystemResourcesServiceProvider"
-                    ],
-                    "aliases": {
-                        "SystemResources": "Stepanenko3\\LaravelSystemResources\\Facades\\SystemResources"
-                    }
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Stepanenko3\\LaravelSystemResources\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Artem Stepanenko",
-                    "email": "stpnnk.artem@gmail.com",
-                    "role": "Creator"
-                }
-            ],
-            "description": "Get OS resources from Laravel",
-            "keywords": [
-                "laravel"
-            ],
-            "support": {
-                "issues": "https://github.com/stepanenko3/laravel-system-resources/issues",
-                "source": "https://github.com/stepanenko3/laravel-system-resources/tree/v1.0.1"
-            },
-            "time": "2022-05-17T06:35:37+00:00"
-        },
-        {
-            "name": "stepanenko3/nova-cards",
-            "version": "v1.9.2",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/stepanenko3/nova-cards.git",
-                "reference": "395a98f22ab8a97651a7f04b01df770d71399081"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/stepanenko3/nova-cards/zipball/395a98f22ab8a97651a7f04b01df770d71399081",
-                "reference": "395a98f22ab8a97651a7f04b01df770d71399081",
-                "shasum": ""
-            },
-            "require": {
-                "erusev/parsedown": "^1.7",
-                "laravel/nova": "^4.0",
-                "php": ">=8.0",
-                "spatie/ssl-certificate": "^2.0",
-                "stepanenko3/laravel-helpers": "*",
-                "stepanenko3/laravel-system-resources": "*"
-            },
-            "type": "library",
-            "extra": {
-                "laravel": {
-                    "providers": [
-                        "Stepanenko3\\NovaCards\\NovaCardsServiceProvider"
-                    ]
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Stepanenko3\\NovaCards\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "description": "A Laravel Nova info cards.",
-            "keywords": [
-                "cards",
-                "laravel",
-                "nova"
-            ],
-            "support": {
-                "issues": "https://github.com/stepanenko3/nova-cards/issues",
-                "source": "https://github.com/stepanenko3/nova-cards/tree/v1.9.2"
-            },
-            "time": "2023-04-23T15:43:57+00:00"
         },
         {
             "name": "stripe/stripe-php",
@@ -10595,6 +10297,72 @@
             "time": "2023-10-29T21:03:27+00:00"
         },
         {
+            "name": "laravel/pint",
+            "version": "v1.13.10",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/laravel/pint.git",
+                "reference": "e2b5060885694ca30ac008c05dc9d47f10ed1abf"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/laravel/pint/zipball/e2b5060885694ca30ac008c05dc9d47f10ed1abf",
+                "reference": "e2b5060885694ca30ac008c05dc9d47f10ed1abf",
+                "shasum": ""
+            },
+            "require": {
+                "ext-json": "*",
+                "ext-mbstring": "*",
+                "ext-tokenizer": "*",
+                "ext-xml": "*",
+                "php": "^8.1.0"
+            },
+            "require-dev": {
+                "friendsofphp/php-cs-fixer": "^3.47.1",
+                "illuminate/view": "^10.41.0",
+                "larastan/larastan": "^2.8.1",
+                "laravel-zero/framework": "^10.3.0",
+                "mockery/mockery": "^1.6.7",
+                "nunomaduro/termwind": "^1.15.1",
+                "pestphp/pest": "^2.31.0"
+            },
+            "bin": [
+                "builds/pint"
+            ],
+            "type": "project",
+            "autoload": {
+                "psr-4": {
+                    "App\\": "app/",
+                    "Database\\Seeders\\": "database/seeders/",
+                    "Database\\Factories\\": "database/factories/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Nuno Maduro",
+                    "email": "enunomaduro@gmail.com"
+                }
+            ],
+            "description": "An opinionated code formatter for PHP.",
+            "homepage": "https://laravel.com",
+            "keywords": [
+                "format",
+                "formatter",
+                "lint",
+                "linter",
+                "php"
+            ],
+            "support": {
+                "issues": "https://github.com/laravel/pint/issues",
+                "source": "https://github.com/laravel/pint"
+            },
+            "time": "2024-01-22T09:04:15+00:00"
+        },
+        {
             "name": "laravel/sail",
             "version": "v1.27.3",
             "source": {
@@ -13448,6 +13216,7 @@
     "prefer-lowest": false,
     "platform": {
         "php": "^8.1",
+        "ext-gd": "*",
         "ext-simplexml": "*"
     },
     "platform-dev": [],

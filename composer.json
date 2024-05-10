@@ -6,13 +6,16 @@
     "license": "MIT",
     "require": {
         "php": "^8.1",
+        "ext-gd": "*",
         "ext-simplexml": "*",
         "akaunting/laravel-language": "^1.0",
+        "akbsit/nova-card-cache": "^1.0",
         "alexazartsev/heroicon": "^2.0",
         "alexwenzel/nova-dependency-container": "^1.10",
         "eminiarts/nova-tabs": "^2.2",
         "guzzlehttp/guzzle": "^7.2",
         "inspheric/nova-defaultable": "^1.2",
+        "interaction-design-foundation/nova-html-card": "^3.3",
         "laravel/breeze": "^1.23",
         "laravel/framework": "^10.10",
         "laravel/nova": "*",
@@ -21,14 +24,13 @@
         "league/omnipay": "^3.2",
         "murdercode/nova4-tinymce-editor": "^1.2",
         "omnipay/paypal": "^3.0",
+        "oriondevelops/nova-greeter": "^0.0.1",
         "outl1ne/nova-page-manager": "^5.9",
         "outl1ne/nova-settings": "^5.2",
         "qirolab/laravel-themer": "^2.1",
-        "stepanenko3/nova-cards": "^1.9",
         "stripe/stripe-php": "^13.10",
         "timothyasp/nova-color-field": "^2.0",
-        "whitecube/nova-flexible-content": "^1.0",
-      "ext-gd": "*"
+        "whitecube/nova-flexible-content": "^1.0"
     },
     "require-dev": {
         "fakerphp/faker": "^1.9.1",
