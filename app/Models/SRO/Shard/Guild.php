@@ -47,7 +47,7 @@ class Guild extends Model
                         FROM
                             _Guild
                             INNER JOIN _GuildMember ON _Guild.ID = _GuildMember.GuildID
-                            INNER JOIN _GuildCrest ON _GuildCrest.GuildID = _Guild.ID
+                            LEFT JOIN _GuildCrest ON _GuildCrest.GuildID = _Guild.ID
                             INNER JOIN _Inventory ON _GuildMember.CharID = _Inventory.CharID
                             INNER JOIN _Items ON _Inventory.ItemID = _Items.ID64
                             INNER JOIN _RefObjCommon WITH (NOLOCK) ON _Items.RefItemID = _RefObjCommon.ID

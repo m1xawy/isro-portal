@@ -1,5 +1,5 @@
 @php
-    $sliders = cache()->remember('slider', setting('cache_widget', 600), function() { return json_decode(setting('slider')); });
+    $sliders = json_decode(setting('slider'));
 @endphp
 
 <div id="default-carousel" class="relative w-full" data-carousel="slide">

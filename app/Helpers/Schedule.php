@@ -5,19 +5,21 @@ use Illuminate\Support\Facades\DB;
 if (!function_exists('getServerTimes')) {
     function getServerTimes(): array
     {
-        $schudules = collect(DB::connection('shard')
-            ->table("dbo._Schedule")
-            ->select(array(
-                "MainInterval_Type",
-                "ScheduleDefineIdx",
-                "SubInterval_DayOfWeek",
-                "SubInterval_StartTimeHour",
-                "SubInterval_StartTimeMinute",
-                "SubInterval_DurationSecond"))
-            ->whereIn("MainInterval_Type", array(1, 3))
-            ->whereIn("ScheduleDefineIdx", array(2, 4, 7, 9, 10, 12, 13, 14, 17, 19, 21, 23, 49, 50))
-            ->get()
-        );
+        $schudules = cache()->remember('server_times', 300, function() {
+            return collect(DB::connection('shard')
+                ->table("dbo._Schedule")
+                ->select(array(
+                    "MainInterval_Type",
+                    "ScheduleDefineIdx",
+                    "SubInterval_DayOfWeek",
+                    "SubInterval_StartTimeHour",
+                    "SubInterval_StartTimeMinute",
+                    "SubInterval_DurationSecond"))
+                ->whereIn("MainInterval_Type", array(1, 3))
+                ->whereIn("ScheduleDefineIdx", array(2, 4, 7, 9, 10, 12, 13, 14, 17, 19, 21, 23, 49, 50))
+                ->get()
+            );
+        });
         $now = Carbon\Carbon::now();
 
         $times = $schudules->map(function ($item, $key) use($now) {

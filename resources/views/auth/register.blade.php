@@ -4,7 +4,7 @@
 @section('content')
     <div class="flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-gray-100 dark:bg-gray-900">
         <div class="w-full sm:max-w-md mt-6 px-6 py-4 bg-white dark:bg-gray-800 shadow-md overflow-hidden sm:rounded-lg">
-            @if (nova_get_setting('register_enable') !== false)
+            @if (!nova_get_setting('register_disable'))
                 <form method="POST" action="{{ route('register') }}">
                     @csrf
 
@@ -39,6 +39,17 @@
 
                         <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
                     </div>
+
+                    @if (setting('register_reraptcha_enable'))
+                        <!-- google recaptch -->
+                        <div class="mt-4">
+                            {!! NoCaptcha::renderJs() !!}
+                            {!! NoCaptcha::display() !!}
+                            @if ($errors->has('g-recaptcha-response'))
+                                <x-input-error :messages="$errors->first('g-recaptcha-response')" />
+                            @endif
+                        </div>
+                    @endif
 
                     <div class="flex items-center justify-end mt-4">
                         <a class="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800" href="{{ route('login') }}">

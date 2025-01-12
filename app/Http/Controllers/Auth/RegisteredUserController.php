@@ -21,6 +21,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
 use Illuminate\View\View;
+use Illuminate\Validation\Rule;
 
 class RegisteredUserController extends Controller
 {
@@ -43,6 +44,12 @@ class RegisteredUserController extends Controller
             'username' => ['required', 'regex:/(^[a-z]+[0-9]*$)/u', 'min:6', 'max:16', 'unique:'.User::class, 'unique:'.MuUser::class.',UserID', 'unique:'.TbUser::class.',StrUserID'],
             'email' => ['required', 'string', 'email', 'max:70', 'unique:'.MuEmail::class.',EmailAddr'],
             'password' => ['required', 'confirmed', 'min:6', 'max:32'],
+            'g-recaptcha-response' => [
+                Rule::requiredIf(function () {
+                    return setting('register_reraptcha_enable');
+                }),
+                'captcha'
+            ],
         ]);
 
         /*

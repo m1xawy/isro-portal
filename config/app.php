@@ -171,6 +171,7 @@ return [
         App\Providers\RouteServiceProvider::class,
         Akaunting\Language\Provider::class,
         App\Providers\HelperServiceProvider::class,
+        Anhskohbo\NoCaptcha\NoCaptchaServiceProvider::class,
     ])->toArray(),
 
     /*

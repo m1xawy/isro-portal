@@ -3,7 +3,8 @@
 namespace App\Nova\Templates;
 
 use Illuminate\Http\Request;
-use Murdercode\TinymceEditor\TinymceEditor;
+//use Murdercode\TinymceEditor\TinymceEditor;
+use Waynestate\Nova\CKEditor4Field\CKEditor;
 use Outl1ne\PageManager\Template;
 
 class PageTemplate extends Template
@@ -18,7 +19,7 @@ class PageTemplate extends Template
     public function fields(Request $request): array
     {
         return [
-            TinymceEditor::make(__('Content'), 'content')
+            CKEditor::make(__('Content'), 'content')
                 ->rules(['required', 'min:20'])
                 ->fullWidth()
                 ->help(__('The content of the page.')),

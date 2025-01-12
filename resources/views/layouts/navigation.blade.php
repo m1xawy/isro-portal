@@ -1,7 +1,3 @@
-@php
-    $pages = cache()->remember('pages', setting('cache_page', 600), function() { return Outl1ne\PageManager\Helpers\NPMHelpers::getPages(); });
-@endphp
-
 <nav x-data="{ open: false }" class="bg-white dark:bg-gray-800 border-b border-gray-100 dark:border-gray-700">
     <!-- Primary Navigation Menu -->
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -52,6 +48,10 @@
                         </x-slot>
 
                         <x-slot name="content">
+                            @php
+                                $pages = Outl1ne\PageManager\Helpers\NPMHelpers::getPages();
+                            @endphp
+
                             @if (!empty($pages) && count($pages) !== 0)
                                 @foreach ($pages as $page)
                                     <x-dropdown-link :href="'/page/'.$page['slug']['en']">
@@ -97,8 +97,12 @@
                                     {{ __('Profile') }}
                                 </x-dropdown-link>
 
-                                <x-dropdown-link :href="route('profile.edit')">
+                                <x-dropdown-link :href="route('profile.edit-password')">
                                     {{ __('Update Password') }}
+                                </x-dropdown-link>
+
+                                <x-dropdown-link :href="route('profile.edit-email')">
+                                    {{ __('Update Email') }}
                                 </x-dropdown-link>
 
                                 <x-dropdown-link :href="route('profile.donate')">
@@ -172,8 +176,12 @@
                             {{ __('Profile') }}
                         </x-responsive-nav-link>
 
-                        <x-responsive-nav-link :href="route('profile.edit')">
+                        <x-responsive-nav-link :href="route('profile.edit-password')">
                             {{ __('Update Password') }}
+                        </x-responsive-nav-link>
+
+                        <x-responsive-nav-link :href="route('profile.edit-email')">
+                            {{ __('Update Email') }}
                         </x-responsive-nav-link>
 
                         <x-responsive-nav-link :href="route('profile.donate')">

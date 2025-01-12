@@ -1,15 +1,10 @@
-@php
-    $backlinks = cache()->remember('backlinks', setting('cache_widget', 600), function() { return json_decode(setting('backlinks')); });
-    $socials = cache()->remember('socials', setting('cache_widget', 600), function() { return json_decode(setting('socials')); });
-@endphp
-
 <footer class="bg-white dark:bg-gray-800">
     <div class="mx-auto w-full max-w-screen-xl p-4 py-6 lg:py-8">
         <div class="md:flex md:justify-between">
             <div class="mb-6 md:mb-0">
-                <a href="{{ cache()->remember('server_url', 600, function() { return setting('server_url', config('app.url')); }) }}" class="flex items-center">
-                    @if (!empty(cache()->remember('server_logo', 600, function() { return setting('server_logo', ''); })))
-                        <img src="{{ asset(Storage::url(cache()->remember('server_logo', 600, function() { return setting('server_logo', ''); }))) }}" class="w-40 mr-3" alt="{{ cache()->remember('server_name', 600, function() { return setting('server_name', config('app.name', 'Laravel')); }) }}"/>
+                <a href="{{ setting('server_url', config('app.url')) }}" class="flex items-center">
+                    @if (!empty(setting('server_logo', '')))
+                        <img src="{{ asset(Storage::url(setting('server_logo', ''))) }}" class="w-40 mr-3" alt="{{ setting('server_name', config('app.name', 'Laravel')) }}"/>
                     @else
                         <x-application-logo class="block h-9 w-auto fill-current text-gray-800 dark:text-gray-200"/>
                     @endif
@@ -31,6 +26,10 @@
                 <div>
                     <h2 class="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">Backlinks</h2>
                     <ul class="text-gray-500 dark:text-gray-400 font-medium">
+                        @php
+                            $backlinks = json_decode(setting('backlinks'));
+                        @endphp
+
                         @if (!empty($backlinks))
                             @foreach($backlinks as $backlink)
                                 <li class="mb-4">
@@ -62,8 +61,12 @@
         </div>
         <hr class="my-6 border-gray-200 sm:mx-auto dark:border-gray-700 lg:my-8"/>
         <div class="sm:flex sm:items-center sm:justify-between">
-            <span class="text-sm text-gray-500 sm:text-center dark:text-gray-400">© 2023 <a href="{{ cache()->remember('server_url', 600, function() { return setting('server_url', config('app.url')); }) }}" class="hover:underline">{{ cache()->remember('server_name', 600, function() { return setting('server_name', config('app.name', 'Laravel')); }) }}</a>. All Rights Reserved. · Coded by <a class="link-default" href="https://mix-shop.tech/" target="_blank">m1xawy</a></span>
+            <span class="text-sm text-gray-500 sm:text-center dark:text-gray-400">© 2023 <a href="{{ setting('server_url', config('app.url')) }}" class="hover:underline">{{ setting('server_name', config('app.name', 'Laravel')) }}</a>. All Rights Reserved. · Coded by <a class="link-default" href="https://mix-shop.tech/" target="_blank">m1xawy</a></span>
             <div class="socials flex mt-4 space-x-5 sm:justify-center sm:mt-0">
+                @php
+                    $socials = json_decode(setting('socials'));
+                @endphp
+
                 <style>.socials a svg {width: 1rem;height: 1rem;}</style>
                 @if (!empty($socials))
                     @foreach($socials as $social)

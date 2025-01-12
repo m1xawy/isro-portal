@@ -14,7 +14,7 @@
                             Username
                         </th>
                         <td class="px-6 py-4">
-                            {{ $user->username }}
+                            {{ Auth::user()->username }}
                         </td>
                     </tr>
                     <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
@@ -22,7 +22,7 @@
                             Email
                         </th>
                         <td class="px-6 py-4">
-                            {{ $user->email }}
+                            {{ Auth::user()->email }}
                         </td>
                     </tr>
                     <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
@@ -30,7 +30,7 @@
                             Premium Silk
                         </th>
                         <td class="px-6 py-4">
-                            {{ $user->getJCash()->PremiumSilk }}
+                            {{ Auth::user()->getJCash()->PremiumSilk }}
                         </td>
                     </tr>
                     <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
@@ -38,7 +38,7 @@
                             Month Usage
                         </th>
                         <td class="px-6 py-4">
-                            {{ $user->getJCash()->MonthUsage }}
+                            {{ Auth::user()->getJCash()->MonthUsage }}
                         </td>
                     </tr>
                     <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
@@ -46,7 +46,7 @@
                             3Month Usage
                         </th>
                         <td class="px-6 py-4">
-                            {{ $user->getJCash()->ThreeMonthUsage }}
+                            {{ Auth::user()->getJCash()->ThreeMonthUsage }}
                         </td>
                     </tr>
                     <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
@@ -54,7 +54,7 @@
                             Silk
                         </th>
                         <td class="px-6 py-4">
-                            {{ $user->getJCash()->Silk }}
+                            {{ Auth::user()->getJCash()->Silk }}
                         </td>
                     </tr>
                     <tr class="bg-white dark:bg-gray-800">
@@ -62,8 +62,8 @@
                             VIP
                         </th>
                         <td class="px-6 py-4">
-                            @php if($user->getVIPInfo() !== null && $user->getVIPInfo()->VIPUserType > 0) : @endphp
-                                <img src="{{ asset('images/ingame/viplevel_'.$user->getVIPInfo()->VIPLv.'.jpg') }}" class="inline-block w-6 mr-1"><span>{{ config('vip-info')['level'][$user->getVIPInfo()->VIPLv] }}</span>
+                            @php if(Auth::user()->getVIPInfo() !== null && Auth::user()->getVIPInfo()->VIPUserType > 0) : @endphp
+                                <img src="{{ asset('images/ingame/viplevel_'.Auth::user()->getVIPInfo()->VIPLv.'.jpg') }}" class="inline-block w-6 mr-1"><span>{{ config('vip-info')['level'][Auth::user()->getVIPInfo()->VIPLv] }}</span>
                             @php else : @endphp
                                 None
                             @php endif; @endphp

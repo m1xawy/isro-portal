@@ -13,7 +13,8 @@ use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\Image;
 use Laravel\Nova\Fields\DateTime;
 use Laravel\Nova\Fields\Trix;
-use Murdercode\TinymceEditor\TinymceEditor;
+//use Murdercode\TinymceEditor\TinymceEditor;
+use Waynestate\Nova\CKEditor4Field\CKEditor;
 
 class Post extends Resource
 {
@@ -60,7 +61,7 @@ class Post extends Resource
                 ->separator('-')
                 ->rules('required', 'alpha_dash', 'max:80')
                 ->creationRules('unique:posts,slug'),
-            TinymceEditor::make(__('Content'), 'content')
+            CKEditor::make(__('Content'), 'content')
                 ->rules(['required', 'min:20'])
                 ->fullWidth()
                 ->help(__('The content of the article.')),

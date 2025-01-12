@@ -1,6 +1,6 @@
 @php
-    $OnlineCount = cache()->remember('server_online_count', setting('cache_widget', 600), function() { return getOnlineCount(); });
-    $MaxCount = cache()->remember('server_online_max', setting('cache_widget', 600), function() { return setting('server_max_player', 999); });
+    $OnlineCount =  getOnlineCount();
+    $MaxCount = setting('server_max_player', 999);
     $progress = ceil($OnlineCount*100/$MaxCount);
 @endphp
 

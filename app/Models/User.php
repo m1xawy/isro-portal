@@ -49,7 +49,7 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function getJCash()
     {
-        $JCash = cache()->remember('j_cash', $seconds = 60, function() {
+        $JCash = cache()->remember('j_cash_'.$this->jid, $seconds = 60, function() {
             return collect(DB::select("
             Declare @ReturnValue Int
             Declare @PremiumSilk Int
@@ -86,7 +86,7 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function getVIPInfo()
     {
-        $VIPInfo = cache()->remember('vip_info', $seconds = 60, function() {
+        $VIPInfo = cache()->remember('vip_info_'.$this->jid, $seconds = 60, function() {
             return collect(DB::select("Select * From [GB_JoymaxPortal].[dbo].[MU_VIP_Info] with(nolock) Where JID = ".$this->jid." AND ExpireDate >= GETDATE()"))->first();
         });
 

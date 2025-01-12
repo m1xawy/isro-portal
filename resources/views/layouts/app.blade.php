@@ -5,9 +5,9 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
-        <title>{{ cache()->remember('server_name', 600, function() { return setting('server_name', config('app.name', 'Laravel')); }) }} - @yield('title')</title>
-        <meta name="description" content="{{ cache()->remember('server_desc', 600, function() { return setting('server_desc', ''); }) }}">
-        <link rel="shortcut icon" href="{{ asset(Storage::url(cache()->remember('server_favicon', 600, function() { return setting('server_favicon', ''); }))) }}">
+        <title>{{ setting('server_name', config('app.name', 'Laravel')) }} - @yield('title')</title>
+        <meta name="description" content="{{ setting('server_desc', '') }}">
+        <link rel="shortcut icon" href="{{ asset(Storage::url(setting('server_favicon', ''))) }}">
 
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">

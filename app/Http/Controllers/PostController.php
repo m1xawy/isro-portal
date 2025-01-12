@@ -21,7 +21,7 @@ class PostController extends Controller
 
     public function show($slug)
     {
-        $post = cache()->remember('posts.view', setting('cache_news', 600), function() use ($slug) {
+        $post = cache()->remember('posts.view_'.$slug, setting('cache_news', 600), function() use ($slug) {
             return Post::where('slug', $slug)->first();
         });
 

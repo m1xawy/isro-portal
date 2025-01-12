@@ -83,6 +83,11 @@ class RankingController extends Controller
             $playerInventory = cache()->remember('char_inventory_' . $name, setting('cache_info_char', 600), function() use ($inventoryService, $charID) {
                 return $inventoryService->getInventorySet($charID, 13, 0);
             });
+            /*
+            $playerJobInventory = cache()->remember('char_inventory_job_' . $name, setting('cache_info_char', 600), function() use ($inventoryService, $charID) {
+                return $inventoryService->getInventoryJob($charID, 13, 0);
+            });
+            */
             $playerAvatar = cache()->remember('char_inventory_avatar_' . $name, setting('cache_info_char', 600), function() use ($inventoryService, $charID) {
                 return $inventoryService->getInventoryAvatar($charID);
             });

@@ -1,7 +1,7 @@
-@if (cache()->remember('server_times_widget_enable', 600, function() { return setting('server_times_widget_enable'); }))
+@if (setting('server_times_widget_enable'))
     @php
-        date_default_timezone_set(cache()->remember('server_timezone', 600, function() { return setting('server_timezone', 'UTC'); }));
-        $schedules = cache()->remember('server_schedule', setting('cache_widget', 600), function() { return getServerTimes(); });
+        date_default_timezone_set(setting('server_timezone', 'UTC'));
+        $schedules = getServerTimes();
     @endphp
 
     <div class="server-times p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg">
@@ -47,7 +47,7 @@
             </ul>
 
             <div class="flex justify-center">
-                <a href="{{ route('pages.timers') }}" class="text-white hover:text-white border border-indigo-700 hover:bg-indigo-800 focus:ring-4 focus:outline-none focus:ring-indigo-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 dark:border-indigo-500 dark:text-indigo-500 dark:hover:text-white dark:hover:bg-indigo-500 dark:focus:ring-indigo-800 w-full">Show All</a>
+                <a href="{{ route('pages.timers') }}" class="text-indigo-700 hover:text-white border border-indigo-700 hover:bg-indigo-800 focus:ring-4 focus:outline-none focus:ring-indigo-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 dark:border-indigo-500 dark:text-indigo-500 dark:hover:text-white dark:hover:bg-indigo-500 dark:focus:ring-indigo-800 w-full">Show All</a>
             </div>
 
         </div>

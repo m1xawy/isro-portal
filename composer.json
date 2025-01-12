@@ -12,6 +12,7 @@
         "akbsit/nova-card-cache": "^1.0",
         "alexazartsev/heroicon": "^2.0",
         "alexwenzel/nova-dependency-container": "^1.10",
+        "anhskohbo/no-captcha": "^3.6",
         "eminiarts/nova-tabs": "^2.2",
         "guzzlehttp/guzzle": "^7.2",
         "inspheric/nova-defaultable": "^1.2",
@@ -30,6 +31,7 @@
         "qirolab/laravel-themer": "^2.1",
         "stripe/stripe-php": "^13.10",
         "timothyasp/nova-color-field": "^2.0",
+        "waynestate/nova-ckeditor4-field": "^1.4",
         "whitecube/nova-flexible-content": "^1.0"
     },
     "require-dev": {

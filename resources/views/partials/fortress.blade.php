@@ -1,6 +1,6 @@
-@if (cache()->remember('server_fortress_widget_enable', 600, function() { return setting('server_fortress_widget_enable'); }))
+@if (setting('server_fortress_widget_enable'))
     @php
-        $fortresses = cache()->remember('server_fortress', setting('cache_widget', 600), function() { return getFortress(); });
+        $fortresses = getFortress();
     @endphp
 
     <div class="server-info p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg">

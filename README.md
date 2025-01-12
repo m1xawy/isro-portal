@@ -61,6 +61,7 @@ composer install
 4. Create new database `SRO_Portal` and run Laravel commands for migrate website tables
 ```sh
 php artisan migrate
+php artisan db:seed
 php artisan key:generate
 php artisan storage:link
 ```
@@ -83,7 +84,8 @@ Get new updates:
 ```sh
 git pull
 composer update
-php artisan migrate --seed
+php artisan migrate
+php artisan db:seed
 php artisan optimize:clear
 ```
 
