@@ -8,6 +8,7 @@ use App\Models\SRO\Shard\InventoryForAvatar;
 use App\Models\SRO\Shard\ItemPoolName;
 use App\Models\SRO\Shard\Items;
 use App\Models\SRO\Shard\MagOpt;
+use App\Models\SRO\Shard\TradeEquipInventory;
 use App\Models\Webapps\CharInventory;
 use Illuminate\Support\Facades\Cache;
 
@@ -191,6 +192,26 @@ class InventoryService
             ->get();
 
         return $this->getInventorySetStats($avatar);
+    }
+
+    /**
+     * @param $characterId
+     * @return array
+     */
+    public function getInventoryJob($characterId): array
+    {
+        $job = TradeEquipInventory::where('CharID', '=', $characterId)
+            ->where('ItemID', '>', 1)
+            ->join('_Items as Items', 'Items.ID64', 'ItemID')
+            ->leftJoin('_BindingOptionWithItem as Binding', static function ($join) {
+                $join->on('Binding.nItemDBID', 'Items.ID64');
+                $join->where('Binding.nOptValue', '>', '0');
+            })
+            ->join('_RefObjCommon as Common', 'Items.RefItemId', 'Common.ID')
+            ->join('_RefObjItem as ObjItem', 'Common.Link', 'ObjItem.ID')
+            ->get();
+
+        return $this->getInventorySetStats($job);
     }
 
     /**

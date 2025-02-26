@@ -50,7 +50,7 @@ if (!function_exists('getUniqueHistory')) {
 if (!function_exists('getUniqueHistoryNames')) {
     function getUniqueHistoryNames()
     {
-        $unique_list_settings = cache()->remember('ranking_unique_list', 300, function() { return json_decode(setting('ranking_unique_list')); });
+        $unique_list_settings = cache()->remember('ranking_unique_list_names', 300, function() { return json_decode(setting('ranking_unique_list')); });
 
         if($unique_list_settings) {
             foreach ($unique_list_settings as $unique_settings) {

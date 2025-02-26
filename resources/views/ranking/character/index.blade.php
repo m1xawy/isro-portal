@@ -11,7 +11,7 @@
                         <div class="w-full">
                             <div class="flex flex-row items-center pb-1">
                                 <div class="w-24 h-24 rounded-md shadow-lg border-2 overflow-hidden">
-                                    <img class="object-cover scale-125" src="{{ asset('images/ingame/chars/'. $characters->RefObjID .'.gif') }}" alt="{{ $characters->CharName16 }}"/>
+                                    <img class="object-cover scale-125" src="{{ asset('images/ingame/chars/'. $characters->RefObjID .'.png') }}" alt="{{ $characters->CharName16 }}"/>
                                 </div>
                                 <div class="ml-4">
                                     <h5 class="mb-1 text-xl font-medium text-gray-900 dark:text-white">{{ $characters->CharName16 }}</h5>
@@ -127,14 +127,22 @@
                         </div>
                     </div>
 
+                    <style>.d-none {display: none}</style>
                     <div class="md:w-1/2 p-4">
                         <div class="relative border dark:bg-gray-800 dark:border-gray-700 bg-cover bg-center bg-no-repeat bg-gray-700" style="background-image: url({{ asset('images/ingame/inventoryDiv_bg.png') }})">
                             <div class="px-4 mx-auto max-w-screen-xl text-center py-8">
                                 <div class="flex flex-row sm:flex-row sm:justify-center">
-                                    <div class="bg-center bg-no-repeat" style="background-image: url({{ asset('images/ingame/inventory_bg.png') }}); width: 178px; height: 315px">
+                                    <div class="bg-center bg-no-repeat" id="display-inventory-set" style="background-image: url({{ asset('images/ingame/inventory_bg.png') }}); width: 178px; height: 315px">
                                         @include('ranking.character.partials.inventory', ['items' => $playerInventory])
                                     </div>
-                                    <div class="bg-equipment-avatar-main bg-center bg-no-repeat flex flex-col justify-end" style="background-image: url({{ asset('images/ingame/accessory_bg.png') }}); width: 206px; background-position: bottom">
+                                    <div class="bg-center bg-no-repeat d-none" id="display-inventory-avatar" style="background-image: url({{ asset('images/ingame/inventory_bg.png') }}); width: 178px; height: 315px;">
+                                        @include('ranking.character.partials.inventoryJob', ['items' => $playerInventory])
+                                    </div>
+                                    <div class="bg-equipment-job-main bg-center bg-no-repeat flex flex-col justify-end" style="background-image: url({{ asset('images/ingame/accessory_bg.png') }}); width: 206px; background-position: bottom">
+                                        <button id="display-inventory-switch" data-type="set" class="inline-flex items-center px-4 py-2 bg-gray-800 dark:bg-gray-200 border border-transparent rounded-md font-semibold text-xs text-white dark:text-gray-800 uppercase tracking-widest hover:bg-gray-700 dark:hover:bg-white focus:bg-gray-700 dark:focus:bg-white active:bg-gray-900 dark:active:bg-gray-300 transition ease-in-out duration-150 ml-3" style="margin-bottom: 1rem">
+                                            Job Equip
+                                        </button>
+
                                         <p class="text-capitalize text-left" style="color: #ffc345; margin-left: 1.6rem; margin-bottom: 0.6rem">Accessories</p>
                                         @include('ranking.character.partials.inventoryAvatar', ['items' => $playerInventory])
                                     </div>
@@ -143,7 +151,6 @@
                         </div>
                     </div>
                 </div>
-
             </div>
         </div>
     </div>
