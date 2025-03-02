@@ -199,24 +199,24 @@
     <div class="slots 9 left earring">
         <div class="itemslot">
             <div class="image"
-                 @isset($playerJob[9]['imgpath'])
-                     style="background:url('{{ $playerJob[9]['imgpath'] }}') no-repeat; background-size: 34px 34px;"
+                 @isset($playerJob[7]['imgpath'])
+                     style="background:url('{{ $playerJob[7]['imgpath'] }}') no-repeat; background-size: 34px 34px;"
                  data-iteminfo="1" @endisset>
                 <span class="qinfo">
-                    @isset($playerJob[9])
-                        {{ $playerJob[9]['amount'] }}
+                    @isset($playerJob[7])
+                        {{ $playerJob[7]['amount'] }}
                     @endisset
                 </span>
-                @isset($playerJob[9]['special'])
-                    @if($playerJob[9]['special'])
+                @isset($playerJob[7]['special'])
+                    @if($playerJob[7]['special'])
                         <span class="plus"></span>
                     @endif
                 @endisset
             </div>
         </div>
         <div class="itemInfo">
-            @isset($playerJob[9])
-                {!! $playerJob[9]['data'] !!}
+            @isset($playerJob[7])
+                {!! $playerJob[7]['data'] !!}
             @endisset
         </div>
     </div>
@@ -247,62 +247,62 @@
     <div class="slots 11 left lring">
         <div class="itemslot">
             <div class="image"
-                 @isset($playerJob[7]['imgpath'])
-                     style="background:url('{{ $playerJob[7]['imgpath'] }}') no-repeat; background-size: 34px 34px;"
+                 @isset($playerJob[9]['imgpath'])
+                     style="background:url('{{ $playerJob[9]['imgpath'] }}') no-repeat; background-size: 34px 34px;"
                  data-iteminfo="1" @endisset>
                 <span class="qinfo">
-                    @isset($playerJob[7])
-                        {{ $playerJob[7]['amount'] }}
+                    @isset($playerJob[9])
+                        {{ $playerJob[9]['amount'] }}
                     @endisset
                 </span>
-                @isset($playerJob[7]['special'])
-                    @if($playerJob[7]['special'])
+                @isset($playerJob[9]['special'])
+                    @if($playerJob[9]['special'])
                         <span class="plus"></span>
                     @endif
                 @endisset
             </div>
         </div>
         <div class="itemInfo">
-            @isset($playerJob[7])
-                {!! $playerJob[7]['data'] !!}
+            @isset($playerJob[9])
+                {!! $playerJob[9]['data'] !!}
             @endisset
         </div>
     </div>
     <div class="slots 12 right rring">
         <div class="itemslot">
             <div class="image"
-                 @isset($playerJob[12]['imgpath'])
-                     style="background:url('{{ $playerJob[12]['imgpath'] }}') no-repeat; background-size: 34px 34px;"
+                 @isset($playerJob[10]['imgpath'])
+                     style="background:url('{{ $playerJob[10]['imgpath'] }}') no-repeat; background-size: 34px 34px;"
                  data-iteminfo="1" @endisset>
                 <span class="qinfo">
-                    @isset($playerJob[12])
-                        {{ $playerJob[12]['amount'] }}
+                    @isset($playerJob[10])
+                        {{ $playerJob[10]['amount'] }}
                     @endisset
                 </span>
-                @isset($playerJob[12]['special'])
-                    @if($playerJob[12]['special'])
+                @isset($playerJob[10]['special'])
+                    @if($playerJob[10]['special'])
                         <span class="plus"></span>
                     @endif
                 @endisset
             </div>
         </div>
         <div class="itemInfo">
-            @isset($playerJob[12])
-                {!! $playerJob[12]['data'] !!}
+            @isset($playerJob[10])
+                {!! $playerJob[10]['data'] !!}
             @endisset
         </div>
     </div>
     <div class="equip-suit-slot">
         <div class="itemslot">
             <div class="image"
-                 @isset($playerJob[10]['imgpath'])
-                     style="background:url('{{ $playerJob[10]['imgpath'] }}') no-repeat; background-size: 34px 34px;"
+                 @isset($playerJob[12]['imgpath'])
+                     style="background:url('{{ $playerJob[12]['imgpath'] }}') no-repeat; background-size: 34px 34px;"
                  data-iteminfo="1" @endisset>
             </div>
         </div>
         <div class="itemInfo">
-            @isset($playerJob[10])
-                {!! $playerJob[10]['data'] !!}
+            @isset($playerJob[12])
+                {!! $playerJob[12]['data'] !!}
             @endisset
         </div>
     </div>
