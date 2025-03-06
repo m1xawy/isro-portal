@@ -34,4 +34,20 @@ class PageController extends Controller
             'timers' => $timers,
         ]);
     }
+
+    public function uniques()
+    {
+        $uniques = cache()->remember('page_uniques', setting('cache_page', 600), function() {
+            return getFullUniqueHistory();
+        });
+
+        $uniques_name = cache()->remember('page_uniques_name', setting('cache_page', 600), function() {
+            return getUniqueHistoryNamesCode();
+        });
+
+        return view('pages.uniques', [
+            'uniques' => $uniques,
+            'uniques_name' => $uniques_name
+        ]);
+    }
 }
