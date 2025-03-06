@@ -77,10 +77,10 @@ if (!function_exists('getFullUniqueHistory')) {
                             LEFT JOIN SILKROAD_R_SHARD.dbo._Char ON _Char.CharID = _LogInstanceWorldInfo.CharID
 
 							--if replaced WorldID with RegionID from _Char in _AddLogInstanceWorldInfo use this file in databases/seeders/_AddLogInstanceWorldInfo.sql
-							--LEFT JOIN SILKROAD_R_SHARD.dbo._RefRegion ON _RefRegion.wRegionID = _LogInstanceWorldInfo.WorldID
+							LEFT JOIN SILKROAD_R_SHARD.dbo._RefRegion ON _RefRegion.wRegionID = _LogInstanceWorldInfo.WorldID
 
                             --for testing original system, but worldID always recorded by 1
-							LEFT JOIN SILKROAD_R_SHARD.dbo._RefRegion ON _RefRegion.wRegionID = (SELECT TOP (1) _RefInstance_World_Region.RegionID FROM SILKROAD_R_SHARD.dbo._RefInstance_World_Region WHERE _RefInstance_World_Region.WorldID = _LogInstanceWorldInfo.WorldID)
+							--LEFT JOIN SILKROAD_R_SHARD.dbo._RefRegion ON _RefRegion.wRegionID = (SELECT TOP (1) _RefInstance_World_Region.RegionID FROM SILKROAD_R_SHARD.dbo._RefInstance_World_Region WHERE _RefInstance_World_Region.WorldID = _LogInstanceWorldInfo.WorldID)
 
                         WHERE
                             _LogInstanceWorldInfo.Value IN (" . $uniques_code_list . ") AND
