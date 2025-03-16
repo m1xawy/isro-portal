@@ -69,6 +69,51 @@ class RankingController extends Controller
         ]);
     }
 
+    public function job()
+    {
+        $job = (new Char)->getJobRanking();
+
+        return view('ranking.ranking.job', [
+            'job' => $job,
+        ]);
+    }
+
+    public function job_all()
+    {
+        $jobAll = (new Char)->getJobRanking();
+
+        return view('ranking.ranking.job-all', [
+            'jobAll' => $jobAll,
+        ]);
+    }
+
+    public function job_trader()
+    {
+        $jobTrader = (new Char)->getJobTraderRanking();
+
+        return view('ranking.ranking.job-trader', [
+            'jobTrader' => $jobTrader,
+        ]);
+    }
+
+    public function job_hunter()
+    {
+        $jobHunter = (new Char)->getJobHunterRanking();
+
+        return view('ranking.ranking.job-hunter', [
+            'jobHunter' => $jobHunter,
+        ]);
+    }
+
+    public function job_thieve()
+    {
+        $jobThieve = (new Char)->getJobThieveRanking();
+
+        return view('ranking.ranking.job-thieve', [
+            'jobThieve' => $jobThieve,
+        ]);
+    }
+
     public function character_view($name, InventoryService $inventoryService)
     {
         $charID = Char::select('CharID')->where('CharName16', $name)->first()->CharID;

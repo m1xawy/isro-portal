@@ -367,6 +367,125 @@ class Char extends Model
         return $fortressGuildRanking;
     }
 
+    public function getJobRanking($limit = 25)
+    {
+        $jobRanking = cache()->remember('job_ranking', setting('cache_fortress_guild', 600), function() use ($limit) {
+            return collect(DB::connection('shard')->select("
+                    SELECT TOP(" . $limit . ")
+                        _Char.CharID, _Char.CharName16, _Char.NickName16, _Char.RefObjID, _UserTradeConflictJob.JobType, _CharTradeConflictJob.JobLevel, _CharTradeConflictJob.JobExp
+                    FROM
+                        SILKROAD_R_SHARD.._CharTradeConflictJob WITH (NOLOCK)
+                        INNER JOIN SILKROAD_R_SHARD.._Char WITH (NOLOCK) ON _Char.CharID = _CharTradeConflictJob.CharID
+                        INNER JOIN SILKROAD_R_SHARD.._User WITH (NOLOCK) ON _User.CharID = _Char.CharID
+                        INNER JOIN SILKROAD_R_SHARD.._UserTradeConflictJob WITH (NOLOCK) ON _UserTradeConflictJob.UserJID = _User.UserJID
+
+                    WHERE
+                        _Char.deleted = 0
+                        AND _Char.CharID > 0
+
+                    ORDER BY
+                        _CharTradeConflictJob.JobLevel DESC,
+                        _CharTradeConflictJob.JobExp DESC
+            "));
+        });
+
+        if(empty($jobRanking)) {
+            return null;
+        }
+
+        return $jobRanking;
+    }
+
+    public function getJobTraderRanking($limit = 25)
+    {
+        $jobTraderRanking = cache()->remember('job_trader_ranking', setting('cache_fortress_guild', 600), function() use ($limit) {
+            return collect(DB::connection('shard')->select("
+                    SELECT TOP(" . $limit . ")
+                        _Char.CharID, _Char.CharName16, _Char.NickName16, _Char.RefObjID, _UserTradeConflictJob.JobType, _CharTradeConflictJob.JobLevel, _CharTradeConflictJob.JobExp
+                    FROM
+                        SILKROAD_R_SHARD.._CharTradeConflictJob WITH (NOLOCK)
+                        INNER JOIN SILKROAD_R_SHARD.._Char WITH (NOLOCK) ON _Char.CharID = _CharTradeConflictJob.CharID
+                        INNER JOIN SILKROAD_R_SHARD.._User WITH (NOLOCK) ON _User.CharID = _Char.CharID
+                        INNER JOIN SILKROAD_R_SHARD.._UserTradeConflictJob WITH (NOLOCK) ON _UserTradeConflictJob.UserJID = _User.UserJID
+
+                    WHERE
+                        _Char.deleted = 0
+                        AND _Char.CharID > 0
+                        AND _UserTradeConflictJob.JobType = 3
+
+                    ORDER BY
+                        _CharTradeConflictJob.JobLevel DESC,
+                        _CharTradeConflictJob.JobExp DESC
+            "));
+        });
+
+        if(empty($jobTraderRanking)) {
+            return null;
+        }
+
+        return $jobTraderRanking;
+    }
+
+    public function getJobHunterRanking($limit = 25)
+    {
+        $jobHunterRanking = cache()->remember('job_hunter_ranking', setting('cache_fortress_guild', 600), function() use ($limit) {
+            return collect(DB::connection('shard')->select("
+                    SELECT TOP(" . $limit . ")
+                        _Char.CharID, _Char.CharName16, _Char.NickName16, _Char.RefObjID, _UserTradeConflictJob.JobType, _CharTradeConflictJob.JobLevel, _CharTradeConflictJob.JobExp
+                    FROM
+                        SILKROAD_R_SHARD.._CharTradeConflictJob WITH (NOLOCK)
+                        INNER JOIN SILKROAD_R_SHARD.._Char WITH (NOLOCK) ON _Char.CharID = _CharTradeConflictJob.CharID
+                        INNER JOIN SILKROAD_R_SHARD.._User WITH (NOLOCK) ON _User.CharID = _Char.CharID
+                        INNER JOIN SILKROAD_R_SHARD.._UserTradeConflictJob WITH (NOLOCK) ON _UserTradeConflictJob.UserJID = _User.UserJID
+
+                    WHERE
+                        _Char.deleted = 0
+                        AND _Char.CharID > 0
+                        AND _UserTradeConflictJob.JobType = 2
+
+                    ORDER BY
+                        _CharTradeConflictJob.JobLevel DESC,
+                        _CharTradeConflictJob.JobExp DESC
+            "));
+        });
+
+        if(empty($jobHunterRanking)) {
+            return null;
+        }
+
+        return $jobHunterRanking;
+    }
+
+    public function getJobThieveRanking($limit = 25)
+    {
+        $jobThieveRanking = cache()->remember('job_thieve_ranking', setting('cache_fortress_guild', 600), function() use ($limit) {
+            return collect(DB::connection('shard')->select("
+                    SELECT TOP(" . $limit . ")
+                        _Char.CharID, _Char.CharName16, _Char.NickName16, _Char.RefObjID, _UserTradeConflictJob.JobType, _CharTradeConflictJob.JobLevel, _CharTradeConflictJob.JobExp
+                    FROM
+                        SILKROAD_R_SHARD.._CharTradeConflictJob WITH (NOLOCK)
+                        INNER JOIN SILKROAD_R_SHARD.._Char WITH (NOLOCK) ON _Char.CharID = _CharTradeConflictJob.CharID
+                        INNER JOIN SILKROAD_R_SHARD.._User WITH (NOLOCK) ON _User.CharID = _Char.CharID
+                        INNER JOIN SILKROAD_R_SHARD.._UserTradeConflictJob WITH (NOLOCK) ON _UserTradeConflictJob.UserJID = _User.UserJID
+
+                    WHERE
+                        _Char.deleted = 0
+                        AND _Char.CharID > 0
+                        AND _UserTradeConflictJob.JobType = 1
+
+                    ORDER BY
+                        _CharTradeConflictJob.JobLevel DESC,
+                        _CharTradeConflictJob.JobExp DESC
+            "));
+        });
+
+        if(empty($jobThieveRanking)) {
+            return null;
+        }
+
+        return $jobThieveRanking;
+    }
+
     public function getGuildMemberUser()
     {
         return $this->hasOne(GuildMember::class, 'CharID', 'CharID');
