@@ -7,7 +7,7 @@
             <div class="p-6 text-gray-900 dark:text-gray-100">
 
                 <div class="lg:flex lg:flex-wrap m-4 pb-4 border-b border-gray-200 dark:border-gray-700">
-                    <div class="md:w-2/3">
+                    <div class="md:w-1/2">
                         <div class="w-full">
                             <div class="flex flex-row items-center pb-1">
                                 <div class="w-24 h-24 rounded-md shadow-lg border-2 overflow-hidden">
@@ -26,9 +26,42 @@
                         </div>
                     </div>
 
-                    <div class="md:w-1/3">
+                    <div class="md:w-1/2">
                         <div class="lg:flex lg:flex-wrap justify-between">
-                            <div class="md:w-1/2">
+                            <div class="md:w-1/3">
+                                <div class="w-full">
+                                    <h4 class="pb-4 text-sm" style="color: #ffc345">Job informations</h4>
+
+                                    <div class="flex flex-row items-center pb-2 mt-2">
+                                        @php if($characters->JobType == 1) : @endphp
+                                        <img class="inline" src="{{ asset('images/ingame/com_job_teaf02_icon.PNG') }}" alt=""/>
+                                        @php elseif($characters->JobType == 2) : @endphp
+                                        <img class="inline" src="{{ asset('images/ingame/com_job_hunter02_icon.PNG') }}" alt=""/>
+                                        @php elseif($characters->JobType == 3) : @endphp
+                                        <img class="inline" src="{{ asset('images/ingame/com_job_trader02_icon.png') }}" alt=""/>
+                                        @php else : @endphp
+                                        <img class="" src="{{ asset('images/ingame/.png') }}" alt=""/>
+                                        @php endif; @endphp
+
+                                        <div class="ml-3">
+                                            <h5 class="text-xs font-bold text-black dark:text-white text-left">
+                                                @php if($characters->JobType == 1) : @endphp
+                                                <span>Thief</span>
+                                                @php elseif($characters->JobType == 2) : @endphp
+                                                <span>Hunter</span>
+                                                @php elseif($characters->JobType == 3) : @endphp
+                                                <span>Trader</span>
+                                                @php else : @endphp
+                                                <span>None</span>
+                                                @php endif; @endphp
+                                            </h5>
+                                            <h5 class="text-xs font-bold text-black dark:text-white text-center">Job Level: {{ $characters->JobLevel }}</h5>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="md:w-1/3">
                                 <div class="w-full">
                                     <h4 class="pb-4 text-sm" style="color: #ffc345">Other informations</h4>
                                     <div class="flex flex-row items-center pb-2">
@@ -48,7 +81,7 @@
                                 </div>
                             </div>
 
-                            <div class="md:w-1/2">
+                            <div class="md:w-1/3">
                                 <div class="w-full">
                                     <h4 class="pb-4 text-sm" style="color: #ffc345">Character Configuration</h4>
                                     <div class="flex flex-row items-center pb-4">
@@ -77,7 +110,7 @@
                                     <td class="px-6 py-4">{{ $characters->CharName16 }}</td>
                                 </tr>
                                 <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                                    <td class="px-6 py-4">Nickname:</td>
+                                    <td class="px-6 py-4">Jobname:</td>
                                     <td class="px-6 py-4">{{ $characters->NickName16 }}</td>
                                 </tr>
                                 <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">

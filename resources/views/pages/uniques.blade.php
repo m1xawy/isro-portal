@@ -19,6 +19,7 @@
                         <tbody>
 
                         @php $i = 0; @endphp
+                        @if (!empty($uniqueHistory))
                         @foreach($uniques as $key => $unique)
                             <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 text-center">
                                 <td class="px-1 py-2">{{ $uniques_name[$unique->Value] }}</td>
@@ -36,6 +37,9 @@
                             </tr>
                             @php $i++; @endphp
                         @endforeach
+                        @else
+                            <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 text-center"><td class="px-1 py-2 text-center">No Records.</td></tr>
+                        @endif
                         </tbody>
                     </table>
                 </div>

@@ -76,12 +76,12 @@ if (!function_exists('getFullUniqueHistory')) {
                             _LogInstanceWorldInfo
 
                             --if replaced JID with CharID & WorldID with RegionID from _Char in _AddLogInstanceWorldInfo, use this file in databases/seeders/_AddLogInstanceWorldInfo.sql
-                            --LEFT JOIN SILKROAD_R_SHARD.dbo._Char ON _Char.CharID = _LogInstanceWorldInfo.CharID
-                            --LEFT JOIN SILKROAD_R_SHARD.dbo._RefRegion ON _RefRegion.wRegionID = _LogInstanceWorldInfo.WorldID
+                            LEFT JOIN SILKROAD_R_SHARD.dbo._Char ON _Char.CharID = _LogInstanceWorldInfo.CharID
+                            LEFT JOIN SILKROAD_R_SHARD.dbo._RefRegion ON _RefRegion.wRegionID = _LogInstanceWorldInfo.WorldID
 
                             --for testing original system, but worldID always recorded by 1 and the CharID is JID
-                            LEFT JOIN SILKROAD_R_SHARD.dbo._Char ON _Char.CharID = (SELECT TOP(1) CharID FROM SILKROAD_R_SHARD.._Char WHERE CharID = (SELECT TOP(1) CharID FROM SILKROAD_R_SHARD.._User WHERE UserJID = _LogInstanceWorldInfo.CharID) ORDER BY LastLogout DESC)
-                            LEFT JOIN SILKROAD_R_SHARD.dbo._RefRegion ON _RefRegion.wRegionID = (SELECT TOP (1) _RefInstance_World_Region.RegionID FROM SILKROAD_R_SHARD.dbo._RefInstance_World_Region WHERE _RefInstance_World_Region.WorldID = _LogInstanceWorldInfo.WorldID)
+                            --LEFT JOIN SILKROAD_R_SHARD.dbo._Char ON _Char.CharID = (SELECT TOP(1) CharID FROM SILKROAD_R_SHARD.._Char WHERE CharID = (SELECT TOP(1) CharID FROM SILKROAD_R_SHARD.._User WHERE UserJID = _LogInstanceWorldInfo.CharID) ORDER BY LastLogout DESC)
+                            --LEFT JOIN SILKROAD_R_SHARD.dbo._RefRegion ON _RefRegion.wRegionID = (SELECT TOP (1) _RefInstance_World_Region.RegionID FROM SILKROAD_R_SHARD.dbo._RefInstance_World_Region WHERE _RefInstance_World_Region.WorldID = _LogInstanceWorldInfo.WorldID)
 
                         WHERE
                             _LogInstanceWorldInfo.Value IN (" . $uniques_code_list . ") AND
@@ -114,6 +114,10 @@ if (!function_exists('getUniqueHistoryNames')) {
             }
         }
 
+        if(empty($unique_name)) {
+            return null;
+        }
+
         return $unique_name;
     }
 }
@@ -128,6 +132,10 @@ if (!function_exists('getUniqueHistoryNamesCode')) {
                 $unique_settings_array[] = $unique_settings->attributes;
                 $unique_name_code = array_column($unique_settings_array, 'ranking_unique_name', 'ranking_unique_code');
             }
+        }
+
+        if(empty($unique_name_code)) {
+            return null;
         }
 
         return $unique_name_code;

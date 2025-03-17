@@ -199,7 +199,7 @@ class Char extends Model
         $charInfo = cache()->remember('char_info_' . $charID, setting('cache_info_char', 600), function() use ($charID) {
             return collect(DB::connection('shard')->select("
                 SELECT
-                    CharName16, NickName16, GuildID, RefObjID, CurLevel, HwanLevel, RemainGold, HP, MP, Strength, Intellect, LastLogout, _Guild.ID, (_Guild.Name) AS GuildName,
+                    CharName16, NickName16, GuildID, RefObjID, CurLevel, HwanLevel, RemainGold, HP, MP, Strength, Intellect, LastLogout, _Guild.ID, (_Guild.Name) AS GuildName, _UserTradeConflictJob.JobType, _CharTradeConflictJob.JobLevel,
 
 					(SUM(_Items.OptLevel)
 					+ SUM(_RefObjItem.ItemClass)
@@ -215,6 +215,10 @@ class Char extends Model
 					INNER JOIN _RefObjCommon WITH (NOLOCK) ON _Items.RefItemID = _RefObjCommon.ID
 					INNER JOIN _RefObjItem WITH (NOLOCK) ON _RefObjCommon.Link = _RefObjItem.ID
                     LEFT OUTER JOIN _BindingOptionWithItem ON _Inventory.ItemID = _BindingOptionWithItem.nItemDBID
+
+                    LEFT OUTER JOIN SILKROAD_R_SHARD.._CharTradeConflictJob WITH (NOLOCK) ON _CharTradeConflictJob.CharID = _Char.CharID
+                    INNER JOIN SILKROAD_R_SHARD.._User WITH (NOLOCK) ON _User.CharID = _Char.CharID
+                    INNER JOIN SILKROAD_R_SHARD.._UserTradeConflictJob WITH (NOLOCK) ON _UserTradeConflictJob.UserJID = _User.UserJID
 
                 WHERE
                     _Inventory.Slot IN(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12)
@@ -236,7 +240,9 @@ class Char extends Model
                     _Char.Intellect,
                     _Char.LastLogout,
                     _Guild.ID,
-                    _Guild.Name
+                    _Guild.Name,
+                    _UserTradeConflictJob.JobType,
+                    _CharTradeConflictJob.JobLevel
 
                 ORDER BY
                     ItemPoints DESC,
@@ -382,6 +388,7 @@ class Char extends Model
                     WHERE
                         _Char.deleted = 0
                         AND _Char.CharID > 0
+                        AND _UserTradeConflictJob.JobType > 0
 
                     ORDER BY
                         _CharTradeConflictJob.JobLevel DESC,
