@@ -19,24 +19,24 @@
                         <tbody>
 
                         @php $i = 0; @endphp
-                        @if (!empty($uniqueHistory))
-                        @foreach($uniques as $key => $unique)
-                            <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 text-center">
-                                <td class="px-1 py-2">{{ $uniques_name[$unique->Value] }}</td>
-                                <td class="px-1 py-2">{{ $unique->EventTime }}</td>
-                                <td class="px-1 py-2 text-left">
-                                    @php if($unique->RefObjID > 2000) : @endphp
-                                    <img src="{{ asset('images/ingame/european.png') }}" style="display:inline;vertical-align:text-top" alt="Rank 3"/>
-                                    @php else : @endphp
-                                    <img src="{{ asset('images/ingame/chinese.png') }}" style="display:inline;vertical-align:text-top" alt="Rank 3"/>
-                                    @php endif; @endphp
+                        @if (!empty($uniques))
+                            @foreach($uniques as $key => $unique)
+                                <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 text-center">
+                                    <td class="px-1 py-2">{{ $uniques_name[$unique->Value] }}</td>
+                                    <td class="px-1 py-2">{{ $unique->EventTime }}</td>
+                                    <td class="px-1 py-2 text-left">
+                                        @php if($unique->RefObjID > 2000) : @endphp
+                                        <img src="{{ asset('images/ingame/european.png') }}" style="display:inline;vertical-align:text-top" alt="Rank 3"/>
+                                        @php else : @endphp
+                                        <img src="{{ asset('images/ingame/chinese.png') }}" style="display:inline;vertical-align:text-top" alt="Rank 3"/>
+                                        @php endif; @endphp
 
-                                    {{ $unique->CharName16 }}
-                                </td>
-                                <td class="px-1 py-2">{{ $unique->AreaName }}</td>
-                            </tr>
-                            @php $i++; @endphp
-                        @endforeach
+                                        {{ $unique->CharName16 }}
+                                    </td>
+                                    <td class="px-1 py-2">{{ $unique->AreaName }}</td>
+                                </tr>
+                                @php $i++; @endphp
+                            @endforeach
                         @else
                             <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 text-center"><td class="px-1 py-2 text-center">No Records.</td></tr>
                         @endif
