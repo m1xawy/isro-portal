@@ -116,7 +116,7 @@ class RankingController extends Controller
 
     public function character_view($name, InventoryService $inventoryService)
     {
-        $charID = Char::select('CharID')->where('CharName16', $name)->first()->CharID;
+        $charID = Char::select('CharID')->where('CharName16', $name)->first()->CharID ?? null;
 
         if ($charID > 0) {
 
@@ -154,7 +154,7 @@ class RankingController extends Controller
 
     public function guild_view($name)
     {
-        $guildID = Guild::select('ID')->where('Name', $name)->first()->ID;
+        $guildID = Guild::select('ID')->where('Name', $name)->first()->ID ?? null;
 
         if ($guildID > 0) {
 
