@@ -51,6 +51,23 @@ class RankingController extends Controller
         ]);
     }
 
+    public function unique_monthly()
+    {
+        $unique_list_settings = cache()->remember('ranking_unique_monthly_list', setting('cache_ranking_unique', 600), function() { return json_decode(setting('ranking_unique_list')); });
+        if(!empty($unique_list_settings)) {
+            $uniquesMonthly = (new Char)->getUniqueMonthlyRanking();
+            $unique_lists = $unique_list_settings;
+        } else {
+            $uniques = [];
+            $unique_lists = [];
+        }
+
+        return view('ranking.ranking.unique-monthly', [
+            'uniques' => $uniquesMonthly,
+            'unique_lists' => $unique_lists,
+        ]);
+    }
+
     public function fortress_player()
     {
         $fortressPlayer = (new Char)->getFortressPlayerRanking();
