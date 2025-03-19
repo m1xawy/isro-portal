@@ -46,6 +46,7 @@ Route::group(['middleware' => 'language'], function () {
     Route::any('/ranking/guild', [RankingController::class, 'guild'])->name('ranking.guild');
     Route::any('/ranking/unique', [RankingController::class, 'unique'])->name('ranking.unique');
     Route::any('/ranking/unique-monthly', [RankingController::class, 'unique_monthly'])->name('ranking.unique.monthly');
+    Route::any('/ranking/honor', [RankingController::class, 'honor'])->name('ranking.honor');
     Route::any('/ranking/job', [RankingController::class, 'job'])->name('ranking.job');
     Route::any('/ranking/job/all', [RankingController::class, 'job_all'])->name('ranking.job.all');
     Route::any('/ranking/job/hunter', [RankingController::class, 'job_hunter'])->name('ranking.job.hunter');

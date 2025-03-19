@@ -55,9 +55,14 @@
                                 </td>
                                 <td class="px-6 py-4">
                                     @php if($player->JobType == 1) : @endphp
+                                    <img class="inline" src="{{ asset('images/ingame/com_job_thief.PNG') }}" alt=""/>
                                     <span>Thief</span>
                                     @php elseif($player->JobType == 2) : @endphp
+                                    <img class="inline" src="{{ asset('images/ingame/com_job_hunter.PNG') }}" alt=""/>
                                     <span>Hunter</span>
+                                    @php elseif($player->JobType == 3) : @endphp
+                                    <img class="inline" src="{{ asset('images/ingame/com_job_merchant.PNG') }}" alt=""/>
+                                    <span>Trader</span>
                                     @php else : @endphp
                                     <span>None</span>
                                     @php endif; @endphp

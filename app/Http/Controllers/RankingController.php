@@ -86,6 +86,15 @@ class RankingController extends Controller
         ]);
     }
 
+    public function honor()
+    {
+        $honor = (new Char)->getHonorRanking();
+
+        return view('ranking.ranking.honor', [
+            'honor' => $honor,
+        ]);
+    }
+
     public function job()
     {
         $job = (new Char)->getJobRanking();

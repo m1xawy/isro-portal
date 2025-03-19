@@ -432,6 +432,49 @@ class Char extends Model
         return $fortressGuildRanking;
     }
 
+    public function getHonorRanking($limit = 25)
+    {
+        $honorRanking = cache()->remember('honor_ranking', setting('cache_fortress_guild', 600), function() use ($limit) {
+            return collect(DB::connection('shard')->select("
+                    SELECT TOP(" . $limit . ")
+                        _Char.CharID,
+                        _Char.RefObjID,
+                        _Char.CharName16,
+                        _Guild.ID,
+                        _Guild.Name,
+                        _TrainingCampHonorRank.Rank,
+                        _TrainingCamp.GraduateCount,
+                        _TrainingCampMember.HonorPoint,
+                        _TrainingCamp.EvaluationPoint,
+                        _RefObjCommon.CodeName128
+
+                        FROM
+                            SILKROAD_R_SHARD.dbo._TrainingCampHonorRank
+                            JOIN SILKROAD_R_SHARD.dbo._TrainingCampMember ON _TrainingCampHonorRank.CampID = _TrainingCampMember.CampID
+                            JOIN SILKROAD_R_SHARD.dbo._Char ON _TrainingCampMember.CharID = _Char.CharID
+                            JOIN SILKROAD_R_SHARD.dbo._RefObjCommon ON _TrainingCampMember.RefObjID = _RefObjCommon.ID
+                            JOIN SILKROAD_R_SHARD.dbo._Guild ON _Guild.ID = _Char.GuildID
+                            JOIN SILKROAD_R_SHARD.dbo._TrainingCamp ON _TrainingCampMember.CampID = _TrainingCamp.ID
+
+                        WHERE
+                            _TrainingCampMember.MemberClass = 0
+                            AND _Char.deleted = 0
+                            AND _Char.CharID > 0
+
+                        ORDER BY
+                            _TrainingCamp.EvaluationPoint DESC,
+                            _TrainingCamp.GraduateCount DESC,
+                            _TrainingCampMember.HonorPoint DESC
+            "));
+        });
+
+        if(empty($honorRanking)) {
+            return null;
+        }
+
+        return $honorRanking;
+    }
+
     public function getJobRanking($limit = 25)
     {
         $jobRanking = cache()->remember('job_ranking', setting('cache_fortress_guild', 600), function() use ($limit) {
