@@ -54,6 +54,10 @@
             @else
                 <p class="text-gray-500 dark:text-gray-400 font-medium">No Fortress.</p>
             @endif
+
+            <div class="flex justify-center">
+                <a href="{{ route('pages.fortress') }}" class="text-indigo-700 hover:text-white border border-indigo-700 hover:bg-indigo-800 focus:ring-4 focus:outline-none focus:ring-indigo-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 dark:border-indigo-500 dark:text-indigo-500 dark:hover:text-white dark:hover:bg-indigo-500 dark:focus:ring-indigo-800 w-full">Show All</a>
+            </div>
         </div>
     </div>
 @endif

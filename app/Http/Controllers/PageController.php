@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\SRO\Shard\Char;
 use Illuminate\Http\Request;
 use Outl1ne\PageManager\Helpers\NPMHelpers;
 
@@ -48,6 +49,24 @@ class PageController extends Controller
         return view('pages.uniques', [
             'uniques' => $uniques,
             'uniques_name' => $uniques_name
+        ]);
+    }
+
+    public function fortress()
+    {
+        $fortressHistory = (new Char)->getFortressHistoryRanking();
+
+        return view('pages.fortress', [
+            'fortressHistory' => $fortressHistory,
+        ]);
+    }
+
+    public function global()
+    {
+        $globalHistory = getGlobalHistory(50);
+
+        return view('pages.global', [
+            'globalHistory' => $globalHistory,
         ]);
     }
 }

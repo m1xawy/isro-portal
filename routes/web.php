@@ -35,6 +35,8 @@ Route::group(['middleware' => 'language'], function () {
     Route::get('/page/{slug}', [PageController::class, 'show'])->name('pages.show');
     Route::get('/timers', [PageController::class, 'timers'])->name('pages.timers');
     Route::get('/uniques', [PageController::class, 'uniques'])->name('pages.uniques');
+    Route::any('/fortress', [PageController::class, 'fortress'])->name('pages.fortress');
+    Route::any('/global', [PageController::class, 'global'])->name('pages.global');
     Route::get('/download', [DownloadController::class, 'index'])->name('pages.download');
 
     Route::get('/ranking', [RankingController::class, 'index'])->name('ranking.index');

@@ -432,6 +432,21 @@ class Char extends Model
         return $fortressGuildRanking;
     }
 
+    public function getFortressHistoryRanking($limit = 25)
+    {
+        $fortressHistoryRanking = cache()->remember('fortress_history_ranking', setting('cache_fortress_guild', 600), function() use ($limit) {
+            return collect(DB::connection('log')->select("
+                    SELECT TOP(" . $limit . ") FortressID, EventTime, strDesc FROM _LogEventSiegeFortress WHERE EventID = 3 ORDER BY EventTime DESC
+            "));
+        });
+
+        if(empty($fortressHistoryRanking)) {
+            return null;
+        }
+
+        return $fortressHistoryRanking;
+    }
+
     public function getHonorRanking($limit = 25)
     {
         $honorRanking = cache()->remember('honor_ranking', setting('cache_fortress_guild', 600), function() use ($limit) {
