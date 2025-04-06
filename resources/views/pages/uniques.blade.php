@@ -31,9 +31,24 @@
                                         <img src="{{ asset('images/ingame/chinese.png') }}" style="display:inline;vertical-align:text-top" alt="Rank 3"/>
                                         @php endif; @endphp
 
-                                        {{ $unique->CharName16 }}
+                                        @if(!empty($History->CharName))
+                                            <a href="{{ route('ranking.character.view', ['name' => $unique->CharName16]) }}">{{ $unique->CharName16 }}</a>
+                                        @else
+                                            None
+                                        @endif
                                     </td>
-                                    <td class="px-1 py-2">{{ $unique->AreaName }}</td>
+                                    <td class="px-1 py-2">
+                                        @switch($unique->AreaName)
+                                            @case('Eu')
+                                                Constantinople
+                                                @break
+                                            @case('Am')
+                                                Asia Minor
+                                                @break
+                                            @default
+                                                {{ $unique->AreaName }}
+                                        @endswitch
+                                    </td>
                                 </tr>
                                 @php $i++; @endphp
                             @endforeach

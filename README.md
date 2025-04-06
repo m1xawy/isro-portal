@@ -28,7 +28,7 @@ iSRO Portal is A free and open-source project for the MMORPG SilkroadR Online (i
 ## Quick Installation
 
 -First be sure you have already installed iSRO-R Databases
-- Install Laragon Full [https://laragon.org](https://laragon.org/download/)
+- Install Laragon Full [https://laragon.org](https://github.com/leokhoa/laragon/releases/download/6.0.0/laragon-wamp.exe)
 - Add PHP ^8.1 or latter [https://php.net](https://windows.php.net/download)
 - Add PHP Sql Server Drivers [https://microsoft.com](https://learn.microsoft.com/en-us/sql/connect/php/download-drivers-php-sql-server)
 - And Sometimes you should install ODBC Driver 17 [https://microsoft.com](https://learn.microsoft.com/en-us/sql/connect/odbc/download-odbc-driver-for-sql-server)
