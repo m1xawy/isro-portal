@@ -14,6 +14,7 @@ class Register
                 Boolean::make('Register Page Disable', 'register_disable'),
                 Boolean::make('Google reCAPTCHA Enable', 'register_reraptcha_enable'),
                 Boolean::make('Email Confirmation Enable', 'register_confirmation_enable'),
+                Boolean::make('SMTP Enable', 'smtp_enabled'),
             ], [], 'Registration'),
         ];
     }
