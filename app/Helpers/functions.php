@@ -15,6 +15,18 @@ if (!function_exists('isEmailConfirmation')) {
     }
 }
 
+if (!function_exists('isSMTPEnabled')) {
+    function isSMTPEnabled()
+    {
+        if (!app()->runningInConsole()) {
+            $smtp = setting('smtp_enabled', 0);
+            Artisan::call('route:clear');
+
+            return $smtp;
+        }
+    }
+}
+
 if (!function_exists('drawGuildIconToPNG')) {
     function drawGuildIconToPNG($hex): void
     {
