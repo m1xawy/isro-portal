@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\ProfileUpdateRequest;
 use App\Models\SRO\Portal\AphChangedSilk;
+use App\Models\SRO\Portal\MuEmail;
+use App\Models\SRO\Portal\MuhAlteredInfo;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -64,6 +66,13 @@ class ProfileController extends Controller
 
         if ($request->user()->isDirty('email')) {
             $request->user()->email_verified_at = null;
+        }
+
+        MuEmail::where('JID', $request->user()->jid)->update(['EmailAddr' => $request->user()->email]);
+        if(setting('register_confirmation_enable', 0) == 1) {
+            MuhAlteredInfo::where('JID', $request->user()->jid)->update(['EmailAddr' => $request->user()->email, 'EmailReceptionStatus'=>'N', 'EmailCertificationStatus'=>'N']);
+        } else {
+            MuhAlteredInfo::where('JID', $request->user()->jid)->update(['EmailAddr' => $request->user()->email, 'EmailReceptionStatus'=>'Y', 'EmailCertificationStatus'=>'Y']);
         }
 
         $request->user()->save();
