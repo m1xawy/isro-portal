@@ -38,6 +38,7 @@ class AppServiceProvider extends ServiceProvider
             //Config::set('app.name', setting('server_name', env('APP_NAME')));
             //Config::set('app.url', setting('server_url', env('APP_URL')));
 
+            date_default_timezone_set(setting('server_timezone', 'UTC'));
             Config::set('mail.default', isSMTPEnabled() == 1 ? env('MAIL_MAILER', 'smtp') : 'log');
             //Config::set('mail.mailers.smtp.host', setting('site_mail_host', env('MAIL_HOST', 'smtp')));
             //Config::set('mail.mailers.smtp.port', setting('site_mail_port', env('MAIL_PORT', 'smtp')));
