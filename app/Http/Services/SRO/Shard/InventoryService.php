@@ -513,9 +513,7 @@ class InventoryService
                 $aSet[$i]['StorageState'] = $aCurItem['UserJID'];
             }
             try {
-                $aSet[$i]['data'] = view('ranking.character.partials.inventorypopup', [
-                    'aItem' => $aInfo
-                ])->render();
+                $aSet[$i]['data'] = $aInfo;
             } catch (\Throwable $e) {
 //                 Throw error
             }

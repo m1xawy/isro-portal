@@ -166,10 +166,10 @@
                             <div class="px-4 mx-auto max-w-screen-xl text-center py-8">
                                 <div class="flex flex-row sm:flex-row sm:justify-center">
                                     <div class="bg-center bg-no-repeat" id="display-inventory-set" style="background-image: url({{ asset('images/ingame/inventory_bg.png') }}); width: 178px; height: 315px">
-                                        @include('ranking.character.partials.inventory', ['items' => $playerInventory])
+                                        @include('ranking.character.partials.inventory.inventory-view', ['inventorySetList' => $playerInventory])
                                     </div>
                                     <div class="bg-center bg-no-repeat d-none" id="display-inventory-avatar" style="background-image: url({{ asset('images/ingame/inventory_bg.png') }}); width: 178px; height: 315px;">
-                                        @include('ranking.character.partials.inventoryJob', ['items' => $playerInventory])
+                                        @include('ranking.character.partials.inventory.inventory-job-view', ['inventoryJobList' => $playerJob])
                                     </div>
                                     <div class="bg-equipment-job-main bg-center bg-no-repeat flex flex-col justify-end" style="background-image: url({{ asset('images/ingame/accessory_bg.png') }}); width: 206px; background-position: bottom">
                                         <button id="display-inventory-switch" data-type="set" class="inline-flex items-center px-4 py-2 bg-gray-800 dark:bg-gray-200 border border-transparent rounded-md font-semibold text-xs text-white dark:text-gray-800 uppercase tracking-widest hover:bg-gray-700 dark:hover:bg-white focus:bg-gray-700 dark:focus:bg-white active:bg-gray-900 dark:active:bg-gray-300 transition ease-in-out duration-150 ml-3" style="margin-bottom: 1rem">
@@ -177,7 +177,7 @@
                                         </button>
 
                                         <p class="text-capitalize text-left" style="color: #ffc345; margin-left: 1.6rem; margin-bottom: 0.6rem">Accessories</p>
-                                        @include('ranking.character.partials.inventoryAvatar', ['items' => $playerInventory])
+                                        @include('ranking.character.partials.inventory.inventory-avatar-view', ['inventoryAvatarList' => $playerAvatar])
                                     </div>
                                 </div>
                             </div>
@@ -191,4 +191,7 @@
     @include('ranking.character.partials.character-global-history')
     @include('ranking.character.partials.character-unique-history')
 
+@endsection
+@section('styles')
+    <link href="{{ asset('/css/layout.css') }}" rel="stylesheet">
 @endsection
