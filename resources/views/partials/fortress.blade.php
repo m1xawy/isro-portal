@@ -1,12 +1,9 @@
 @if (setting('server_fortress_widget_enable'))
-    @php
-        $fortresses = getFortress();
-    @endphp
-
     <div class="server-info p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg">
         <div class="max-w-xl">
             <h2 class="text-lg font-medium text-gray-900 dark:text-gray-100">{{ __('Fortress War') }}</h2>
 
+            @php $fortresses = getFortress(); @endphp
             @if (count($fortresses))
             <ul class="max-w-md divide-y divide-gray-200 dark:divide-gray-700">
                 @foreach($fortresses as $fortress)

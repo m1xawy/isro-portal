@@ -1,13 +1,10 @@
 @if (setting('server_global_widget_enable'))
-@php
-    $GlobalHistory = getGlobalHistory();
-@endphp
-
 <div class="server-info p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg">
     <div class="max-w-xl">
         <h2 class="text-lg font-medium text-gray-900 dark:text-gray-100">{{ __('Global History') }}</h2>
 
         <ul class="max-w-md divide-y divide-gray-200 dark:divide-gray-700">
+            @php $GlobalHistory = getGlobalHistory(); @endphp
             @if (!empty($GlobalHistory))
                 @foreach($GlobalHistory as $History)
                 <li class="py-3 sm:py-4">

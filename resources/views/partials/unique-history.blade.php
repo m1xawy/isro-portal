@@ -1,14 +1,14 @@
 @if (setting('server_unique_widget_enable'))
-    @php
-        $uniqueHistory = getUniqueHistory();
-        $unique_name = getUniqueHistoryNames();
-    @endphp
-
     <div class="server-info p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg">
         <div class="max-w-xl">
             <h2 class="text-lg font-medium text-gray-900 dark:text-gray-100">{{ __('Unique History') }}</h2>
 
             <ul class="max-w-md divide-y divide-gray-200 dark:divide-gray-700">
+                @php
+                    $uniqueHistory = getUniqueHistory();
+                    $unique_name = getUniqueHistoryNames();
+                @endphp
+
                 @if (!empty($uniqueHistory))
                     @foreach($uniqueHistory as $History)
                     <li class="py-3 sm:py-4">

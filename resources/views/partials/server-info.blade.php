@@ -1,12 +1,9 @@
 @if (setting('server_info_widget_enable'))
-@php
-    $server_info = json_decode(setting('server_info'));
-@endphp
-
 <div class="server-info p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg">
     <div class="max-w-xl">
         <h2 class="text-lg font-medium text-gray-900 dark:text-gray-100">{{ __('Server Information') }}</h2>
 
+        @php $server_info = json_decode(setting('server_info')); @endphp
         @if (!empty($server_info))
         <ul class="max-w-md divide-y divide-gray-200 dark:divide-gray-700">
             @foreach($server_info as $info)

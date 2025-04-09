@@ -1,9 +1,4 @@
 @if (setting('server_times_widget_enable'))
-    @php
-        date_default_timezone_set(setting('server_timezone', 'UTC'));
-        $schedules = getServerTimes();
-    @endphp
-
     <div class="server-times p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg">
         <div class="max-w-xl">
             <h2 class="text-lg font-medium text-gray-900 dark:text-gray-100">{{ __('Event Schedule') }}</h2>
@@ -22,6 +17,7 @@
                     </div>
                 </li>
 
+                @php $schedules = getServerTimes(); @endphp
                 @php $i = 0; @endphp
                 @foreach($schedules as $key => $schedule)
                     @if(is_null($schedule)) @continue @endif

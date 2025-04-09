@@ -1,7 +1,3 @@
-@php
-    $topGuild = getTopGuild();
-@endphp
-
 <div class="server-info p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg">
     <div class="max-w-xl">
         <h2 class="text-lg font-medium text-gray-900 dark:text-gray-100">{{ __('Top Guild') }}</h2>
@@ -16,6 +12,7 @@
                 </tr>
                 </thead>
                 <tbody>
+                @php $topGuild = getTopGuild(); @endphp
                 @php $i = 1; @endphp
                 @forelse($topGuild->take(5) as $guild)
                     <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">

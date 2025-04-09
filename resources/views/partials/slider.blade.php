@@ -1,10 +1,7 @@
-@php
-    $sliders = json_decode(setting('slider'));
-@endphp
-
 <div id="default-carousel" class="relative w-full" data-carousel="slide">
     <!-- Carousel wrapper -->
     <div class="relative h-96 overflow-hidden rounded-lg md:h-96">
+        @php $sliders = json_decode(setting('slider')); @endphp
         @if (!empty($sliders))
             @foreach($sliders as $slider)
                 <!-- Item 1 -->

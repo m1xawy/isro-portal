@@ -31,11 +31,7 @@
                                         <img src="{{ asset('images/ingame/chinese.png') }}" style="display:inline;vertical-align:text-top" alt="Rank 3"/>
                                         @php endif; @endphp
 
-                                        @if(!empty($History->CharName))
-                                            <a href="{{ route('ranking.character.view', ['name' => $unique->CharName16]) }}">{{ $unique->CharName16 }}</a>
-                                        @else
-                                            None
-                                        @endif
+                                        <a href="{{ route('ranking.character.view', ['name' => $unique->CharName16]) }}">{{ $unique->CharName16 }}</a>
                                     </td>
                                     <td class="px-1 py-2">
                                         @switch($unique->AreaName)
