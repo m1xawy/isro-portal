@@ -69,4 +69,9 @@ class PageController extends Controller
             'globalHistory' => $globalHistory,
         ]);
     }
+
+    public function guide()
+    {
+        return view('pages.guide');
+    }
 }
