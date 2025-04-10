@@ -62,11 +62,23 @@
         <br />
     @endif
 
-    @if(in_array($item['info']['TypeID3'], [6, 4, 5, 2], true))
+    @if(in_array($item['info']['TypeID3'], [6, 4, 5, 2, 1], true))
         <br />
+        @php $str = 0 @endphp
+        @php $int = 0 @endphp
+        @if($item['blues'])
+            @foreach($item['blues'] as $aBlues)
+                @if(str_contains($aBlues['name'], 'Str'))
+                    @php $str++ @endphp
+                @endif
+                @if(str_contains($aBlues['name'], 'Int'))
+                    @php $int++ @endphp
+                @endif
+            @endforeach
+        @endif
         <span style="color:#efdaa4;">Wheels Count: [{{ count($item['blues']) }}]</span><br />
-        <span style="color:#efdaa4;">STR Count: [{{ count($item['blues']) }}]</span><br />
-        <span style="color:#efdaa4;">INT Count: [{{ count($item['blues']) }}]</span><br />
+        <span style="color:#efdaa4;">STR Count: [{{ $str }}]</span><br />
+        <span style="color:#efdaa4;">INT Count: [{{ $int }}]</span><br />
     @endif
 
     @if($item['blues'])
@@ -76,7 +88,7 @@
         @endforeach
     @endif
 
-    @if(in_array($item['info']['TypeID3'], [6, 4, 5, 2], true))
+    @if(in_array($item['info']['TypeID3'], [6, 4, 5, 2, 1], true))
         @if(!$item['nOptValue'])
             Able to use Advanced elixir.
         @else
