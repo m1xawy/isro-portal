@@ -1,9 +1,13 @@
 <div class="sro-item-detail {{ $item['special'] ? 'sro-item-special' : '' }}">
     <div class="item" data-itemInfo="1">
         @if($item['special'])
-        <img alt="" class="sro-item-special-seal" src="{{ asset('/images/sro/equipment/seal.gif') }}" />
+        <img alt="" class="sro-item-special-seal" src="{{ asset('/images/sro/seal.gif') }}" />
         @endif
+        @if(file_exists(public_path($item['imgpath'])))
         <img alt="" src="{{ asset(strtolower($item['imgpath'])) }}">
+        @else
+        <img alt="" src="{{ asset('/images/sro/icon_default.jpg') }}">
+        @endif
         @if($item['amount'])
         <span class="amount">{{ $item['amount'] }}</span>
         @endif

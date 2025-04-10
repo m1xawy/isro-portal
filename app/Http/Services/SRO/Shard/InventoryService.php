@@ -22,146 +22,17 @@ class InventoryService
 
     /**
      * @param $characterId
-     * @param $slot
-     * @return mixed
-     */
-    public function getInventorySlot($characterId, $slot)
-    {
-        return Inventory::where('CharID', '=', $characterId)
-            ->where('Slot', '=', $slot)
-            ->where('ItemID', '>', '0')
-            ->first();
-    }
-
-    /**
-     * Counting all that Server sox parts
-     * @param null $filter
-     * @return array
-     */
-    public function getServerSoxCount($filter = null): array
-    {
-        $soxMapping = [
-            '_A_' => 'Seal of Star',
-            '_B_' => 'Seal of Moon',
-            '_C_' => 'Seal of Sun'
-        ];
-
-        $soxCount = [
-            '_A_' => 0,
-            '_B_' => 0,
-            '_C_' => 0
-        ];
-
-        $items = Items::join('_RefObjCommon as Common', static function ($join) use ($filter) {
-            $join->on('Common.ID', 'RefItemID');
-            if ($filter) {
-                $join->where('Common.CodeName128', 'like', 'ITEM_%' . $filter . '_%_RARE');
-            } else {
-                $join->where('Common.CodeName128', 'like', 'ITEM_%_RARE');
-            }
-        })->get();
-
-        foreach ($items as $item) {
-            foreach ($soxMapping as $key => $itemTest) {
-                if (preg_match('/' . $key . '/', $item->CodeName128)) {
-                    $test[$key] = ++$soxCount[$key];
-                }
-            }
-        }
-
-        return $soxCount;
-    }
-
-    /**
-     * Returning stats for the sox filter - Server
-     * @param null $filter
-     * @return mixed
-     */
-    public function getServerSoxFilter($filter = null)
-    {
-        if ($filter === '0') {
-            $filter = 0;
-        } elseif (strlen($filter) === 1) {
-            $filter = '0' . $filter;
-        }
-
-        $getWebInventoryItemId64 = CharInventory::all()->pluck('item_id64');
-
-        $items = Items::join('_RefObjCommon as Common', static function ($join) use ($filter) {
-            $join->on('Common.ID', 'RefItemID');
-            if ($filter) {
-                $join->where('Common.CodeName128', 'like', 'ITEM_%' . $filter . '_%_RARE');
-            } else {
-                $join->where('Common.CodeName128', 'like', 'ITEM_%_RARE');
-            }
-        })
-            ->join('_RefObjItem as ObjItem', 'Common.Link', 'ObjItem.ID')
-            ->leftJoin('_BindingOptionWithItem as Binding', static function ($join) {
-                $join->on('Binding.nItemDBID', 'ID64');
-                $join->where('Binding.nOptValue', '>', '0');
-            })
-            ->leftJoin('_Inventory as Inventory', '_Items.ID64', 'Inventory.ItemID')
-            ->leftJoin('_Char as Char', 'Inventory.CharID', 'Char.CharID')
-            ->leftJoin('_Chest as Storage', '_Items.ID64', 'Storage.ItemID')
-            ->get();
-
-        return [
-            'inventory' => $this->getInventorySetStats($items, true),
-            'webInventory' => $getWebInventoryItemId64
-        ];
-    }
-
-    /**
-     * Get from the Serial64 the Item Data
-     * @param $serial64
-     * @return array
-     */
-    public function getInventorySlotData($serial64): array
-    {
-        $item = Items::where('Serial64', '=', $serial64)
-            ->leftJoin('_BindingOptionWithItem as Binding', static function ($join) {
-                $join->on('Binding.nItemDBID', 'ID64');
-                $join->where('Binding.nOptValue', '>', '0');
-            })
-            ->join('_RefObjCommon as Common', 'RefItemId', 'Common.ID')
-            ->join('_RefObjItem as ObjItem', 'Common.Link', 'ObjItem.ID')
-            ->get();
-
-        return $this->getInventorySetStats($item);
-    }
-
-    /**
-     * @param $characterId
      * @param $maxSlot
      * @param $minSlot
      * @return array
      */
     public function getInventorySet($characterId, $maxSlot, $minSlot): array
     {
-        /*
-        // Caching for one the day the magOpt Table
-        $oneDay = 86400;
-        $_aMagOptLevel = Cache::remember('magOpt', $oneDay * 1, static function () {
-            $q = MagOpt::all()->sortBy('id');
-            $aList = [];
-            foreach ($q as $iKey => $aCurData) {
-                $aList[$aCurData['id']] = [
-                    'name' => $aCurData['name'],
-                    'desc' => $aCurData['desc'],
-                    'mLevel' => $aCurData['mLevel'],
-                    'extension' => $aCurData['extension'],
-                    'sortkey' => $aCurData['sortkey'],
-                ];
-            }
-            return $aList;
-        });
-        */
-
         $inventory = Inventory::where('CharID', '=', $characterId)
             ->where('ItemID', '>', '0')
             ->where('slot', '<', $maxSlot)
             ->where('slot', '>=', $minSlot)
-//            ->where('slot', '!=', 8) // For Job Flag
+            ->where('slot', '!=', 8)
             ->join('_Items as Items', 'Items.ID64', '_Inventory.ItemID')
             ->leftJoin('_BindingOptionWithItem as Binding', static function ($join) {
                 $join->on('Binding.nItemDBID', 'Items.ID64');
@@ -171,7 +42,7 @@ class InventoryService
             ->join('_RefObjItem as ObjItem', 'Common.Link', 'ObjItem.ID')
             ->get();
 
-        return $this->getInventorySetStats($inventory);
+        return $this->convertItemList($inventory);
     }
 
     /**
@@ -191,7 +62,7 @@ class InventoryService
             ->join('_RefObjItem as ObjItem', 'Common.Link', 'ObjItem.ID')
             ->get();
 
-        return $this->getInventorySetStats($avatar);
+        return $this->convertItemList($avatar);
     }
 
     /**
@@ -211,14 +82,14 @@ class InventoryService
             ->join('_RefObjItem as ObjItem', 'Common.Link', 'ObjItem.ID')
             ->get();
 
-        return $this->getInventorySetStats($job);
+        return $this->convertItemList($job);
     }
 
     /**
      * @param $iPetId
      * @return mixed
      */
-    public function getPetInformation($iPetId)
+    public function getPet($iPetId)
     {
         return CharCos::where('_CharCOS.ID', '=', $iPetId)
             ->leftJoin('_TimedJobForPet as TimedJob', static function ($join) {
@@ -242,229 +113,11 @@ class InventoryService
     }
 
     /**
-     * @param $item
-     * @param $quantity
-     * @param $item_plus
-     * @return array
-     */
-    public function ItemStats($item, $quantity, $item_plus): array
-    {
-        $aSpecialInfo = [];
-        if ($item['TypeID3'] == 13) {
-            $item['Variance'] = 1;
-        }
-        $aInfo = $item;
-        $aInfo['info'] = $this->getItemInfoWebmall($item);
-        $item['Variance'] = 0;
-        $item['OptLevel'] = $item_plus;
-        $aInfo['OptLevel'] = $item_plus;
-        $aInfo['nOptValue'] = 0;
-        $aInfo['ID64'] = $aInfo['ID'];
-        $aInfo['Serial64'] = 0;
-        $aInfo['RefItemID'] = 0;
-        $item['Data'] = 0;
-        $item['MagParamNum'] = null;
-        $aInfo['blues'] = $this->getBluesStats($item, $aSpecialInfo);
-        $aInfo['whitestats'] = $this->getWhiteStats($item, $aSpecialInfo);
-        if ($aInfo['MaxStack'] > 1) {
-            $aSet['amount'] = $quantity;
-            $aInfo['amount'] = $quantity;
-        } else {
-            $aSet['amount'] = false;
-            $aInfo['amount'] = 0;
-        }
-        $aSet['TypeID2'] = data_get($aInfo, 'TypeID2', 0);
-        $aSet['TypeID3'] = data_get($aInfo, 'TypeID3', 0);
-        $aSet['Variance'] = data_get($aInfo, 'Variance', 0);
-        $aSet['OptLevel'] = $item_plus;
-        $aSet['RefItemID'] = data_get($item, 'RefItemID', 0);
-        $aSet['special'] = data_get($aInfo['info'], 'sox', null);
-        $aSet['sox'] = $item['Rarity'];
-        $aSet['ItemID'] = $aInfo['ID'];
-        $aSet['ItemName'] = data_get($aInfo['info'], 'WebName', 'Unknown');
-        $aSet['imgpath'] = $this->getWebMallItemImage($item['AssocFileIcon128']);
-        //$aSet['WebInventory'] = $aInfo['info'];
-        $aSet['data'] = view('ranking.character.partials.inventorypopup', [
-            'aItem' => $aInfo,
-            'gm_info' => false,
-        ])->render();
-        return $aSet;
-    }
-
-    /**
-     * @param $aItem
-     * @return string
-     */
-    public function getWebMallItemImage($aItem): string
-    {
-        return str_replace(['ddj', '\\'], ['jpg', '/'], strtolower($aItem));
-    }
-
-    /**
-     * @param $aItem
-     * @return array
-     */
-    protected function getItemInfoWebmall($aItem): array
-    {
-        $aData = [];
-        $aData['ReqLevel1'] = $aItem['ReqLevel1'];
-        $aData['CanSell'] = $aItem['CanSell'];
-        $aData['CanTrade'] = $aItem['CanTrade'];
-        $aData['CanBuy'] = $aItem['CanBuy'];
-        $aData['TypeID2'] = $aItem['TypeID2'];
-        $aData['TypeID3'] = $aItem['TypeID3'];
-        $aData['TypeID4'] = $aItem['TypeID4'];
-        $aData['Price'] = $aItem['Price']; // Npc Price
-        $aData['sox'] = null; // For Blade
-        $aData['OptLevel'] = data_get($aItem, 'OptLevel', 0);
-        $aData['Degree'] = data_get($aItem, 'ItemClass', '0'); // For Blade
-        $aData['WebName'] = $this->getItemRealName(
-            $aItem['NameStrID128']
-        );
-
-        if ($this->isPet($aItem)) {
-            $aData['PetState'] = true;
-            $aData['Type'] = 'Pet';
-            $aData['PetType'] = $aData['TypeID4'];
-            if (isset($aItem['RentEndTime'])) {
-                $aPet = $this->getPetInformation($aItem['Data']);
-
-                if (!(bool)$aPet) {
-                    $aPet = $aItem;
-                }
-                $aData['PetName'] = $aPet['CharName'];
-                $aTime = self::diffTime(strtotime($aPet['RentEndTime']) - time() - 60 * 60 * 24);
-                $aData['PetEndTime'] = ((time() > strtotime($aPet['RentEndTime'])) ?
-                    '0Day 0Hour 0Minute' :
-                    (int)$aTime['day'] . 'Day ' . (int)$aTime['hour'] . 'Hour ' . (int)$aTime['min'] . 'Minute');
-
-                if ($aPet['inventorysize'] !== null) {
-                    $aTime = self::diffTime($aPet['inventorykeep'] - time() - 60 * 60 * 24);
-                    $aData['inventorySize'] = $aPet['inventorysize'];
-                    $aData['inventoryEndTime'] = ((time() > $aPet['inventorykeep']) ?
-                        '0Day 0Hour 0Minute' :
-                        (int)$aTime['day'] . 'Day ' . (int)$aTime['hour'] . 'Hour ' . (int)$aTime['min'] . 'Minute');
-                }
-            } else {
-                $aData['PetLevel'] = 1;
-            }
-            $aData['Type'] = array_key_exists('Type', $aData) ? ucfirst(strtolower($aData['Type'])) : '';
-            return $aData;
-        }
-        if ($aData['TypeID2'] !== 1) {
-            return $aData;
-        }
-        $aStats = explode('_', $aItem['CodeName128']);
-        $aSEX = [0 => 'Female', 1 => 'Male'];
-        $aClothDetail = [
-            'FA' => 'Foot',
-            'HA' => 'Head',
-            'CA' => 'Head',
-            'SA' => 'Shoulder',
-            'BA' => 'Chest',
-            'LA' => 'Legs',
-            'AA' => 'Hands'
-        ];
-        $aClothType = [
-            'CH' => ['CLOTHES' => 'Garment', 'HEAVY' => 'Armor', 'LIGHT' => 'Protector'],
-            'EU' => ['CLOTHES' => 'Robe', 'HEAVY' => 'Heavy armor', 'LIGHT' => 'Light armor']
-        ];
-        $aWeaponType = [
-            'CH' => [
-                'TBLADE' => 'Glavie',
-                'SPEAR' => 'Spear',
-                'SWORD' => 'Sword',
-                'BLADE' => 'Blade',
-                'BOW' => 'Bow',
-                'SHIELD' => 'Shield'
-            ],
-            'EU' => [
-                'AXE' => 'Dual axe',
-                'CROSSBOW' => 'Crossbow',
-                'DAGGER' => 'Dagger',
-                'DARKSTAFF' => 'Dark staff',
-                'HARP' => 'Harp',
-                'SHIELD' => 'Shield',
-                'STAFF' => 'Light staff',
-                'SWORD' => 'Onehand sword',
-                'TSTAFF' => 'Twohand staff',
-                'TSWORD' => 'Twohand sword'
-            ]
-        ];
-        if ($aStats[1] === 'CH') {
-            $aData['Race'] = 'Chinese';
-        } elseif ($aStats[1] === 'EU') {
-            $aData['Race'] = 'European';
-        }
-
-        switch ($aItem['TypeID3']) {
-            case self::WEAPON:
-                $aData['Type'] = $aWeaponType[$aStats[1]][$aStats[2]] ?? '';
-                $aData['Degree'] = self::getDegree4ItemClass($aItem['ItemClass']);
-                $aData['sox'] = self::getSOXRate4ItemClass($aItem['ItemClass'], $aItem['Rarity']);
-                break;
-            case self::SHIELD:
-                //set
-                $aData['Type'] = $aWeaponType[$aStats[1]][$aStats[2]] ?? '';
-                $aData['Degree'] = self::getDegree4ItemClass($aItem['ItemClass']);
-                $aData['sox'] = self::getSOXRate4ItemClass($aItem['ItemClass'], $aItem['Rarity']);
-                break;
-            case 12:
-            case self::ACC:
-                $aData['Type'] = $aStats[2];
-                $aData['Degree'] = self::getDegree4ItemClass($aItem['ItemClass']);
-                $aData['sox'] = self::getSOXRate4ItemClass($aItem['ItemClass'], $aItem['Rarity']);
-                break;
-            /**
-             * DEVIL
-             */
-            case 14:
-                $aData['Type'] = 'Devil´s Spirit';
-                $aData['Degree'] = 'devil';
-                $aData['Sex'] = $aSEX[$aItem['ReqGender']];
-                $aTime = self::diffTime($aItem['Data'] - time());
-                $buffer = ((time() > $aItem['Data']) ?
-                    '0Day 0Hour 0Minute' :
-                    $aTime['day'] . 'Day ' . $aTime['hour'] . 'Hour ' . $aTime['min'] . 'Minute');
-                $aData['timeEnd'] = $aItem['Data'] === 0 ? '28Day' : $buffer;
-                $aData['Slot'] = 0;
-                break;
-            /**
-             * DRESS
-             */
-            case 13:
-                $aData['Type'] = $aStats[2] . ' ' . ((!isset($aStats[5]) || is_numeric($aStats[5])) ? 'dress' : $aStats[5]);
-                //$aData['Degree'] = $aStats[3];
-                $aData['Sex'] = $aSEX[$aItem['ReqGender']];
-                $aData['Slot'] = $aItem['TypeID4'];
-                break;
-
-            default:
-                $aData['Degree'] = self::getDegree4ItemClass($aItem['ItemClass']);
-                if (isset($aSEX[$aItem['ReqGender']])) {
-                    $aData['Sex'] = $aSEX[$aItem['ReqGender']];
-                }
-                if (isset($aClothType[$aStats[1]][$aStats[3]])) {
-                    $aData['Type'] = $aClothType[$aStats[1]][$aStats[3]];
-                }
-                if (isset($aClothDetail[$aStats[5]])) {
-                    $aData['Detail'] = $aClothDetail[$aStats[5]];
-                }
-                $aData['sox'] = self::getSOXRate4ItemClass($aItem['ItemClass'], $aItem['Rarity']);
-                break;
-        }
-
-        $aData['Type'] = array_key_exists('Type', $aData) ? ucfirst(strtolower($aData['Type'])) : '';
-        return $aData;
-    }
-
-
-    /**
      * @param $inventory
      * @param bool $filter
      * @return array
      */
-    public function getInventorySetStats($inventory, $filter = false): array
+    public function convertItemList($inventory, $filter = false): array
     {
         $aSet = [];
         if (!$inventory) {
@@ -527,15 +180,14 @@ class InventoryService
      */
     public function getItemIcon($aItem): string
     {
-        $path = '/images/sro/' . str_replace(['ddj', '\\'], ['jpg', '/'], strtolower($aItem));
+        $iconPath = $aItem;
+        $iconPath = str_replace('\\', '/', $iconPath);
 
-        $icon = asset($path);
-        $iconDefault = asset('/images/sro/icon_default.jpg');
-
-        if (file_exists(public_path($path))) {
-            return $icon;
+        if (substr($iconPath, -4) == '.ddj') {
+            $iconPath = sprintf('%s.jpg', substr($iconPath, 0, strlen($iconPath) - 4));
         }
-        return $iconDefault;
+
+        return sprintf('/images/sro/%s', $iconPath);
     }
 
     /**
@@ -564,7 +216,7 @@ class InventoryService
             $aData['PetState'] = true;
             $aData['Type'] = 'Pet';
             if (!isset($aItem['RentEndTime'])) {
-                $aPet = $this->getPetInformation($aItem['Data']);
+                $aPet = $this->getPet($aItem['Data']);
 
                 if (!(bool)$aPet) {
                     return $aData;
@@ -769,7 +421,6 @@ class InventoryService
      */
     protected function getItemRealName($CodeName128): string
     {
-        // Caching for one the day the magOpt Table
         $oneDay = 86400;
         $mappingList = Cache::remember('itemPoolName', $oneDay * 7, static function () {
             $q = ItemPoolName::all();
@@ -800,7 +451,7 @@ class InventoryService
     {
         // Caching for one the day the magOpt Table
         $oneDay = 86400;
-        $_aMagOptLevel = Cache::remember('magOpt', $oneDay * 1, static function () {
+        $_aMagOptLevel = Cache::remember('getOptMagList', $oneDay * 7, static function () {
             $q = MagOpt::all()->sortBy('id');
             $aList = [];
             foreach ($q as $iKey => $aCurData) {
