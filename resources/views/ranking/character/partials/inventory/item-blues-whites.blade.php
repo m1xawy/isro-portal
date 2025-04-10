@@ -81,10 +81,11 @@
                     @continue
                 @endif
             @endforeach
+
+            <span style="color:#efdaa4;">Wheels Count: [{{ count($item['blues']) }}]</span><br />
+            <span style="color:#efdaa4;">STR Count: [{{ $str }}]</span><br />
+            <span style="color:#efdaa4;">INT Count: [{{ $int }}]</span><br />
         @endif
-        <span style="color:#efdaa4;">Wheels Count: [{{ count($item['blues']) }}]</span><br />
-        <span style="color:#efdaa4;">STR Count: [{{ $str }}]</span><br />
-        <span style="color:#efdaa4;">INT Count: [{{ $int }}]</span><br />
     @endif
 
     @if($item['blues'])
