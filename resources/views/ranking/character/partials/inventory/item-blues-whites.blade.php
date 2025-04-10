@@ -21,7 +21,7 @@
         @isset($item['info']['Type'])
         Sort of item: {{ data_get($item['info'], 'Type', '') }}<br />
         @else
-            @if(!in_array($item['info']['TypeID3'], [6, 4, 5, 2, 1], true))
+            @if(count(array_intersect([13, 14], explode(',', $item['info']['TypeID3']))))
                 Sort of item: {{ $item['info']['TypeID3'] == 13 ? 'Avatar Dress' : ($item['info']['TypeID3'] == 14 ? 'Devil´s Spirit' : '') }}<br />
             @endif
         @endisset
@@ -48,7 +48,7 @@
         {{ $item['info']['Sex'] }}<br />
     @endisset
 
-    @if(!in_array($item['info']['TypeID3'], [6, 4, 5, 2, 1], true))
+    @if(count(array_intersect([13, 14], explode(',', $item['info']['TypeID3']))))
         {{ $item['ReqGender'] == 0 ? 'Female' : 'Male' }}<br />
     @endif
 
@@ -56,23 +56,29 @@
         {{ $item['info']['Race'] }}<br />
     @endisset
 
-    @if(!in_array($item['info']['TypeID3'], [6, 4, 5, 2, 1], true))
+    @if(count(array_intersect([13], explode(',', $item['info']['TypeID3']))))
         <br />
         <span style="color:#efdaa4;">Max. no. of magic options: {{ $item['MaxMagicOptCount'] }} Unit</span>
         <br />
     @endif
 
-    @if(in_array($item['info']['TypeID3'], [6, 4, 5, 2, 1], true))
+    @if(!count(array_intersect([13, 14], explode(',', $item['info']['TypeID3']))))
         <br />
         @php $str = 0 @endphp
         @php $int = 0 @endphp
         @if($item['blues'])
             @foreach($item['blues'] as $aBlues)
                 @if(str_contains($aBlues['name'], 'Str'))
-                    @php $str++ @endphp
+                    @php
+                        $str += intval(preg_replace('/[^0-9]+/', '', $aBlues['name']));
+                    @endphp
+                    @continue
                 @endif
                 @if(str_contains($aBlues['name'], 'Int'))
-                    @php $int++ @endphp
+                    @php
+                        $int += intval(preg_replace('/[^0-9]+/', '', $aBlues['name']));
+                    @endphp
+                    @continue
                 @endif
             @endforeach
         @endif
@@ -88,7 +94,7 @@
         @endforeach
     @endif
 
-    @if(in_array($item['info']['TypeID3'], [6, 4, 5, 2, 1], true))
+    @if(!count(array_intersect([13, 14], explode(',', $item['info']['TypeID3']))))
         @if(!$item['nOptValue'])
             Able to use Advanced elixir.
         @else
@@ -113,7 +119,7 @@
     @endif
 
     @if(!$item['info']['timeEnd'] || $item['blues'])
-        @if(in_array($item['info']['TypeID3'], [13, 14], true))
+        @if(count(array_intersect([13], explode(',', $item['info']['TypeID3']))))
         <span style="color:#efdaa4;">Max. no. of magic options: {{ $item['MaxMagicOptCount'] }} Unit</span><br/>
         @endif
         @if($item['blues'])
