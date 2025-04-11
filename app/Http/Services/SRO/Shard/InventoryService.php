@@ -5,11 +5,10 @@ namespace App\Http\Services\SRO\Shard;
 use App\Models\SRO\Shard\CharCos;
 use App\Models\SRO\Shard\Inventory;
 use App\Models\SRO\Shard\InventoryForAvatar;
-use App\Models\SRO\Shard\ItemPoolName;
-use App\Models\SRO\Shard\Items;
-use App\Models\SRO\Shard\MagOpt;
 use App\Models\SRO\Shard\TradeEquipInventory;
-use App\Models\Webapps\CharInventory;
+use App\Models\SRO\Account\ItemNameDesc;
+use App\Models\SRO\Account\MagOptDesc;
+use App\Models\SRO\Shard\Items;
 use Illuminate\Support\Facades\Cache;
 
 class InventoryService
@@ -422,8 +421,8 @@ class InventoryService
     protected function getItemRealName($CodeName128): string
     {
         $oneDay = 86400;
-        $mappingList = Cache::remember('itemPoolName', $oneDay * 7, static function () {
-            $q = ItemPoolName::all();
+        $mappingList = Cache::remember('ItemNameDesc', $oneDay * 7, static function () {
+            $q = ItemNameDesc::all();
 
             $aList = [];
             foreach ($q as $iKey => $aCurData) {
@@ -449,10 +448,9 @@ class InventoryService
      */
     protected function getBluesStats($aItem, &$aSpecialInfo): array
     {
-        // Caching for one the day the magOpt Table
         $oneDay = 86400;
-        $_aMagOptLevel = Cache::remember('getOptMagList', $oneDay * 7, static function () {
-            $q = MagOpt::all()->sortBy('id');
+        $_aMagOptLevel = Cache::remember('MagOptDesc', $oneDay * 7, static function () {
+            $q = MagOptDesc::all()->sortBy('id');
             $aList = [];
             foreach ($q as $iKey => $aCurData) {
                 $aList[$aCurData['id']] = [

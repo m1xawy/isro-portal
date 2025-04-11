@@ -1,12 +1,12 @@
 <?php
 
-namespace Database\Seeders;
+namespace Database\Seeders\Donate;
 
 use Carbon\Carbon;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
-class PaypalSeeder extends Seeder
+class CoinbaseSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -15,7 +15,7 @@ class PaypalSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('donation_paypals')->updateOrInsert(
+        DB::table('donation_coinbase')->updateOrInsert(
             [
                 'name' => "100 Silk",
                 'description' => "Pay 1 USD for 100 Silk",
@@ -25,7 +25,7 @@ class PaypalSeeder extends Seeder
                 'updated_at' => Carbon::now(),
             ]);
 
-        DB::table('donation_paypals')->updateOrInsert(
+        DB::table('donation_coinbase')->updateOrInsert(
             [
                 'name' => "500 Silk",
                 'description' => "Pay 5 USD for 500 Silk",
@@ -35,7 +35,7 @@ class PaypalSeeder extends Seeder
                 'updated_at' => Carbon::now(),
             ]);
 
-        DB::table('donation_paypals')->updateOrInsert(
+        DB::table('donation_coinbase')->updateOrInsert(
             [
                 'name' => "1000 Silk",
                 'description' => "Pay 10 USD for 1000 Silk",
@@ -45,7 +45,7 @@ class PaypalSeeder extends Seeder
                 'updated_at' => Carbon::now(),
             ]);
 
-        DB::table('donation_paypals')->updateOrInsert(
+        DB::table('donation_coinbase')->updateOrInsert(
             [
                 'name' => "2500 Silk",
                 'description' => "Pay 25 USD for 2500 Silk",
@@ -55,7 +55,7 @@ class PaypalSeeder extends Seeder
                 'updated_at' => Carbon::now(),
             ]);
 
-        DB::table('donation_paypals')->updateOrInsert(
+        DB::table('donation_coinbase')->updateOrInsert(
             [
                 'name' => "5000 Silk",
                 'description' => "Pay 50 USD for 5000 Silk",
@@ -65,7 +65,7 @@ class PaypalSeeder extends Seeder
                 'updated_at' => Carbon::now(),
             ]);
 
-        DB::table('donation_paypals')->updateOrInsert(
+        DB::table('donation_coinbase')->updateOrInsert(
             [
                 'name' => "7500 Silk",
                 'description' => "Pay 75 USD for 7500 Silk",
@@ -75,7 +75,7 @@ class PaypalSeeder extends Seeder
                 'updated_at' => Carbon::now(),
             ]);
 
-        DB::table('donation_paypals')->updateOrInsert(
+        DB::table('donation_coinbase')->updateOrInsert(
             [
                 'name' => "10000 Silk",
                 'description' => "Pay 100 USD for 10000 Silk",
@@ -85,7 +85,7 @@ class PaypalSeeder extends Seeder
                 'updated_at' => Carbon::now(),
             ]);
 
-        DB::table('donation_paypals')->updateOrInsert(
+        DB::table('donation_coinbase')->updateOrInsert(
             [
                 'name' => "250000 Silk",
                 'description' => "Pay 250 USD for 25000 Silk",
@@ -95,7 +95,7 @@ class PaypalSeeder extends Seeder
                 'updated_at' => Carbon::now(),
             ]);
 
-        DB::table('donation_paypals')->updateOrInsert(
+        DB::table('donation_coinbase')->updateOrInsert(
             [
                 'name' => "500000 Silk",
                 'description' => "Pay 500 USD for 50000 Silk",
@@ -105,7 +105,7 @@ class PaypalSeeder extends Seeder
                 'updated_at' => Carbon::now(),
             ]);
 
-        DB::table('donation_paypals')->updateOrInsert(
+        DB::table('donation_coinbase')->updateOrInsert(
             [
                 'name' => "100000 Silk",
                 'description' => "Pay 1000 USD for 100000 Silk",

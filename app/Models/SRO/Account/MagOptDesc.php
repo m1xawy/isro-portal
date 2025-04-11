@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Models\SRO\Shard;
+namespace App\Models\SRO\Account;
 
 use Illuminate\Database\Eloquent\Model;
 
-class ItemPoolName extends Model
+class MagOptDesc extends Model
 {
     /**
      * The Database connection name for the model.
@@ -25,7 +25,7 @@ class ItemPoolName extends Model
      *
      * @var string
      */
-    protected $table = 'dbo._Rigid_ItemNameDesc';
+    protected $table = 'dbo._Rigid_MagOptDesc';
 
     /**
      * The attributes that are mass assignable.
@@ -33,22 +33,10 @@ class ItemPoolName extends Model
      * @var array
      */
     protected $fillable = [
-        'Service',
-        'ID',
-        'StrID',
-        'KOR',
-        'UNK0',
-        'UNK1',
-        'UNK2',
-        'UNK3',
-        'VNM',
-        'ENG',
-        'UNK4',
-        'UNK5',
-        'UNK6',
-        'TUR',
-        'ARA',
-        'ESP',
-        'GER'
+        'name',
+        'desc',
+        'mLevel',
+        'extension',
+        'sortkey'
     ];
 }

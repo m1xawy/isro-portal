@@ -38,7 +38,6 @@ Route::group(['middleware' => 'language'], function () {
     Route::any('/fortress', [PageController::class, 'fortress'])->name('pages.fortress');
     Route::any('/global', [PageController::class, 'global'])->name('pages.global');
     Route::get('/download', [DownloadController::class, 'index'])->name('pages.download');
-    Route::get('/guide', [PageController::class, 'guide'])->name('pages.guide');
 
     Route::get('/ranking', [RankingController::class, 'index'])->name('ranking.index');
     Route::get('/ranking/character/{name}', [RankingController::class, 'character_view'])->name('ranking.character.view');

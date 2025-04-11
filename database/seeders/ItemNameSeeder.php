@@ -5,7 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
-class MagOptSeeder extends Seeder
+class ItemNameSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -15,7 +15,7 @@ class MagOptSeeder extends Seeder
     public function run()
     {
         DB::connection('account')->unprepared(
-            file_get_contents('database/seeders/_MagOptDesc.sql')
+            file_get_contents('database/seeders/_ItemNameDesc.sql')
         );
     }
 }

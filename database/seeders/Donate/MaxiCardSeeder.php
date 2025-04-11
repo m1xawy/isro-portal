@@ -1,6 +1,6 @@
 <?php
 
-namespace Database\Seeders;
+namespace Database\Seeders\Donate;
 
 use Carbon\Carbon;
 use Illuminate\Database\Seeder;
@@ -16,8 +16,8 @@ class MaxiCardSeeder extends Seeder
     public function run()
     {
         DB::table('maxi_card_epin')->updateOrInsert(
+            ['name' => "Maxicard 1TL"],
             [
-                'name' => "Maxicard 1TL",
                 'description' => "Maxicard 1TL",
                 'price' => 1,
                 'silk' => 1,
@@ -26,8 +26,8 @@ class MaxiCardSeeder extends Seeder
             ]);
 
         DB::table('maxi_card_epin')->updateOrInsert(
+            ['name' => "Maxicard 5TL"],
             [
-                'name' => "Maxicard 5TL",
                 'description' => "Maxicard 5TL",
                 'price' => 5,
                 'silk' => 5,
@@ -36,8 +36,8 @@ class MaxiCardSeeder extends Seeder
             ]);
 
         DB::table('maxi_card_epin')->updateOrInsert(
+            ['name' => "Maxicard 10TL"],
             [
-                'name' => "Maxicard 10TL",
                 'description' => "Maxicard 10TL",
                 'price' => 10,
                 'silk' => 10,
@@ -46,8 +46,8 @@ class MaxiCardSeeder extends Seeder
             ]);
 
         DB::table('maxi_card_epin')->updateOrInsert(
+            ['name' => "Maxicard 25TL"],
             [
-                'name' => "Maxicard 25TL",
                 'description' => "Maxicard 25TL",
                 'price' => 25,
                 'silk' => 25,
@@ -56,8 +56,8 @@ class MaxiCardSeeder extends Seeder
             ]);
 
         DB::table('maxi_card_epin')->updateOrInsert(
+            ['name' => "Maxicard 50TL"],
             [
-                'name' => "Maxicard 50TL",
                 'description' => "Maxicard 50TL",
                 'price' => 50,
                 'silk' => 50,
@@ -66,8 +66,8 @@ class MaxiCardSeeder extends Seeder
             ]);
 
         DB::table('maxi_card_epin')->updateOrInsert(
+            ['name' => "Maxicard 75TL"],
             [
-                'name' => "Maxicard 75TL",
                 'description' => "Maxicard 75TL",
                 'price' => 75,
                 'silk' => 75,
@@ -76,8 +76,8 @@ class MaxiCardSeeder extends Seeder
             ]);
 
         DB::table('maxi_card_epin')->updateOrInsert(
+            ['name' => "Maxicard 100TL"],
             [
-                'name' => "Maxicard 100TL",
                 'description' => "Maxicard 100TL",
                 'price' => 100,
                 'silk' => 100,
@@ -86,8 +86,8 @@ class MaxiCardSeeder extends Seeder
             ]);
 
         DB::table('maxi_card_epin')->updateOrInsert(
+            ['name' => "Maxicard 250TL"],
             [
-                'name' => "Maxicard 250TL",
                 'description' => "Maxicard 250TL",
                 'price' => 250,
                 'silk' => 250,
@@ -96,8 +96,8 @@ class MaxiCardSeeder extends Seeder
             ]);
 
         DB::table('maxi_card_epin')->updateOrInsert(
+            ['name' => "Maxicard 500TL"],
             [
-                'name' => "Maxicard 500TL",
                 'description' => "Maxicard 500TL",
                 'price' => 500,
                 'silk' => 500,
@@ -106,8 +106,8 @@ class MaxiCardSeeder extends Seeder
             ]);
 
         DB::table('maxi_card_epin')->updateOrInsert(
+            ['name' => "Maxicard 1000TL"],
             [
-                'name' => "Maxicard 1000TL",
                 'description' => "Maxicard 1000TL",
                 'price' => 1000,
                 'silk' => 1000,

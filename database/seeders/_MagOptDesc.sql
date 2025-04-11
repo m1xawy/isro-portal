@@ -1,10 +1,4 @@
--- -------------------------------------------------------------
--- Database: DEVSOME_SRO_VT_SHARD
--- Generation Time: 2020-04-19 16:17:30.0580
--- -------------------------------------------------------------
-
-
-INSERT INTO [dbo].[_Rigid_MagOptDesc] ([id], [name], [desc], [mLevel], [extension], [sortkey]) VALUES
+INSERT INTO [dbo].[_Rigid_MagOptDesc] VALUES
 ('468', N'MATTR_SOLID', N'Steady (%desc% Time/times)', '14', N'', '4'),
 ('467', N'MATTR_SOLID', N'Steady (%desc% Time/times)', '13', N'', '4'),
 ('466', N'MATTR_LUCK', N'Luck %desc% Increase', '14', N'', '9'),
