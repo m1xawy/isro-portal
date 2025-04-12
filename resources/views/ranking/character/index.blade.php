@@ -193,14 +193,14 @@
 
 @endsection
 @section('styles')
-    <link href="{{ asset('/css/layout.css') }}" rel="stylesheet">
-    <script src="{{ asset('/js/function.js') }}"></script>
+    <link href="{{ asset('/css/main.css') }}" rel="stylesheet">
+    <script src="{{ asset('/js/main.js') }}"></script>
     <style>
         /********CUSTOM INV********/
         .sro-item-detail .tooltip {
             text-align: left !important;
             font-size: 12px;
-            width: 230px;
+            width: 240px;
             min-height: 200px;
             background-color: rgba(28, 30, 52, .8);
             color: #fff;
