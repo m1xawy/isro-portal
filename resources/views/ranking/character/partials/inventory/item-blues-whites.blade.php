@@ -12,7 +12,7 @@
 <br />
 <br />
 
-{{--{{ var_dump($item['ItemClass']) }}<br /><br />--}}
+{{--{{ var_dump($item['TypeID3']) }}<br /><br />--}}
 
 @if($item['info']['sox'])
     <b style="color:#f2e43d;">{{ $item['info']['sox'] }}</b><br />
@@ -92,9 +92,7 @@
 @if(count(array_intersect([13], explode(',', $item['info']['TypeID3']))))
     <span style="color:#efdaa4;">Max. no. of magic options: {{ $item['MaxMagicOptCount'] }} Unit</span>
     <br />
-@endif
-
-@if(count(array_intersect([4], explode(',', $item['info']['TypeID2']))))
+@elseif(count(array_intersect([4], explode(',', $item['info']['TypeID2']))))
     <span style="color:#efdaa4;">Max. no. of magic options: {{ $item['MaxMagicOptCount'] }} Unit</span>
     <br />
 @endif
