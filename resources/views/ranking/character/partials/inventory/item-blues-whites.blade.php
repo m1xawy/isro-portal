@@ -113,7 +113,7 @@
 
 @if(!count(array_intersect([13, 14], explode(',', $item['info']['TypeID3']))))
     @if(!count(array_intersect([4], explode(',', $item['info']['TypeID2']))))
-        @if($item['MagParam1'] == 4611686018427387904)
+        @if($item['MagParam1'] >= 4611686018427387904)
             <span style="color:#ff2f51;">You may not use normal Magic Stone</span>
             <br />
             @php $str = 0 @endphp
