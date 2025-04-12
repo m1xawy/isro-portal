@@ -576,7 +576,9 @@ class InventoryService
         });
 
         $aBlues = [];
-        for ($i = 1; $i <= $aItem['MagParamNum']; $i++) {
+        $aWheel = ($aItem['MagParam1'] >= 4611686018427387904) ? 2 : 1;
+
+        for ($i = $aWheel; $i <= $aItem['MagParamNum']; $i++) {
             if (isset($aItem['MagParam' . $i]) && $aItem['MagParam' . $i] > 1) {
                 $aData = self::convertBlue($aItem['MagParam' . $i], $_aMagOptLevel, $aSpecialInfo);
                 if ($aData) {
