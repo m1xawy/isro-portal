@@ -433,7 +433,7 @@ class InventoryService
                 $aData['Type'] = $aAvatarType[$aItem['MaxMagicOptCount']] ?? null;
                 //$aData['Type'] = $aStats[2] . ' ' . ((!isset($aStats[5]) || is_numeric($aStats[5])) ? 'dress' : $aStats[5]);
                 //$aData['Degree'] = $aStats[3];
-                $aData['Sex'] = $aSEX[$aItem['ReqGender']];
+                $aData['Sex'] = $aSEX[$aItem['ReqGender']] ?? null;
                 $aData['Slot'] = $aItem['TypeID4'];
                 break;
 
@@ -990,7 +990,7 @@ class InventoryService
 
             }
         }
-        return $aStats;
+        return $aStats ?? [];
     }
 
     /**
