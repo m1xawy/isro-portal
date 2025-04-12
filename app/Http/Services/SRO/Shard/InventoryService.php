@@ -18,8 +18,8 @@ class InventoryService
     const SHIELD = 4;
     const ACC = 5;
     const SET = 2;
-    const DRESS = "13";
-    const DEVIL = "14";
+    const DRESS = 13;
+    const DEVIL = 14;
 
     /**
      * @param $characterId
@@ -234,9 +234,11 @@ class InventoryService
                 $aData['inventoryEndTime'] = ((time() > $aPet['inventorykeep']) ? '0Day 0Hour 0Minute' : (int)$aTime['day'] . 'Day ' . (int)$aTime['hour'] . 'Hour ' . (int)$aTime['min'] . 'Minute');
             }
         }
+        /*
         if ($aData['TypeID2'] !== 1) {
             return $aData;
         }
+        */
         $aStats = explode('_', $aItem['CodeName128']);
         $aSEX = [0 => 'Female', 1 => 'Male'];
         $aClothDetail = [
@@ -248,44 +250,6 @@ class InventoryService
             'LA' => 'Legs',
             'AA' => 'Hands'
         ];
-        $aSetName = [
-            'SET_A_RARE' => [
-                0 => 'Destruction',
-                1 => 'Destruction',
-                2 => 'Destruction',
-                3 => 'Destruction',
-                4 => 'Destruction',
-                5 => 'Destruction',
-                6 => 'Power',
-                7 => 'Protection',
-                9 => 'Myth',
-                10 => 'Myth',
-                11 => 'Myth',
-                12 => 'Myth',
-
-            ],
-            'SET_B_RARE' => [
-                0 => 'Immortality',
-                1 => 'Immortality',
-                2 => 'Immortality',
-                3 => 'Immortality',
-                4 => 'Immortality',
-                5 => 'Immortality',
-                6 => 'Fight',
-                7 => 'Guard',
-                9 => 'Legend',
-                10 => 'Legend',
-                11 => 'Legend',
-                12 => 'Legend',
-            ],
-        ];
-
-        if (isset($aStats[4], $aStats[5], $aStats[6])) {
-            $setKey = $aStats[4] . '_' . $aStats[5] . '_' . $aStats[6];
-            if (array_key_exists($setKey, $aSetName)) {
-                $aItem['Egy'] = $aSetName[$setKey][$aItem['Slot']] ?? null;
-            }
-        }
 
         $aClothType = [
             'CH' => ['CLOTHES' => 'Garment', 'HEAVY' => 'Armor', 'LIGHT' => 'Protector'],
@@ -317,6 +281,117 @@ class InventoryService
             $aData['Race'] = 'Chinese';
         } elseif ($aStats[1] === 'EU') {
             $aData['Race'] = 'European';
+        }
+
+        $aSoxName = [
+            'SET_A_RARE' => [
+                0 => 'Destruction',
+                1 => 'Destruction',
+                2 => 'Destruction',
+                3 => 'Destruction',
+                4 => 'Destruction',
+                5 => 'Destruction',
+                6 => 'Power',
+                7 => 'Protection',
+                9 => 'Myth',
+                10 => 'Myth',
+                11 => 'Myth',
+                12 => 'Myth',
+            ],
+            'SET_B_RARE' => [
+                0 => 'Immortality',
+                1 => 'Immortality',
+                2 => 'Immortality',
+                3 => 'Immortality',
+                4 => 'Immortality',
+                5 => 'Immortality',
+                6 => 'Fight',
+                7 => 'Guard',
+                9 => 'Legend',
+                10 => 'Legend',
+                11 => 'Legend',
+                12 => 'Legend',
+            ],
+        ];
+
+        $aJobDetail = [
+            0 => 'Head',
+            1 => 'Chest',
+            2 => 'Shoulder',
+            3 => 'Hands',
+            4 => 'Legs',
+            5 => 'Foot',
+        ];
+
+        $ajobType = [
+            2 => [
+                1 => 'Hunter Equipment (weapon)',
+            ],
+            1 => [
+                1 => 'Hunter Equipment (head)',
+                2 => 'Hunter Equipment (shoulder)',
+                3 => 'Hunter Equipment (tunic)',
+                4 => 'Hunter Equipment (pants)',
+                5 => 'Hunter Equipment (gloves)',
+                6 => 'Hunter Equipment (shoes)',
+            ],
+            3 => [
+                1 => 'Hunter Equipment (earrging)',
+                2 => 'Hunter Equipment (necklace)',
+                3 => 'Hunter Equipment (ring)',
+            ],
+            5 => [
+                1 => 'Thief Equipment (weapon)',
+            ],
+            4 => [
+                1 => 'Thief Equipment (head)',
+                2 => 'Thief Equipment (shoulder)',
+                3 => 'Thief Equipment (tunic)',
+                4 => 'Thief Equipment (pants)',
+                5 => 'Thief Equipment (gloves)',
+                6 => 'Thief Equipment (shoes)',
+            ],
+            6 => [
+                1 => 'Thief Equipment (earrging)',
+                2 => 'Thief Equipment (necklace)',
+                3 => 'Thief Equipment (ring)',
+            ],
+        ];
+
+        $aJobDegree = [
+            1 => 'Lowest Quality',
+            2 => 'Low Quality',
+            3 => 'Medium Quality',
+        ];
+
+        $aAvatarType = [
+            1 => 'Avatar Attach',
+            2 => 'Avatar Hat',
+            4 => 'Avatar Dress',
+            9 => 'Devil spirit\'s'
+        ];
+
+        if (isset($aStats[4], $aStats[5], $aStats[6])) {
+            $setKey = $aStats[4] . '_' . $aStats[5] . '_' . $aStats[6];
+            if (array_key_exists($setKey, $aSoxName)) {
+                $aItem['SoxName'] = $aSoxName[$setKey][$aItem['Slot']] ?? null;
+            }
+        }
+
+        if ($aItem['TypeID2'] == 4 || $aItem['TypeID3'] > 0 || $aItem['TypeID4'] > 0) {
+            if (array_key_exists($aItem['TypeID3'], $ajobType)) {
+                if (array_key_exists($aItem['TypeID4'], $ajobType[$aItem['TypeID3']])) {
+                    $aData['JobType'] = $ajobType[$aItem['TypeID3']][$aItem['TypeID4']] ?? null;
+                }
+            }
+
+            if (array_key_exists($aItem['Slot'], $aJobDetail)) {
+                $aData['JobDetail'] = $aJobDetail[$aItem['Slot']] ?? null;
+            }
+
+            if (array_key_exists($aItem['ItemClass'], $aJobDegree)) {
+                $aData['JobDegree'] = $aJobDegree[$aItem['ItemClass']] ?? null;
+            }
         }
 
         switch ($aItem['TypeID3']) {
@@ -353,7 +428,8 @@ class InventoryService
              * DRESS
              */
             case self::DRESS:
-                $aData['Type'] = $aStats[2] . ' ' . ((!isset($aStats[5]) || is_numeric($aStats[5])) ? 'dress' : $aStats[5]);
+                $aData['Type'] = $aAvatarType[$aItem['MaxMagicOptCount']] ?? null;
+                //$aData['Type'] = $aStats[2] . ' ' . ((!isset($aStats[5]) || is_numeric($aStats[5])) ? 'dress' : $aStats[5]);
                 //$aData['Degree'] = $aStats[3];
                 $aData['Sex'] = $aSEX[$aItem['ReqGender']];
                 $aData['Slot'] = $aItem['TypeID4'];
