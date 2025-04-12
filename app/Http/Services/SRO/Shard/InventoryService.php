@@ -207,9 +207,7 @@ class InventoryService
         $aData['sox'] = null; // For Blade
         $aData['OptLevel'] = data_get($aItem, 'OptLevel', 0);
         $aData['Degree'] = data_get($aItem, 'ItemClass', '0'); // For Blade
-        $aData['WebName'] = $this->getItemRealName(
-            $aItem['NameStrID128']
-        );
+        $aData['WebName'] = $this->getItemRealName($aItem['NameStrID128']);
 
         if ($this->isPet($aItem)) {
             $aData['PetState'] = true;
@@ -226,16 +224,12 @@ class InventoryService
             $aData['PetType'] = $aData['TypeID4'];
             $aData['PetName'] = $aPet['CharName'];
             $aTime = self::diffTime(strtotime($aPet['RentEndTime']) - time() - 60 * 60 * 24);
-            $aData['PetEndTime'] = ((time() > strtotime($aPet['RentEndTime'])) ?
-                '0Day 0Hour 0Minute' :
-                (int)$aTime['day'] . 'Day ' . (int)$aTime['hour'] . 'Hour ' . (int)$aTime['min'] . 'Minute');
+            $aData['PetEndTime'] = ((time() > strtotime($aPet['RentEndTime'])) ? '0Day 0Hour 0Minute' : (int)$aTime['day'] . 'Day ' . (int)$aTime['hour'] . 'Hour ' . (int)$aTime['min'] . 'Minute');
             $aData['PetLevel'] = $aPet['Lvl'];
             if ($aPet['inventorysize'] !== null) {
                 $aTime = self::diffTime($aPet['inventorykeep'] - time() - 60 * 60 * 24);
                 $aData['inventorySize'] = $aPet['inventorysize'];
-                $aData['inventoryEndTime'] = ((time() > $aPet['inventorykeep']) ?
-                    '0Day 0Hour 0Minute' :
-                    (int)$aTime['day'] . 'Day ' . (int)$aTime['hour'] . 'Hour ' . (int)$aTime['min'] . 'Minute');
+                $aData['inventoryEndTime'] = ((time() > $aPet['inventorykeep']) ? '0Day 0Hour 0Minute' : (int)$aTime['day'] . 'Day ' . (int)$aTime['hour'] . 'Hour ' . (int)$aTime['min'] . 'Minute');
             }
         }
         if ($aData['TypeID2'] !== 1) {
@@ -310,9 +304,7 @@ class InventoryService
                 $aData['Degree'] = 'devil';
                 $aData['Sex'] = $aSEX[$aItem['ReqGender']];
                 $aTime = self::diffTime($aItem['Data'] - time());
-                $buffer = ((time() > $aItem['Data']) ?
-                    '0Day 0Hour 0Minute' :
-                    $aTime['day'] . 'Day ' . $aTime['hour'] . 'Hour ' . $aTime['min'] . 'Minute');
+                $buffer = ((time() > $aItem['Data']) ? '0Day 0Hour 0Minute' : $aTime['day'] . 'Day ' . $aTime['hour'] . 'Hour ' . $aTime['min'] . 'Minute');
                 $aData['timeEnd'] = $aItem['Data'] === 0 ? '28Day' : $buffer;
                 $aData['Slot'] = 0;
                 break;
@@ -528,14 +520,14 @@ class InventoryService
         if ($_aMagOptLevel[$iState]['name'] === 'MATTR_REPAIR') {
             $iValue--;
         }
-        $aSpecialInfo[$_aMagOptLevel[$iState]['name']] = (isset($aSpecialInfo[$_aMagOptLevel[$iState]['name']])) ?
-            ($aSpecialInfo[$_aMagOptLevel[$iState]['name']] + $iValue) :
-            $iValue;
+        $aSpecialInfo[$_aMagOptLevel[$iState]['name']] = (isset($aSpecialInfo[$_aMagOptLevel[$iState]['name']])) ? ($aSpecialInfo[$_aMagOptLevel[$iState]['name']] + $iValue) : $iValue;
 
         return [
             'name' => str_replace('%desc%', $iValue, $_aMagOptLevel[$iState]['desc']),
             'color' => $_aMagOptLevel[$iState]['name'] === 'MATTR_DEC_MAXDUR' ? 'ff2f51' : '50cecd',
             'sortkey' => $_aMagOptLevel[$iState]['sortkey'],
+            'mValue' => $iValue,
+            'mLevel' => $_aMagOptLevel[$iState]['mLevel'],
             'id' => $iState
         ];
     }

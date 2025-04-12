@@ -12,11 +12,14 @@
 <br />
 <br />
 
+{{--{{ var_dump($item['TypeID2']) }}<br />--}}
+
 @if($item['info']['Degree'] >= '1')
     @if($item['info']['sox'])
         <b style="color:#f2e43d;">{{ $item['info']['sox'] }}</b><br />
     @endif
 
+    @if(!count(array_intersect([4], explode(',', $item['info']['TypeID2']))))
     <span style="color:#efdaa4;">
         @isset($item['info']['Type'])
         Sort of item: {{ data_get($item['info'], 'Type', '') }}<br />
@@ -29,6 +32,32 @@
         @endif
     </span>
     <br />
+    @else
+    <span style="color:#efdaa4;">
+        Sort of item: Hunter Equipment ({{ data_get($item['info'], 'Type', '') }})<br />
+        Mounting part: {{ data_get($item['info'], 'Detail', '') }}<br />
+        @if($item['info']['ReqLevel1'])
+            @switch($item['info']['Degree'])
+                @case(1)
+                    Level: Lowest Quality<br />
+                    @break
+
+                @case(2)
+                    Level: Low Quality<br />
+                    @break
+
+                @case(3)
+                    Level: Medium Quality<br />
+                    @break
+
+                @default
+                    Level: Lowest Quality<br />
+            @endswitch
+        @endif
+    </span>
+    <br />
+    @endif
+
     @if($item['whitestats'])
         @foreach($item['whitestats'] as $iKey => $sWhites)
             {{ $sWhites }} <br />
@@ -37,7 +66,12 @@
     @endif
 
     @if($item['info']['ReqLevel1'])
-        Reqiure level {{ $item['info']['ReqLevel1'] }}<br />
+        @if(count(array_intersect([4], explode(',', $item['info']['TypeID2']))))
+            Job level: {{ $item['info']['ReqLevel1'] }}<br />
+            <span style="color:#efdaa4;">Max. no. of magic options: {{ $item['MaxMagicOptCount'] }} Unit</span><br />
+        @else
+            Reqiure level: {{ $item['info']['ReqLevel1'] }}<br />
+         @endif
     @endif
 
     @isset($item['info']['Sex'])
@@ -48,9 +82,50 @@
         {{ $item['info']['Race'] }}<br />
     @endisset
 
-    @if(count(array_intersect([13], explode(',', $item['info']['TypeID3']))))
+    @if(count(array_intersect([13, 14], explode(',', $item['info']['TypeID3']))))
+        <span style="color:#efdaa4;">
+            @isset($item['info']['Type'])
+                Sort of item: {{ data_get($item['info'], 'Type', '') }}<br />
+            @else
+                @switch($item['info']['TypeID3'])
+                    @case(13)
+                        Sort of item: Avatar Dress<br />
+                        @break
+
+                    @case(14)
+                        Sort of item: Devil´s Spirit<br />
+                        @break
+
+                    @default
+                        Sort of item: Avatar Dress<br />
+                @endswitch
+            @endisset
+        </span>
         <br />
+    @endif
+
+    @if(count(array_intersect([13, 14], explode(',', $item['info']['TypeID3']))))
+        @if($item['info']['TypeID3'] == 14)
+            Basic stats (HP/MP) increase when equipped.  Also, upon awakening the bracelet and activating it, the outer appearance becomes extravagant and divine power becomes available to the wearer for a time.
+            <br />
+            <br />
+            When awakened, the Awakening Time is counted down.
+        @else
+            Dress worn by {{ $item['info']['WebName'] }}<br />
+        @endif
+        <br />
+    @endif
+
+    @if(count(array_intersect([13], explode(',', $item['info']['TypeID3']))))
         <span style="color:#efdaa4;">Max. no. of magic options: {{ $item['MaxMagicOptCount'] }} Unit</span>
+        <br />
+    @endif
+
+    @if(count(array_intersect([14], explode(',', $item['info']['TypeID3']))))
+        <br />
+        <span style="color:#efdaa4;">Basic Option</span><br />
+        MaximumHP 15% Increase<br />
+        MaximumHP 15% Increase<br />
         <br />
     @endif
 
@@ -102,20 +177,26 @@
     @if($item['blues'])
         <br />
         @foreach($item['blues'] as $aBlues)
-            <b style="color:#{{ $aBlues['color'] }}">{{ $aBlues['name'] }}</b><br />
+            <b style="color:#{{ $aBlues['color'] }}">{{ $aBlues['name'] }} @if($item['mLevel'] > 0) (+{{ round($aBlues['mValue'] / $aBlues['mLevel']) * 100 }}%) @endif</b><br />
         @endforeach
     @endif
 
     @if(!count(array_intersect([13, 14], explode(',', $item['info']['TypeID3']))))
-        @if(!$item['nOptValue'])
-            Able to use Advanced elixir.
-        @else
-            <b>Advanced elixir is in effect [+{{ $item['nOptValue'] }}]</b>
+        @if(!count(array_intersect([4], explode(',', $item['info']['TypeID2']))))
+            @if(!$item['nOptValue'])
+                Able to use Advanced elixir.
+            @else
+                <b>Advanced elixir is in effect [+{{ $item['nOptValue'] }}]</b>
+            @endif
         @endif
     @endif
 
-    @isset($item['info']['timeEnd'])
-        <span style="color:#efdaa4;font-weight:bold;">Awaken period</span><br/>
-        {{ $item['info']['timeEnd'] }}<br/>
-    @endisset
+    @if(count(array_intersect([14], explode(',', $item['info']['TypeID3']))))
+        <br/><span style="color:#efdaa4;font-weight:bold;">Awaken period</span><br/>
+        @isset($item['timeEnd'])
+            {{ $item['timeEnd'] }}<br/>
+        @else
+            28Day
+        @endisset
+    @endif
 @endif
