@@ -20,10 +20,6 @@
     <span style="color:#efdaa4;">
         @isset($item['info']['Type'])
         Sort of item: {{ data_get($item['info'], 'Type', '') }}<br />
-        @else
-            @if(count(array_intersect([13, 14], explode(',', $item['info']['TypeID3']))))
-                Sort of item: {{ $item['info']['TypeID3'] == 13 ? 'Avatar Dress' : ($item['info']['TypeID3'] == 14 ? 'Devil´s Spirit' : '') }}<br />
-            @endif
         @endisset
         @isset($item['info']['Detail'])
         Mounting part: {{ data_get($item['info'], 'Detail', '') }}<br />
@@ -48,10 +44,6 @@
         {{ $item['info']['Sex'] }}<br />
     @endisset
 
-    @if(count(array_intersect([13, 14], explode(',', $item['info']['TypeID3']))))
-        {{ $item['ReqGender'] == 0 ? 'Female' : 'Male' }}<br />
-    @endif
-
     @isset($item['info']['Race'])
         {{ $item['info']['Race'] }}<br />
     @endisset
@@ -62,7 +54,8 @@
         <br />
     @endif
 
-    @if(!count(array_intersect([13, 14], explode(',', $item['info']['TypeID3']))))
+    @if($item['MagParam1'] == 4611686018427387904)
+        <span style="color:#ff2f51;">You may not use normal Magic Stone</span>
         <br />
         @php $str = 0 @endphp
         @php $int = 0 @endphp
@@ -88,6 +81,24 @@
         @endif
     @endif
 
+    {{--
+    @if($item['MagParamNum'])
+        <br /><span style="color:#53EE92;">Magic Param Numbers: {{ $item['MagParamNum'] }}</span><br />
+        <b style="color:#50cecd">MagParam1: {{ $item['MagParam1'] }}</b><br />
+        <b style="color:#50cecd">MagParam2: {{ $item['MagParam2'] }}</b><br />
+        <b style="color:#50cecd">MagParam3: {{ $item['MagParam3'] }}</b><br />
+        <b style="color:#50cecd">MagParam4: {{ $item['MagParam4'] }}</b><br />
+        <b style="color:#50cecd">MagParam5: {{ $item['MagParam5'] }}</b><br />
+        <b style="color:#50cecd">MagParam6: {{ $item['MagParam6'] }}</b><br />
+        <b style="color:#50cecd">MagParam7: {{ $item['MagParam7'] }}</b><br />
+        <b style="color:#50cecd">MagParam8: {{ $item['MagParam8'] }}</b><br />
+        <b style="color:#50cecd">MagParam9: {{ $item['MagParam9'] }}</b><br />
+        <b style="color:#50cecd">MagParam10: {{ $item['MagParam10'] }}</b><br />
+        <b style="color:#50cecd">MagParam11: {{ $item['MagParam11'] }}</b><br />
+        <b style="color:#50cecd">MagParam12: {{ $item['MagParam12'] }}</b><br />
+    @endif
+    --}}
+
     @if($item['blues'])
         <br />
         @foreach($item['blues'] as $aBlues)
@@ -102,58 +113,9 @@
             <b>Advanced elixir is in effect [+{{ $item['nOptValue'] }}]</b>
         @endif
     @endif
-@elseif($item['info']['Degree'])
-    <br/>
-    <br/>
 
-    <span style="color:#efdaa4;">Sort of item: {{ $item['info']['Type'] }}</span>
-    <br/>
-    <br/>
-
-    {{ $item['info']['Sex'] }}
-    <br/>
-    <br/>
-
-    @if($item['info']['timeEnd'])
+    @isset($item['info']['timeEnd'])
         <span style="color:#efdaa4;font-weight:bold;">Awaken period</span><br/>
         {{ $item['info']['timeEnd'] }}<br/>
-    @endif
-
-    @if(!$item['info']['timeEnd'] || $item['blues'])
-        @if(count(array_intersect([13], explode(',', $item['info']['TypeID3']))))
-        <span style="color:#efdaa4;">Max. no. of magic options: {{ $item['MaxMagicOptCount'] }} Unit</span><br/>
-        @endif
-        @if($item['blues'])
-            <br/>
-            <br/>
-            @foreach($item['blues'] as $iKey => $aBlues)
-                <span style="color:#{{ $aBlues['color'] }};font-weight: bold;">{{ $aBlues['name'] }}</span><br/>
-            @endforeach
-       @endif
-    @endif
-@elseif(data_get($item['info'], 'PetType'))
-    <br/>
-    <br/>
-
-    <span style="color:#efdaa4;">Sort of item: Summon Scroll</span>
-    <br/>
-    <br/>
-
-    <span style="color:#efdaa4;font-weight:bold;">Pet information</span><br/>
-    pet name: {{ data_get($item['info'], 'PetName') ?: 'No Name' }}<br/>
-
-    @if(data_get($item['info'], 'PetType') == 1)
-        pet level: {{ data_get($item['info'], 'PetLevel', 0) }}
-    @else
-        <span style="color:#efdaa4;font-weight:bold;">Rental period</span><br/>
-        {{ data_get($item['info'], 'PetEndTime', 'Unknown time') }}
-    @endif
-
-    @if(data_get($item['info'], 'inventorySize'))
-        <br/>
-        <br/>
-        <span style="color:#efdaa4;font-weight:bold;">Inventory</span><br/>
-        {{ data_get($item['info'], 'inventoryEndTime', 'Unknown time') }}<br/>
-        Size: {{ data_get($item['info'], 'inventorySize', 'unknown') }} Slots
-    @endif
+    @endisset
 @endif

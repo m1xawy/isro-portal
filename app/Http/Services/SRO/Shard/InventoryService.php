@@ -450,9 +450,9 @@ class InventoryService
     {
         $oneDay = 86400;
         $_aMagOptLevel = Cache::remember('MagOptDesc', $oneDay * 7, static function () {
-            $q = MagOptDesc::all()->sortBy('id');
+            $aData = MagOptDesc::all()->sortBy('id');
             $aList = [];
-            foreach ($q as $iKey => $aCurData) {
+            foreach ($aData as $iKey => $aCurData) {
                 $aList[$aCurData['id']] = [
                     'name' => $aCurData['name'],
                     'desc' => $aCurData['desc'],
@@ -466,10 +466,8 @@ class InventoryService
 
         $aBlues = [];
         for ($i = 1; $i <= $aItem['MagParamNum']; $i++) {
-            $magParam = 'MagParam' . $i;
-
-            if (isset($aItem[$magParam]) && $aItem[$magParam] > 1) {
-                $aData = self::convertBlue($aItem[$magParam], $_aMagOptLevel, $aSpecialInfo);
+            if (isset($aItem['MagParam' . $i]) && $aItem['MagParam' . $i] > 1) {
+                $aData = self::convertBlue($aItem['MagParam' . $i], $_aMagOptLevel, $aSpecialInfo);
                 if ($aData) {
                     $aBlues[$aData['sortkey'] . '_' . $aData['id']] = $aData;
                 }
