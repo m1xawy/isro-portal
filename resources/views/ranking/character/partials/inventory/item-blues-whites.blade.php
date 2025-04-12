@@ -12,12 +12,49 @@
 <br />
 <br />
 
-{{--{{ var_dump($item['TypeID2']) }}<br />--}}
+{{--{{ var_dump($item['CodeName128']) }}<br />--}}
 
 @if($item['info']['Degree'] >= '1')
     @if($item['info']['sox'])
         <b style="color:#f2e43d;">{{ $item['info']['sox'] }}</b><br />
     @endif
+    <span style="color:#53EE92;font-weight: bold;">
+        @switch($item['CodeName128'])
+            @case(str_contains($item['CodeName128'], 'SET_A_RARE') && $item['Slot'] = 6)
+                Power<br />
+                @break
+
+            @case(str_contains($item['CodeName128'], 'SET_B_RARE') && $item['Slot'] = 6)
+                Fight<br />
+                @break
+
+            @case(str_contains($item['CodeName128'], 'SET_A_RARE') && $item['Slot'] = 7)
+                Protection<br />
+                @break
+
+            @case(str_contains($item['CodeName128'], 'SET_B_RARE') && $item['Slot'] = 7)
+                Guard<br />
+                @break
+
+            @case(str_contains($item['CodeName128'], 'SET_A_RARE') && in_array($item['Slot'], [0, 1, 2, 3, 4, 5]))
+                Destruction<br />
+                @break
+
+            @case(str_contains($item['CodeName128'], 'SET_B_RARE') && in_array($item['Slot'], [0, 1, 2, 3, 4, 5]))
+                Immortality<br />
+                @break
+
+            @case(str_contains($item['CodeName128'], 'SET_A_RARE') && in_array($item['Slot'], [9, 10, 11, 12]))
+                Myth<br />
+                @break
+
+            @case(str_contains($item['CodeName128'], 'SET_B_RARE') && in_array($item['Slot'], [9, 10, 11, 12]))
+                Legend<br />
+                @break
+
+            @default
+        @endswitch
+    </span>
 
     @if(!count(array_intersect([4], explode(',', $item['info']['TypeID2']))))
     <span style="color:#efdaa4;">
@@ -34,8 +71,75 @@
     <br />
     @else
     <span style="color:#efdaa4;">
-        Sort of item: Hunter Equipment ({{ data_get($item['info'], 'Type', '') }})<br />
-        Mounting part: {{ data_get($item['info'], 'Detail', '') }}<br />
+        @if($item['info']['TypeID3'] == 2 && $item['info']['TypeID4'] == 1)
+            Sort of item: Hunter Equipment (weapon)<br />
+        @elseif($item['info']['TypeID3'] == 1 && $item['info']['TypeID4'] == 1)
+            Sort of item: Hunter Equipment (head)<br />
+        @elseif($item['info']['TypeID3'] == 1 && $item['info']['TypeID4'] == 2)
+            Sort of item: Hunter Equipment (shoulder)<br />
+        @elseif($item['info']['TypeID3'] == 1 && $item['info']['TypeID4'] == 3)
+            Sort of item: Hunter Equipment (tunic)<br />
+        @elseif($item['info']['TypeID3'] == 1 && $item['info']['TypeID4'] == 4)
+            Sort of item: Hunter Equipment (pants)<br />
+        @elseif($item['info']['TypeID3'] == 1 && $item['info']['TypeID4'] == 5)
+            Sort of item: Hunter Equipment (gloves)<br />
+        @elseif($item['info']['TypeID3'] == 1 && $item['info']['TypeID4'] == 6)
+            Sort of item: Hunter Equipment (shoes)<br />
+        @elseif($item['info']['TypeID3'] == 3 && $item['info']['TypeID4'] == 1)
+            Sort of item: Hunter Equipment (earrging)<br />
+        @elseif($item['info']['TypeID3'] == 3 && $item['info']['TypeID4'] == 2)
+            Sort of item: Hunter Equipment (necklace)<br />
+        @elseif($item['info']['TypeID3'] == 3 && $item['info']['TypeID4'] == 3)
+            Sort of item: Hunter Equipment (ring)<br />
+
+        @elseif($item['info']['TypeID3'] == 5 && $item['info']['TypeID4'] == 1)
+            Sort of item: Thief Equipment (weapon)<br />
+        @elseif($item['info']['TypeID3'] == 4 && $item['info']['TypeID4'] == 1)
+            Sort of item: Thief Equipment (head)<br />
+        @elseif($item['info']['TypeID3'] == 4 && $item['info']['TypeID4'] == 2)
+            Sort of item: Thief Equipment (shoulder)<br />
+        @elseif($item['info']['TypeID3'] == 4 && $item['info']['TypeID4'] == 3)
+            Sort of item: Thief Equipment (tunic)<br />
+        @elseif($item['info']['TypeID3'] == 4 && $item['info']['TypeID4'] == 4)
+            Sort of item: Thief Equipment (pants)<br />
+        @elseif($item['info']['TypeID3'] == 4 && $item['info']['TypeID4'] == 5)
+            Sort of item: Thief Equipment (gloves)<br />
+        @elseif($item['info']['TypeID3'] == 4 && $item['info']['TypeID4'] == 6)
+            Sort of item: Thief Equipment (shoes)<br />
+        @elseif($item['info']['TypeID3'] == 3 && $item['info']['TypeID4'] == 1)
+            Sort of item: Thief Equipment (earrging)<br />
+        @elseif($item['info']['TypeID3'] == 3 && $item['info']['TypeID4'] == 2)
+            Sort of item: Thief Equipment (necklace)<br />
+        @elseif($item['info']['TypeID3'] == 3 && $item['info']['TypeID4'] == 3)
+            Sort of item: Thief Equipment (ring)<br />
+        @endif
+        @switch($item['Slot'])
+            @case(0)
+                Mounting part: Head<br />
+                @break
+
+            @case(1)
+                Mounting part: Chest<br />
+                @break
+
+            @case(2)
+                Mounting part: Shoulder<br />
+                @break
+
+            @case(3)
+                Mounting part: Hands<br />
+                @break
+
+            @case(4)
+                Mounting part: Legs<br />
+                @break
+
+            @case(5)
+                Mounting part: Foot<br />
+                @break
+
+            @default
+        @endswitch
         @if($item['info']['ReqLevel1'])
             @switch($item['info']['Degree'])
                 @case(1)
@@ -87,13 +191,21 @@
             @isset($item['info']['Type'])
                 Sort of item: {{ data_get($item['info'], 'Type', '') }}<br />
             @else
-                @switch($item['info']['TypeID3'])
-                    @case(13)
+                @switch($item['MaxMagicOptCount'])
+                    @case(1)
+                        Sort of item: Avatar Attach<br />
+                        @break
+
+                    @case(2)
+                        Sort of item: Avatar Hat<br />
+                        @break
+
+                    @case(4)
                         Sort of item: Avatar Dress<br />
                         @break
 
-                    @case(14)
-                        Sort of item: Devil´s Spirit<br />
+                    @case(9)
+                        Sort of item: Devil spirit's<br />
                         @break
 
                     @default

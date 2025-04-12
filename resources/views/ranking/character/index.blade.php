@@ -194,4 +194,65 @@
 @endsection
 @section('styles')
     <link href="{{ asset('/css/layout.css') }}" rel="stylesheet">
+    <script src="{{ asset('/js/function.js') }}"></script>
+    <style>
+        /********CUSTOM INV********/
+        .sro-item-detail .tooltip {
+            text-align: left !important;
+            font-size: 12px;
+            width: 230px;
+            min-height: 200px;
+            background-color: rgba(28, 30, 52, .8);
+            color: #fff;
+            padding: 6px;
+            border: 1px solid #808bba;
+            border-radius: 5px;
+            box-shadow: none;
+            z-index: 999;
+        }
+
+        .table.table-inventory {
+            margin: 0;
+            width: 178px;
+        }
+        .table.table-inventory tr:first-child td {
+            padding: 12px 12px 35px;
+        }
+        .table.table-inventory td, .table.table-inventory th {
+            padding: 5.5px 5px;
+        }
+        .sro-item-detail.sro-item-special {
+            background: 0;
+        }
+        .sro-item-detail {
+            background: 0;
+            width: auto;
+            margin: 0;
+        }
+        .table.table-inventory td:last-child {
+            float: right;
+        }
+        .sro-item-detail .item {
+            margin: 0;
+            background: 0;
+        }
+
+        /********CUSTOM INV AVATAR********/
+        .table.table-inventory-avatar {
+            margin: -5px auto 12px;
+            width: 158px;
+        }
+        .table.table-inventory-avatar tbody {
+            display: flex;
+        }
+        .table.table-inventory-avatar tr:first-child td {
+            padding: 6px;
+        }
+        .table.table-inventory-avatar td, .table.table-inventory-avatar th {
+            padding: 6px;
+        }
+        .table.table-inventory-avatar td:last-child {
+            float: right;
+        }
+    </style>
 @endsection
