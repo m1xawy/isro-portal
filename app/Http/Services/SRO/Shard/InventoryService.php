@@ -378,10 +378,12 @@ class InventoryService
             }
         }
 
-        if ($aItem['TypeID2'] == 4 || $aItem['TypeID3'] > 0 || $aItem['TypeID4'] > 0) {
-            if (array_key_exists($aItem['TypeID3'], $ajobType)) {
-                if (array_key_exists($aItem['TypeID4'], $ajobType[$aItem['TypeID3']])) {
-                    $aData['JobType'] = $ajobType[$aItem['TypeID3']][$aItem['TypeID4']] ?? null;
+        if ($aItem['TypeID2'] == 4) {
+            if ($aItem['TypeID3'] > 0 && $aItem['TypeID4'] > 0) {
+                if (array_key_exists($aItem['TypeID3'], $ajobType)) {
+                    if (array_key_exists($aItem['TypeID4'], $ajobType[$aItem['TypeID3']])) {
+                        $aData['JobType'] = $ajobType[$aItem['TypeID3']][$aItem['TypeID4']] ?? null;
+                    }
                 }
             }
 
@@ -578,7 +580,7 @@ class InventoryService
             if (isset($aItem['MagParam' . $i]) && $aItem['MagParam' . $i] > 1) {
                 $aData = self::convertBlue($aItem['MagParam' . $i], $_aMagOptLevel, $aSpecialInfo);
                 if ($aData) {
-                    $aBlues[$aData['sortkey'] . '_' . $aData['id']] = $aData;
+                    $aBlues[] = $aData;
                 }
             }
         }

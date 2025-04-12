@@ -138,22 +138,6 @@
                 <span style="color:#efdaa4;">STR Count: [{{ $str }}]</span><br />
                 <span style="color:#efdaa4;">INT Count: [{{ $int }}]</span><br />
             @endif
-
-            @if($item['MagParamNum'] > 0)
-                <br /><span style="color:#53EE92;">Magic Param Numbers: {{ $item['MagParamNum'] }}</span><br />
-                <b style="color:#50cecd">MagParam1: {{ $item['MagParam1'] }}</b><br />
-                <b style="color:#50cecd">MagParam2: {{ $item['MagParam2'] }}</b><br />
-                <b style="color:#50cecd">MagParam3: {{ $item['MagParam3'] }}</b><br />
-                <b style="color:#50cecd">MagParam4: {{ $item['MagParam4'] }}</b><br />
-                <b style="color:#50cecd">MagParam5: {{ $item['MagParam5'] }}</b><br />
-                <b style="color:#50cecd">MagParam6: {{ $item['MagParam6'] }}</b><br />
-                <b style="color:#50cecd">MagParam7: {{ $item['MagParam7'] }}</b><br />
-                <b style="color:#50cecd">MagParam8: {{ $item['MagParam8'] }}</b><br />
-                <b style="color:#50cecd">MagParam9: {{ $item['MagParam9'] }}</b><br />
-                <b style="color:#50cecd">MagParam10: {{ $item['MagParam10'] }}</b><br />
-                <b style="color:#50cecd">MagParam11: {{ $item['MagParam11'] }}</b><br />
-                <b style="color:#50cecd">MagParam12: {{ $item['MagParam12'] }}</b><br />
-            @endif
         @endif
     @endif
 @endif
