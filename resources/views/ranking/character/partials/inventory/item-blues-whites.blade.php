@@ -12,60 +12,27 @@
 <br />
 <br />
 
-{{--{{ var_dump($item['CodeName128']) }}<br />--}}
+{{ var_dump($item['info']) }}<br /><br />
 
 @if($item['info']['Degree'] >= '1')
     @if($item['info']['sox'])
         <b style="color:#f2e43d;">{{ $item['info']['sox'] }}</b><br />
     @endif
-    <span style="color:#53EE92;font-weight: bold;">
-        @switch($item['CodeName128'])
-            @case(str_contains($item['CodeName128'], 'SET_A_RARE') && $item['Slot'] = 6)
-                Power<br />
-                @break
 
-            @case(str_contains($item['CodeName128'], 'SET_B_RARE') && $item['Slot'] = 6)
-                Fight<br />
-                @break
-
-            @case(str_contains($item['CodeName128'], 'SET_A_RARE') && $item['Slot'] = 7)
-                Protection<br />
-                @break
-
-            @case(str_contains($item['CodeName128'], 'SET_B_RARE') && $item['Slot'] = 7)
-                Guard<br />
-                @break
-
-            @case(str_contains($item['CodeName128'], 'SET_A_RARE') && in_array($item['Slot'], [0, 1, 2, 3, 4, 5]))
-                Destruction<br />
-                @break
-
-            @case(str_contains($item['CodeName128'], 'SET_B_RARE') && in_array($item['Slot'], [0, 1, 2, 3, 4, 5]))
-                Immortality<br />
-                @break
-
-            @case(str_contains($item['CodeName128'], 'SET_A_RARE') && in_array($item['Slot'], [9, 10, 11, 12]))
-                Myth<br />
-                @break
-
-            @case(str_contains($item['CodeName128'], 'SET_B_RARE') && in_array($item['Slot'], [9, 10, 11, 12]))
-                Legend<br />
-                @break
-
-            @default
-        @endswitch
-    </span>
+    @if($item['Egy'])
+        <span style="color:#53EE92;font-weight: bold;">{{ $item['Egy'] }}</span><br />
+    @endif
 
     @if(!count(array_intersect([4], explode(',', $item['info']['TypeID2']))))
     <span style="color:#efdaa4;">
         @isset($item['info']['Type'])
-        Sort of item: {{ data_get($item['info'], 'Type', '') }}<br />
+        Sort of item: {{ $item['info']['Type'] }}<br />
         @endisset
         @isset($item['info']['Detail'])
-        Mounting part: {{ data_get($item['info'], 'Detail', '') }}<br />
+        Mounting part: {{ $item['info']['Detail'] }}<br />
         @endisset
         @if($item['info']['ReqLevel1'])
-        Degree: {{ data_get($item['info'], 'Degree', '') }} degrees<br />
+        Degree: {{ $item['info']['Degree'] }} degrees<br />
         @endif
     </span>
     <br />
@@ -268,7 +235,6 @@
         @endif
     @endif
 
-    {{--
     @if($item['MagParamNum'])
         <br /><span style="color:#53EE92;">Magic Param Numbers: {{ $item['MagParamNum'] }}</span><br />
         <b style="color:#50cecd">MagParam1: {{ $item['MagParam1'] }}</b><br />
@@ -284,7 +250,6 @@
         <b style="color:#50cecd">MagParam11: {{ $item['MagParam11'] }}</b><br />
         <b style="color:#50cecd">MagParam12: {{ $item['MagParam12'] }}</b><br />
     @endif
-    --}}
 
     @if($item['blues'])
         <br />

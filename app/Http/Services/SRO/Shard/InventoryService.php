@@ -17,7 +17,9 @@ class InventoryService
     const WEAPON = 6;
     const SHIELD = 4;
     const ACC = 5;
-    const SET = 1;
+    const SET = 2;
+    const DRESS = "13";
+    const DEVIL = "14";
 
     /**
      * @param $characterId
@@ -246,6 +248,45 @@ class InventoryService
             'LA' => 'Legs',
             'AA' => 'Hands'
         ];
+        $aSetName = [
+            'SET_A_RARE' => [
+                0 => 'Destruction',
+                1 => 'Destruction',
+                2 => 'Destruction',
+                3 => 'Destruction',
+                4 => 'Destruction',
+                5 => 'Destruction',
+                6 => 'Power',
+                7 => 'Protection',
+                9 => 'Myth',
+                10 => 'Myth',
+                11 => 'Myth',
+                12 => 'Myth',
+
+            ],
+            'SET_B_RARE' => [
+                0 => 'Immortality',
+                1 => 'Immortality',
+                2 => 'Immortality',
+                3 => 'Immortality',
+                4 => 'Immortality',
+                5 => 'Immortality',
+                6 => 'Fight',
+                7 => 'Guard',
+                9 => 'Legend',
+                10 => 'Legend',
+                11 => 'Legend',
+                12 => 'Legend',
+            ],
+        ];
+
+        if (isset($aStats[4], $aStats[5], $aStats[6])) {
+            $setKey = $aStats[4] . '_' . $aStats[5] . '_' . $aStats[6];
+            if (array_key_exists($setKey, $aSetName)) {
+                $aItem['Egy'] = $aSetName[$setKey][$aItem['Slot']] ?? null;
+            }
+        }
+
         $aClothType = [
             'CH' => ['CLOTHES' => 'Garment', 'HEAVY' => 'Armor', 'LIGHT' => 'Protector'],
             'EU' => ['CLOTHES' => 'Robe', 'HEAVY' => 'Heavy armor', 'LIGHT' => 'Light armor']
@@ -299,7 +340,7 @@ class InventoryService
             /**
              * DEVIL
              */
-            case 14:
+            case self::DEVIL:
                 $aData['Type'] = 'Devil´s Spirit';
                 $aData['Degree'] = 'devil';
                 $aData['Sex'] = $aSEX[$aItem['ReqGender']];
@@ -311,7 +352,7 @@ class InventoryService
             /**
              * DRESS
              */
-            case 13:
+            case self::DRESS:
                 $aData['Type'] = $aStats[2] . ' ' . ((!isset($aStats[5]) || is_numeric($aStats[5])) ? 'dress' : $aStats[5]);
                 //$aData['Degree'] = $aStats[3];
                 $aData['Sex'] = $aSEX[$aItem['ReqGender']];
