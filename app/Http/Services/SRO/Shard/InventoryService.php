@@ -283,7 +283,7 @@ class InventoryService
              * DRESS
              */
             case self::DRESS:
-                $aData['Type'] = config('constants.item.clothdetail')[$aItem['MaxMagicOptCount']] ?? null;
+                $aData['Type'] = config('constants.item.avatartype')[$aItem['MaxMagicOptCount']] ?? null;
                 //$aData['Type'] = $aStats[2] . ' ' . ((!isset($aStats[5]) || is_numeric($aStats[5])) ? 'dress' : $aStats[5]);
                 //$aData['Degree'] = $aStats[3];
                 $aData['Sex'] = config('constants.item.sex')[$aItem['ReqGender']] ?? null;

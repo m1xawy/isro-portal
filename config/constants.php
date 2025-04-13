@@ -179,13 +179,6 @@ return [
         ],
     ],
     'item' => [
-        'rarity' => [
-            '0' => 'Normal',
-            '1' => 'Seal of Nova',
-            '2' => 'Seal of Moon',
-            '3' => 'Seal of Sun',
-            '6' => 'Set',
-        ],
         'soxtype' => [
             3 => 'Seal of Heavy Storm',
             2 => 'Seal of Star',
