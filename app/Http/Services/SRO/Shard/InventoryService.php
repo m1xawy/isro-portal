@@ -586,8 +586,23 @@ class InventoryService
                 }
             }
         }
-        ksort($aBlues);
-        return $aBlues;
+
+        $bBlues = [];
+        $counter = [];
+        foreach ($aBlues as $aBlue) {
+            if (!isset($counter[$aBlue['sortkey']])) {
+                $counter[$aBlue['sortkey']] = 0;
+                $sortkey = $aBlue['sortkey'];
+            } else {
+                $counter[$aBlue['sortkey']]++;
+                $sortkey = $aBlue['sortkey'] . '_' . $counter[$aBlue['sortkey']];
+            }
+
+            $bBlues[$sortkey] = $aBlue;
+        }
+
+        ksort($bBlues);
+        return $bBlues;
     }
 
     /**
@@ -643,14 +658,17 @@ class InventoryService
         }
         $aSpecialInfo[$_aMagOptLevel[$iState]['name']] = (isset($aSpecialInfo[$_aMagOptLevel[$iState]['name']])) ? ($aSpecialInfo[$_aMagOptLevel[$iState]['name']] + $iValue) : $iValue;
 
-        return [
+        $cBlues =  [
+            'id' => $iState,
+            'code' => $_aMagOptLevel[$iState]['name'],
             'name' => str_replace('%desc%', $iValue, $_aMagOptLevel[$iState]['desc']),
             'color' => $_aMagOptLevel[$iState]['name'] === 'MATTR_DEC_MAXDUR' ? 'ff2f51' : '50cecd',
-            'sortkey' => $_aMagOptLevel[$iState]['sortkey'],
             'mValue' => $iValue,
             'mLevel' => $_aMagOptLevel[$iState]['mLevel'],
-            'id' => $iState
+            'sortkey' => $_aMagOptLevel[$iState]['sortkey'],
         ];
+
+        return $cBlues;
     }
 
     /**

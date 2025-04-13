@@ -12,7 +12,7 @@
 <br />
 <br />
 
-{{--{{ var_dump($item['TypeID3']) }}<br /><br />--}}
+{{ var_dump($item['SoxName']) }}<br /><br />
 
 @if($item['info']['sox'])
     <b style="color:#f2e43d;">{{ $item['info']['sox'] }}</b><br />
@@ -116,27 +116,21 @@
         @if($item['MagParam1'] >= 4611686018427387904)
             <span style="color:#ff2f51;">You may not use normal Magic Stone</span>
             <br />
-            @php $str = 0 @endphp
-            @php $int = 0 @endphp
+            @php $aSTRCount = 0 @endphp
+            @php $aINTCount = 0 @endphp
             @if($item['blues'])
                 @foreach($item['blues'] as $aBlues)
-                    @if(str_contains($aBlues['name'], 'Str'))
-                        @php
-                            $str += intval(preg_replace('/[^0-9]+/', '', $aBlues['name']));
-                        @endphp
-                        @continue
+                    @if($aBlues['code'] == 'MATTR_STR')
+                        @php $aSTRCount += $aBlues['mValue'] @endphp
                     @endif
-                    @if(str_contains($aBlues['name'], 'Int'))
-                        @php
-                            $int += intval(preg_replace('/[^0-9]+/', '', $aBlues['name']));
-                        @endphp
-                        @continue
+                    @if($aBlues['code'] == 'MATTR_INT')
+                        @php $aINTCount += $aBlues['mValue'] @endphp
                     @endif
                 @endforeach
 
                 <span style="color:#efdaa4;">Wheels Count: [{{ count($item['blues']) }}]</span><br />
-                <span style="color:#efdaa4;">STR Count: [{{ $str }}]</span><br />
-                <span style="color:#efdaa4;">INT Count: [{{ $int }}]</span><br />
+                <span style="color:#efdaa4;">STR Count: [{{ $aSTRCount }}]</span><br />
+                <span style="color:#efdaa4;">INT Count: [{{ $aINTCount }}]</span><br />
             @endif
         @endif
     @endif
