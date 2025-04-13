@@ -6,7 +6,6 @@ use App\Http\Controllers\Donate\DonationsMaxiCardController;
 use App\Http\Controllers\Donate\DonationsPayOpController;
 use App\Http\Controllers\Donate\DonationsPaypalController;
 use App\Http\Controllers\Donate\DonationsStripeController;
-use App\Http\Controllers\DownloadController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileController;
@@ -37,7 +36,7 @@ Route::group(['middleware' => 'language'], function () {
     Route::get('/uniques', [PageController::class, 'uniques'])->name('pages.uniques');
     Route::any('/fortress', [PageController::class, 'fortress'])->name('pages.fortress');
     Route::any('/global', [PageController::class, 'global'])->name('pages.global');
-    Route::get('/download', [DownloadController::class, 'index'])->name('pages.download');
+    Route::get('/download', [PageController::class, 'download'])->name('pages.download');
 
     Route::get('/ranking', [RankingController::class, 'index'])->name('ranking.index');
     Route::get('/ranking/character/{name}', [RankingController::class, 'character_view'])->name('ranking.character.view');

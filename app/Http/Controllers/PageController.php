@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Download;
 use App\Models\SRO\Shard\Char;
 use Illuminate\Http\Request;
 use Outl1ne\PageManager\Helpers\NPMHelpers;
@@ -23,6 +24,17 @@ class PageController extends Controller
         }
 
         return redirect()->back();
+    }
+
+    public function download()
+    {
+        $downloads = cache()->remember('download', setting('cache_download', 600), function() {
+            return Download::all();
+        });
+
+        return view('pages.download', [
+            'downloads' => $downloads,
+        ]);
     }
 
     public function timers()
