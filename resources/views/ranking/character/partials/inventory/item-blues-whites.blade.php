@@ -155,9 +155,9 @@
 
 @if(count(array_intersect([14], explode(',', $item['info']['TypeID3']))))
     <br/><span style="color:#efdaa4;font-weight:bold;">Awaken period</span><br/>
-    @isset($item['timeEnd'])
-        {{ $item['timeEnd'] }}<br/>
+    @if(time() > $item['Data'])
+        0Day 0Hour 0Minute<br/>
     @else
-        28Day
-    @endisset
+        {{ floor(($item['Data'] - time()) / (3600 * 24)) }} Day {{ substr(floor(($item['Data'] - time()) / 3600 * 24), 0, 2) }} Hour {{ floor(($item['Data'] - time()) / 60 % 60) }} Minute<br/>
+    @endif
 @endif
