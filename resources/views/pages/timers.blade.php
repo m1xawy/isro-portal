@@ -19,7 +19,7 @@
                         @foreach($timers as $key => $time)
                             @if(is_null($time)) @continue @endif
                             <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 text-center">
-                                <td class="px-1 py-2">{{ config('constants')['eventschedule'][$key] }}</td>
+                                <td class="px-1 py-2">{{ config('constants.eventschedule')[$key] }}</td>
                                 <td class="px-1 py-2">
                                     @if($time['status'])
                                         <span class="text-green-800">Active</span>
