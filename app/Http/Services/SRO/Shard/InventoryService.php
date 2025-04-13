@@ -365,6 +365,7 @@ class InventoryService
         ];
 
         $aAvatarType = [
+            0 => 'Avatar Flag',
             1 => 'Avatar Attach',
             2 => 'Avatar Hat',
             4 => 'Avatar Dress',
@@ -948,11 +949,20 @@ class InventoryService
                                 self::getValue(
                                     $aItem['PD_L'] * 10,
                                     $aItem['PD_U'] * 10,
-                                    $aWhiteStats[3]
+                                    $aWhiteStats[4]
                                 ),
                                 $aItem['PDInc'] * 10,
                                 ((int)$aItem['nOptValue'] + (int)$aItem['OptLevel'])
-                            ) / 10 . ' (+' . $aWhiteStats[3] . '%)',
+                            ) / 10 . ' (+' . $aWhiteStats[4] . '%)',
+                        1 => 'Mag. def. pwr. ' . self::calcOPTValue(
+                                self::getValue(
+                                    $aItem['MD_L'] * 10,
+                                    $aItem['MD_U'] * 10,
+                                    $aWhiteStats[5]
+                                ),
+                                $aItem['MDInc'] * 10,
+                                ((int)$aItem['nOptValue'] + (int)$aItem['OptLevel'])
+                            ) / 10 . ' (+' . $aWhiteStats[5] . '%)',
                     ];
                     break;
                 case 2:
@@ -995,6 +1005,15 @@ class InventoryService
                     break;
                 case 3:
                     $aStats = [
+                        0 => 'Phy. absorption ' . self::calcOPTValue(
+                                self::getValue(
+                                    $aItem['PAR_L'] * 10,
+                                    $aItem['PAR_U'] * 10,
+                                    $aWhiteStats[0]
+                                ),
+                                $aItem['PARInc'] * 10,
+                                ((int)$aItem['nOptValue'] + (int)$aItem['OptLevel'])
+                            ) / 10 . ' (+' . $aWhiteStats[0] . '%)',
                         1 => 'Mag. absorption ' . self::calcOPTValue(
                                 self::getValue(
                                     $aItem['MAR_L'] * 10,

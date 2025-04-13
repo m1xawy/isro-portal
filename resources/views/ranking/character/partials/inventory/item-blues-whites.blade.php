@@ -12,8 +12,6 @@
 <br />
 <br />
 
-{{ var_dump($item['SoxName']) }}<br /><br />
-
 @if($item['info']['sox'])
     <b style="color:#f2e43d;">{{ $item['info']['sox'] }}</b><br />
 @endif
@@ -83,6 +81,8 @@
         <br />
         <br />
         When awakened, the Awakening Time is counted down.
+    @elseif($item['info']['TypeID3'] == 13 && $item['MaxMagicOptCount'] == 0)
+        Flag with enormous, magnificent dragon pattern engraved. Can be equipped in the job slot.<br />
     @else
         Dress worn by {{ $item['info']['WebName'] }}<br />
     @endif
