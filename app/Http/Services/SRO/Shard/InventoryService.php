@@ -342,7 +342,7 @@ class InventoryService
         $iDegree = self::getDegree4ItemClass($iItemClass);
         $iSOXRate = (int)(($iDegree * 3) - $iItemClass);
         $iSOXRate = ($iDegree === 12 && $iSOXRate === 2) ? 3 : $iSOXRate;
-        return config('constants.item.rarity')[$iSOXRate];
+        return config('constants.item.soxtype')[$iSOXRate];
     }
 
     /**

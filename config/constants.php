@@ -186,6 +186,12 @@ return [
             '3' => 'Seal of Sun',
             '6' => 'Set',
         ],
+        'soxtype' => [
+            3 => 'Seal of Heavy Storm',
+            2 => 'Seal of Star',
+            1 => 'Seal of Moon',
+            0 => 'Seal of Sun'
+        ],
         'soxclass' => [
             'SET_A_RARE' => [
                 0 => 'Destruction',
