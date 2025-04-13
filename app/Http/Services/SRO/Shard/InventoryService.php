@@ -211,201 +211,53 @@ class InventoryService
         $aData['Degree'] = data_get($aItem, 'ItemClass', '0'); // For Blade
         $aData['WebName'] = $this->getItemRealName($aItem['NameStrID128']);
 
-        if ($this->isPet($aItem)) {
-            $aData['PetState'] = true;
-            $aData['Type'] = 'Pet';
-            if (!isset($aItem['RentEndTime'])) {
-                $aPet = $this->getPet($aItem['Data']);
-
-                if (!(bool)$aPet) {
-                    return $aData;
-                }
-            } else {
-                $aPet = $aItem;
-            }
-            $aData['PetType'] = $aData['TypeID4'];
-            $aData['PetName'] = $aPet['CharName'];
-            $aTime = self::diffTime(strtotime($aPet['RentEndTime']) - time() - 60 * 60 * 24);
-            $aData['PetEndTime'] = ((time() > strtotime($aPet['RentEndTime'])) ? '0Day 0Hour 0Minute' : (int)$aTime['day'] . 'Day ' . (int)$aTime['hour'] . 'Hour ' . (int)$aTime['min'] . 'Minute');
-            $aData['PetLevel'] = $aPet['Lvl'];
-            if ($aPet['inventorysize'] !== null) {
-                $aTime = self::diffTime($aPet['inventorykeep'] - time() - 60 * 60 * 24);
-                $aData['inventorySize'] = $aPet['inventorysize'];
-                $aData['inventoryEndTime'] = ((time() > $aPet['inventorykeep']) ? '0Day 0Hour 0Minute' : (int)$aTime['day'] . 'Day ' . (int)$aTime['hour'] . 'Hour ' . (int)$aTime['min'] . 'Minute');
-            }
-        }
-
         if (!in_array($aItem['TypeID2'], [1, 4])) {
             return $aData;
         }
 
         $aStats = explode('_', $aItem['CodeName128']);
-        $aSEX = [0 => 'Female', 1 => 'Male'];
-        $aClothDetail = [
-            'FA' => 'Foot',
-            'HA' => 'Head',
-            'CA' => 'Head',
-            'SA' => 'Shoulder',
-            'BA' => 'Chest',
-            'LA' => 'Legs',
-            'AA' => 'Hands'
-        ];
-
-        $aClothType = [
-            'CH' => ['CLOTHES' => 'Garment', 'HEAVY' => 'Armor', 'LIGHT' => 'Protector'],
-            'EU' => ['CLOTHES' => 'Robe', 'HEAVY' => 'Heavy armor', 'LIGHT' => 'Light armor']
-        ];
-        $aWeaponType = [
-            'CH' => [
-                'TBLADE' => 'Glavie',
-                'SPEAR' => 'Spear',
-                'SWORD' => 'Sword',
-                'BLADE' => 'Blade',
-                'BOW' => 'Bow',
-                'SHIELD' => 'Shield'
-            ],
-            'EU' => [
-                'AXE' => 'Dual axe',
-                'CROSSBOW' => 'Crossbow',
-                'DAGGER' => 'Dagger',
-                'DARKSTAFF' => 'Dark staff',
-                'HARP' => 'Harp',
-                'SHIELD' => 'Shield',
-                'STAFF' => 'Light staff',
-                'SWORD' => 'Onehand sword',
-                'TSTAFF' => 'Twohand staff',
-                'TSWORD' => 'Twohand sword'
-            ]
-        ];
-        if ($aStats[1] === 'CH') {
-            $aData['Race'] = 'Chinese';
-        } elseif ($aStats[1] === 'EU') {
-            $aData['Race'] = 'European';
-        }
-
-        $aSoxName = [
-            'SET_A_RARE' => [
-                0 => 'Destruction',
-                1 => 'Destruction',
-                2 => 'Destruction',
-                3 => 'Destruction',
-                4 => 'Destruction',
-                5 => 'Destruction',
-                6 => 'Power',
-                7 => 'Protection',
-                9 => 'Myth',
-                10 => 'Myth',
-                11 => 'Myth',
-                12 => 'Myth',
-            ],
-            'SET_B_RARE' => [
-                0 => 'Immortality',
-                1 => 'Immortality',
-                2 => 'Immortality',
-                3 => 'Immortality',
-                4 => 'Immortality',
-                5 => 'Immortality',
-                6 => 'Fight',
-                7 => 'Guard',
-                9 => 'Legend',
-                10 => 'Legend',
-                11 => 'Legend',
-                12 => 'Legend',
-            ],
-        ];
-
-        $aJobDetail = [
-            0 => 'Head',
-            1 => 'Chest',
-            2 => 'Shoulder',
-            3 => 'Hands',
-            4 => 'Legs',
-            5 => 'Foot',
-        ];
-
-        $ajobType = [
-            2 => [
-                1 => 'Hunter Equipment (weapon)',
-            ],
-            1 => [
-                1 => 'Hunter Equipment (head)',
-                2 => 'Hunter Equipment (shoulder)',
-                3 => 'Hunter Equipment (tunic)',
-                4 => 'Hunter Equipment (pants)',
-                5 => 'Hunter Equipment (gloves)',
-                6 => 'Hunter Equipment (shoes)',
-            ],
-            3 => [
-                1 => 'Hunter Equipment (earrging)',
-                2 => 'Hunter Equipment (necklace)',
-                3 => 'Hunter Equipment (ring)',
-            ],
-            5 => [
-                1 => 'Thief Equipment (weapon)',
-            ],
-            4 => [
-                1 => 'Thief Equipment (head)',
-                2 => 'Thief Equipment (shoulder)',
-                3 => 'Thief Equipment (tunic)',
-                4 => 'Thief Equipment (pants)',
-                5 => 'Thief Equipment (gloves)',
-                6 => 'Thief Equipment (shoes)',
-            ],
-            6 => [
-                1 => 'Thief Equipment (earrging)',
-                2 => 'Thief Equipment (necklace)',
-                3 => 'Thief Equipment (ring)',
-            ],
-        ];
-
-        $aJobDegree = [
-            1 => 'Lowest Quality',
-            2 => 'Low Quality',
-            3 => 'Medium Quality',
-        ];
-
-        $aAvatarType = [
-            0 => 'Avatar Flag',
-            1 => 'Avatar Attach',
-            2 => 'Avatar Hat',
-            4 => 'Avatar Dress',
-            9 => 'Devil spirit\'s'
-        ];
+        $aData['Race'] = config('constants')['item']['race'][$aStats[1]] ?? null;
 
         if (isset($aStats[4], $aStats[5], $aStats[6])) {
             $setKey = $aStats[4] . '_' . $aStats[5] . '_' . $aStats[6];
-            if (array_key_exists($setKey, $aSoxName)) {
-                $aItem['SoxName'] = $aSoxName[$setKey][$aItem['Slot']] ?? null;
+
+            if (array_key_exists($setKey, config('constants')['item']['soxclass'])) {
+                $aItem['SoxClass'] = config('constants')['item']['soxclass'][$setKey][$aItem['Slot']] ?? null;
             }
         }
 
         if ($aItem['TypeID2'] == 4) {
             if ($aItem['TypeID3'] > 0 && $aItem['TypeID4'] > 0) {
-                if (array_key_exists($aItem['TypeID3'], $ajobType)) {
-                    if (array_key_exists($aItem['TypeID4'], $ajobType[$aItem['TypeID3']])) {
-                        $aData['JobType'] = $ajobType[$aItem['TypeID3']][$aItem['TypeID4']] ?? null;
+                if (array_key_exists($aItem['TypeID3'], config('constants')['item']['jobtype'])) {
+                    if (array_key_exists($aItem['TypeID4'], config('constants')['item']['jobtype'][$aItem['TypeID3']])) {
+                        $aData['JobType'] = config('constants')['item']['jobtype'][$aItem['TypeID3']][$aItem['TypeID4']] ?? null;
                     }
                 }
             }
 
-            if (array_key_exists($aItem['Slot'], $aJobDetail)) {
-                $aData['JobDetail'] = $aJobDetail[$aItem['Slot']] ?? null;
+            if (array_key_exists($aItem['Slot'], config('constants')['item']['jobdetail'])) {
+                $aData['JobDetail'] = config('constants')['item']['jobdetail'][$aItem['Slot']] ?? null;
             }
 
-            if (array_key_exists($aItem['ItemClass'], $aJobDegree)) {
-                $aData['JobDegree'] = $aJobDegree[$aItem['ItemClass']] ?? null;
+            if (array_key_exists($aItem['ItemClass'], config('constants')['item']['jobdegree'])) {
+                $aData['JobDegree'] = config('constants')['item']['jobdegree'][$aItem['ItemClass']] ?? null;
             }
+        }
+
+        if ($aItem['TypeID3'] == 14) {
+            $aTime = self::diffTime($aItem['Data'] - time());
+            $aData['devilTimeEnd'] = $aItem['Data'] === 0 ? '28Day' : ((time() > $aItem['Data']) ? '0Day 0Hour 0Minute' : $aTime['day'] . 'Day ' . $aTime['hour'] . 'Hour ' . $aTime['min'] . 'Minute');
         }
 
         switch ($aItem['TypeID3']) {
             case self::WEAPON:
-                $aData['Type'] = $aWeaponType[$aStats[1]][$aStats[2]] ?? '';
+                $aData['Type'] = config('constants')['item']['weapontype'][$aStats[1]][$aStats[2]] ?? '';
                 $aData['Degree'] = self::getDegree4ItemClass($aItem['ItemClass']);
                 $aData['sox'] = self::getSOXRate4ItemClass($aItem['ItemClass'], $aItem['Rarity']);
                 break;
             case self::SHIELD:
                 //set
-                $aData['Type'] = $aWeaponType[$aStats[1]][$aStats[2]] ?? '';
+                $aData['Type'] = config('constants')['item']['weapontype'][$aStats[1]][$aStats[2]] ?? '';
                 $aData['Degree'] = self::getDegree4ItemClass($aItem['ItemClass']);
                 $aData['sox'] = self::getSOXRate4ItemClass($aItem['ItemClass'], $aItem['Rarity']);
                 break;
@@ -421,7 +273,7 @@ class InventoryService
             case self::DEVIL:
                 $aData['Type'] = 'Devil´s Spirit';
                 $aData['Degree'] = 'devil';
-                $aData['Sex'] = $aSEX[$aItem['ReqGender']];
+                $aData['Sex'] = config('constants')['item']['sex'][$aItem['ReqGender']];
                 $aTime = self::diffTime($aItem['Data'] - time());
                 $buffer = ((time() > $aItem['Data']) ? '0Day 0Hour 0Minute' : $aTime['day'] . 'Day ' . $aTime['hour'] . 'Hour ' . $aTime['min'] . 'Minute');
                 $aData['timeEnd'] = $aItem['Data'] === 0 ? '28Day' : $buffer;
@@ -431,23 +283,23 @@ class InventoryService
              * DRESS
              */
             case self::DRESS:
-                $aData['Type'] = $aAvatarType[$aItem['MaxMagicOptCount']] ?? null;
+                $aData['Type'] = config('constants')['item']['clothdetail'][$aItem['MaxMagicOptCount']] ?? null;
                 //$aData['Type'] = $aStats[2] . ' ' . ((!isset($aStats[5]) || is_numeric($aStats[5])) ? 'dress' : $aStats[5]);
                 //$aData['Degree'] = $aStats[3];
-                $aData['Sex'] = $aSEX[$aItem['ReqGender']] ?? null;
+                $aData['Sex'] = config('constants')['item']['sex'][$aItem['ReqGender']] ?? null;
                 $aData['Slot'] = $aItem['TypeID4'];
                 break;
 
             default:
                 $aData['Degree'] = self::getDegree4ItemClass($aItem['ItemClass']);
-                if (isset($aSEX[$aItem['ReqGender']])) {
-                    $aData['Sex'] = $aSEX[$aItem['ReqGender']];
+                if (isset(config('constants')['item']['sex'][$aItem['ReqGender']])) {
+                    $aData['Sex'] = config('constants')['item']['sex'][$aItem['ReqGender']];
                 }
-                if (isset($aClothType[$aStats[1]][$aStats[3]])) {
-                    $aData['Type'] = $aClothType[$aStats[1]][$aStats[3]];
+                if (isset(config('constants')['item']['clothtype'][$aStats[1]][$aStats[3]])) {
+                    $aData['Type'] = config('constants')['item']['clothtype'][$aStats[1]][$aStats[3]];
                 }
-                if (isset($aClothDetail[$aStats[5]])) {
-                    $aData['Detail'] = $aClothDetail[$aStats[5]];
+                if (isset(config('constants')['item']['clothdetail'][$aStats[5]])) {
+                    $aData['Detail'] = config('constants')['item']['clothdetail'][$aStats[5]];
                 }
                 $aData['sox'] = self::getSOXRate4ItemClass($aItem['ItemClass'], $aItem['Rarity']);
                 break;
@@ -486,16 +338,11 @@ class InventoryService
         if ($iRarity <= 1) {
             return '';
         }
-        $aSOX = [
-            0 => 'Seal of Sun',
-            1 => 'Seal of Moon',
-            2 => 'Seal of Star',
-            3 => 'Seal of Heavy Storm'
-        ];
+
         $iDegree = self::getDegree4ItemClass($iItemClass);
         $iSOXRate = (int)(($iDegree * 3) - $iItemClass);
         $iSOXRate = ($iDegree === 12 && $iSOXRate === 2) ? 3 : $iSOXRate;
-        return $aSOX[$iSOXRate];
+        return config('constants')['item']['rarity'][$iSOXRate];
     }
 
     /**

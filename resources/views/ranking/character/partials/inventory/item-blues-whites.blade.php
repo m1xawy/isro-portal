@@ -16,8 +16,8 @@
     <b style="color:#f2e43d;">{{ $item['info']['sox'] }}</b><br />
 @endif
 
-@if($item['SoxName'])
-    <span style="color:#53EE92;font-weight: bold;">{{ $item['SoxName'] }}</span><br />
+@if($item['SoxClass'])
+    <span style="color:#53EE92;font-weight: bold;">{{ $item['SoxClass'] }}</span><br />
 @endif
 
 <span style="color:#efdaa4;">
@@ -155,9 +155,7 @@
 
 @if(count(array_intersect([14], explode(',', $item['info']['TypeID3']))))
     <br/><span style="color:#efdaa4;font-weight:bold;">Awaken period</span><br/>
-    @if(time() > $item['Data'])
-        0Day 0Hour 0Minute<br/>
-    @else
-        {{ floor(($item['Data'] - time()) / (3600 * 24)) }} Day {{ substr(floor(($item['Data'] - time()) / 3600 * 24), 0, 2) }} Hour {{ floor(($item['Data'] - time()) / 60 % 60) }} Minute<br/>
-    @endif
+    @isset($item['info']['devilTimeEnd'])
+        {{ $item['info']['devilTimeEnd'] }}<br/>
+    @endisset
 @endif

@@ -26,7 +26,7 @@
                         <div class="flex items-center space-x-4">
                             <div class="flex-1 min-w-0">
                                 <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
-                                    {{ config('schedule-label')[$key] }}
+                                    {{ config('constants')['eventschedule'][$key] }}
                                 </p>
                             </div>
                             <div class="inline-flex items-center text-sm text-gray-500 dark:text-gray-400 font-medium">
