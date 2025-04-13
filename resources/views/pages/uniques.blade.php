@@ -31,7 +31,11 @@
                                         <img src="{{ asset('images/ingame/chinese.png') }}" style="display:inline;vertical-align:text-top" alt="Rank 3"/>
                                         @php endif; @endphp
 
-                                        <a href="{{ route('ranking.character.view', ['name' => $unique->CharName16]) }}">{{ $unique->CharName16 }}</a>
+                                        @if($unique->CharName16)
+                                            <a href="{{ route('ranking.character.view', ['name' => $unique->CharName16]) }}">{{ $unique->CharName16 }}</a>
+                                        @else
+                                            Empty
+                                        @endif
                                     </td>
                                     <td class="px-1 py-2">
                                         @switch($unique->AreaName)
