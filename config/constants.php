@@ -91,6 +91,59 @@ return [
             'update' => '<span class="badge text-bg-primary">Update</span>',
             'event' => '<span class="badge text-bg-success">Event</span>',
         ],
+        'footer' => [
+            'general' => [
+                1 => [
+                    'name' => 'Home',
+                    'url' => '#',
+                    'image' => '',
+                ],
+                2 => [
+                    'name' => 'Privacy Policy',
+                    'url' => '#',
+                    'image' => '',
+                ],
+                3 => [
+                    'name' => 'Terms & Conditions',
+                    'url' => '#',
+                    'image' => '',
+                ],
+            ],
+            'social' => [
+                1 => [
+                    'name' => 'Facebook',
+                    'url' => 'https://www.facebook.com/',
+                    'image' => '',
+                ],
+                2 => [
+                    'name' => 'Discord',
+                    'url' => 'https://discord.com/',
+                    'image' => '',
+                ],
+                3 => [
+                    'name' => 'Youtube',
+                    'url' => 'https://www.youtube.com/',
+                    'image' => '',
+                ],
+            ],
+            'backlink' => [
+                1 => [
+                    'name' => 'Elitepvpers',
+                    'url' => 'https://www.elitepvpers.com/forum/sro-pserver-advertising/',
+                    'image' => '',
+                ],
+                2 => [
+                    'name' => 'SIlkroad4arab',
+                    'url' => 'https://www.silkroad4arab.com/vb/forumdisplay.php?f=85',
+                    'image' => '',
+                ],
+                3 => [
+                    'name' => 'SroCave',
+                    'url' => 'https://srocave.com/forum/sro-private-server-advertising.34/',
+                    'image' => '',
+                ],
+            ],
+        ],
     ],
     'widgets' => [
         'server_info' => [
