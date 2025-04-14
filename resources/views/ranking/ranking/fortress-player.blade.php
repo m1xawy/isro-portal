@@ -2,8 +2,7 @@
     <table class="table table-striped">
         <thead class="table-dark">
         <tr>
-            <th scope="col"></th>
-            <th scope="col">{{ __('Race') }}</th>
+            <th scope="col">{{ __('Rank') }}</th>
             <th scope="col">{{ __('Name') }}</th>
             <th scope="col">{{ __('Kills/Death') }}</th>
         </tr>
@@ -25,8 +24,6 @@
                         @else
                             <img src="{{ asset('images/chinese.png') }}" alt=""/>
                         @endif
-                    </td>
-                    <td>
                         <a href="{{ route('ranking.character.view', ['name' => $value->CharName16]) }}" class="text-decoration-none">{{ $value->CharName16 }}</a>
                     </td>
                     <td>

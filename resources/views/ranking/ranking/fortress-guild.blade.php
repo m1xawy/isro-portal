@@ -2,7 +2,7 @@
     <table class="table table-striped">
         <thead class="table-dark">
             <tr>
-                <th scope="col"></th>
+                <th scope="col">{{ __('Rank') }}</th>
                 <th scope="col">{{ __('Name') }}</th>
                 <th scope="col">{{ __('Kills/Death') }}</th>
             </tr>
