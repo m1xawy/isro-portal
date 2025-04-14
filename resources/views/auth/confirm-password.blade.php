@@ -1,35 +1,36 @@
-@extends('layouts.full')
+@extends('layouts.guest')
 @section('title', __('Confirm Password'))
 
 @section('content')
-    <div class="flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-gray-100 dark:bg-gray-900">
-        <div class="w-full sm:max-w-md mt-6 px-6 py-4 bg-white dark:bg-gray-800 shadow-md overflow-hidden sm:rounded-lg">
+    <div class="container my-5">
+        <div class="mb-3">
+            {{ __('This is a secure area of the application. Please confirm your password before continuing.') }}
+        </div>
 
-            <div class="mb-4 text-sm text-gray-600 dark:text-gray-400">
-                {{ __('This is a secure area of the application. Please confirm your password before continuing.') }}
+        <form method="POST" action="{{ route('password.confirm') }}">
+            @csrf
+
+            <div class="row mb-3">
+                <label for="password" class="col-md-4 col-form-label text-md-end">{{ __('Password') }}</label>
+
+                <div class="col-md-6">
+                    <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
+
+                    @error('password')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                    @enderror
+                </div>
             </div>
 
-            <form method="POST" action="{{ route('password.confirm') }}">
-                @csrf
-
-                <!-- Password -->
-                <div>
-                    <x-input-label for="password" :value="__('Password')" />
-
-                    <x-text-input id="password" class="block mt-1 w-full"
-                                    type="password"
-                                    name="password"
-                                    required autocomplete="current-password" />
-
-                    <x-input-error :messages="$errors->get('password')" class="mt-2" />
-                </div>
-
-                <div class="flex justify-end mt-4">
-                    <x-primary-button>
+            <div class="row mb-0">
+                <div class="col-md-5 offset-md-4">
+                    <button type="submit" class="btn btn-primary">
                         {{ __('Confirm') }}
-                    </x-primary-button>
+                    </button>
                 </div>
-            </form>
-        </div>
+            </div>
+        </form>
     </div>
 @endsection

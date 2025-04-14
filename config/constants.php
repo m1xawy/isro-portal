@@ -15,6 +15,7 @@ return [
             'free_silk' => 0,
             'free_premium_silk' => 0,
             'debug' => true,
+            'register_disable' => false,
             'register_confirmation' => true,
         ],
         'connection' => [
@@ -98,7 +99,7 @@ return [
                     //To changing icon https://fontawesome.com/icons
                     'icon' => '<i class="fas fa-fw fa-check"></i>',
                     'name' => 'Cap',
-                    'value' => '110'
+                    'value' => '140'
                 ],
                 2 => [
                     'icon' => '<i class="fa fa-fw fa-flask"></i>',

@@ -1,73 +1,92 @@
-@extends('layouts.full')
+@extends('layouts.guest')
 @section('title', __('Register'))
 
 @section('content')
-    <div class="flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-gray-100 dark:bg-gray-900">
-        <div class="w-full sm:max-w-md mt-6 px-6 py-4 bg-white dark:bg-gray-800 shadow-md overflow-hidden sm:rounded-lg">
-            @if (!nova_get_setting('register_disable'))
-                <form method="POST" action="{{ route('register') }}">
-                    @csrf
+    <div class="container my-5">
+        @if (!config('constants.general.options.register_disable'))
+        <form method="POST" action="{{ route('register') }}">
+            @csrf
 
-                    <!-- Name -->
-                    <div>
-                        <x-input-label for="username" :value="__('Username')" />
-                        <x-text-input id="username" class="block mt-1 w-full" type="text" name="username" :value="old('username')" required autofocus />
-                        <x-input-error :messages="$errors->get('username')" class="mt-2" />
-                    </div>
+            <div class="row mb-3">
+                <label for="username" class="col-md-4 col-form-label text-md-end">{{ __('Username') }}</label>
 
-                    <!-- Email Address -->
-                    <div class="mt-4">
-                        <x-input-label for="email" :value="__('Email')" />
-                        <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required />
-                        <x-input-error :messages="$errors->get('email')" class="mt-2" />
-                    </div>
+                <div class="col-md-6">
+                    <input id="username" type="text" class="form-control @error('username') is-invalid @enderror" name="username" value="{{ old('username') }}" required autocomplete="username" autofocus>
 
-                    <!-- Password -->
-                    <div class="mt-4">
-                        <x-input-label for="password" :value="__('Password')" />
+                    @error('username')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                    @enderror
+                </div>
+            </div>
 
-                        <x-text-input id="password" class="block mt-1 w-full" type="password" name="password" required />
+            <div class="row mb-3">
+                <label for="email" class="col-md-4 col-form-label text-md-end">{{ __('Email') }}</label>
 
-                        <x-input-error :messages="$errors->get('password')" class="mt-2" />
-                    </div>
+                <div class="col-md-6">
+                    <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
 
-                    <!-- Confirm Password -->
-                    <div class="mt-4">
-                        <x-input-label for="password_confirmation" :value="__('Confirm Password')" />
+                    @error('email')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                    @enderror
+                </div>
+            </div>
 
-                        <x-text-input id="password_confirmation" class="block mt-1 w-full" type="password" name="password_confirmation" required />
+            <div class="row mb-3">
+                <label for="password" class="col-md-4 col-form-label text-md-end">{{ __('Password') }}</label>
 
-                        <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
-                    </div>
+                <div class="col-md-6">
+                    <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
 
-                    @if (setting('register_reraptcha_enable'))
-                        <!-- google recaptch -->
-                        <div class="mt-4">
-                            {!! NoCaptcha::renderJs() !!}
-                            {!! NoCaptcha::display() !!}
-                            @if ($errors->has('g-recaptcha-response'))
-                                <x-input-error :messages="$errors->first('g-recaptcha-response')" />
-                            @endif
-                        </div>
+                    @error('password')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                    @enderror
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <label for="password-confirm" class="col-md-4 col-form-label text-md-end">{{ __('Confirm Password') }}</label>
+
+                <div class="col-md-6">
+                    <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required>
+                </div>
+            </div>
+
+            @if (!config('constants.general.captcha.enable'))
+                <!-- google recaptch -->
+                <div class="row mb-3">
+                    {!! NoCaptcha::renderJs() !!}
+                    {!! NoCaptcha::display() !!}
+                    @if ($errors->has('g-recaptcha-response'))
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
                     @endif
-
-                    <div class="flex items-center justify-end mt-4">
-                        <a class="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800" href="{{ route('login') }}">
-                            {{ __('Already registered?') }}
-                        </a>
-
-                        <x-primary-button class="ml-4">
-                            {{ __('Register') }}
-                        </x-primary-button>
-                    </div>
-                </form>
-            @else
-                <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg w-full">
-                    <div class="p-6 text-gray-900 dark:text-gray-100 text-center">
-                        Register page disabled
-                    </div>
                 </div>
             @endif
-        </div>
+
+            <div class="row mb-0">
+                <div class="col-md-8 offset-md-4">
+                    <button type="submit" class="btn btn-primary">
+                        {{ __('Register') }}
+                    </button>
+                    <a class="btn btn-link" href="{{ route('login') }}">
+                        {{ __('Already registered?') }}
+                    </a>
+                </div>
+            </div>
+        </form>
+        @else
+            <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg w-full">
+                <div class="p-6 text-gray-900 dark:text-gray-100 text-center">
+                    Register page is disabled!
+                </div>
+            </div>
+        @endif
     </div>
 @endsection
