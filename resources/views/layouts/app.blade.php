@@ -21,7 +21,7 @@
     @stack('styles')
 </head>
 
-<body>
+<body data-bs-theme="{{ config('constants.general.options.theme_color_mode') }}">
 @include('layouts.header')
 
 <main>
@@ -52,6 +52,7 @@
 
 <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 <script defer src="{{ asset('js/bootstrap.bundle.min.js') }}" integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq"></script>
+<script src="{{ asset('js/color-modes.js') }}"></script>
 <script src="https://kit.fontawesome.com/3d3e6e21dd.js" crossorigin="anonymous"></script>
 <script defer src="{{ asset('js/function.js') }}"></script>
 

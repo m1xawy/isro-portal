@@ -10,6 +10,7 @@ return [
             'logo' => 'images/bootstrap-logo-white.svg',
             'timezone' => 'Africa/Cairo',
             'theme' => 'default',
+            'theme_color_mode' => 'switch', //switch, light, dark
             'fake_player' => 250,
             'max_player' => 1000,
             'max_level' => 140,
