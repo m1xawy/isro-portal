@@ -25,10 +25,14 @@
 @include('layouts.header')
 
 <main>
-    @section('breadcrumb')
-        <div class="px-4 py-5 mb-5 text-center" style="background: rgba(33, 37, 41, 0.03)">
-            <h1 class="display-5 fw-bold text-body-emphasis">@yield('title')</h1>
-            <div class="col-lg-6 mx-auto"></div>
+    @section('hero')
+        <div class="mb-5">
+            <div class="p-5 text-center bg-body-tertiary" style="background-image: url({{ config('constants.general.hero.hero_background') }}) !important; background-repeat: no-repeat; background-size: cover; background-position: center;">
+                <div class="container py-5">
+                    <h1 class="display-5 fw-bold text-body-emphasis" style="color: {{ config('constants.general.hero.hero_label_color') }} !important;">@yield('title')</h1>
+                    <p class="col-lg-8 mx-auto lead"></p>
+                </div>
+            </div>
         </div>
     @show
 

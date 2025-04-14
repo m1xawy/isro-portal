@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('title', __('Home'))
 
-@section('breadcrumb')
+@section('hero')
     @include('partials.carousel')
 @stop
 
