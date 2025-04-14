@@ -15,7 +15,7 @@
                         <p class="card-text">{{ $value->desc }}</p>
 
                         <div class="d-grid mx-auto">
-                            <a href="{{ $value->url }}" class="btn btn-primary">{{ __('Download') }}</a>
+                            <a href="{{ $value->url }}" target="_blank" class="btn btn-primary">{{ __('Download') }}</a>
                         </div>
                     </div>
                 </div>

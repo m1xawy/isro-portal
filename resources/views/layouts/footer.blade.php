@@ -9,7 +9,7 @@
                     <img src="{{ asset('images/bootstrap-logo.svg') }}" alt="" width="" height="40" class="">
                 @endif
             </a>
-            <p class="text-body-secondary mb-0">© 2025 <a href="{{ config('constants.general.options.server_url') }}">{{ config('constants.general.options.server_name') }}</a>, Inc - All Rights Reserved.</p>
+            <p class="text-body-secondary mb-0 mt-2">© 2025 <a href="{{ config('constants.general.options.server_url') }}">{{ config('constants.general.options.server_name') }}</a>, Inc - All Rights Reserved.</p>
             <p class="text-body-secondary">Coded by <a class="link-default" href="https://github.com/m1xawy" target="_blank">m1xawy</a></p>
         </div>
 
