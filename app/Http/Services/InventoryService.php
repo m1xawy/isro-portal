@@ -1,14 +1,13 @@
 <?php
 
-namespace App\Http\Services\SRO\Shard;
+namespace App\Http\Services;
 
+use App\Models\SRO\Account\ItemNameDesc;
+use App\Models\SRO\Account\MagOptDesc;
 use App\Models\SRO\Shard\CharCos;
 use App\Models\SRO\Shard\Inventory;
 use App\Models\SRO\Shard\InventoryForAvatar;
 use App\Models\SRO\Shard\TradeEquipInventory;
-use App\Models\SRO\Account\ItemNameDesc;
-use App\Models\SRO\Account\MagOptDesc;
-use App\Models\SRO\Shard\Items;
 use Illuminate\Support\Facades\Cache;
 
 class InventoryService

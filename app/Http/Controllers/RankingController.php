@@ -2,11 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Services\InventoryService;
 use App\Models\SRO\Shard\Char;
-use App\Models\SRO\Shard\CharUniqueKill;
 use App\Models\SRO\Shard\Guild;
-use Illuminate\Http\Request;
-use App\Http\Services\SRO\Shard\InventoryService;
 
 class RankingController extends Controller
 {
