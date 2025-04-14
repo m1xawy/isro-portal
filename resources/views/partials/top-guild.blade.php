@@ -14,18 +14,25 @@
                         </tr>
                     </thead>
                     <tbody>
-                    @php $topGuild = getTopGuild(); @endphp
-                    @php $i = 1; @endphp
-                    @forelse($topGuild->take(5) as $value)
-                        <tr>
-                            <td>@if($i <= 3)<img src="{{ config('constants.ranking.top_icons')[$i] }}" alt=""/>@else{{ $i }}@endif</td>
-                            <td><a href="{{ route('ranking.guild.view', ['name' => $value->Name]) }}" class="text-decoration-none">{{ $value->Name }}</a></td>
-                            <td>{{ $value->ItemPoints }}</td>
-                        </tr>
-                        @php $i++ @endphp
-                    @empty
-                        <tr><td colspan="3" class="text-center">No records found!</td></tr>
-                    @endforelse
+                        @php $i = 1; @endphp
+                        @forelse($top_guild as $value)
+                            <tr>
+                                <td>
+                                    @if($i <= 3)
+                                        <img src="{{ config('constants.ranking.top_icons')[$i] }}" alt=""/>
+                                    @else
+                                        {{ $i }}
+                                    @endif
+                                </td>
+                                <td>
+                                    <a href="{{ route('ranking.guild.view', ['name' => $value->Name]) }}" class="text-decoration-none">{{ $value->Name }}</a>
+                                </td>
+                                <td>{{ $value->ItemPoints }}</td>
+                            </tr>
+                            @php $i++ @endphp
+                        @empty
+                            <tr><td colspan="3" class="text-center">{{ __('No Records Found!') }}</td></tr>
+                        @endforelse
                     </tbody>
                 </table>
             </div>

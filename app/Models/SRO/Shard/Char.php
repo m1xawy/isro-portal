@@ -36,7 +36,7 @@ class Char extends Model
 
     public static function getPlayerRanking($limit = 25)
     {
-        $playerRanking = cache()->remember('player_ranking', setting('cache_ranking_player', 600), function() use ($limit) {
+        $playerRanking = cache()->remember('player_ranking_'.$limit, setting('cache_ranking_player', 600), function() use ($limit) {
             return collect(DB::connection('shard')->select("
                     SELECT TOP(" . $limit . ")
                         _Char.CharID, _Char.CharName16, _Char.CurLevel, _Char.RefObjID, _Guild.ID, _Guild.Name,
@@ -86,7 +86,7 @@ class Char extends Model
 
     public static function getGuildRanking($limit = 25)
     {
-        $guildRanking = cache()->remember('guild_ranking', setting('cache_ranking_guild', 600), function() use ($limit) {
+        $guildRanking = cache()->remember('guild_ranking_'.$limit, setting('cache_ranking_guild', 600), function() use ($limit) {
             return collect(DB::connection('shard')->select("
                     SELECT TOP(" . $limit . ")
                          _Guild.ID, _Guild.Name,  _Guild.Lvl, _Guild.GatheredSP,

@@ -4,22 +4,17 @@
             {{ __('Server Info') }}
         </div>
         <div class="card-body">
-            @php $server_info = config('constants.widgets.server_info.data'); @endphp
-            @if (!empty($server_info))
-                <ul class="list-unstyled">
-                    @foreach($server_info as $value)
-                        <li>
-                            <span>
-                                {!! $value['icon'] !!}
-                                {{ $value['name'] }}
-                            </span>
-                            <span class="float-end">{{ $value['value'] }}</span>
-                        </li>
-                    @endforeach
-                </ul>
-            @else
-                <p>No server info available!</p>
-            @endif
+            <ul class="list-unstyled">
+                @foreach(config('constants.widgets.server_info.data') as $value)
+                    <li>
+                        <span>
+                            {!! $value['icon'] !!}
+                            {{ $value['name'] }}
+                        </span>
+                        <span class="float-end">{{ $value['value'] }}</span>
+                    </li>
+                @endforeach
+            </ul>
         </div>
     </div>
 @endif

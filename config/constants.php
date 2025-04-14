@@ -204,7 +204,7 @@ return [
             ],
         ],
         'event_schedule' => [
-            'enable' => false,
+            'enable' => true,
             'data' => [
                 'roc' => 'Roc',
                 'medusa' => 'Medusa',
@@ -223,7 +223,7 @@ return [
             ],
         ],
         'fortress_war' => [
-            'enable' => false,
+            'enable' => true,
             'data' => [
                 1 => [
                     'name' => 'Jangan',
@@ -244,19 +244,19 @@ return [
             ],
         ],
         'global_history' => [
-            'enable' => false,
+            'enable' => true,
             'limit' => 5,
         ],
         'unique_history' => [
-            'enable' => false,
+            'enable' => true,
             'limit' => 5,
         ],
         'top_player' => [
-            'enable' => false,
+            'enable' => true,
             'limit' => 5,
         ],
         'top_guild' => [
-            'enable' => false,
+            'enable' => true,
             'limit' => 5,
         ],
         'discord' => [
@@ -281,57 +281,48 @@ return [
             3 => 'images/rank3.png',
         ],
         'unique_points' => [
-            1 => [
+            'MOB_CH_TIGERWOMAN' => [
                 'id' => 1954,
-                'code' => 'MOB_CH_TIGERWOMAN',
                 'name' => 'Tiger Girl',
                 'points' => 1
             ],
-            2 => [
+            'MOB_OA_URUCHI' => [
                 'id' => 1982,
-                'code' => 'MOB_OA_URUCHI',
                 'name' => 'Uruchi',
                 'points' => 2
             ],
-            3 => [
+            'MOB_KK_ISYUTARU' => [
                 'id' => 2002,
-                'code' => 'MOB_KK_ISYUTARU',
                 'name' => 'Isyutaru',
                 'points' => 3
             ],
-            4 => [
+            'MOB_KK_ISYUTARU' => [
                 'id' => 3810,
-                'code' => 'MOB_TK_BONELORD',
                 'name' => 'Lord Yarkan',
                 'points' => 4
             ],
-            5 => [
+            'MOB_RM_TAHOMET' => [
                 'id' => 3875,
-                'code' => 'MOB_RM_TAHOMET',
                 'name' => 'Demon Shaitan',
                 'points' => 5
             ],
-            6 => [
+            'MOB_AM_IVY' => [
                 'id' => 14778,
-                'code' => 'MOB_AM_IVY',
                 'name' => 'Captain Ivy',
                 'points' => 2
             ],
-            7 => [
+            'MOB_EU_KERBEROS' => [
                 'id' => 5871,
-                'code' => 'MOB_EU_KERBEROS',
                 'name' => 'Cerberus',
                 'points' => 1
             ],
-            8 => [
+            'MOB_RM_ROC' => [
                 'id' => 3877,
-                'code' => 'MOB_RM_ROC',
                 'name' => 'Roc',
                 'points' => 15
             ],
-            9 => [
+            'MOB_TQ_WHITESNAKE' => [
                 'id' => 14839,
-                'code' => 'MOB_TQ_WHITESNAKE',
                 'name' => 'Medusa',
                 'points' => 10
             ],

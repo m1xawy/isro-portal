@@ -4,26 +4,21 @@
             {{ __('Unique History') }}
         </div>
         <div class="card-body">
-            @php
-                $uniqueHistory = getUniqueHistory();
-                $unique_name = getUniqueHistoryNames();
-            @endphp
-
-            @if (!empty($uniqueHistory))
+            @if (!empty($unique_history))
                 <ul class="list-unstyled">
-                    @foreach($uniqueHistory as $value)
+                    @foreach($unique_history as $value)
                         <li class="mb-3">
-                            <p class="mb-0">{{ $unique_name[$value->MobID] }}</p>
+                            <p class="mb-0">{{ config('constants.ranking.unique_points')[$value->Value] }}</p>
                             <small>
                                 Killed by:
                                 <a href="{{ route('ranking.character.view', ['name' => $value->CharName16]) }}" class="text-decoration-none">{{ $value->CharName16 }}</a>
-                                {{ \Carbon\Carbon::make($value->EventDate)->diffForHumans() }}
+                                {{ \Carbon\Carbon::make($value->EventTime)->diffForHumans() }}
                             </small>
                         </li>
                     @endforeach
                 </ul>
             @else
-                <p class="text-center">No records found!</p>
+                <p class="text-center">{{ __('No Records Found!') }}</p>
             @endif
 
             <div class="d-grid mx-auto">

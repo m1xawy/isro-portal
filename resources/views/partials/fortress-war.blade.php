@@ -4,30 +4,26 @@
             {{ __('Fortress War') }}
         </div>
         <div class="card-body">
-            @php
-                $fortresses = getFortress();
-                $const = config('constants.widgets.fortress_war.data');
-            @endphp
-            @if (count($fortresses))
+            @if (count($fortress_war))
                 <ul class="list-unstyled">
-                    @foreach($fortresses as $value)
+                    @foreach($fortress_war as $value)
                         <li>
                             <span>
-                                <img src="{{ $const[$value->FortressID]['icon'] }}" alt="">
-                                {{ $const[$value->FortressID]['name'] }}
+                                <img src="{{ config('constants.widgets.fortress_war.data')[$value->FortressID]['icon'] }}" alt="">
+                                {{ config('constants.widgets.fortress_war.data')[$value->FortressID]['name'] }}
                             </span>
                             <span class="float-end">
                                 @if($value->Name !== 'DummyGuild')
                                     <a href="{{ route('ranking.guild.view', ['name' => $value->Name]) }}" class="text-decoration-none">{{ $value->Name }}</a>
                                 @else
-                                    <span>None</span>
+                                    <span>{{ __('DummyGuild') }}</span>
                                 @endif
                             </span>
                         </li>
                     @endforeach
                 </ul>
             @else
-                <p class="text-center">No records found!</p>
+                <p class="text-center">{{ __('No Records Found!') }}</p>
             @endif
 
             <div class="d-grid mx-auto">

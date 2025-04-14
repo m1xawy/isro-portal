@@ -4,10 +4,9 @@
             {{ __('Global History') }}
         </div>
         <div class="card-body">
-            @php $GlobalHistory = getGlobalHistory(); @endphp
-            @if (!empty($GlobalHistory))
+            @if (!empty($global_history))
                 <ul class="list-unstyled">
-                    @foreach($GlobalHistory as $value)
+                    @foreach($global_history as $value)
                         <li class="mb-3">
                             <p class="mb-0">[{{ $value->Comment }}]</p>
                             <small>

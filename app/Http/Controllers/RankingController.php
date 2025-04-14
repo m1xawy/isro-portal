@@ -10,7 +10,7 @@ class RankingController extends Controller
 {
     public function index()
     {
-        $rankings = (new Char)->getPlayerRanking();
+        $rankings = Char::getPlayerRanking();
         return view('ranking.index', [
             'rankings' => $rankings,
         ]);
@@ -18,7 +18,7 @@ class RankingController extends Controller
 
     public function player()
     {
-        $players = (new Char)->getPlayerRanking();
+        $players = Char::getPlayerRanking();
         return view('ranking.ranking.player', [
             'players' => $players,
         ]);
@@ -26,7 +26,7 @@ class RankingController extends Controller
 
     public function guild()
     {
-        $guilds = (new Char)->getGuildRanking();
+        $guilds = Char::getGuildRanking();
         return view('ranking.ranking.guild', [
             'guilds' => $guilds,
         ]);
