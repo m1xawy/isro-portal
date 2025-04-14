@@ -157,6 +157,26 @@ return [
         ],
     ],
     'widgets' => [
+        'global_history' => [
+            'enable' => false,
+            'limit' => 5,
+        ],
+        'unique_history' => [
+            'enable' => false,
+            'limit' => 5,
+        ],
+        'top_player' => [
+            'enable' => false,
+            'limit' => 5,
+        ],
+        'top_guild' => [
+            'enable' => false,
+            'limit' => 5,
+        ],
+        'discord' => [
+            'enable' => true,
+            'server_id' => '1004443821570019338',
+        ],
         'server_info' => [
             'enable' => true,
             'data' => [
@@ -204,7 +224,7 @@ return [
             ],
         ],
         'event_schedule' => [
-            'enable' => true,
+            'enable' => false,
             'data' => [
                 'roc' => 'Roc',
                 'medusa' => 'Medusa',
@@ -223,7 +243,7 @@ return [
             ],
         ],
         'fortress_war' => [
-            'enable' => true,
+            'enable' => false,
             'data' => [
                 1 => [
                     'name' => 'Jangan',
@@ -242,26 +262,6 @@ return [
                     'icon' => 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAMAAAAoLQ9TAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAgY0hSTQAAeiYAAICEAAD6AAAAgOgAAHUwAADqYAAAOpgAABdwnLpRPAAAAwBQTFRFAAAADwUAHh4eJA0AKA4ALRAAMxIANxMANBQBOxUAPRYAPhcBODg4Pz4+QBcAThwATR0CUSEGWSABXSEAXSUIWygNZiQBZycFZSsKbjIRbzMSeTAIfDEIfjQLfDcRezsYfzsYQkFBV1ZWXFtbYWBgaGdnamlpa2pqb25uenh4enl5fHt7f319gT0Zi0MckkMZnkscjU0pk0skk08qm1o1nlkyn1o0qU0aq1corVksplw2q180uGY7l2dNrWhBt25GsXVTw3NHxXBCy3lN0H5TuYVo04BTwZN615d115l375Vj5Zt1/9g9m5mZqKenqaiorKqqs7GxtLOz97mX78q298eu/sms98y1+dS//9O7/9S7w8LC0M/P0tDQ29ra3t7e39/f4N/f/9fA/93L/+HR/+TV/+ja/+nc4uHh4+Pj5OPjAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAxIPgcAAAAQB0Uk5T////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////AFP3ByUAAAAZdEVYdFNvZnR3YXJlAFBhaW50Lk5FVCB2My41Ljg3O4BdAAAA2UlEQVQoU2NgwADxfn4MDGmhHuYMDMoqWkDpeH//xAyQMlVtJQ1NkEC0f1ZGQAyPopqOqgZYBRNTZmZgLA+vujYDgxpQII5JjIkpKIGHh4FBgMEXpFfP08SYiYmBQVzOWgbI/c8QlRTpbSbLImjk7GYA5P5nSBdOMQwzZZHiduSCCESESCenujJLWoq4WIAFRMOFg90dWBRsOF3YwQJWPnwcYbYsLE4sPhIggf8M/Kxewg7MClwsQiDefyBm9WGzY9X1YQZzgPg/AwOzPbM+I4QNIkBCQBeBAQC7RkQfNj4PRwAAAABJRU5ErkJggg==',
                 ],
             ],
-        ],
-        'global_history' => [
-            'enable' => true,
-            'limit' => 5,
-        ],
-        'unique_history' => [
-            'enable' => true,
-            'limit' => 5,
-        ],
-        'top_player' => [
-            'enable' => true,
-            'limit' => 5,
-        ],
-        'top_guild' => [
-            'enable' => true,
-            'limit' => 5,
-        ],
-        'discord' => [
-            'enable' => true,
-            'server_id' => '1004443821570019338',
         ],
     ],
     'ranking' => [
@@ -403,11 +403,32 @@ return [
                 "icon" => "eu_cleric.png"
             ],
         ],
-        'job' => [
+        'honor_level' => [
+            1 => 'images/com_honor_level_1.PNG',
+            2 => 'images/com_honor_level_2.PNG',
+            3 => 'images/com_honor_level_3.PNG',
+            4 => 'images/com_honor_level_4.PNG',
+            5 => 'images/com_honor_level_5.PNG',
+        ],
+        'job_type' => [
             0 => 'None',
             1 => 'Trader',
             2 => 'Thief',
             3 => 'Hunter',
+        ],
+        'job_type_icons' => [
+            1 => [
+                'name' => 'Thief',
+                'icon' => 'images/ingame/com_job_thief.PNG'
+            ],
+            2 => [
+                'name' => 'Hunter',
+                'icon' => 'images/ingame/com_job_hunter.PNG',
+            ],
+            3 => [
+                'name' => 'Trader',
+                'icon' => 'images/ingame/com_job_merchant.PNG',
+            ],
         ],
         'vip_level' => [
             "level_access" => 4,

@@ -12,7 +12,7 @@ class RankingController extends Controller
     {
         $rankings = Char::getPlayerRanking();
         return view('ranking.index', [
-            'rankings' => $rankings,
+            'data' => $rankings,
         ]);
     }
 
@@ -20,7 +20,7 @@ class RankingController extends Controller
     {
         $players = Char::getPlayerRanking();
         return view('ranking.ranking.player', [
-            'players' => $players,
+            'data' => $players,
         ]);
     }
 
@@ -28,7 +28,7 @@ class RankingController extends Controller
     {
         $guilds = Char::getGuildRanking();
         return view('ranking.ranking.guild', [
-            'guilds' => $guilds,
+            'data' => $guilds,
         ]);
     }
 
@@ -44,7 +44,7 @@ class RankingController extends Controller
         }
 
         return view('ranking.ranking.unique', [
-            'uniques' => $uniques,
+            'data' => $uniques,
             'unique_lists' => $unique_lists,
         ]);
     }
@@ -61,7 +61,7 @@ class RankingController extends Controller
         }
 
         return view('ranking.ranking.unique-monthly', [
-            'uniques' => $uniquesMonthly,
+            'data' => $uniquesMonthly,
             'unique_lists' => $unique_lists,
         ]);
     }
@@ -71,7 +71,7 @@ class RankingController extends Controller
         $fortressPlayer = (new Char)->getFortressPlayerRanking();
 
         return view('ranking.ranking.fortress-player', [
-            'fortressPlayers' => $fortressPlayer,
+            'data' => $fortressPlayer,
         ]);
     }
 
@@ -80,7 +80,7 @@ class RankingController extends Controller
         $fortressGuild = (new Char)->getFortressGuildRanking();
 
         return view('ranking.ranking.fortress-guild', [
-            'fortressGuilds' => $fortressGuild,
+            'data' => $fortressGuild,
         ]);
     }
 
@@ -89,7 +89,7 @@ class RankingController extends Controller
         $honor = (new Char)->getHonorRanking();
 
         return view('ranking.ranking.honor', [
-            'honor' => $honor,
+            'data' => $honor,
         ]);
     }
 
@@ -98,7 +98,7 @@ class RankingController extends Controller
         $job = (new Char)->getJobRanking();
 
         return view('ranking.ranking.job', [
-            'job' => $job,
+            'data' => $job,
         ]);
     }
 
@@ -107,7 +107,7 @@ class RankingController extends Controller
         $jobAll = (new Char)->getJobRanking();
 
         return view('ranking.ranking.job-all', [
-            'jobAll' => $jobAll,
+            'data' => $jobAll,
         ]);
     }
 
@@ -116,7 +116,7 @@ class RankingController extends Controller
         $jobTrader = (new Char)->getJobTraderRanking();
 
         return view('ranking.ranking.job-trader', [
-            'jobTrader' => $jobTrader,
+            'data' => $jobTrader,
         ]);
     }
 
@@ -125,7 +125,7 @@ class RankingController extends Controller
         $jobHunter = (new Char)->getJobHunterRanking();
 
         return view('ranking.ranking.job-hunter', [
-            'jobHunter' => $jobHunter,
+            'data' => $jobHunter,
         ]);
     }
 
@@ -134,7 +134,7 @@ class RankingController extends Controller
         $jobThieve = (new Char)->getJobThieveRanking();
 
         return view('ranking.ranking.job-thieve', [
-            'jobThieve' => $jobThieve,
+            'data' => $jobThieve,
         ]);
     }
 
