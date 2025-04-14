@@ -296,7 +296,7 @@ return [
                 'name' => 'Isyutaru',
                 'points' => 3
             ],
-            'MOB_KK_ISYUTARU' => [
+            'MOB_TK_BONELORD' => [
                 'id' => 3810,
                 'name' => 'Lord Yarkan',
                 'points' => 4
