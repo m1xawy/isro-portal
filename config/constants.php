@@ -9,7 +9,8 @@ return [
             'favicon' => 'images/favicons/favicon.ico',
             'logo' => 'images/bootstrap-logo-white.svg',
             'timezone' => 'Africa/Cairo',
-            'max_player' => 3500,
+            'fake_player' => 250,
+            'max_player' => 1000,
             'max_level' => 140,
             'free_silk' => 0,
             'free_premium_silk' => 0,
@@ -137,7 +138,7 @@ return [
             ],
         ],
         'event_schedule' => [
-            'enable' => true,
+            'enable' => false,
             'data' => [
                 'roc' => 'Roc',
                 'medusa' => 'Medusa',
@@ -156,7 +157,7 @@ return [
             ],
         ],
         'fortress_war' => [
-            'enable' => true,
+            'enable' => false,
             'data' => [
                 1 => [
                     'name' => 'Jangan',
@@ -177,24 +178,24 @@ return [
             ],
         ],
         'global_history' => [
-            'enable' => true,
+            'enable' => false,
             'limit' => 5,
         ],
         'unique_history' => [
-            'enable' => true,
+            'enable' => false,
+            'limit' => 5,
+        ],
+        'top_player' => [
+            'enable' => false,
+            'limit' => 5,
+        ],
+        'top_guild' => [
+            'enable' => false,
             'limit' => 5,
         ],
         'discord' => [
             'enable' => true,
             'server_id' => '1004443821570019338',
-        ],
-        'top_player' => [
-            'enable' => true,
-            'limit' => 5,
-        ],
-        'top_guild' => [
-            'enable' => true,
-            'limit' => 5,
         ],
     ],
     'ranking' => [

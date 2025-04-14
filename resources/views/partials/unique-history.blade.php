@@ -14,11 +14,11 @@
                     @foreach($uniqueHistory as $History)
                         <li class="mb-3">
                             <p class="mb-0">{{ $unique_name[$History->MobID] }}</p>
-                            <small>Killed by:</small>
-                            <a href="{{ route('ranking.character.view', ['name' => $History->CharName16]) }}" class="text-decoration-none">
-                                <small>{{ $History->CharName16 }}</small>
-                            </a>
-                            <small>{{ \Carbon\Carbon::make($History->EventDate)->diffForHumans() }}</small>
+                            <small>
+                                Killed by:
+                                <a href="{{ route('ranking.character.view', ['name' => $History->CharName16]) }}" class="text-decoration-none">{{ $History->CharName16 }}</a>
+                                {{ \Carbon\Carbon::make($History->EventDate)->diffForHumans() }}
+                            </small>
                         </li>
                     @endforeach
                 </ul>

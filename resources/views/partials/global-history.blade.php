@@ -9,12 +9,12 @@
                 <ul class="list-unstyled">
                     @foreach($GlobalHistory as $History)
                         <li class="mb-3">
-                            <p class="mb-0">[ {{ $History->Comment }} ]</p>
-                            <small>Sent by:</small>
-                            <a href="{{ route('ranking.character.view', ['name' => $History->CharName]) }}" class="text-decoration-none">
-                                <small>{{ $History->CharName }}</small>
-                            </a>
-                            <small>{{ \Carbon\Carbon::make($History->EventTime)->diffForHumans() }}</small>
+                            <p class="mb-0">[{{ $History->Comment }}]</p>
+                            <small>
+                                Sent by:
+                                <a href="{{ route('ranking.character.view', ['name' => $History->CharName]) }}" class="text-decoration-none">{{ $History->CharName }}</a>
+                                {{ \Carbon\Carbon::make($History->EventTime)->diffForHumans() }}
+                            </small>
                         </li>
                     @endforeach
                 </ul>
