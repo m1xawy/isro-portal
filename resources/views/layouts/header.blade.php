@@ -2,8 +2,8 @@
     <div class="container-fluid">
         <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
             <a href="{{ url('/') }}" class="d-flex align-items-center me-3 mb-2 mb-lg-0 text-white text-decoration-none">
-                @if (!empty(config('constants.general.logo')))
-                    <img src="{{ asset(config('constants.general.logo')) }}" alt="" width="" height="40" class="">
+                @if (!empty(config('constants.general.options.logo')))
+                    <img src="{{ asset(config('constants.general.options.logo')) }}" alt="" width="" height="40" class="">
                 @else
                     <img src="{{ asset('images/bootstrap-logo-white.svg') }}" alt="mdo" width="" height="40" class="">
                 @endif

@@ -1,4 +1,4 @@
-@if (config('constants.top_guild.enable'))
+@if (config('constants.widgets.top_guild.enable'))
 <div class="card mb-4">
     <div class="card-header">
         {{ __('Top Guild') }}
@@ -19,7 +19,7 @@
                 @forelse($topGuild->take(5) as $guild)
                     <tr>
                         <td>
-                            @if($i <= 3)<img src="{{ config('constants.top_icons')[$i] }}" alt=""/>@else{{ $i }}@endif
+                            @if($i <= 3)<img src="{{ config('constants.ranking.top_icons')[$i] }}" alt=""/>@else{{ $i }}@endif
                         </td>
                         <td>
                             <a href="{{ route('ranking.guild.view', ['name' => $guild->Name]) }}">{{ $guild->Name }}</a>

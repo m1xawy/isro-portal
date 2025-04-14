@@ -35,11 +35,11 @@ class AppServiceProvider extends ServiceProvider
     private function configureApp(): void
     {
         try {
-            Config::set('app.name', config('constants.general.server_name'));
-            Config::set('app.url', config('constants.general.server_url'));
+            Config::set('app.name', config('constants.general.options.server_name'));
+            Config::set('app.url', config('constants.general.options.server_url'));
             Config::set('mail.default', config('constants.smtp.enable') ? env('MAIL_MAILER', 'smtp') : 'log');
 
-            date_default_timezone_set(config('constants.general.timezone'));
+            date_default_timezone_set(config('constants.general.options.timezone'));
 
         } catch (QueryException $e) {
             // Error: Something Wrong.

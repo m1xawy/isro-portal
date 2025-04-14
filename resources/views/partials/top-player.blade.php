@@ -1,4 +1,4 @@
-@if (config('constants.top_player.enable'))
+@if (config('constants.widgets.top_player.enable'))
 <div class="card mb-4">
     <div class="card-header">
         {{ __('Top Players') }}
@@ -19,7 +19,7 @@
                 @forelse($topPlayer->take(5) as $player)
                     <tr>
                         <td>
-                            @if($i <= 3)<img src="{{ config('constants.top_icons')[$i] }}" alt=""/>@else{{ $i }}@endif
+                            @if($i <= 3)<img src="{{ config('constants.ranking.top_icons')[$i] }}" alt=""/>@else{{ $i }}@endif
                         </td>
                         <td>
                             <a href="{{ route('ranking.character.view', ['name' => $player->CharName16]) }}">{{ $player->CharName16 }}</a>

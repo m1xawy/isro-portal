@@ -1,4 +1,4 @@
-@php $sliders = config('constants.sliders'); @endphp
+@php $sliders = config('constants.general.sliders'); @endphp
 <div id="myCarousel" class="carousel slide mb-6" data-bs-ride="carousel">
     @if (!empty($sliders) && count($sliders) > 1)
     <div class="carousel-indicators">

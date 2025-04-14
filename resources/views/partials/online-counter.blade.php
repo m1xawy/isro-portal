@@ -1,6 +1,6 @@
 @php
     $OnlineCount =  getOnlineCount();
-    $MaxCount = config('constants.general.max_player');
+    $MaxCount = config('constants.general.options.max_player');
     $progress = ceil($OnlineCount*100/$MaxCount);
 @endphp
 

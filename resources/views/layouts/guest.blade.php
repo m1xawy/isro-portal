@@ -5,9 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('constants.general.server_name') }} - @yield('title')</title>
-    <meta name="description" content="{{ config('constants.general.server_desc') }}">
-    <link rel="shortcut icon" href="{{ asset(config('constants.general.favicon')) }}">
+    <title>{{ config('constants.general.options.server_name') }} - @yield('title')</title>
+    <meta name="description" content="{{ config('constants.general.options.server_desc') }}">
+    <link rel="shortcut icon" href="{{ asset(config('constants.general.options.favicon')) }}">
 
     <!-- SEO -->
     @include('partials.seo')

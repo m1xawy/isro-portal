@@ -1,5 +1,5 @@
-@if (config('constants.discord.enable'))
+@if (config('constants.widgets.discord.enable'))
     <div class="mb-4">
-        <iframe src="https://discordapp.com/widget?id={{ config('constants.discord.server_id') }}&theme=dark" width="100%" height="500" allowtransparency="true" frameborder="0"></iframe>
+        <iframe src="https://discordapp.com/widget?id={{ config('constants.widgets.discord.server_id') }}&theme=dark" width="100%" height="500" allowtransparency="true" frameborder="0"></iframe>
     </div>
 @endif

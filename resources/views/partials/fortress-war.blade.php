@@ -1,17 +1,20 @@
-@if (config('constants.fortress_war.enable'))
+@if (config('constants.widgets.fortress_war.enable'))
     <div class="card mb-4">
         <div class="card-header">
             {{ __('Fortress War') }}
         </div>
         <div class="card-body">
-            @php $fortresses = getFortress(); @endphp
+            @php
+                $fortresses = getFortress();
+                $const = config('constants.widgets.fortress_war.data');
+            @endphp
             @if (count($fortresses))
                 <ul class="list-unstyled">
                     @foreach($fortresses as $fortress)
                         <li>
                             <span>
-                                <img src="{{ config('constants.fortress_war.data')[$fortress->FortressID]['icon'] }}" alt="">
-                                {{ config('constants.fortress_war.data')[$fortress->FortressID]['name'] }}
+                                <img src="{{ $const[$fortress->FortressID]['icon'] }}" alt="">
+                                {{ $const[$fortress->FortressID]['name'] }}
                             </span>
                             <span class="float-end">
                                 @if($fortress->Name !== 'DummyGuild')

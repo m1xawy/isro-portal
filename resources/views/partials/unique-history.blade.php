@@ -1,4 +1,4 @@
-@if (setting('server_unique_widget_enable'))
+@if (config('constants.widgets.unique_history.enable'))
     <div class="card mb-4">
         <div class="card-header">
             {{ __('Unique History') }}

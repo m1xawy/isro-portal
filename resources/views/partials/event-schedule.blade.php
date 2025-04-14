@@ -1,17 +1,19 @@
-@if (config('constants.event_schedule.enable'))
+@if (config('constants.widgets.event_schedule.enable'))
     <div class="card mb-4">
         <div class="card-header">
             {{ __('Event Schedule') }}
         </div>
         <div class="card-body">
-
-            @php $schedules = getServerTimes(); @endphp
+            @php
+                $schedules = getServerTimes();
+                $const = config('constants.widgets.event_schedule.data');
+            @endphp
             @php $i = 0; @endphp
             <ul class="list-unstyled">
                 @foreach($schedules as $key => $schedule)
                     @if(is_null($schedule)) @continue @endif
                     <li>
-                        <span>{{ config('constants.event_schedule.data')[$key] }}</span>
+                        <span>{{ $const[$key] }}</span>
                         <span class="float-end">
                             @if($schedule['status'])
                                 <span class="text-success">Active</span>

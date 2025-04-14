@@ -1,10 +1,10 @@
-@if (config('constants.server_info.enable'))
+@if (config('constants.widgets.server_info.enable'))
     <div class="card mb-4">
         <div class="card-header">
             {{ __('Server Info') }}
         </div>
         <div class="card-body">
-            @php $server_info = config('constants.server_info.data'); @endphp
+            @php $server_info = config('constants.widgets.server_info.data'); @endphp
             @if (!empty($server_info))
                 <ul class="list-unstyled">
                     @foreach($server_info as $info)
