@@ -100,7 +100,7 @@ function loadCheck()
 function paginatorAjax(element, urlData)
 {
     ajaxReload();
-    jQuery(element).html($('#spinner').html());
+    jQuery(element).html('<i class="fas fa-spinner fa-spin"></i>');
     xhr = jQuery.ajax({
         url : urlData,
         type: "POST",

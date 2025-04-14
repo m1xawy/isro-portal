@@ -6,8 +6,10 @@ use App\Http\Controllers\Controller;
 use App\Models\SRO\Account\TbUser;
 use App\Models\SRO\Portal\MuhAlteredInfo;
 use App\Models\SRO\Portal\MuUser;
+use Exception;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Validation\Rules\Password;
@@ -24,8 +26,16 @@ class PasswordController extends Controller
             'password' => ['required', 'min:6', 'max:32', 'confirmed'],
         ]);
 
-        MuUser::where('JID', $request->user()->jid)->update(['UserPwd' => md5($request->password)]);
-        TbUser::where('PortalJID', $request->user()->jid)->update(['password' => md5($request->password)]);
+        DB::beginTransaction();
+        try {
+            MuUser::where('JID', $request->user()->jid)->update(['UserPwd' => md5($request->password)]);
+            TbUser::where('PortalJID', $request->user()->jid)->update(['password' => md5($request->password)]);
+
+        } catch (Exception $e) {
+            DB::rollBack();
+            return back()->withErrors(['current_password' => ["Something went wrong, Please try again later."]]);
+        }
+        DB::commit();
 
         $request->user()->update([
             'password' => Hash::make($validated['password']),

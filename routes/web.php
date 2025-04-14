@@ -57,8 +57,7 @@ Route::any('/ranking/guild-crest/{hex}', [RankingController::class, 'guild_crest
 //TODO: simple way to switch middleware if email confirmation is enabled, i need to make custom middleware to handle it better
 Route::middleware(['auth', isEmailConfirmation()])->group(function () {
     Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
-    Route::get('/profile/edit-password', [ProfileController::class, 'edit_password'])->name('profile.edit.password');
-    Route::get('/profile/edit-email', [ProfileController::class, 'edit_email'])->name('profile.edit.email');
+    Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile/edit', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile/edit', [ProfileController::class, 'destroy'])->name('profile.destroy');
     Route::get('/profile/donate/history', [ProfileController::class, 'donate_history'])->name('profile.donate.history');

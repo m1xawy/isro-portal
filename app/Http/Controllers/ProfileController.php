@@ -6,9 +6,12 @@ use App\Http\Requests\ProfileUpdateRequest;
 use App\Models\SRO\Portal\AphChangedSilk;
 use App\Models\SRO\Portal\MuEmail;
 use App\Models\SRO\Portal\MuhAlteredInfo;
+use Exception;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
 
@@ -30,7 +33,7 @@ class ProfileController extends Controller
 
     public function donate_history(Request $request): View
     {
-        $donateHistory = cache()->remember('donateHistory'.$request->user()->jid, 600, function() use ($request) {
+        $donateHistory = Cache::remember('donate_history', 86400 * 7, static function () use ($request) {
             return AphChangedSilk::where('JID', $request->user()->jid)->orderBy('ChangeDate', 'DESC')->get();
         });
 
@@ -43,16 +46,9 @@ class ProfileController extends Controller
     /**
      * Display the user's profile form.
      */
-    public function edit_password(Request $request): View
+    public function edit(Request $request): View
     {
-        return view('profile.edit-password', [
-            'user' => $request->user(),
-        ]);
-    }
-
-    public function edit_email(Request $request): View
-    {
-        return view('profile.edit-email', [
+        return view('profile.edit', [
             'user' => $request->user(),
         ]);
     }
@@ -68,16 +64,23 @@ class ProfileController extends Controller
             $request->user()->email_verified_at = null;
         }
 
-        MuEmail::where('JID', $request->user()->jid)->update(['EmailAddr' => $request->user()->email]);
-        if(setting('register_confirmation_enable', 0) == 1) {
-            MuhAlteredInfo::where('JID', $request->user()->jid)->update(['EmailAddr' => $request->user()->email, 'EmailReceptionStatus'=>'N', 'EmailCertificationStatus'=>'N']);
-        } else {
-            MuhAlteredInfo::where('JID', $request->user()->jid)->update(['EmailAddr' => $request->user()->email, 'EmailReceptionStatus'=>'Y', 'EmailCertificationStatus'=>'Y']);
+        DB::beginTransaction();
+        try {
+            MuEmail::where('JID', $request->user()->jid)->update(['EmailAddr' => $request->user()->email]);
+            if(config('constants.general.options.register_confirmation')) {
+                MuhAlteredInfo::where('JID', $request->user()->jid)->update(['EmailAddr' => $request->user()->email, 'EmailReceptionStatus'=>'N', 'EmailCertificationStatus'=>'N']);
+            } else {
+                MuhAlteredInfo::where('JID', $request->user()->jid)->update(['EmailAddr' => $request->user()->email, 'EmailReceptionStatus'=>'Y', 'EmailCertificationStatus'=>'Y']);
+            }
+        } catch (Exception $e) {
+            DB::rollBack();
+            return back()->withErrors(['email' => ["Something went wrong, Please try again later."]]);
         }
+        DB::commit();
 
         $request->user()->save();
 
-        return Redirect::route('profile.edit-email')->with('status', 'profile-updated');
+        return Redirect::route('profile.edit')->with('status', 'profile-updated');
     }
 
     /**

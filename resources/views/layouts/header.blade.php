@@ -58,8 +58,7 @@
                             </a>
                             <ul class="dropdown-menu">
                                 <li><a class="dropdown-item" href="{{ route('profile') }}">{{ __('Account') }}</a></li>
-                                <li><a class="dropdown-item" href="{{ route('profile.edit.password') }}">{{ __('Update Password') }}</a></li>
-                                <li><a class="dropdown-item" href="{{ route('profile.edit.email') }}">{{ __('Update Email') }}</a></li>
+                                <li><a class="dropdown-item" href="{{ route('profile.edit') }}">{{ __('Settings') }}</a></li>
                                 <li><a class="dropdown-item" href="{{ route('profile.donate') }}">{{ __('Donate') }}</a></li>
                                 <li><a class="dropdown-item" href="{{ route('profile.donate.history') }}">{{ __('Donate History') }}</a></li>
                                 @if (Auth::user()->role == 'admin')

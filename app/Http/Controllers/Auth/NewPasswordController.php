@@ -6,9 +6,11 @@ use App\Http\Controllers\Controller;
 use App\Models\SRO\Account\TbUser;
 use App\Models\SRO\Portal\MuUser;
 use App\Models\User;
+use Exception;
 use Illuminate\Auth\Events\PasswordReset;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Password;
@@ -47,8 +49,16 @@ class NewPasswordController extends Controller
             function ($user) use ($request) {
 
                 $user = User::where('email', $request->email)->first();
-                MuUser::where('JID', $user->jid)->update(['UserPwd' => md5($request->password)]);
-                TbUser::where('PortalJID', $user->jid)->update(['password' => md5($request->password)]);
+                DB::beginTransaction();
+                try {
+                    MuUser::where('JID', $user->jid)->update(['UserPwd' => md5($request->password)]);
+                    TbUser::where('PortalJID', $user->jid)->update(['password' => md5($request->password)]);
+
+                } catch (Exception $e) {
+                    DB::rollBack();
+                    return back()->withErrors(['email' => ["Something went wrong, Please try again later."]]);
+                }
+                DB::commit();
 
                 $user->forceFill([
                     'password' => Hash::make($request->password),

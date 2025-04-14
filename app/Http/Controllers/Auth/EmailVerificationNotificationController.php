@@ -18,7 +18,7 @@ class EmailVerificationNotificationController extends Controller
             return redirect()->intended(RouteServiceProvider::HOME);
         }
 
-        if (isEmailConfirmation() == 'throttle') {
+        if (!config('constants.general.options.register_confirmation')) {
             return redirect()->intended(RouteServiceProvider::HOME);
         }
 
