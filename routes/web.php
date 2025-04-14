@@ -27,83 +27,78 @@ use Illuminate\Foundation\Auth\EmailVerificationRequest;
 |
 */
 
-Route::group(['middleware' => 'language'], function () {
-    Route::get('/', [PostController::class, 'index'])->name('home');
-    Route::get('/posts/{slug}', [PostController::class, 'show'])->name('post.show');
+Route::get('/', [PageController::class, 'index'])->name('home');
+Route::get('/post/{slug}', [PageController::class, 'post'])->name('pages.show');
+Route::get('/page/{slug}', [PageController::class, 'page'])->name('pages.show');
+Route::get('/timers', [PageController::class, 'timers'])->name('pages.timers');
+Route::get('/uniques', [PageController::class, 'uniques'])->name('pages.uniques');
+Route::any('/fortress', [PageController::class, 'fortress'])->name('pages.fortress');
+Route::any('/global', [PageController::class, 'global'])->name('pages.global');
+Route::get('/download', [PageController::class, 'download'])->name('pages.download');
 
-    Route::get('/page/{slug}', [PageController::class, 'show'])->name('pages.show');
-    Route::get('/timers', [PageController::class, 'timers'])->name('pages.timers');
-    Route::get('/uniques', [PageController::class, 'uniques'])->name('pages.uniques');
-    Route::any('/fortress', [PageController::class, 'fortress'])->name('pages.fortress');
-    Route::any('/global', [PageController::class, 'global'])->name('pages.global');
-    Route::get('/download', [PageController::class, 'download'])->name('pages.download');
+Route::get('/ranking', [RankingController::class, 'index'])->name('ranking');
+Route::any('/ranking/player', [RankingController::class, 'player'])->name('ranking.player');
+Route::any('/ranking/guild', [RankingController::class, 'guild'])->name('ranking.guild');
+Route::any('/ranking/unique', [RankingController::class, 'unique'])->name('ranking.unique');
+Route::any('/ranking/unique-monthly', [RankingController::class, 'unique_monthly'])->name('ranking.unique.monthly');
+Route::any('/ranking/honor', [RankingController::class, 'honor'])->name('ranking.honor');
+Route::any('/ranking/job', [RankingController::class, 'job'])->name('ranking.job');
+Route::any('/ranking/job/all', [RankingController::class, 'job_all'])->name('ranking.job.all');
+Route::any('/ranking/job/hunter', [RankingController::class, 'job_hunter'])->name('ranking.job.hunter');
+Route::any('/ranking/job/thieve', [RankingController::class, 'job_thieve'])->name('ranking.job.thieve');
+Route::any('/ranking/job/trader', [RankingController::class, 'job_trader'])->name('ranking.job.trader');
+Route::any('/ranking/fortress/player', [RankingController::class, 'fortress_player'])->name('ranking.fortress.player');
+Route::any('/ranking/fortress/guild', [RankingController::class, 'fortress_guild'])->name('ranking.fortress.guild');
 
-    Route::get('/ranking', [RankingController::class, 'index'])->name('ranking.index');
-    Route::get('/ranking/character/{name}', [RankingController::class, 'character_view'])->name('ranking.character.view');
-    Route::get('/ranking/guild/{name}', [RankingController::class, 'guild_view'])->name('ranking.guild.view');
-    Route::any('/ranking/guild-crest/{hex}', [RankingController::class, 'guild_crest'])->name('ranking.guild-crest');
+Route::get('/ranking/character/{name}', [RankingController::class, 'character_view'])->name('ranking.character.view');
+Route::get('/ranking/guild/{name}', [RankingController::class, 'guild_view'])->name('ranking.guild.view');
+Route::any('/ranking/guild-crest/{hex}', [RankingController::class, 'guild_crest'])->name('ranking.guild-crest');
 
-    Route::any('/ranking/player', [RankingController::class, 'player'])->name('ranking.player');
-    Route::any('/ranking/guild', [RankingController::class, 'guild'])->name('ranking.guild');
-    Route::any('/ranking/unique', [RankingController::class, 'unique'])->name('ranking.unique');
-    Route::any('/ranking/unique-monthly', [RankingController::class, 'unique_monthly'])->name('ranking.unique.monthly');
-    Route::any('/ranking/honor', [RankingController::class, 'honor'])->name('ranking.honor');
-    Route::any('/ranking/job', [RankingController::class, 'job'])->name('ranking.job');
-    Route::any('/ranking/job/all', [RankingController::class, 'job_all'])->name('ranking.job.all');
-    Route::any('/ranking/job/hunter', [RankingController::class, 'job_hunter'])->name('ranking.job.hunter');
-    Route::any('/ranking/job/thieve', [RankingController::class, 'job_thieve'])->name('ranking.job.thieve');
-    Route::any('/ranking/job/trader', [RankingController::class, 'job_trader'])->name('ranking.job.trader');
-    Route::any('/ranking/fortress/player', [RankingController::class, 'fortress_player'])->name('ranking.fortress.player');
-    Route::any('/ranking/fortress/guild', [RankingController::class, 'fortress_guild'])->name('ranking.fortress.guild');
+//TODO: simple way to switch middleware if email confirmation is enabled, i need to make custom middleware to handle it better
+Route::middleware(['auth', isEmailConfirmation()])->group(function () {
+    Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
+    Route::get('/profile/edit-password', [ProfileController::class, 'edit_password'])->name('profile.edit.password');
+    Route::get('/profile/edit-email', [ProfileController::class, 'edit_email'])->name('profile.edit.email');
+    Route::patch('/profile/edit', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile/edit', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::get('/profile/donate/history', [ProfileController::class, 'donate_history'])->name('profile.donate.history');
 
-    //TODO: simple way to switch middleware if email confirmation is enabled, i need to make custom middleware to handle it better
-    Route::middleware(['auth', isEmailConfirmation()])->group(function () {
-        Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
-        Route::get('/profile/edit-password', [ProfileController::class, 'edit_password'])->name('profile.edit-password');
-        Route::get('/profile/edit-email', [ProfileController::class, 'edit_email'])->name('profile.edit-email');
-        Route::patch('/profile/edit', [ProfileController::class, 'update'])->name('profile.update');
-        Route::delete('/profile/edit', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::group(['prefix' => '/profile/donate'], static function () {
+        Route::get('/', [DonationsController::class, 'index'])->name('profile.donate');
+        Route::get('/{method?}', [DonationsController::class, 'showMethod'])->name('donations-method-index');
 
-        //Route::get('/profile/donate', [ProfileController::class, 'donate'])->name('profile.donate');
-        Route::get('/profile/donate/history', [ProfileController::class, 'donate_history'])->name('profile.donate.history');
+        Route::group(['prefix' => 'paypal'], static function () {
+            Route::get('/buy/{id}', [DonationsPaypalController::class, 'buy'])->where('id', '[0-9]+')->name('donate-paypal');
+            Route::get('/complete', [DonationsPaypalController::class, 'complete'])->name('donate-paypal-complete');
+            Route::get('/invoice-closed', [DonationsPaypalController::class, 'invoiceClosed'])->name('donate-paypal-invoice-closed');
+            Route::get('/success', [DonationsPaypalController::class, 'success'])->name('donate-paypal-success');
+            Route::get('/notify', [DonationsPaypalController::class, 'notify'])->name('donate-paypal-notify');
+            Route::get('/error/{id}', [DonationsPaypalController::class, 'error'])->name('donate-paypal-error');
+        });
 
-        Route::group(['prefix' => '/profile/donate'], static function () {
-            Route::get('/', [DonationsController::class, 'index'])->name('profile.donate');
-            Route::get('/{method?}', [DonationsController::class, 'showMethod'])->name('donations-method-index');
+        Route::group(['prefix' => 'coinbase'], static function () {
+            Route::get('/buy/{id}', [DonationsCoinbaseController::class, 'buy'])->name('donate-coinbase-buy');
+        });
+        // Payop
+        Route::group(['prefix' => 'payop'], static function () {
+            Route::get('/buy/{id}', [DonationsPayOpController::class, 'buy'])->where('id', '[0-9]+')->name('donate-payop');
+            Route::get('/success', [DonationsPayOpController::class, 'handleSuccessCallback'])->name('donate-payop-success');
+            Route::get('/error', [DonationsPayOpController::class, 'handleErrorCallback'])->name('donate-payop-error');
+        });
 
-            Route::group(['prefix' => 'paypal'], static function () {
-                Route::get('/buy/{id}', [DonationsPaypalController::class, 'buy'])->where('id', '[0-9]+')->name('donate-paypal');
-                Route::get('/complete', [DonationsPaypalController::class, 'complete'])->name('donate-paypal-complete');
-                Route::get('/invoice-closed', [DonationsPaypalController::class, 'invoiceClosed'])->name('donate-paypal-invoice-closed');
-                Route::get('/success', [DonationsPaypalController::class, 'success'])->name('donate-paypal-success');
-                Route::get('/notify', [DonationsPaypalController::class, 'notify'])->name('donate-paypal-notify');
-                Route::get('/error/{id}', [DonationsPaypalController::class, 'error'])->name('donate-paypal-error');
-            });
+        Route::group(['prefix' => 'maxicard'], static function () {
+            Route::get('/buy', [DonationsMaxiCardController::class, 'buy'])->name('donate-maxicard-buy');
+            Route::post('/buy', [DonationsMaxiCardController::class, 'store'])->name('donate-maxicard-buy-post');
+        });
 
-            Route::group(['prefix' => 'coinbase'], static function () {
-                Route::get('/buy/{id}', [DonationsCoinbaseController::class, 'buy'])->name('donate-coinbase-buy');
-            });
-            // Payop
-            Route::group(['prefix' => 'payop'], static function () {
-                Route::get('/buy/{id}', [DonationsPayOpController::class, 'buy'])->where('id', '[0-9]+')->name('donate-payop');
-                Route::get('/success', [DonationsPayOpController::class, 'handleSuccessCallback'])->name('donate-payop-success');
-                Route::get('/error', [DonationsPayOpController::class, 'handleErrorCallback'])->name('donate-payop-error');
-            });
-
-            Route::group(['prefix' => 'maxicard'], static function () {
-                Route::get('/buy', [DonationsMaxiCardController::class, 'buy'])->name('donate-maxicard-buy');
-                Route::post('/buy', [DonationsMaxiCardController::class, 'store'])->name('donate-maxicard-buy-post');
-            });
-
-            Route::group(['prefix' => 'stripe'], static function () {
-                Route::get('/buy/{id}', [DonationsStripeController::class, 'buy'])->where('id', '[0-9]+')->name('donate-stripe');
-                Route::post('/buy/{id}', [DonationsStripeController::class, 'buyPost'])->where('id', '[0-9]+')->name('donate-stripe-post');
-                Route::post('/confirm', [DonationsStripeController::class, 'confirm'])->name('donate-stripe-confirm');
-                Route::get('/success', [DonationsStripeController::class, 'success'])->name('donate-stripe-success');
-                Route::get('/error', [DonationsStripeController::class, 'error'])->name('donate-stripe-error');
-            });
+        Route::group(['prefix' => 'stripe'], static function () {
+            Route::get('/buy/{id}', [DonationsStripeController::class, 'buy'])->where('id', '[0-9]+')->name('donate-stripe');
+            Route::post('/buy/{id}', [DonationsStripeController::class, 'buyPost'])->where('id', '[0-9]+')->name('donate-stripe-post');
+            Route::post('/confirm', [DonationsStripeController::class, 'confirm'])->name('donate-stripe-confirm');
+            Route::get('/success', [DonationsStripeController::class, 'success'])->name('donate-stripe-success');
+            Route::get('/error', [DonationsStripeController::class, 'error'])->name('donate-stripe-error');
         });
     });
-
-    require __DIR__.'/auth.php';
 });
+
+require __DIR__.'/auth.php';

@@ -1,7 +1,0 @@
-@include('partials.online-player')
-@include('partials.server-info')
-@include('partials.fortress')
-@include('partials.server-timers')
-@include('partials.unique-history')
-@include('partials.global-history')
-@include('partials.discord-widget')

@@ -1,34 +1,25 @@
-@if (setting('server_info_widget_enable'))
-<div class="server-info p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg">
-    <div class="max-w-xl">
-        <h2 class="text-lg font-medium text-gray-900 dark:text-gray-100">{{ __('Server Information') }}</h2>
-
-        @php $server_info = json_decode(setting('server_info')); @endphp
-        @if (!empty($server_info))
-        <ul class="max-w-md divide-y divide-gray-200 dark:divide-gray-700">
-            @foreach($server_info as $info)
-            <li class="py-3 sm:py-4">
-                <div class="flex items-center space-x-4">
-                    <div class="flex-shrink-0">
-                        <style>.server-info svg {width: 1rem;height: 1rem;}</style>
-                        {!! $info->attributes->server_info_icon !!}
-                    </div>
-                    <div class="flex-1 min-w-0">
-                        <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
-                            {{ $info->attributes->server_info_title }}
-                        </p>
-                    </div>
-                    <div class="inline-flex items-center text-sm text-gray-500 dark:text-gray-400 font-medium">
-                        {{ $info->attributes->server_info_value }}
-                    </div>
-                </div>
-            </li>
-            @endforeach
-        </ul>
-        @else
-            <p class="text-gray-500 dark:text-gray-400 font-medium">No Server Info.</p>
-        @endif
-
+@if (config('constants.server_info.enable'))
+    <div class="card mb-4">
+        <div class="card-header">
+            {{ __('Server Info') }}
+        </div>
+        <div class="card-body">
+            @php $server_info = config('constants.server_info.data'); @endphp
+            @if (!empty($server_info))
+                <ul class="list-unstyled">
+                    @foreach($server_info as $info)
+                        <li>
+                            <span>
+                                {!! $info['icon'] !!}
+                                {{ $info['name'] }}
+                            </span>
+                            <span class="float-end">{{ $info['value'] }}</span>
+                        </li>
+                    @endforeach
+                </ul>
+            @else
+                <p>No Server Info.</p>
+            @endif
+        </div>
     </div>
-</div>
 @endif

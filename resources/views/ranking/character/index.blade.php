@@ -18,7 +18,7 @@
                                     <span class="text-sm text-gray-500 dark:text-gray-400">Item Points: <span style="color: #ffc345">{{ $characters->ItemPoints }}</span></span>
                                     <ul class="character-build flex flex-row mt-3">
                                         @foreach($charBuildInfo as $build)
-                                            <li><img src="{{ asset('images/ingame/skillmastery/'. config('constants.skillmastery')[$build->MasteryID]['icon']) }}" title="{{ config('constants.skillmastery')[$build->MasteryID]['name'] }}"></li>
+                                            <li><img src="{{ asset('images/ingame/skillmastery/'. config('constants.skill_mastery')[$build->MasteryID]['icon']) }}" title="{{ config('constants.skill_mastery')[$build->MasteryID]['name'] }}"></li>
                                         @endforeach
                                     </ul>
                                 </div>
@@ -150,7 +150,7 @@
                                     <td class="px-6 py-4" style="color: #ffc345">
                                         [
                                         @php if($characters->HwanLevel > 0) : @endphp
-                                            {{ config('constants.hwantitles')[$race][$characters->HwanLevel] }}
+                                            {{ config('constants.hwan_titles')[$race][$characters->HwanLevel] }}
                                         @php endif; @endphp
                                         ]
                                     </td>

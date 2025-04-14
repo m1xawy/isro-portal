@@ -221,26 +221,26 @@ class InventoryService
         if (isset($aStats[4], $aStats[5], $aStats[6])) {
             $setKey = $aStats[4] . '_' . $aStats[5] . '_' . $aStats[6];
 
-            if (array_key_exists($setKey, config('constants.item.soxclass'))) {
-                $aItem['SoxClass'] = config('constants.item.soxclass')[$setKey][$aItem['Slot']] ?? null;
+            if (array_key_exists($setKey, config('constants.item.sox_class'))) {
+                $aItem['SoxClass'] = config('constants.item.sox_class')[$setKey][$aItem['Slot']] ?? null;
             }
         }
 
         if ($aItem['TypeID2'] == 4) {
             if ($aItem['TypeID3'] > 0 && $aItem['TypeID4'] > 0) {
-                if (array_key_exists($aItem['TypeID3'], config('constants.item.jobtype'))) {
-                    if (array_key_exists($aItem['TypeID4'], config('constants.item.jobtype')[$aItem['TypeID3']])) {
-                        $aData['JobType'] = config('constants.item.jobtype')[$aItem['TypeID3']][$aItem['TypeID4']] ?? null;
+                if (array_key_exists($aItem['TypeID3'], config('constants.item.job_type'))) {
+                    if (array_key_exists($aItem['TypeID4'], config('constants.item.job_type')[$aItem['TypeID3']])) {
+                        $aData['JobType'] = config('constants.item.job_type')[$aItem['TypeID3']][$aItem['TypeID4']] ?? null;
                     }
                 }
             }
 
-            if (array_key_exists($aItem['Slot'], config('constants.item.jobdetail'))) {
-                $aData['JobDetail'] = config('constants.item.jobdetail')[$aItem['Slot']] ?? null;
+            if (array_key_exists($aItem['Slot'], config('constants.item.job_detail'))) {
+                $aData['JobDetail'] = config('constants.item.job_detail')[$aItem['Slot']] ?? null;
             }
 
-            if (array_key_exists($aItem['ItemClass'], config('constants.item.jobdegree'))) {
-                $aData['JobDegree'] = config('constants.item.jobdegree')[$aItem['ItemClass']] ?? null;
+            if (array_key_exists($aItem['ItemClass'], config('constants.item.job_degree'))) {
+                $aData['JobDegree'] = config('constants.item.job_degree')[$aItem['ItemClass']] ?? null;
             }
         }
 
@@ -251,13 +251,13 @@ class InventoryService
 
         switch ($aItem['TypeID3']) {
             case self::WEAPON:
-                $aData['Type'] = config('constants.item.weapontype')[$aStats[1]][$aStats[2]] ?? '';
+                $aData['Type'] = config('constants.item.weapon_type')[$aStats[1]][$aStats[2]] ?? '';
                 $aData['Degree'] = self::getDegree4ItemClass($aItem['ItemClass']);
                 $aData['sox'] = self::getSOXRate4ItemClass($aItem['ItemClass'], $aItem['Rarity']);
                 break;
             case self::SHIELD:
                 //set
-                $aData['Type'] = config('constants.item.weapontype')[$aStats[1]][$aStats[2]] ?? '';
+                $aData['Type'] = config('constants.item.weapon_type')[$aStats[1]][$aStats[2]] ?? '';
                 $aData['Degree'] = self::getDegree4ItemClass($aItem['ItemClass']);
                 $aData['sox'] = self::getSOXRate4ItemClass($aItem['ItemClass'], $aItem['Rarity']);
                 break;
@@ -283,7 +283,7 @@ class InventoryService
              * DRESS
              */
             case self::DRESS:
-                $aData['Type'] = config('constants.item.avatartype')[$aItem['MaxMagicOptCount']] ?? null;
+                $aData['Type'] = config('constants.item.avatar_type')[$aItem['MaxMagicOptCount']] ?? null;
                 //$aData['Type'] = $aStats[2] . ' ' . ((!isset($aStats[5]) || is_numeric($aStats[5])) ? 'dress' : $aStats[5]);
                 //$aData['Degree'] = $aStats[3];
                 $aData['Sex'] = config('constants.item.sex')[$aItem['ReqGender']] ?? null;
@@ -295,11 +295,11 @@ class InventoryService
                 if (isset(config('constants.item.sex')[$aItem['ReqGender']])) {
                     $aData['Sex'] = config('constants.item.sex')[$aItem['ReqGender']];
                 }
-                if (isset(config('constants.item.clothtype')[$aStats[1]][$aStats[3]])) {
-                    $aData['Type'] = config('constants.item.clothtype')[$aStats[1]][$aStats[3]];
+                if (isset(config('constants.item.cloth_type')[$aStats[1]][$aStats[3]])) {
+                    $aData['Type'] = config('constants.item.cloth_type')[$aStats[1]][$aStats[3]];
                 }
-                if (isset(config('constants.item.clothdetail')[$aStats[5]])) {
-                    $aData['Detail'] = config('constants.item.clothdetail')[$aStats[5]];
+                if (isset(config('constants.item.cloth_detail')[$aStats[5]])) {
+                    $aData['Detail'] = config('constants.item.cloth_detail')[$aStats[5]];
                 }
                 $aData['sox'] = self::getSOXRate4ItemClass($aItem['ItemClass'], $aItem['Rarity']);
                 break;
@@ -342,7 +342,7 @@ class InventoryService
         $iDegree = self::getDegree4ItemClass($iItemClass);
         $iSOXRate = (int)(($iDegree * 3) - $iItemClass);
         $iSOXRate = ($iDegree === 12 && $iSOXRate === 2) ? 3 : $iSOXRate;
-        return config('constants.item.soxtype')[$iSOXRate];
+        return config('constants.item.sox_type')[$iSOXRate];
     }
 
     /**

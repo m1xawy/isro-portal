@@ -1,30 +1,55 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="csrf-token" content="{{ csrf_token() }}">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
-        <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>{{ config('constants.general.server_name') }} - @yield('title')</title>
+    <meta name="description" content="{{ config('constants.general.server_desc') }}">
+    <link rel="shortcut icon" href="{{ asset(config('constants.general.favicon')) }}">
 
-        <!-- Fonts -->
-        <link rel="preconnect" href="https://fonts.bunny.net">
-        <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
+    <!-- SEO -->
+    @include('partials.seo')
+    <!-- Scripts -->
+    {{--@vite(['resources/css/app.css', 'resources/js/app.js'])--}}
 
-        <!-- Scripts -->
-        @vite(['resources/css/app.css', 'resources/js/app.js'])
-    </head>
-    <body class="font-sans text-gray-900 antialiased">
-        <div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-gray-100 dark:bg-gray-900">
-            <div>
-                <a href="/">
-                    <x-application-logo class="w-20 h-20 fill-current text-gray-500" />
-                </a>
-            </div>
+    <!-- Styles -->
+    <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/style.css') }}" rel="stylesheet">
+    <!-- Inline Styles -->
+    @stack('styles')
+</head>
 
-            <div class="w-full sm:max-w-md mt-6 px-6 py-4 bg-white dark:bg-gray-800 shadow-md overflow-hidden sm:rounded-lg">
-                {{ $slot }}
-            </div>
+<body>
+@include('layouts.header')
+
+<main>
+    @section('breadcrumb')
+        @include('partials.breadcrumb')
+    @show
+
+    <div class="container">
+        <div class="row">
+            @yield('content')
         </div>
-    </body>
+    </div><!-- /.container -->
+
+    @include('layouts.footer')
+</main>
+
+<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+<script defer src="{{ asset('js/bootstrap.bundle.min.js') }}" integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq"></script>
+<script src="https://kit.fontawesome.com/3d3e6e21dd.js" crossorigin="anonymous"></script>
+<script defer src="{{ asset('js/function.js') }}"></script>
+
+<script type="text/javascript">
+    var ServerTime = new Date( {{ now()->format('Y, n, j, G, i, s') }} );
+    var iTimeStamp = {{ now()->format('U') }} - Math.round( + new Date() / 1000 );
+    startClockTimer('#idTimerClock');
+</script>
+
+<!-- Inline Scripts -->
+@yield('scripts')
+</body>
 </html>

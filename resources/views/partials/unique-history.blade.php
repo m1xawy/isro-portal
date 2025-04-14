@@ -1,36 +1,34 @@
 @if (setting('server_unique_widget_enable'))
-    <div class="server-info p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg">
-        <div class="max-w-xl">
-            <h2 class="text-lg font-medium text-gray-900 dark:text-gray-100">{{ __('Unique History') }}</h2>
+    <div class="card mb-4">
+        <div class="card-header">
+            {{ __('Unique History') }}
+        </div>
+        <div class="card-body">
+            @php
+                $uniqueHistory = getUniqueHistory();
+                $unique_name = getUniqueHistoryNames();
+            @endphp
 
-            <ul class="max-w-md divide-y divide-gray-200 dark:divide-gray-700">
-                @php
-                    $uniqueHistory = getUniqueHistory();
-                    $unique_name = getUniqueHistoryNames();
-                @endphp
-
-                @if (!empty($uniqueHistory))
+            @if (!empty($uniqueHistory))
+                <ul class="list-unstyled">
                     @foreach($uniqueHistory as $History)
-                    <li class="py-3 sm:py-4">
-                        <div class="flex items-center space-x-4">
-                            <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
-                                <span class="text-sm font-medium text-gray-900 truncate dark:text-white">{{ $unique_name[$History->MobID] }}</span><br>
-                                <span class="inline-flex items-center text-sm text-gray-500 truncate dark:text-gray-400 font-medium">Killed by</span>
-                                <span class="text-sm font-medium text-gray-900 truncate dark:text-white"><a href="{{ route('ranking.character.view', ['name' => $History->CharName16]) }}">{{ $History->CharName16 }}</a></span>
-                                <span class="inline-flex items-center text-sm text-gray-500 truncate dark:text-gray-400 font-medium">{{ \Carbon\Carbon::make($History->EventDate)->diffForHumans() }}</span>
-                            </p>
-                        </div>
-                    </li>
+                        <li class="mb-3">
+                            <p class="mb-0">{{ $unique_name[$History->MobID] }}</p>
+                            <small>Killed by:</small>
+                            <a href="{{ route('ranking.character.view', ['name' => $History->CharName16]) }}" class="text-decoration-none">
+                                <small>{{ $History->CharName16 }}</small>
+                            </a>
+                            <small>{{ \Carbon\Carbon::make($History->EventDate)->diffForHumans() }}</small>
+                        </li>
                     @endforeach
-                @else
-                    <p class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 text-center">No Records.</p>
-                @endif
-            </ul>
+                </ul>
+            @else
+                <p>No Records.</p>
+            @endif
 
-            <div class="flex justify-center">
-                <a href="{{ route('pages.uniques') }}" class="text-indigo-700 hover:text-white border border-indigo-700 hover:bg-indigo-800 focus:ring-4 focus:outline-none focus:ring-indigo-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 dark:border-indigo-500 dark:text-indigo-500 dark:hover:text-white dark:hover:bg-indigo-500 dark:focus:ring-indigo-800 w-full">Show All</a>
+            <div class="d-grid mx-auto">
+                <a href="{{ route('pages.uniques') }}" class="btn btn-primary btn-sm">{{ __('Unique Tracker') }}</a>
             </div>
-
         </div>
     </div>
 @endif

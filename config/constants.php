@@ -1,7 +1,195 @@
 <?php
 
 return [
-    'hwantitles' => [
+    'general' => [
+        'server_name' => 'Silkroad Online',
+        'server_desc' => "Silkroad Online is a World's first blockbuster Free to play MMORPG. Silkroad Olnine puts players deep into ancient Chinese, Islamic, and European civilization. Enjoy Silkroad's hardcore PvP, personal dungeon system, never ending fortress war and be the top of the highest heroes!",
+        'server_url' => 'https://isro-portal/',
+        'max_player' => 3500,
+        'max_level' => 140,
+        'favicon' => 'images/favicons/favicon.ico',
+        'logo' => 'images/bootstrap-logo-white.svg',
+        'timezone' => 'Africa/Cairo',
+        'debug' => true,
+        'register_confirmation' => true,
+    ],
+    'connection' => [
+        'host' => '192.168.1.101',
+        'port' => '1433',
+        'user' => 'sa',
+        'password' => '123456',
+        'db_website' => 'SRO_Portal',
+        'db_portal' => 'GB_JoymaxPortal',
+        'db_account' => 'SILKROAD_R_ACCOUNT',
+        'db_shard' => 'SILKROAD_R_SHARD',
+        'db_log' => 'SILKROAD_R_SHARD_LOG',
+    ],
+    'smtp' => [
+        'enable' => true,
+        'host' => 'smtp.mailtrap.io',
+        'port' => 2525,
+        'username' => '',
+        'password' => '',
+        'encryption' => 'tls',
+    ],
+    'captcha' => [
+        'enable' => true,
+        'sitekey' => '',
+        'secret' => '',
+    ],
+    'cache' => [
+        'enable' => true,
+        'data' => [
+            'news' => 3600,
+            'download' => 3600,
+            'pages' => 3600,
+            'event-schedule' => 3600,
+            'fortress-war' => 3600,
+            'unique-history' => 3600,
+            'global-history' => 3600,
+            'ranking-player' => 3600,
+            'ranking-guild' => 3600,
+            'ranking-unique' => 3600,
+            'ranking-unique-monthly' => 3600,
+            'ranking-job' => 3600,
+            'ranking-honor' => 3600,
+            'ranking-fortress-player' => 3600,
+            'ranking-fortress-guild' => 3600,
+        ]
+    ],
+    'discord' => [
+        'enable' => true,
+        'server_id' => '1004443821570019338',
+    ],
+    'top_player' => [
+        'enable' => true,
+        'limit' => 5,
+    ],
+    'top_guild' => [
+        'enable' => true,
+        'limit' => 5,
+    ],
+    'sliders' => [
+        0 => [
+            'title' => 'Example headline',
+            'desc' => 'Some representative placeholder content for the first slide of the carousel.',
+            'image' => 'https://picsum.photos/1500/250',
+            'btn-label' => 'Play Now',
+            'btn-url' => '#',
+        ],
+        1 => [
+            'title' => 'Example headline',
+            'desc' => 'Some representative placeholder content for the first slide of the carousel.',
+            'image' => 'https://picsum.photos/1500/250',
+            'btn-label' => 'Sign Up',
+            'btn-url' => '#',
+        ],
+        2 => [
+            'title' => 'Example headline',
+            'desc' => 'Some representative placeholder content for the first slide of the carousel.',
+            'image' => 'https://picsum.photos/1500/250',
+            'btn-label' => 'Download Now',
+            'btn-url' => '#',
+        ],
+    ],
+    'news-category' => [
+        'news' => '<span class="badge text-bg-warning">News</span>',
+        'update' => '<span class="badge text-bg-primary">Update</span>',
+        'event' => '<span class="badge text-bg-success">Event</span>',
+    ],
+    'server_info' => [
+        'enable' => true,
+        'data' => [
+            1 => [
+                //To changing icon
+                //https://fontawesome.com/icons
+                'icon' => '<i class="fas fa-fw fa-check"></i>',
+                'name' => 'Cap',
+                'value' => '110'
+            ],
+            2 => [
+                'icon' => '<i class="fa fa-fw fa-flask"></i>',
+                'name' => 'EXP & SP',
+                'value' => '1x'
+            ],
+            3 => [
+                'icon' => '<i class="fa fa-fw fa-users"></i>',
+                'name' => 'Party EXP',
+                'value' => '1x'
+            ],
+            4 => [
+                'icon' => '<i class="fa fa-fw fa-coins"></i>',
+                'name' => 'Gold',
+                'value' => '1x'
+            ],
+            5 => [
+                'icon' => '<i class="fa fa-fw fa-coins"></i>',
+                'name' => 'Drop',
+                'value' => '1x'
+            ],
+            6 => [
+                'icon' => '<i class="fa fa-fw fa-star"></i>',
+                'name' => 'Trade goods',
+                'value' => '1x'
+            ],
+            7 => [
+                'icon' => '<i class="fa fa-fw fa-exclamation"></i>',
+                'name' => 'HWID Limit',
+                'value' => '1'
+            ],
+            8 => [
+                'icon' => '<i class="fa fa-fw fa-exclamation"></i>',
+                'name' => 'IP Limit',
+                'value' => '1'
+            ],
+        ],
+    ],
+    'event_schedule' => [
+        'enable' => true,
+        'data' => [
+            'roc' => 'Roc',
+            'medusa' => 'Medusa',
+            'special' => 'Special Trade',
+            'fortress' => 'Fortress War',
+            'selkis_neith' => 'Selket & Neith',
+            'anubis_isis' => 'Anubis & Isis',
+            'haroeris_seth' => 'Haroeris & Seth',
+            'ctf' => 'Capture The Flag (CTF)',
+            'ba_random' => 'Battle Arena (Random)',
+            'ba_party' => 'Battle Arena (Party)',
+            'ba_guild' => 'Battle Arena (Guild)',
+            'ba_job' => 'Battle Arena (Job)',
+            'survival_solo' => 'Survival (Solo)',
+            'survival_party' => 'Survival (Party)',
+        ],
+    ],
+    'fortress_war' => [
+        'enable' => true,
+        'data' => [
+            1 => [
+                'name' => 'Jangan',
+                'icon' => 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAgY0hSTQAAeiYAAICEAAD6AAAAgOgAAHUwAADqYAAAOpgAABdwnLpRPAAAABl0RVh0U29mdHdhcmUAUGFpbnQuTkVUIHYzLjUuODc7gF0AAAK8SURBVDhPpZNtTI1hGMdtz6PTMeoc5mTO6qyWlzTh8MGQZKZMNi9nEpUhSyWzZhPVvEyjWZSNo5dRFArpzVkfzixhxxbJZmF9YbMUkc1m0vRzPY9SjW/u7b/75br///t/39d1jxs3qimKYtam0vMvDMX0Pf9sGklV1T76PTDQCggGPbx7UULXq1KJKX3anjFkWTAOn8pA2w9+PKLzw0Uhe6hIXkZ9ehSfv7ppe3ach80ZXHcmdg2LSG/Q7BoF3+h/2t/xskg2rKPa5i0Cr6mT01yC3sE67ltMuPMdtLdnkZm6uFs43/840RShg5sNcTrpjTbvbgKv8fTK+NuDAu5Jf11QVZbA2bzV+hvpAjp5sJ2WTif3J02Cr81gNMobuMBs4oNqpaf1qC5wtzwFp9mP2sIYYjf7/xbRBX4+oXjhVDwrZ4uTL4JGgRtMZnq9Iqi5k8Stq0lcPBeL0zqNY4ts7Nwxc0Tg00c3xSEqbYqBAR8L+PgIAsB3AY8NMTQqNq5IbKtipECZyI0gP+ITg0YEnrcWcXqukbeKmXav6bQZrDwzhNJoXEq9ahGyPynKBPIUH1yqL/mRVuISAkcEWh8UymIwh5fP4JZzPY8a9lN3bROl4qREmUxVcRRXjodTeWYVp2x+3IgNZlu8bUTAdTubFlcGJxUvqjIjSVdUijPtpInlJNWbkoN2suQKNTmR8ogmTqaHsHPLkIPhTFx27qYyYxEVQtJSeSlrKWWKhYrxflzLjaRW1qrlGjdPzCchPnhMGvVCyj20trcgP4qaIxE0zQygLHcJHrmzRzFRkb8C96wALmSGcSJtHo7o6e81jl7Fo0t53y57z/7U+RTkhFNywE5lcijlyXM4n21n754wEuOCiI6Y0jOqlPVvMKYiJdiXEhfMdkcgDsn1hvggEjdaiV1j0Wz//Zn+9zv/AmCerVg+UIPjAAAAAElFTkSuQmCC',
+            ],
+            3 => [
+                'name' => 'Hotan',
+                'icon' => 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAgY0hSTQAAeiYAAICEAAD6AAAAgOgAAHUwAADqYAAAOpgAABdwnLpRPAAAABl0RVh0U29mdHdhcmUAUGFpbnQuTkVUIHYzLjUuODc7gF0AAAI5SURBVDhPpVNfSFNhFL+3OzDpQeqh8E3ywUIwRkIFIgOL8CEKqcAHwagVlRWzf1CxQHLM7E2WFAvFahFLsweLle5ls2YY1WhdTCG9i6Zmjaa7aDJ+3XPave4y37pw7vfnnN/v+53vnE8Qcj5JktbTUhuxmmV9HLPqRyCLxZJcVmeQnn6NdNyL2bEnmPvcgnfPL2s+KUkxJrC2UaifupSawvzMB8QjdpRsEqGMXOKRTH7ZhMlQAwa6T7K6LKaA5BZqpv5Rf+DXmBtyqJMBB21FeN9fZ8xp/SnoRuhRLTzOGiJZNJQQY/pnjIOX0wkTCQHJ5NBtDHQe4hgajVRospRSoLw5xs5d5WuxMPcFUx+f4Zv8CpPhw4j0XWBQ8QYBuyvX4YVnD7zXbf9I6JdKRBhMTjptenwIo30HIIaHIN5sZfDwfZtBQHH+tsoVgvn4PSRiHsxO9GtEaxALtjE4k8lAgAqxod5Q4HdXoNtZhoetO/IVkIrSYglKtBei4wyDC3q8EKurWDaloNtjV8UKwe+vHaYUiIBki3VaGrZqrXw1hgK6I0rBl6tgId5l3DDdwffxYciBvbw34t+HaMCBsK+WTyeCO1e3o/2s1VwJZfQuqyCwXi69iWgcfOCA87gVG4uEvDJyIxHB26cXTUrcTdtMNx/0NTNJtoQqd3FuK8uDRxHoshskOgEp6O3Yj/ZzW3HjRGluK/MzMHWkRpi8dX4nXKetcJ0qx7UjZWixb8aVxi0EzH9M//uc/wJzr6izEbwcCQAAAABJRU5ErkJggg==',
+            ],
+            4 => [
+                'name' => 'Constantinople',
+                'icon' => 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAP3RFWHRHZW5lcmF0ZWQgYnkAR2VuZXJhdGVkIGJ5IHRoZSBEZXZlbG9wZXIncyBJbWFnZSBMaWJyYXJ5IChEZXZJTCk++VvxAAAAB3RFWHRBdXRob3IAqa7MSAAAAAx0RVh0RGVzY3JpcHRpb24AEwkhIwAAAlZJREFUOI11k11IU2EYx//nnOWWHaY0ESEl20UMNOhCaKB9SjGEFEuNwgQVKbqoqCAvdmFEoX1oddFFBCkZZDdRCZlRi0JChCZR4kcmNvzY8GNrc57mzvl3obMdmw88V+/z/73P+z7/R1BVDfEhSSJVVROQIBKdiWsLzn8LQ5JEJhLnvfL9f6aqGla6oKpqhLmGBz7NE4AudzybJFJqaW8b50rtsi4mrun/zblxJ7HFSZhreOizn29HZ3nkTg8LurxESi1hvU7X88u03RtZhQAAzw2EiNTTLMy3Mjx+hfKuVsrbr3JJ8dNRYKZsrWfa7nZ+7SrivrwMwlTG3JYhAqAIACWWjYAyi3c/ynD4RBsMWWmAZRsgSVCUZIQ32+DXBJx1fsGHgT2AMQW+0Zl/fwCATT0zhFzJDXkPmVr6kmpUZWSuk5Gfp1h/4Rgtpd2U7Y8JuZI77w6vPsGwAhEkSeSl4QXcPngLgWAAi4FfMEZGsBD0IzvDhLnuIYjmdOTfb0RPVSZi49SNsS7LhGCfA4orCSXFhYAgwHH8BZ48fQ1vxxjc19yILumnqAM8mIhACL5BUXkLeqfKgcVRGJM3wT1fjaMn2+GZJqamQ+sDxsYCKK5qRa+3An+y7WBSJmCQsZieA7fWgMabj2CMRnUAQ5yhBEkS2eGJ4v3+ZgjeCVBbbldYUhAadMHX8BEj9Tbo7BxzVLwjq/tDRHIFleE67rVvJUxltN0Y1DlQ58REkIselYHvZ1iYb2Vu81BC8bqAGKSic5I5TYlvjqWwdp3jI7Z56603APwFHFmZpeP1n4kAAAAASUVORK5CYII=',
+            ],
+            6 => [
+                'name' => 'Bandit',
+                'icon' => 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAMAAAAoLQ9TAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAgY0hSTQAAeiYAAICEAAD6AAAAgOgAAHUwAADqYAAAOpgAABdwnLpRPAAAAwBQTFRFAAAADwUAHh4eJA0AKA4ALRAAMxIANxMANBQBOxUAPRYAPhcBODg4Pz4+QBcAThwATR0CUSEGWSABXSEAXSUIWygNZiQBZycFZSsKbjIRbzMSeTAIfDEIfjQLfDcRezsYfzsYQkFBV1ZWXFtbYWBgaGdnamlpa2pqb25uenh4enl5fHt7f319gT0Zi0MckkMZnkscjU0pk0skk08qm1o1nlkyn1o0qU0aq1corVksplw2q180uGY7l2dNrWhBt25GsXVTw3NHxXBCy3lN0H5TuYVo04BTwZN615d115l375Vj5Zt1/9g9m5mZqKenqaiorKqqs7GxtLOz97mX78q298eu/sms98y1+dS//9O7/9S7w8LC0M/P0tDQ29ra3t7e39/f4N/f/9fA/93L/+HR/+TV/+ja/+nc4uHh4+Pj5OPjAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAxIPgcAAAAQB0Uk5T////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////AFP3ByUAAAAZdEVYdFNvZnR3YXJlAFBhaW50Lk5FVCB2My41Ljg3O4BdAAAA2UlEQVQoU2NgwADxfn4MDGmhHuYMDMoqWkDpeH//xAyQMlVtJQ1NkEC0f1ZGQAyPopqOqgZYBRNTZmZgLA+vujYDgxpQII5JjIkpKIGHh4FBgMEXpFfP08SYiYmBQVzOWgbI/c8QlRTpbSbLImjk7GYA5P5nSBdOMQwzZZHiduSCCESESCenujJLWoq4WIAFRMOFg90dWBRsOF3YwQJWPnwcYbYsLE4sPhIggf8M/Kxewg7MClwsQiDefyBm9WGzY9X1YQZzgPg/AwOzPbM+I4QNIkBCQBeBAQC7RkQfNj4PRwAAAABJRU5ErkJggg==',
+            ],
+        ],
+    ],
+    'top_icons' => [
+        1 => 'images/rank1.png',
+        2 => 'images/rank2.png',
+        3 => 'images/rank3.png',
+    ],
+    'hwan_titles' => [
         'CH' => [
             1 => 'Captain',
             2 => 'General',
@@ -19,42 +207,7 @@ return [
             6 => 'Duke',
         ],
     ],
-    'viplevel' => [
-        "level_access"=>4,
-        "level"=>[
-            0=>"Normal",
-            1=>"Iron",
-            2=>"Bronze",
-            3=>"Silver",
-            4=>"Gold",
-            5=>"Platinum",
-            6=>"VIP"
-        ],
-        "type"=>[
-            0=>"General",
-            1=>"VIP",
-            2=>"New",
-            3=>"Returne",
-            4=>"Free"
-        ]
-    ],
-    'eventschedule' => [
-        'roc' => 'Roc',
-        'medusa' => 'Medusa',
-        'special' => 'Special Trade',
-        'fortress' => 'Fortress War',
-        'selkis_neith' => 'Selket & Neith',
-        'anubis_isis' => 'Anubis & Isis',
-        'haroeris_seth' => 'Haroeris & Seth',
-        'ctf' => 'Capture The Flag (CTF)',
-        'ba_random' => 'Battle Arena (Random)',
-        'ba_party' => 'Battle Arena (Party)',
-        'ba_guild' => 'Battle Arena (Guild)',
-        'ba_job' => 'Battle Arena (Job)',
-        'survival_solo' => 'Survival (Solo)',
-        'survival_party' => 'Survival (Party)',
-    ],
-    'skillmastery' => [
+    'skill_mastery' => [
         257 => [
             "name" => "Blade",
             "icon" => "mastery_sword.png"
@@ -87,7 +240,6 @@ return [
             "name" => "Recovery",
             "icon" => "mastery_water.png"
         ],
-
         513 => [
             "name" => "Warrior",
             "icon" => "eu_warrior.png"
@@ -113,29 +265,33 @@ return [
             "icon" => "eu_cleric.png"
         ],
     ],
-    'job' => [
-        '0' => 'None',
-        '1' => 'Trader',
-        '2' => 'Thief',
-        '3' => 'Hunter',
-
-        'none' => '0',
-        'trader' => '1',
-        'thief' => '2',
-        'hunter' => '3',
+    'vip_level' => [
+        "level_access" => 4,
+        "level" => [
+            0 => "Normal",
+            1 => "Iron",
+            2 => "Bronze",
+            3 => "Silver",
+            4 => "Gold",
+            5 => "Platinum",
+            6 => "VIP"
+        ],
+        "type" => [
+            0 => "General",
+            1 => "VIP",
+            2 => "New",
+            3 => "Returne",
+            4 => "Free"
+        ]
     ],
-    'skill' => [
+    'job' => [
+        0 => 'None',
+        1 => 'Trader',
+        2 => 'Thief',
+        3 => 'Hunter',
     ],
     'guild' => [
         'permission' => [
-            'all' => -1,
-            'join' => 1,
-            'withdraw' => 2,
-            'union' => 4,
-            'storage' => 8,
-            'notice' => 16,
-        ],
-        'permission_names' => [
             -1 => 'All',
             1 => 'Join',
             2 => 'Withdraw',
@@ -143,49 +299,40 @@ return [
             8 => 'Storage',
             16 => 'Notice',
         ],
-        'siege' => [
-            '1' => 'Commander',
-            '2' => 'Deputy Commander',
-            '4' => 'Fortress War Administrator',
-            '8' => 'Production Administrator',
-            '16' => 'Training Administrator',
-            '32' => 'Military Engineer',
-        ],
-    ],
-    'siege' => [
-        'names' => [
-            // SiegeID => Name
-            '1' => 'Jangan',
-            '3' => 'Hotan',
-            '4' => 'Constantinople',
-            '6' => 'Bandit',
+        'authority' => [
+            1 => 'Leader',
+            2 => 'Deputy Commander',
+            4 => 'Fortress War Administrator',
+            8 => 'Production Administrator',
+            16 => 'Training Administrator',
+            32 => 'Military Engineer',
         ],
     ],
     'inventory' => [
         'slots' => [
-            'helm' => '0',
-            'chest' => '1',
-            'shoulders' => '2',
-            'gauntlet' => '3',
-            'pants' => '4',
-            'boots' => '5',
-            'weapon' => '6',
-            'shield' => '7',
-            'job' => '8',
-            'earring' => '9',
-            'necklace' => '10',
-            'lring' => '11',
-            'rring' => '12',
+            0 => 'helm',
+            1 => 'chest' ,
+            2 => 'shoulders',
+            3 => 'gauntlet',
+            4 => 'pants',
+            5 => 'boots',
+            6 => 'weapon',
+            7 => 'shield',
+            8 => 'job',
+            9 => 'earring',
+            10 => 'necklace',
+            11 => 'lring',
+            12 => 'rring',
         ],
     ],
     'item' => [
-        'soxtype' => [
+        'sox_type' => [
             3 => 'Seal of Heavy Storm',
             2 => 'Seal of Star',
             1 => 'Seal of Moon',
             0 => 'Seal of Sun'
         ],
-        'soxclass' => [
+        'sox_class' => [
             'SET_A_RARE' => [
                 0 => 'Destruction',
                 1 => 'Destruction',
@@ -216,18 +363,18 @@ return [
             ],
         ],
         'sex' => [
-            '0' => 'Female',
-            '1' => 'Male',
+            0 => 'Female',
+            1 => 'Male',
         ],
         'country' => [
-            '0' => 'Chinese',
-            '1' => 'Europe',
+            0 => 'Chinese',
+            1 => 'Europe',
         ],
         'race' => [
             'CH' => 'Chinese',
             'EU' => 'European',
         ],
-        'clothdetail' => [
+        'cloth_detail' => [
             'FA' => 'Foot',
             'HA' => 'Head',
             'CA' => 'Head',
@@ -236,7 +383,7 @@ return [
             'LA' => 'Legs',
             'AA' => 'Hands'
         ],
-        'clothtype' => [
+        'cloth_type' => [
             'CH' => [
                 'CLOTHES' => 'Garment',
                 'HEAVY' => 'Armor',
@@ -248,7 +395,7 @@ return [
                 'LIGHT' => 'Light armor'
             ]
         ],
-        'weapontype' => [
+        'weapon_type' => [
             'CH' => [
                 'TBLADE' => 'Glavie',
                 'SPEAR' => 'Spear',
@@ -270,7 +417,14 @@ return [
                 'TSWORD' => 'Twohand sword'
             ]
         ],
-        'jobdetail' => [
+        'avatar_type' => [
+            0 => 'Avatar Flag',
+            1 => 'Avatar Attach',
+            2 => 'Avatar Hat',
+            4 => 'Avatar Dress',
+            9 => 'Devil spirit\'s'
+        ],
+        'job_detail' => [
             0 => 'Head',
             1 => 'Chest',
             2 => 'Shoulder',
@@ -278,12 +432,12 @@ return [
             4 => 'Legs',
             5 => 'Foot',
         ],
-        'jobdegree' => [
+        'job_degree' => [
             1 => 'Lowest Quality',
             2 => 'Low Quality',
             3 => 'Medium Quality',
         ],
-        'jobtype' => [
+        'job_type' => [
             2 => [
                 1 => 'Hunter Equipment (weapon)',
             ],
@@ -316,13 +470,6 @@ return [
                 2 => 'Thief Equipment (necklace)',
                 3 => 'Thief Equipment (ring)',
             ],
-        ],
-        'avatartype' => [
-            0 => 'Avatar Flag',
-            1 => 'Avatar Attach',
-            2 => 'Avatar Hat',
-            4 => 'Avatar Dress',
-            9 => 'Devil spirit\'s'
         ],
     ],
 ];

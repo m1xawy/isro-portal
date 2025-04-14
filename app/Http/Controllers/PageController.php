@@ -3,13 +3,40 @@
 namespace App\Http\Controllers;
 
 use App\Models\Download;
+use App\Models\Post;
 use App\Models\SRO\Shard\Char;
 use Illuminate\Http\Request;
 use Outl1ne\PageManager\Helpers\NPMHelpers;
 
 class PageController extends Controller
 {
-    public function show($slug)
+    public function index()
+    {
+        $posts = cache()->remember('posts', setting('cache_news', 600), function() {
+            return Post::where('published_at', '<=', now())->orderBy('published_at', 'DESC')->get();
+        });
+
+        return view('pages.index', [
+            'posts' => $posts,
+        ]);
+    }
+
+    public function post($slug)
+    {
+        $post = cache()->remember('posts.view_'.$slug, setting('cache_news', 600), function() use ($slug) {
+            return Post::where('slug', $slug)->first();
+        });
+
+        if ($post) {
+            return view('pages.view', [
+                'post' => $post
+            ]);
+        }
+
+        return redirect()->back();
+    }
+
+    public function page($slug)
     {
         $pages = cache()->remember('page', setting('cache_page', 600), function() {
             return NPMHelpers::getPages();

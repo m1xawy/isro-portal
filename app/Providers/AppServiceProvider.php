@@ -35,19 +35,14 @@ class AppServiceProvider extends ServiceProvider
     private function configureApp(): void
     {
         try {
-            //Config::set('app.name', setting('server_name', env('APP_NAME')));
-            //Config::set('app.url', setting('server_url', env('APP_URL')));
+            Config::set('app.name', config('constants.general.server_name'));
+            Config::set('app.url', config('constants.general.server_url'));
+            Config::set('mail.default', config('constants.smtp.enable') ? env('MAIL_MAILER', 'smtp') : 'log');
 
-            date_default_timezone_set(setting('server_timezone', 'UTC'));
-            Config::set('mail.default', isSMTPEnabled() == 1 ? env('MAIL_MAILER', 'smtp') : 'log');
-            //Config::set('mail.mailers.smtp.host', setting('site_mail_host', env('MAIL_HOST', 'smtp')));
-            //Config::set('mail.mailers.smtp.port', setting('site_mail_port', env('MAIL_PORT', 'smtp')));
-            //Config::set('mail.mailers.smtp.username', setting('site_mail_username', env('MAIL_USERNAME', 'smtp')));
-            //Config::set('mail.mailers.smtp.password', setting('site_mail_password', env('MAIL_PASSWORD', 'smtp')));
-            //Config::set('mail.mailers.smtp.encryption', setting('site_mail_encryption', env('MAIL_ENCRYPTION', 'smtp')));
+            date_default_timezone_set(config('constants.general.timezone'));
 
         } catch (QueryException $e) {
-            // Error: No database configured yet
+            // Error: Something Wrong.
         }
     }
 }
