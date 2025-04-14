@@ -21,10 +21,6 @@
                     @php $i++; @endphp
                 @endforeach
             </ul>
-
-            <div class="d-grid mx-auto">
-                <a href="{{ route('pages.timers') }}" class="btn btn-primary btn-sm">{{ __('Event Times') }}</a>
-            </div>
         </div>
     </div>
 @endif

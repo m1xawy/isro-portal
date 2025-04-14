@@ -10,7 +10,7 @@
                         <li class="mb-3">
                             <p class="mb-0">{{ config('constants.ranking.unique_points')[$value->Value] }}</p>
                             <small>
-                                Killed by:
+                                {{ __('Killed by:') }}
                                 <a href="{{ route('ranking.character.view', ['name' => $value->CharName16]) }}" class="text-decoration-none">{{ $value->CharName16 }}</a>
                                 {{ \Carbon\Carbon::make($value->EventTime)->diffForHumans() }}
                             </small>
@@ -20,10 +20,6 @@
             @else
                 <p class="text-center">{{ __('No Records Found!') }}</p>
             @endif
-
-            <div class="d-grid mx-auto">
-                <a href="{{ route('pages.uniques') }}" class="btn btn-primary btn-sm">{{ __('Unique Tracker') }}</a>
-            </div>
         </div>
     </div>
 @endif

@@ -16,7 +16,7 @@
         @php $footer_links = config('constants.general.footer'); @endphp
         @if (!empty($footer_links))
         <div class="col-md-2 mb-3">
-            <h5>General</h5>
+            <h5>{{ __('General') }}</h5>
             <ul class="nav flex-column">
                 @foreach($footer_links['general'] as $value)
                 <li class="nav-item mb-2"><a href="{{ $value['url'] }}" target="_blank" class="nav-link p-0 text-body-secondary">{{ $value['name'] }}</a></li>
@@ -25,7 +25,7 @@
         </div>
 
         <div class="col-md-2 mb-3">
-            <h5>Social Media</h5>
+            <h5>{{ __('Social Media') }}</h5>
             <ul class="nav flex-column">
                 @foreach($footer_links['social'] as $value)
                     <li class="nav-item mb-2"><a href="{{ $value['url'] }}" target="_blank" class="nav-link p-0 text-body-secondary">{{ $value['name'] }}</a></li>
@@ -34,7 +34,7 @@
         </div>
 
         <div class="col-md-2 mb-3">
-            <h5>Backlink</h5>
+            <h5>{{ __('Backlink') }}</h5>
             <ul class="nav flex-column">
                 @foreach($footer_links['backlink'] as $value)
                     <li class="nav-item mb-2"><a href="{{ $value['url'] }}" target="_blank" class="nav-link p-0 text-body-secondary">{{ $value['name'] }}</a></li>

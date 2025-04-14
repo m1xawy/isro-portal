@@ -8,9 +8,9 @@
                 <table class="table table-striped">
                     <thead class="table-dark">
                         <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">Name</th>
-                            <th scope="col">Points</th>
+                            <th scope="col"></th>
+                            <th scope="col">{{ __('Name') }}</th>
+                            <th scope="col">{{ __('Points') }}</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -19,7 +19,7 @@
                             <tr>
                                 <td>
                                     @if($i <= 3)
-                                        <img src="{{ config('constants.ranking.top_icons')[$i] }}" alt=""/>
+                                        <img src="{{ asset(config('constants.ranking.top_icons')[$i]) }}" alt=""/>
                                     @else
                                         {{ $i }}
                                     @endif

@@ -7,9 +7,9 @@
             <table class="table table-striped">
                 <thead class="table-dark">
                     <tr>
-                        <th scope="col">Message</th>
-                        <th scope="col">Character</th>
-                        <th scope="col">Date</th>
+                        <th scope="col">{{ __('Message') }}</th>
+                        <th scope="col">{{ __('Character') }}</th>
+                        <th scope="col">{{ __('Date') }}</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -21,14 +21,14 @@
                                 @if(!empty($value->CharName))
                                     <a href="{{ route('ranking.character.view', ['name' => $value->CharName]) }}" class="text-decoration-none">{{ $value->CharName }}</a>
                                 @else
-                                    <span>NoName</span>
+                                    <span>{{ __('NoName') }}</span>
                                 @endif
                             </td>
                             <td>{{ $value->EventTime }}</td>
                         </tr>
                         @endforeach
                     @else
-                        <tr><td colspan="3" class="text-center">No records found~</td></tr>
+                        <tr><td colspan="3" class="text-center">{{ __('No Records Found!') }}</td></tr>
                     @endif
                 </tbody>
             </table>

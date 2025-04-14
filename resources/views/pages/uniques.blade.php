@@ -7,10 +7,10 @@
             <table class="table table-striped">
                 <thead class="table-dark">
                     <tr>
-                        <th scope="col">Unique</th>
-                        <th scope="col">Dead Time</th>
-                        <th scope="col">Killer</th>
-                        <th scope="col">Area</th>
+                        <th scope="col">{{ __('Unique') }}</th>
+                        <th scope="col">{{ __('Dead Time') }}</th>
+                        <th scope="col">{{ __('Killer') }}</th>
+                        <th scope="col">{{ __('Area') }}</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -20,25 +20,25 @@
                                 <td>{{ $uniques_name[$value->Value] }}</td>
                                 <td>{{ $value->EventTime }}</td>
                                 <td>
-                                    @php if($value->RefObjID > 2000) : @endphp
-                                    <img src="{{ asset('images/ingame/european.png') }}" style="display:inline;vertical-align:text-top" alt=""/>
-                                    @php else : @endphp
-                                    <img src="{{ asset('images/ingame/chinese.png') }}" style="display:inline;vertical-align:text-top" alt=""/>
-                                    @php endif; @endphp
+                                    @if($value->RefObjID > 2000)
+                                        <img src="{{ asset('images/european.png') }}" style="display:inline;vertical-align:text-top" alt=""/>
+                                    @else
+                                        <img src="{{ asset('images/chinese.png') }}" style="display:inline;vertical-align:text-top" alt=""/>
+                                    @endif
 
                                     @if($value->CharName16)
                                         <a href="{{ route('ranking.character.view', ['name' => $value->CharName16]) }}" class="text-decoration-none">{{ $value->CharName16 }}</a>
                                     @else
-                                        <span>NoName</span>
+                                        <span>{{ __('NoName') }}</span>
                                     @endif
                                 </td>
                                 <td>
                                     @switch($value->AreaName)
                                         @case('Eu')
-                                            Constantinople
+                                            {{ __('Constantinople') }}
                                             @break
                                         @case('Am')
-                                            Asia Minor
+                                            {{ __('Asia Minor') }}
                                             @break
                                         @default
                                             {{ $value->AreaName }}
@@ -47,7 +47,7 @@
                             </tr>
                         @endforeach
                     @else
-                        <tr><td colspan="4" class="text-center">No records found!</td></tr>
+                        <tr><td colspan="4" class="text-center">{{ __('No Records Found!') }}</td></tr>
                     @endif
                 </tbody>
             </table>

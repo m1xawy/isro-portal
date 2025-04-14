@@ -23,7 +23,7 @@
             @csrf
 
             <div class="row mb-3">
-                <label for="code" class="col-md-4 col-form-label text-md-end">E-Pin Code</label>
+                <label for="code" class="col-md-4 col-form-label text-md-end">{{ __('E-Pin Code') }}</label>
 
                 <div class="col-md-6">
                     <input id="code" type="text" class="form-control @error('code') is-invalid @enderror" name="code" required>
@@ -37,7 +37,7 @@
             </div>
 
             <div class="row mb-3">
-                <label for="password" class="col-md-4 col-form-label text-md-end">E-Pin Password</label>
+                <label for="password" class="col-md-4 col-form-label text-md-end">{{ __('E-Pin Password') }}</label>
 
                 <div class="col-md-6">
                     <input id="password" type="text" class="form-control @error('password') is-invalid @enderror" name="password" required>
@@ -52,7 +52,7 @@
 
             <div class="row mb-0">
                 <div class="col-md-8 offset-md-4">
-                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <button type="submit" class="btn btn-primary">{{ __('Submit') }}</button>
                 </div>
             </div>
         </form>

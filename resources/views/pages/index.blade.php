@@ -13,10 +13,13 @@
                 <img src="{{ Storage::url($value->featured_image) }}" class="card-img-top" alt="...">
                 @endif
                 <div class="card-header">
-                    <a href="{{ '/post/' . $value->slug }}" class="text-decoration-none">
+                    <a href="{{ route('pages.post.show', ['slug' => $value->slug]) }}" class="text-decoration-none">
                         <h5 class="card-title">{{ $value->title }}</h5>
                     </a>
-                    <p class="card-text">{!! config('constants.general.news-category')[$value->category] !!} Published on {{ $value->published_at->format("M j, Y") }}</p>
+                    <p class="card-text">
+                        {!! config('constants.general.news-category')[$value->category] !!}
+                        {{ __('Published on') }} {{ $value->published_at->format("M j, Y") }}
+                    </p>
                 </div>
                 <div class="card-body">
                     {!! $value->content !!}
@@ -24,7 +27,7 @@
             </div>
         @empty
             <div class="alert alert-danger text-center" role="alert">
-                No posts available!
+                {{ __('No Posts Available!') }}
             </div>
        @endforelse
     </div>

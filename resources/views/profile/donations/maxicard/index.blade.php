@@ -17,14 +17,14 @@
                 </div>
             @empty
                 <div class="alert alert-danger" role="alert">
-                    No packages available!
+                    {{ __('No Packages Available!') }}
                 </div>
             @endforelse
         </div>
 
         <div class="row mb-0">
             <div class="col-md-8 offset-md-4">
-                <a href="{{ route('donate-maxicard-buy') }}" class="btn btn-primary">Buy Now</a>
+                <a href="{{ route('donate-maxicard-buy') }}" class="btn btn-primary">{{ __('Buy Now') }}</a>
             </div>
         </div>
     </div>

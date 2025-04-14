@@ -28,20 +28,20 @@
                         </div>
                         <div class="card-body">
                             <p>{{ $data->description }}</p>
-                            <a href="{{ route('donate-paypal', ['id' => $data->id]) }}" class="w-100 btn btn-lg btn-primary">Buy Now</a>
+                            <a href="{{ route('donate-paypal', ['id' => $data->id]) }}" class="w-100 btn btn-lg btn-primary">{{ __('Buy Now') }}</a>
                         </div>
                     </div>
                 </div>
             @empty
                 <div class="alert alert-danger" role="alert">
-                    No packages available!
+                    {{ __('No Packages Available!') }}
                 </div>
             @endforelse
         </div>
 
         @if($invoices->count() > 0)
         <div class="row mb-3">
-            <h4>You have pending payments!</h4>
+            <h4>{{ __('You have pending payments!') }}</h4>
 
             <div class="table-responsive">
                 <table class="table table-striped">

@@ -7,30 +7,29 @@
             <table class="table table-striped">
                 <thead class="table-dark">
                     <tr>
-                        <th scope="col">Fortress</th>
-                        <th scope="col">Winner</th>
-                        <th scope="col">Date</th>
+                        <th scope="col">{{ __('Fortress') }}</th>
+                        <th scope="col">{{ __('Winner') }}</th>
+                        <th scope="col">{{ __('Date') }}</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @php $const = config('constants.widgets.fortress_war.data'); @endphp
                     @forelse($fortressHistory as $value)
                         <tr>
                             <td>
-                                <img src="{{ $const[$value->FortressID]['icon'] }}" alt="">
-                                {{ $const[$value->FortressID]['name'] }}
+                                <img src="{{ config('constants.widgets.fortress_war.data')[$value->FortressID]['icon'] }}" alt="">
+                                {{ config('constants.widgets.fortress_war.data')[$value->FortressID]['name'] }}
                             </td>
                             <td>
                                 @if(!empty($value->strDesc))
                                     <a href="{{ route('ranking.guild.view', ['name' => $value->strDesc]) }}" class="text-decoration-none">{{ $value->strDesc }}</a>
                                 @else
-                                    <span>NoName</span>
+                                    <span>{{ __('NoName') }}</span>
                                 @endif
                             </td>
                             <td>{{ $value->EventTime }}</td>
                         </tr>
                     @empty
-                        <tr><td colspan="3" class="text-center">No records found!</td></tr>
+                        <tr><td colspan="3" class="text-center">{{ __('No Records Found!') }}</td></tr>
                     @endforelse
                 </tbody>
             </table>

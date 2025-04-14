@@ -17,8 +17,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [PageController::class, 'index'])->name('home');
-Route::get('/post/{slug}', [PageController::class, 'post'])->name('pages.show');
-Route::get('/page/{slug}', [PageController::class, 'page'])->name('pages.show');
+Route::get('/post/{slug}', [PageController::class, 'post'])->name('pages.post.show');
+Route::get('/page/{slug}', [PageController::class, 'page'])->name('pages.page.show');
 Route::get('/timers', [PageController::class, 'timers'])->name('pages.timers');
 Route::get('/uniques', [PageController::class, 'uniques'])->name('pages.uniques');
 Route::any('/fortress', [PageController::class, 'fortress'])->name('pages.fortress');

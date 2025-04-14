@@ -29,7 +29,7 @@
                         @php $pages = Outl1ne\PageManager\Helpers\NPMHelpers::getPages(); @endphp
                         @if (!empty($pages) && count($pages) !== 0)
                             @foreach ($pages as $page)
-                                <li><a class="dropdown-item" href="{{ '/page/' .$page['slug']['en'] }}">{{ $page['name']['en'] }}</a></li>
+                                <li><a class="dropdown-item" href="{{ route('pages.page.show', ['slug' => $page['slug']['en']]) }}">{{ $page['name']['en'] }}</a></li>
                             @endforeach
                         @else
                             <li><a class="dropdown-item" href="#">{{ __('No Pages') }}</a></li>
@@ -59,27 +59,27 @@
 
                     <a class="nav-link px-3 py-1 text-white dropdown-toggle d-flex align-items-center" id="bd-theme" type="button" aria-expanded="false" data-bs-toggle="dropdown" aria-label="Toggle theme (light)">
                         <svg class="bi my-1 theme-icon-active" aria-hidden="true"><use href="#sun-fill"></use></svg>
-                        <span class="visually-hidden" id="bd-theme-text">Toggle theme</span>
+                        <span class="visually-hidden" id="bd-theme-text">{{ __('Toggle theme') }}</span>
                     </a>
                     <ul class="dropdown-menu dropdown-menu-end shadow" aria-labelledby="bd-theme-text" style="">
                         <li>
                             <button type="button" class="dropdown-item d-flex align-items-center active" data-bs-theme-value="light" aria-pressed="true">
                                 <svg class="bi me-2 opacity-50" aria-hidden="true"><use href="#sun-fill"></use></svg>
-                                Light
+                                {{ __('Light') }}
                                 <svg class="bi ms-auto d-none" aria-hidden="true"><use href="#check2"></use></svg>
                             </button>
                         </li>
                         <li>
                             <button type="button" class="dropdown-item d-flex align-items-center" data-bs-theme-value="dark" aria-pressed="false">
                                 <svg class="bi me-2 opacity-50" aria-hidden="true"><use href="#moon-stars-fill"></use></svg>
-                                Dark
+                                {{ __('Dark') }}
                                 <svg class="bi ms-auto d-none" aria-hidden="true"><use href="#check2"></use></svg>
                             </button>
                         </li>
                         <li>
                             <button type="button" class="dropdown-item d-flex align-items-center" data-bs-theme-value="auto" aria-pressed="false">
                                 <svg class="bi me-2 opacity-50" aria-hidden="true"><use href="#circle-half"></use></svg>
-                                Auto
+                                {{ __('Auto') }}
                                 <svg class="bi ms-auto d-none" aria-hidden="true"><use href="#check2"></use></svg>
                             </button>
                         </li>

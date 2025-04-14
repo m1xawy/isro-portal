@@ -10,7 +10,7 @@
                         <li class="mb-3">
                             <p class="mb-0">[{{ $value->Comment }}]</p>
                             <small>
-                                Sent by:
+                                {{ __('Sent by:') }}
                                 <a href="{{ route('ranking.character.view', ['name' => $value->CharName]) }}" class="text-decoration-none">{{ $value->CharName }}</a>
                                 {{ \Carbon\Carbon::make($value->EventTime)->diffForHumans() }}
                             </small>
@@ -18,12 +18,8 @@
                     @endforeach
                 </ul>
             @else
-                <p class="text-center">No records found!</p>
+                <p class="text-center">{{ __('No Records Found!') }}</p>
             @endif
-
-            <div class="d-grid mx-auto">
-                <a href="{{ route('pages.global') }}" class="btn btn-primary btn-sm">{{ __('Global History') }}</a>
-            </div>
         </div>
     </div>
 @endif

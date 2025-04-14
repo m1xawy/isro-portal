@@ -16,7 +16,7 @@
                                 @if($value->Name !== 'DummyGuild')
                                     <a href="{{ route('ranking.guild.view', ['name' => $value->Name]) }}" class="text-decoration-none">{{ $value->Name }}</a>
                                 @else
-                                    <span>{{ __('DummyGuild') }}</span>
+                                    <span>{{ __('None') }}</span>
                                 @endif
                             </span>
                         </li>
@@ -25,10 +25,6 @@
             @else
                 <p class="text-center">{{ __('No Records Found!') }}</p>
             @endif
-
-            <div class="d-grid mx-auto">
-                <a href="{{ route('pages.fortress') }}" class="btn btn-primary btn-sm">{{ __('Fortress History') }}</a>
-            </div>
         </div>
     </div>
 @endif

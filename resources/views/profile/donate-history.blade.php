@@ -7,13 +7,13 @@
             <table class="table table-striped">
                 <thead class="table-dark">
                     <tr>
-                        <th scope="col">Serial</th>
-                        <th scope="col">Remained Silk</th>
-                        <th scope="col">Changed Silk</th>
-                        <th scope="col">Silk Type</th>
-                        <th scope="col">Date</th>
-                        <th scope="col">Expire Date</th>
-                        <th scope="col">Status</th>
+                        <th scope="col">{{ __('Serial') }}</th>
+                        <th scope="col">{{ __('Remained Silk') }}</th>
+                        <th scope="col">{{ __('Changed Silk') }}</th>
+                        <th scope="col">{{ __('Silk Type') }}</th>
+                        <th scope="col">{{ __('Date') }}</th>
+                        <th scope="col">{{ __('Expire Date') }}</th>
+                        <th scope="col">{{ __('Status') }}</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -31,7 +31,7 @@
                         @endforeach
                     @else
                         <tr>
-                            <td colspan="7" class="text-center">No records found!</td>
+                            <td colspan="7" class="text-center">{{ __('No Records Found!') }}</td>
                         </tr>
                     @endif
                 </tbody>

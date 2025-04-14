@@ -16,13 +16,13 @@
                     <div class="d-flex gap-2 w-100 justify-content-between">
                         <div>
                             <h6 class="mb-0">{{ $method->name }}</h6>
-                            <p class="mb-0 opacity-75">Currency: {{ $method->currency }}</p>
+                            <p class="mb-0 opacity-75">{{ __('Currency:') }} {{ $method->currency }}</p>
                         </div>
                     </div>
                 </a>
             @empty
                 <div class="alert alert-danger" role="alert">
-                    No methods available!
+                    {{ __('No Methods Available!') }}
                 </div>
             @endforelse
         </div>

@@ -6,37 +6,37 @@
         <table class="table table-striped">
             <tbody>
             <tr>
-                <th scope="row">Username</th>
+                <th scope="row">{{ __('Username') }}</th>
                 <td>{{ Auth::user()->username }}</td>
             </tr>
             <tr>
-                <th scope="row">Email</th>
+                <th scope="row">{{ __('Email') }}</th>
                 <td>{{ Auth::user()->email }}</td>
             </tr>
             <tr>
-                <th scope="row">Premium Silk</th>
+                <th scope="row">{{ __('Premium Silk') }}</th>
                 <td>{{ Auth::user()->getJCash()->PremiumSilk }}</td>
             </tr>
             <tr>
-                <th scope="row">Month Usage</th>
+                <th scope="row">{{ __('Month Usage') }}</th>
                 <td>{{ Auth::user()->getJCash()->MonthUsage }}</td>
             </tr>
             <tr>
-                <th scope="row">3Month Usage</th>
+                <th scope="row">{{ __('3Month Usage') }}</th>
                 <td>{{ Auth::user()->getJCash()->ThreeMonthUsage }}</td>
             </tr>
             <tr>
-                <th scope="row">Silk</th>
+                <th scope="row">{{ __('Silk') }}</th>
                 <td>{{ Auth::user()->getJCash()->Silk }}</td>
             </tr>
             <tr>
-                <th scope="row">VIP</th>
+                <th scope="row">{{ __('VIP') }}</th>
                 <td>
                     @if(Auth::user()->getVIPInfo() !== null && Auth::user()->getVIPInfo()->VIPUserType > 0)
                         <img src="{{ asset('images/ingame/viplevel_'.Auth::user()->getVIPInfo()->VIPLv.'.jpg') }}" alt="">
                         <span>{{ config('constants.viplevel.level')[Auth::user()->getVIPInfo()->VIPLv] }}</span>
                     @else
-                        <span>None</span>
+                        <span>{{ __('None') }}</span>
                     @endif
                 </td>
             </tr>

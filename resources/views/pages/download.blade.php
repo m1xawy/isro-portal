@@ -7,7 +7,7 @@
             @forelse($downloads as $value)
             <div class="col-md-3 mb-4">
                 <div class="card">
-                    @if ( $value->icon )
+                    @if ($value->icon)
                         <img src="{{ Storage::url($value->icon) }}" class="card-img-top" alt="...">
                     @endif
                     <div class="card-body text-center">
@@ -22,7 +22,7 @@
             </div>
             @empty
                 <div class="alert alert-danger text-center" role="alert">
-                    No downloads available!
+                    {{ __('No Downloads Available!') }}
                 </div>
             @endforelse
         </div>
