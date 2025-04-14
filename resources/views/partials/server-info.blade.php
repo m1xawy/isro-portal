@@ -7,18 +7,18 @@
             @php $server_info = config('constants.widgets.server_info.data'); @endphp
             @if (!empty($server_info))
                 <ul class="list-unstyled">
-                    @foreach($server_info as $info)
+                    @foreach($server_info as $value)
                         <li>
                             <span>
-                                {!! $info['icon'] !!}
-                                {{ $info['name'] }}
+                                {!! $value['icon'] !!}
+                                {{ $value['name'] }}
                             </span>
-                            <span class="float-end">{{ $info['value'] }}</span>
+                            <span class="float-end">{{ $value['value'] }}</span>
                         </li>
                     @endforeach
                 </ul>
             @else
-                <p>No Server Info.</p>
+                <p>No server info available!</p>
             @endif
         </div>
     </div>

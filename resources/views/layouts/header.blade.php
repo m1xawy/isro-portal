@@ -39,6 +39,17 @@
             </ul>
 
             <div class="d-flex text-end">
+                <div class="dropdown d-none">
+                    <a href="#" class="nav-link px-2 py-2 me-2 text-white dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                        {{ language()->getName($code = 'default') }}
+                    </a>
+                    <ul class="dropdown-menu" style="">
+                        @foreach (language()->allowed() as $code => $name)
+                            <li><a class="dropdown-item" href="{{ language()->back($code) }}">{{ $name }}</a></li>
+                        @endforeach
+                    </ul>
+                </div>
+
                 @if (Route::has('login'))
                     @auth
                         <div class="dropdown">

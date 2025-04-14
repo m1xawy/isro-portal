@@ -10,15 +10,15 @@
             @endphp
             @php $i = 0; @endphp
             <ul class="list-unstyled">
-                @foreach($schedules as $key => $schedule)
-                    @if(is_null($schedule)) @continue @endif
+                @foreach($schedules as $key => $value)
+                    @if(is_null($value)) @continue @endif
                     <li>
                         <span>{{ $const[$key] }}</span>
                         <span class="float-end">
-                            @if($schedule['status'])
+                            @if($value['status'])
                                 <span class="text-success">Active</span>
                             @else
-                                <span class="timerCountdown" id="idTimeCountdown_{{ $i }}" data-time="{{ $schedule['start'] }}"></span>
+                                <span class="timerCountdown" id="idTimeCountdown_{{ $i }}" data-time="{{ $value['start'] }}"></span>
                             @endif
                         </span>
                     </li>

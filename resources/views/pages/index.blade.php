@@ -6,24 +6,26 @@
 @stop
 
 @section('content')
-    @forelse($posts as $post)
-        <div class="card mb-4">
-            @if ( $post->featured_image )
-            <img src="{{ Storage::url($post->featured_image) }}" class="card-img-top" alt="...">
-            @endif
-            <div class="card-header">
-                <a href="{{ '/post/' . $post->slug }}" class="text-decoration-none">
-                    <h5 class="card-title">{{ $post->title }}</h5>
-                </a>
-                <p class="card-text">{!! config('constants.general.news-category')[$post->category] !!} Published on {{ $post->published_at->format("M j, Y") }}</p>
+    <div class="container">
+        @forelse($posts as $value)
+            <div class="card mb-4">
+                @if ( $value->featured_image )
+                <img src="{{ Storage::url($value->featured_image) }}" class="card-img-top" alt="...">
+                @endif
+                <div class="card-header">
+                    <a href="{{ '/post/' . $value->slug }}" class="text-decoration-none">
+                        <h5 class="card-title">{{ $value->title }}</h5>
+                    </a>
+                    <p class="card-text">{!! config('constants.general.news-category')[$value->category] !!} Published on {{ $value->published_at->format("M j, Y") }}</p>
+                </div>
+                <div class="card-body">
+                    {!! $value->content !!}
+                </div>
             </div>
-            <div class="card-body">
-                {!! $post->content !!}
+        @empty
+            <div class="alert alert-danger text-center" role="alert">
+                No posts available!
             </div>
-        </div>
-    @empty
-        <div class="alert alert-danger" role="alert">
-            No Posts available!
-        </div>
-   @endforelse
+       @endforelse
+    </div>
 @endsection

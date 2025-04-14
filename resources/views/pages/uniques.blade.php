@@ -1,65 +1,56 @@
 @extends('layouts.full')
-@section('title', __('Unique History'))
+@section('title', __('Unique Tracker'))
 
 @section('content')
-    <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
-        <div class="p-6 text-gray-900 dark:text-gray-100">
-            <h2 class="text-lg font-medium text-gray-900 dark:text-gray-100 py-4">Unique History</h2>
-            <div class="relative overflow-x-auto">
-                <div class="relative overflow-x-auto">
-                    <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-                        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-                        <tr class="text-center">
-                            <th scope="col" class="px-1 py-2">Unique</th>
-                            <th scope="col" class="px-1 py-2">Dead Time</th>
-                            <th scope="col" class="px-1 py-2">Killer</th>
-                            <th scope="col" class="px-1 py-2">Area</th>
-                        </tr>
-                        </thead>
-                        <tbody>
+    <div class="container">
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead class="table-dark">
+                    <tr>
+                        <th scope="col">Unique</th>
+                        <th scope="col">Dead Time</th>
+                        <th scope="col">Killer</th>
+                        <th scope="col">Area</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (!empty($uniques))
+                        @foreach($uniques as $key => $value)
+                            <tr>
+                                <td>{{ $uniques_name[$value->Value] }}</td>
+                                <td>{{ $value->EventTime }}</td>
+                                <td>
+                                    @php if($value->RefObjID > 2000) : @endphp
+                                    <img src="{{ asset('images/ingame/european.png') }}" style="display:inline;vertical-align:text-top" alt=""/>
+                                    @php else : @endphp
+                                    <img src="{{ asset('images/ingame/chinese.png') }}" style="display:inline;vertical-align:text-top" alt=""/>
+                                    @php endif; @endphp
 
-                        @php $i = 0; @endphp
-                        @if (!empty($uniques))
-                            @foreach($uniques as $key => $unique)
-                                <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 text-center">
-                                    <td class="px-1 py-2">{{ $uniques_name[$unique->Value] }}</td>
-                                    <td class="px-1 py-2">{{ $unique->EventTime }}</td>
-                                    <td class="px-1 py-2 text-left">
-                                        @php if($unique->RefObjID > 2000) : @endphp
-                                        <img src="{{ asset('images/ingame/european.png') }}" style="display:inline;vertical-align:text-top" alt="Rank 3"/>
-                                        @php else : @endphp
-                                        <img src="{{ asset('images/ingame/chinese.png') }}" style="display:inline;vertical-align:text-top" alt="Rank 3"/>
-                                        @php endif; @endphp
-
-                                        @if($unique->CharName16)
-                                            <a href="{{ route('ranking.character.view', ['name' => $unique->CharName16]) }}">{{ $unique->CharName16 }}</a>
-                                        @else
-                                            Empty
-                                        @endif
-                                    </td>
-                                    <td class="px-1 py-2">
-                                        @switch($unique->AreaName)
-                                            @case('Eu')
-                                                Constantinople
-                                                @break
-                                            @case('Am')
-                                                Asia Minor
-                                                @break
-                                            @default
-                                                {{ $unique->AreaName }}
-                                        @endswitch
-                                    </td>
-                                </tr>
-                                @php $i++; @endphp
-                            @endforeach
-                        @else
-                            <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 text-center"><td class="px-1 py-2 text-center">No Records.</td></tr>
-                        @endif
-                        </tbody>
-                    </table>
-                </div>
-
-            </div>
+                                    @if($value->CharName16)
+                                        <a href="{{ route('ranking.character.view', ['name' => $value->CharName16]) }}" class="text-decoration-none">{{ $value->CharName16 }}</a>
+                                    @else
+                                        <span>NoName</span>
+                                    @endif
+                                </td>
+                                <td>
+                                    @switch($value->AreaName)
+                                        @case('Eu')
+                                            Constantinople
+                                            @break
+                                        @case('Am')
+                                            Asia Minor
+                                            @break
+                                        @default
+                                            {{ $value->AreaName }}
+                                    @endswitch
+                                </td>
+                            </tr>
+                        @endforeach
+                    @else
+                        <tr><td colspan="4" class="text-center">No records found!</td></tr>
+                    @endif
+                </tbody>
+            </table>
         </div>
     </div>
 @endsection

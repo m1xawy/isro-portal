@@ -11,19 +11,19 @@
 
             @if (!empty($uniqueHistory))
                 <ul class="list-unstyled">
-                    @foreach($uniqueHistory as $History)
+                    @foreach($uniqueHistory as $value)
                         <li class="mb-3">
-                            <p class="mb-0">{{ $unique_name[$History->MobID] }}</p>
+                            <p class="mb-0">{{ $unique_name[$value->MobID] }}</p>
                             <small>
                                 Killed by:
-                                <a href="{{ route('ranking.character.view', ['name' => $History->CharName16]) }}" class="text-decoration-none">{{ $History->CharName16 }}</a>
-                                {{ \Carbon\Carbon::make($History->EventDate)->diffForHumans() }}
+                                <a href="{{ route('ranking.character.view', ['name' => $value->CharName16]) }}" class="text-decoration-none">{{ $value->CharName16 }}</a>
+                                {{ \Carbon\Carbon::make($value->EventDate)->diffForHumans() }}
                             </small>
                         </li>
                     @endforeach
                 </ul>
             @else
-                <p>No Records.</p>
+                <p class="text-center">No records found!</p>
             @endif
 
             <div class="d-grid mx-auto">

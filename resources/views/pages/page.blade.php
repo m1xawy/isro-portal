@@ -2,11 +2,12 @@
 @section('title', $page['name']['en'])
 
 @section('content')
-    <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
-        <div class="p-6 text-gray-900 dark:text-gray-100">
-            <h2 class="text-lg font-medium text-gray-900 dark:text-gray-100">{{ $page['name']['en'] }}</h2>
-
-            <div class="mt-1 text-sm text-gray-600 dark:text-gray-400">
+    <div class="container">
+        <div class="card mb-4 p-0">
+            <div class="card-header">
+                {{ $page['name']['en'] }}
+            </div>
+            <div class="card-body">
                 @if(!empty($page['data']))
                     {!! $page['data']['en']['content'] !!}
                 @endif

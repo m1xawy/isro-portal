@@ -187,7 +187,7 @@ return [
             'limit' => 5,
         ],
         'top_player' => [
-            'enable' => false,
+            'enable' => true,
             'limit' => 5,
         ],
         'top_guild' => [

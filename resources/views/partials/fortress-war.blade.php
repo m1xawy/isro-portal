@@ -10,15 +10,15 @@
             @endphp
             @if (count($fortresses))
                 <ul class="list-unstyled">
-                    @foreach($fortresses as $fortress)
+                    @foreach($fortresses as $value)
                         <li>
                             <span>
-                                <img src="{{ $const[$fortress->FortressID]['icon'] }}" alt="">
-                                {{ $const[$fortress->FortressID]['name'] }}
+                                <img src="{{ $const[$value->FortressID]['icon'] }}" alt="">
+                                {{ $const[$value->FortressID]['name'] }}
                             </span>
                             <span class="float-end">
-                                @if($fortress->Name !== 'DummyGuild')
-                                    <a href="{{ route('ranking.guild.view', ['name' => $fortress->Name]) }}" class="text-decoration-none">{{ $fortress->Name }}</a>
+                                @if($value->Name !== 'DummyGuild')
+                                    <a href="{{ route('ranking.guild.view', ['name' => $value->Name]) }}" class="text-decoration-none">{{ $value->Name }}</a>
                                 @else
                                     <span>None</span>
                                 @endif
@@ -27,7 +27,7 @@
                     @endforeach
                 </ul>
             @else
-                <p>No Fortress.</p>
+                <p class="text-center">No records found!</p>
             @endif
 
             <div class="d-grid mx-auto">

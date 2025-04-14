@@ -2,22 +2,22 @@
 <div id="myCarousel" class="carousel slide mb-6" data-bs-ride="carousel">
     @if (!empty($sliders) && count($sliders) > 1)
     <div class="carousel-indicators">
-        @foreach($sliders as $key => $slider)
+        @foreach($sliders as $key => $value)
             <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="{{ $key }}" @if($key == 0) class="active" @endif aria-current="true" aria-label="Slide {{ $key }}"></button>
         @endforeach
     </div>
     @endif
     <div class="carousel-inner">
         @if (!empty($sliders))
-            @foreach($sliders as $key => $slider)
+            @foreach($sliders as $key => $value)
                 <div class="carousel-item @if($key == 0) active @endif">
                     <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice"><rect width="100%" height="100%" fill="var(--bs-secondary-color)"/></svg>
 
                     <div class="container">
                         <div class="carousel-caption">
-                            <h1>{{ $slider['title'] }}</h1>
-                            <p class="opacity-75">{{ $slider['desc'] }}</p>
-                            <p><a class="btn btn-lg btn-primary" href="{{ $slider['btn-url'] }}">{{ $slider['btn-label'] }}</a></p>
+                            <h1>{{ $value['title'] }}</h1>
+                            <p class="opacity-75">{{ $value['desc'] }}</p>
+                            <p><a class="btn btn-lg btn-primary" href="{{ $value['btn-url'] }}">{{ $value['btn-label'] }}</a></p>
                         </div>
                     </div>
                 </div>

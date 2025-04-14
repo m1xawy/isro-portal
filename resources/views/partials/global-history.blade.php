@@ -7,19 +7,19 @@
             @php $GlobalHistory = getGlobalHistory(); @endphp
             @if (!empty($GlobalHistory))
                 <ul class="list-unstyled">
-                    @foreach($GlobalHistory as $History)
+                    @foreach($GlobalHistory as $value)
                         <li class="mb-3">
-                            <p class="mb-0">[{{ $History->Comment }}]</p>
+                            <p class="mb-0">[{{ $value->Comment }}]</p>
                             <small>
                                 Sent by:
-                                <a href="{{ route('ranking.character.view', ['name' => $History->CharName]) }}" class="text-decoration-none">{{ $History->CharName }}</a>
-                                {{ \Carbon\Carbon::make($History->EventTime)->diffForHumans() }}
+                                <a href="{{ route('ranking.character.view', ['name' => $value->CharName]) }}" class="text-decoration-none">{{ $value->CharName }}</a>
+                                {{ \Carbon\Carbon::make($value->EventTime)->diffForHumans() }}
                             </small>
                         </li>
                     @endforeach
                 </ul>
             @else
-                <p>No Records.</p>
+                <p class="text-center">No records found!</p>
             @endif
 
             <div class="d-grid mx-auto">

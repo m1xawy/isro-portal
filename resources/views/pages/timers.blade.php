@@ -1,40 +1,39 @@
 @extends('layouts.full')
-@section('title', __('Server Timers'))
+@section('title', __('Event Times'))
 
 @section('content')
-    <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
-        <div class="p-6 text-gray-900 dark:text-gray-100">
-            <h2 class="text-lg font-medium text-gray-900 dark:text-gray-100 py-4">Server Timers</h2>
-            <div class="relative overflow-x-auto">
-                <div class="relative overflow-x-auto">
-                    <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-                        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-                        <tr class="text-center">
-                            <th scope="col" class="px-1 py-2">Event Name</th>
-                            <th scope="col" class="px-1 py-2">Remaining Time & Status</th>
+    <div class="container">
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead class="table-dark">
+                    <tr>
+                        <th>Event Name</th>
+                        <th>Remaining Time</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @php $const = config('constants.widgets.event_schedule.data');@endphp
+                    @php $i = 0; @endphp
+                    @foreach($timers as $key => $value)
+                        @if(is_null($value)) @continue @endif
+                        <tr>
+                            <td>{{ $const[$key] }}</td>
+                            <td>
+                                <span class="timerCountdown" id="idTimeCountdown_{{ $i }}" data-time="{{ $value['start'] }}"></span>
+                            </td>
+                            <td>
+                                @if($value['status'])
+                                    <span class="text-success">Active</span>
+                                @else
+                                    <span class="text-warning">Planned</span>
+                                @endif
+                            </td>
                         </tr>
-                        </thead>
-                        <tbody>
-                        @php $i = 0; @endphp
-                        @foreach($timers as $key => $time)
-                            @if(is_null($time)) @continue @endif
-                            <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 text-center">
-                                <td class="px-1 py-2">{{ config('constants.eventschedule.data')[$key] }}</td>
-                                <td class="px-1 py-2">
-                                    @if($time['status'])
-                                        <span class="text-green-800">Active</span>
-                                    @else
-                                        <span class="timerCountdown" id="idTimeCountdown_{{ $i }}" data-time="{{ $time['start'] }}"></span>
-                                    @endif
-                                </td>
-                            </tr>
-                            @php $i++; @endphp
-                        @endforeach
-                        </tbody>
-                    </table>
-                </div>
-
-            </div>
+                        @php $i++; @endphp
+                    @endforeach
+                </tbody>
+            </table>
         </div>
     </div>
 @endsection
