@@ -36,7 +36,7 @@ class RankingController extends Controller
     {
         $unique_list_settings = cache()->remember('ranking_unique_list', setting('cache_ranking_unique', 600), function() { return json_decode(setting('ranking_unique_list')); });
         if(!empty($unique_list_settings)) {
-            $uniques = (new Char)->getUniqueRanking();
+            $uniques = Char::getUniqueRanking();
             $unique_lists = $unique_list_settings;
         } else {
             $uniques = [];
@@ -53,10 +53,10 @@ class RankingController extends Controller
     {
         $unique_list_settings = cache()->remember('ranking_unique_monthly_list', setting('cache_ranking_unique', 600), function() { return json_decode(setting('ranking_unique_list')); });
         if(!empty($unique_list_settings)) {
-            $uniquesMonthly = (new Char)->getUniqueMonthlyRanking();
+            $uniquesMonthly = Char::getUniqueMonthlyRanking();
             $unique_lists = $unique_list_settings;
         } else {
-            $uniques = [];
+            $uniquesMonthly = [];
             $unique_lists = [];
         }
 
@@ -68,7 +68,7 @@ class RankingController extends Controller
 
     public function fortress_player()
     {
-        $fortressPlayer = (new Char)->getFortressPlayerRanking();
+        $fortressPlayer = Char::getFortressPlayerRanking();
 
         return view('ranking.ranking.fortress-player', [
             'data' => $fortressPlayer,
@@ -77,7 +77,7 @@ class RankingController extends Controller
 
     public function fortress_guild()
     {
-        $fortressGuild = (new Char)->getFortressGuildRanking();
+        $fortressGuild = Char::getFortressGuildRanking();
 
         return view('ranking.ranking.fortress-guild', [
             'data' => $fortressGuild,
@@ -86,7 +86,7 @@ class RankingController extends Controller
 
     public function honor()
     {
-        $honor = (new Char)->getHonorRanking();
+        $honor = Char::getHonorRanking();
 
         return view('ranking.ranking.honor', [
             'data' => $honor,
@@ -95,7 +95,7 @@ class RankingController extends Controller
 
     public function job()
     {
-        $job = (new Char)->getJobRanking();
+        $job = Char::getJobRanking();
 
         return view('ranking.ranking.job', [
             'data' => $job,
@@ -104,7 +104,7 @@ class RankingController extends Controller
 
     public function job_all()
     {
-        $jobAll = (new Char)->getJobRanking();
+        $jobAll = Char::getJobRanking();
 
         return view('ranking.ranking.job-all', [
             'data' => $jobAll,
@@ -113,7 +113,7 @@ class RankingController extends Controller
 
     public function job_trader()
     {
-        $jobTrader = (new Char)->getJobTraderRanking();
+        $jobTrader = Char::getJobTraderRanking();
 
         return view('ranking.ranking.job-trader', [
             'data' => $jobTrader,
@@ -122,7 +122,7 @@ class RankingController extends Controller
 
     public function job_hunter()
     {
-        $jobHunter = (new Char)->getJobHunterRanking();
+        $jobHunter = Char::getJobHunterRanking();
 
         return view('ranking.ranking.job-hunter', [
             'data' => $jobHunter,
@@ -131,7 +131,7 @@ class RankingController extends Controller
 
     public function job_thieve()
     {
-        $jobThieve = (new Char)->getJobThieveRanking();
+        $jobThieve = Char::getJobThieveRanking();
 
         return view('ranking.ranking.job-thieve', [
             'data' => $jobThieve,

@@ -136,7 +136,7 @@ class Char extends Model
         return $guildRanking;
     }
 
-    public function getUniqueRanking($limit = 25)
+    public static function getUniqueRanking($limit = 25)
     {
         $unique_list_settings = cache()->remember('ranking_unique_list', setting('cache_ranking_unique', 600), function() { return json_decode(setting('ranking_unique_list')); });
 
@@ -194,7 +194,7 @@ class Char extends Model
         return $uniqueRanking;
     }
 
-    public function getUniqueMonthlyRanking($limit = 25)
+    public static function getUniqueMonthlyRanking($limit = 25)
     {
         $unique_list_settings = cache()->remember('ranking_unique_list', setting('cache_ranking_unique', 600), function() { return json_decode(setting('ranking_unique_list')); });
 
@@ -253,7 +253,7 @@ class Char extends Model
         return $uniqueRanking;
     }
 
-    public function getCharInfo($charID)
+    public static function getCharInfo($charID)
     {
         $charInfo = cache()->remember('char_info_' . $charID, setting('cache_info_char', 600), function() use ($charID) {
             return collect(DB::connection('shard')->select("
@@ -317,7 +317,7 @@ class Char extends Model
         return $charInfo;
     }
 
-    public function getCharUniqueHistory($charID)
+    public static function getCharUniqueHistory($charID)
     {
         $unique_list_settings = cache()->remember('ranking_unique_list', setting('cache_ranking_unique', 600), function() { return json_decode(setting('ranking_unique_list')); });
         if(!empty($unique_list_settings)) {
@@ -338,7 +338,7 @@ class Char extends Model
         return $charUniqueHistory;
     }
 
-    public function getCharBuildInfo($charID)
+    public static function getCharBuildInfo($charID)
     {
         $charBuildInfo = cache()->remember('char_info_build_' . $charID, setting('cache_info_char', 600), function() use ($charID) {
             return collect(DB::connection('shard')->select("SELECT * FROM _CharSkillMastery WHERE Level > 0 AND CharID = " . $charID));
@@ -351,7 +351,7 @@ class Char extends Model
         return $charBuildInfo;
     }
 
-    public function getCharGlobalHistory($charName)
+    public static function getCharGlobalHistory($charName)
     {
         $charGlobalHistory = cache()->remember('char_global_history_' . $charName, setting('cache_info_char', 600), function() use ($charName) {
             return collect(DB::connection('log')->select("SELECT * FROM _LogChatMessage WHERE TargetName = '[YELL]' AND CharName COLLATE Latin1_General_CI_AS = '" . $charName . "'"));
@@ -364,7 +364,7 @@ class Char extends Model
         return $charGlobalHistory;
     }
 
-    public function getFortressPlayerRanking($limit = 25)
+    public static function getFortressPlayerRanking($limit = 25)
     {
         $fortressPlayerRanking = cache()->remember('fortress_player_ranking', setting('cache_fortress_player', 600), function() use ($limit) {
             return collect(DB::connection('shard')->select("
@@ -399,7 +399,7 @@ class Char extends Model
         return $fortressPlayerRanking;
     }
 
-    public function getFortressGuildRanking($limit = 25)
+    public static function getFortressGuildRanking($limit = 25)
     {
         $fortressGuildRanking = cache()->remember('fortress_guild_ranking', setting('cache_fortress_guild', 600), function() use ($limit) {
             return collect(DB::connection('shard')->select("
@@ -432,7 +432,7 @@ class Char extends Model
         return $fortressGuildRanking;
     }
 
-    public function getFortressHistoryRanking($limit = 25)
+    public static function getFortressHistoryRanking($limit = 25)
     {
         $fortressHistoryRanking = cache()->remember('fortress_history_ranking', setting('cache_fortress_guild', 600), function() use ($limit) {
             return collect(DB::connection('log')->select("
@@ -447,7 +447,7 @@ class Char extends Model
         return $fortressHistoryRanking;
     }
 
-    public function getHonorRanking($limit = 25)
+    public static function getHonorRanking($limit = 25)
     {
         $honorRanking = cache()->remember('honor_ranking', setting('cache_fortress_guild', 600), function() use ($limit) {
             return collect(DB::connection('shard')->select("
@@ -490,7 +490,7 @@ class Char extends Model
         return $honorRanking;
     }
 
-    public function getJobRanking($limit = 25)
+    public static function getJobRanking($limit = 25)
     {
         $jobRanking = cache()->remember('job_ranking', setting('cache_fortress_guild', 600), function() use ($limit) {
             return collect(DB::connection('shard')->select("
@@ -520,7 +520,7 @@ class Char extends Model
         return $jobRanking;
     }
 
-    public function getJobTraderRanking($limit = 25)
+    public static function getJobTraderRanking($limit = 25)
     {
         $jobTraderRanking = cache()->remember('job_trader_ranking', setting('cache_fortress_guild', 600), function() use ($limit) {
             return collect(DB::connection('shard')->select("
@@ -550,7 +550,7 @@ class Char extends Model
         return $jobTraderRanking;
     }
 
-    public function getJobHunterRanking($limit = 25)
+    public static function getJobHunterRanking($limit = 25)
     {
         $jobHunterRanking = cache()->remember('job_hunter_ranking', setting('cache_fortress_guild', 600), function() use ($limit) {
             return collect(DB::connection('shard')->select("
@@ -580,7 +580,7 @@ class Char extends Model
         return $jobHunterRanking;
     }
 
-    public function getJobThieveRanking($limit = 25)
+    public static function getJobThieveRanking($limit = 25)
     {
         $jobThieveRanking = cache()->remember('job_thieve_ranking', setting('cache_fortress_guild', 600), function() use ($limit) {
             return collect(DB::connection('shard')->select("

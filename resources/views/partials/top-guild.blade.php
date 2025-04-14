@@ -8,7 +8,7 @@
                 <table class="table table-striped">
                     <thead class="table-dark">
                         <tr>
-                            <th scope="col"></th>
+                            <th scope="col">{{ __('Rank') }}</th>
                             <th scope="col">{{ __('Name') }}</th>
                             <th scope="col">{{ __('Points') }}</th>
                         </tr>
@@ -31,7 +31,9 @@
                             </tr>
                             @php $i++ @endphp
                         @empty
-                            <tr><td colspan="3" class="text-center">{{ __('No Records Found!') }}</td></tr>
+                            <tr>
+                                <td colspan="3" class="text-center">{{ __('No Records Found!') }}</td>
+                            </tr>
                         @endforelse
                     </tbody>
                 </table>
