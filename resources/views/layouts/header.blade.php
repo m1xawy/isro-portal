@@ -5,7 +5,7 @@
                 @if (!empty(config('constants.general.options.logo')))
                     <img src="{{ asset(config('constants.general.options.logo')) }}" alt="" width="" height="40" class="">
                 @else
-                    <img src="{{ asset('images/bootstrap-logo-white.svg') }}" alt="mdo" width="" height="40" class="">
+                    <img src="{{ asset('images/bootstrap-logo-white.svg') }}" alt="" width="" height="40" class="">
                 @endif
             </a>
 

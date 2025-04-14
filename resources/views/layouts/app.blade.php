@@ -26,7 +26,10 @@
 
 <main>
     @section('breadcrumb')
-        @include('partials.breadcrumb')
+        <div class="px-4 py-5 mb-5 text-center" style="background: rgba(33, 37, 41, 0.03)">
+            <h1 class="display-5 fw-bold text-body-emphasis">@yield('title')</h1>
+            <div class="col-lg-6 mx-auto"></div>
+        </div>
     @show
 
     <div class="container">

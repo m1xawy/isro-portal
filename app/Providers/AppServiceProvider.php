@@ -28,7 +28,7 @@ class AppServiceProvider extends ServiceProvider
         $this->configureApp();
 
         if (!app()->runningInConsole()) {
-            Theme::set(setting('site_theme', 'default'));
+            Theme::set(config('constants.general.options.theme'));
         }
     }
 

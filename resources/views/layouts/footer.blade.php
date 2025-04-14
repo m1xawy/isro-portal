@@ -1,29 +1,43 @@
 <!-- FOOTER -->
 <div class="container">
-    <footer class="py-3 my-4">
-        <ul class="nav justify-content-center border-bottom pb-3 mb-3">
-            <li class="nav-item"><a href="/" class="nav-link px-2 text-body-secondary">Home</a></li>
-            <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">Privacy Policy</a></li>
-            <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">Terms & Conditions</a></li>
-            <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">FAQs</a></li>
-            <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">About</a></li>
+    <footer class="row py-5 my-5 border-top">
+        <div class="col-md-6 mb-3">
+            <a href="{{ url('/') }}" class="d-flex align-items-center me-3 mb-2 mb-lg-0 text-white text-decoration-none" aria-label="Bootstrap">
+                @if (!empty(config('constants.general.options.logo')))
+                    <img src="{{ asset(config('constants.general.options.logo')) }}" alt="" width="" height="40" class="">
+                @else
+                    <img src="{{ asset('images/bootstrap-logo.svg') }}" alt="" width="" height="40" class="">
+                @endif
+            </a>
+            <p class="text-body-secondary mb-0">© 2025 <a href="{{ config('constants.general.options.server_url') }}">{{ config('constants.general.options.server_name') }}</a>, Inc - All Rights Reserved.</p>
+            <p class="text-body-secondary">Coded by <a class="link-default" href="https://github.com/m1xawy" target="_blank">m1xawy</a></p>
+        </div>
 
-            @php $backlinks = json_decode(setting('backlinks'));@endphp
-            @if (!empty($backlinks))
-                @foreach($backlinks as $backlink)
-                    <li class="nav-item">
-                        <a href="{{ $backlink->attributes->backlink_url }}" class="nav-link px-2 text-body-secondary">
-                            @if (isset($backlink->attributes->backlink_icon))
-                                <img class="d-inline-block" src="{{ $backlink->attributes->backlink_icon }}" alt="">
-                            @endif
-                            {{ $backlink->attributes->backlink_name }}
-                        </a>
-                    </li>
-                @endforeach
-            @else
-            @endif
-        </ul>
-        <p class="text-center text-body-secondary">© 2025 <a href="{{ setting('server_url', config('app.url')) }}">{{ setting('server_name', config('app.name', 'Silkroad Online')) }}</a>, Inc - All Rights Reserved.</p>
-        <p class="text-center text-body-secondary">Coded by <a class="link-default" href="https://mix-shop.tech/" target="_blank">m1xawy</a></p>
+        <div class="col-md-2 mb-3">
+            <h5>General</h5>
+            <ul class="nav flex-column">
+                <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Home</a></li>
+                <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Privacy Policy</a></li>
+                <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Terms & Conditions</a></li>
+            </ul>
+        </div>
+
+        <div class="col-md-2 mb-3">
+            <h5>Social Media</h5>
+            <ul class="nav flex-column">
+                <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Facebook</a></li>
+                <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Discord</a></li>
+                <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Youtube</a></li>
+            </ul>
+        </div>
+
+        <div class="col-md-2 mb-3">
+            <h5>Backlink</h5>
+            <ul class="nav flex-column">
+                <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Elitepvpers</a></li>
+                <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Silkroad4arab</a></li>
+                <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">SroCave</a></li>
+            </ul>
+        </div>
     </footer>
 </div>

@@ -9,6 +9,7 @@ return [
             'favicon' => 'images/favicons/favicon.ico',
             'logo' => 'images/bootstrap-logo-white.svg',
             'timezone' => 'Africa/Cairo',
+            'theme' => 'default',
             'fake_player' => 250,
             'max_player' => 1000,
             'max_level' => 140,
@@ -16,7 +17,7 @@ return [
             'free_premium_silk' => 0,
             'debug' => true,
             'register_disable' => false,
-            'register_confirmation' => true,
+            'register_confirmation' => false,
         ],
         'connection' => [
             'host' => '192.168.1.101',
