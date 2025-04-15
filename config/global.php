@@ -50,6 +50,7 @@ return [
                 'news' => 86400, //1 day
                 'download' => 604800, //1 week
                 'pages' => 3600,
+                'account' => 3600,
                 'event-schedule' => 3600,
                 'fortress-war' => 3600,
                 'unique-history' => 3600,

@@ -17,23 +17,21 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @if (!empty($donateHistory))
-                        @foreach($donateHistory as $history)
-                            <tr>
-                                <td>{{ $history->PTInvoiceID }}</td>
-                                <td style="color: orange">{{ $history->RemainedSilk }}</td>
-                                <td style="color: orangered">{{ $history->ChangedSilk }}</td>
-                                <td>{{ ($history->SilkType == 3) ? 'premium' : 'Normal' }}</td>
-                                <td>{{ $history->ChangeDate }}</td>
-                                <td>{{ $history->AvailableDate }}</td>
-                                <td>{{ ($history->AvailableStatus == 'Y') ? "Available" : "Not Available" }}</td>
-                            </tr>
-                        @endforeach
-                    @else
+                    @forelse($data as $value)
+                        <tr>
+                            <td>{{ $value->PTInvoiceID }}</td>
+                            <td style="color: orange">{{ $value->RemainedSilk }}</td>
+                            <td style="color: orangered">{{ $value->ChangedSilk }}</td>
+                            <td>{{ ($value->SilkType == 3) ? 'premium' : 'Normal' }}</td>
+                            <td>{{ $value->ChangeDate }}</td>
+                            <td>{{ $value->AvailableDate }}</td>
+                            <td>{{ ($value->AvailableStatus == 'Y') ? "Available" : "Not Available" }}</td>
+                        </tr>
+                    @empty
                         <tr>
                             <td colspan="7" class="text-center">{{ __('No Records Found!') }}</td>
                         </tr>
-                    @endif
+                    @endforelse
                 </tbody>
             </table>
         </div>

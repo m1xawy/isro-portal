@@ -33,13 +33,13 @@ class ProfileController extends Controller
 
     public function donate_history(Request $request): View
     {
-        $donateHistory = Cache::remember('donate_history', 86400 * 7, static function () use ($request) {
+        $data = Cache::remember('donate_history', config('global.general.cache.data.account'), static function () use ($request) {
             return AphChangedSilk::where('JID', $request->user()->jid)->orderBy('ChangeDate', 'DESC')->get();
         });
 
         return view('profile.donate-history', [
             'user' => $request->user(),
-            'donateHistory' => $donateHistory,
+            'data' => $data,
         ]);
     }
 
@@ -72,6 +72,7 @@ class ProfileController extends Controller
             } else {
                 MuhAlteredInfo::where('JID', $request->user()->jid)->update(['EmailAddr' => $request->user()->email, 'EmailReceptionStatus'=>'Y', 'EmailCertificationStatus'=>'Y']);
             }
+
         } catch (Exception $e) {
             DB::rollBack();
             return back()->withErrors(['email' => ["Something went wrong, Please try again later."]]);
