@@ -60,13 +60,17 @@ class RegisteredUserController extends Controller
             $userBinIP = ($request->ip() == "::1") ? ip2long('127.0.0.1') : ip2long($request->ip());
 
             $portalUser = MuUser::setPortalAccount($request->username, $request->password);
-            MuEmail::setEmail($portalUser->JID, $portalUser->Email);
-            MuhAlteredInfo::setAlteredInfo($portalUser->JID, $request->username, $portalUser->Email, $userBinIP);
+            MuEmail::setEmail($portalUser->JID, $request->email);
+            MuhAlteredInfo::setAlteredInfo($portalUser->JID, $request->username, $request->email, $userBinIP);
             AuhAgreedService::setAgreedService($portalUser->JID, $userBinIP);
             MuJoiningInfo::setJoiningInfo($portalUser->JID, $userBinIP);
             MuVIPInfo::setVIPInfo($portalUser->JID);
+
+            $free_silk = config('global.general.options.free_silk');
+            $free_premium_silk = config('global.general.options.free_premium_silk');
             //type 1 = silk, type 3 = premium silk
-            AphChangedSilk::setChangedSilk($portalUser->JID, 3, 100);
+            AphChangedSilk::setChangedSilk($portalUser->JID, 1, $free_silk);
+            AphChangedSilk::setChangedSilk($portalUser->JID, 3, $free_premium_silk);
             TbUser::setGameAccount($portalUser->JID, $request->username, $request->password, $request->ip());
 
             $user = User::create([
@@ -78,7 +82,7 @@ class RegisteredUserController extends Controller
 
         } catch (Exception $e) {
             DB::rollBack();
-            return back()->withErrors(['username' => ["Something went wrong, Please try again later."]]);
+            return back()->withErrors(['username' => [$e->getMessage()]]);
         }
         DB::commit();
 
