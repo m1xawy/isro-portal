@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cache;
 
 class Post extends Model
 {
@@ -21,6 +22,13 @@ class Post extends Model
             if ( !$post->author_id ) {
                 $post->author_id = Auth::id();
             }
+        });
+    }
+
+    public static function getPosts()
+    {
+        return Cache::remember('news', now()->addMinutes(config('global.general.cache.data.news')), function () {
+            return self::where('published_at', '<=', now())->orderBy('published_at', 'DESC')->get();
         });
     }
 

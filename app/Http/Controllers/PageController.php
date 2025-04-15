@@ -12,13 +12,8 @@ class PageController extends Controller
 {
     public function index()
     {
-        $data = Cache::remember('news', config('global.general.cache.data.news'), function () {
-            return Post::where('published_at', '<=', now())->orderBy('published_at', 'DESC')->get();
-        });
-
-        return view('pages.index', [
-            'data' => $data,
-        ]);
+        $data = Post::getPosts();
+        return view('pages.index', compact('data'));
     }
 
     public function post($slug)

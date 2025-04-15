@@ -179,8 +179,8 @@ return [
         ],
         'online_counter' => [
             'enable' => true,
-            'max_player' => 250,
-            'fake_player' => 1000,
+            'max_player' => 1000,
+            'fake_player' => 250,
         ],
         'server_info' => [
             'enable' => true,

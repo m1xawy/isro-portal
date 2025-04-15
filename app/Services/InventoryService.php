@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Services;
+namespace App\Services;
 
 use App\Models\SRO\Account\ItemNameDesc;
 use App\Models\SRO\Account\MagOptDesc;
