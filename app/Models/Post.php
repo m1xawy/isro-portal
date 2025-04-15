@@ -32,6 +32,13 @@ class Post extends Model
         });
     }
 
+    public static function getPost($slug)
+    {
+        return Cache::remember('news_view_'.$slug, now()->addMinutes(config('global.general.cache.data.news')), function () use ($slug) {
+            return self::where('slug', $slug)->first();
+        });
+    }
+
     public function author()
     {
         return $this->belongsTo(User::class);

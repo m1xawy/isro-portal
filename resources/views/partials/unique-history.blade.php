@@ -8,10 +8,14 @@
                 <ul class="list-unstyled">
                     @foreach($unique_history as $value)
                         <li class="mb-3">
-                            <p class="mb-0">{{ config('global.ranking.unique_points')[$value->Value] }}</p>
+                            <p class="mb-0">{{ config('global.ranking.unique_points')[$value->Value]['name'] }}</p>
                             <small>
                                 {{ __('Killed by:') }}
-                                <a href="{{ route('ranking.character.view', ['name' => $value->CharName16]) }}" class="text-decoration-none">{{ $value->CharName16 }}</a>
+                                @if(!empty($value->CharName16))
+                                    <a href="{{ route('ranking.character.view', ['name' => $value->CharName16]) }}" class="text-decoration-none">{{ $value->CharName16 }}</a>
+                                @else
+                                    <span>{{ __('None') }}</span>
+                                @endif
                                 {{ \Carbon\Carbon::make($value->EventTime)->diffForHumans() }}
                             </small>
                         </li>

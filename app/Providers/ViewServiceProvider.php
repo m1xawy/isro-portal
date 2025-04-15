@@ -2,10 +2,11 @@
 
 namespace App\Providers;
 
+use App\Models\SRO\Log\LogInstanceWorldInfo;
 use App\Models\SRO\Shard\Char;
+use App\Services\ScheduleService;
 use Illuminate\Database\QueryException;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
-use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\View;
 
 class ViewServiceProvider extends ServiceProvider
@@ -15,7 +16,7 @@ class ViewServiceProvider extends ServiceProvider
         try {
             if(config('global.widgets.event_schedule.enable')) {
                 View::composer(['layouts.sidebar', 'layouts.sidebar-right'], function ($view) {
-                    $view->with('event_schedule', getServerTimes());
+                    $view->with('event_schedule', ScheduleService::getEventSchedules());
                 });
             }
             if(config('global.widgets.fortress_war.enable')) {
@@ -30,7 +31,7 @@ class ViewServiceProvider extends ServiceProvider
             }
             if(config('global.widgets.unique_history.enable')) {
                 View::composer(['layouts.sidebar', 'layouts.sidebar-right'], function ($view) {
-                    $view->with('unique_history', getFullUniqueHistory());
+                    $view->with('unique_history', LogInstanceWorldInfo::getUniques($limit = 5));
                 });
             }
             if(config('global.widgets.online_counter.enable')) {

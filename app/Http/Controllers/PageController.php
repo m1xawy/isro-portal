@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Download;
 use App\Models\Post;
+use App\Models\SRO\Log\LogInstanceWorldInfo;
 use App\Models\SRO\Shard\Char;
+use App\Services\ScheduleService;
 use Illuminate\Support\Facades\Cache;
 use Outl1ne\PageManager\Helpers\NPMHelpers;
 
@@ -18,94 +20,56 @@ class PageController extends Controller
 
     public function post($slug)
     {
-        $data = Cache::remember('news_view_'.$slug, config('global.general.cache.data.news'), function () use ($slug) {
-            return Post::where('slug', $slug)->first();
-        });
-
-        if ($data) {
-            return view('pages.view', [
-                'post' => $data
-            ]);
+        $data = Post::getPost($slug);
+        if (!$data) {
+            return redirect()->back();
         }
 
-        return redirect()->back();
+        return view('pages.view', compact('data'));
     }
 
     public function page($slug)
     {
-        $data = Cache::remember('page_view_'.$slug, config('global.general.cache.data.pages'), function () use ($slug) {
-            return NPMHelpers::getPages();
+        $data = Cache::remember('page_view_'.$slug, now()->addMinutes(config('global.general.cache.data.pages')), function () use ($slug) {
+            foreach (NPMHelpers::getPages() as $value){
+                if (!$value['slug']['en'] == $slug) {
+                    return redirect()->back();
+                }
+                $page = $value;
+            }
+            return $page;
         });
 
-        foreach ($data as $value){
-            if ($value['slug']['en'] == $slug) {
-                $data = $value;
-            } else {
-                return redirect()->back();
-            }
-        }
-
-        return view('pages.page', [
-            'data' => $data,
-        ]);
+        return view('pages.page', compact('data'));
     }
 
     public function download()
     {
-        $data = Cache::remember('download', config('global.general.cache.data.download'), function () {
-            return Download::all();
-        });
-
-        return view('pages.download', [
-            'data' => $data,
-        ]);
+        $data = Download::getDownloads();
+        return view('pages.download', compact('data'));
     }
 
-    public function timers()
+    public function timers(ScheduleService $scheduleService)
     {
-        $data = Cache::remember('event-schedule', config('global.general.cache.data.event-schedule'), function () {
-            return getServerTimes();
-        });
-
-        return view('pages.timers', [
-            'data' => $data,
-        ]);
+        $data = $scheduleService->getEventSchedules();
+        return view('pages.timers', compact('data'));
     }
 
     public function uniques()
     {
-        $data = Cache::remember('unique-history', config('global.general.cache.data.unique-history'), function () {
-            return getFullUniqueHistory();
-        });
-
-        if (!$data) {
-            $data = [];
-        }
-
-        return view('pages.uniques', [
-            'data' => $data,
-        ]);
+        $data = LogInstanceWorldInfo::getUniques();
+        return view('pages.uniques', compact('data'));
     }
 
     public function fortress()
     {
-        $data = Cache::remember('fortress-war', config('global.general.cache.data.fortress-war'), function () {
-            return Char::getFortressHistoryRanking();
-        });
-
-        return view('pages.fortress', [
-            'data' => $data,
-        ]);
+        $data = Char::getFortressHistoryRanking();
+        return view('pages.fortress', compact('data'));
     }
 
     public function globals()
     {
-        $data = Cache::remember('global-history', config('global.general.cache.data.global-history'), function () {
-            return getGlobalHistory();
-        });
-
-        return view('pages.globals', [
-            'data' => $data,
-        ]);
+        $data = getGlobalHistory();
+        return view('pages.globals', compact('data'));
     }
 }

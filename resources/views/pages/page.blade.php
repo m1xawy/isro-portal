@@ -1,16 +1,14 @@
 @extends('layouts.full')
-@section('title', $page['name']['en'])
+@section('title', $data['name']['en'])
 
 @section('content')
     <div class="container">
         <div class="card mb-4 p-0">
             <div class="card-header">
-                {{ $page['name']['en'] }}
+                {{ $data['name']['en'] }}
             </div>
             <div class="card-body">
-                @if(!empty($page['data']))
-                    {!! $page['data']['en']['content'] !!}
-                @endif
+                {!! $data['data']['en']['content'] !!}
             </div>
         </div>
     </div>
