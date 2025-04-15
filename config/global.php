@@ -11,8 +11,6 @@ return [
             'timezone' => 'Africa/Cairo',
             'theme' => 'default',
             'theme_color_mode' => 'dark', //switch, light, dark
-            'fake_player' => 250,
-            'max_player' => 1000,
             'max_level' => 140,
             'free_silk' => 0,
             'free_premium_silk' => 0,
@@ -51,18 +49,19 @@ return [
                 'download' => 604800, //1 week
                 'pages' => 3600,
                 'account' => 3600,
-                'event-schedule' => 3600,
-                'fortress-war' => 3600,
-                'unique-history' => 3600,
-                'global-history' => 3600,
-                'ranking-player' => 3600,
-                'ranking-guild' => 3600,
-                'ranking-unique' => 3600,
-                'ranking-unique-monthly' => 3600,
-                'ranking-job' => 3600,
-                'ranking-honor' => 3600,
-                'ranking-fortress-player' => 3600,
-                'ranking-fortress-guild' => 3600,
+                'online_counter' => 0, //no cache
+                'event_schedule' => 3600,
+                'fortress_war' => 3600,
+                'unique_history' => 3600,
+                'globals_history' => 3600,
+                'ranking_player' => 3600,
+                'ranking_guild' => 3600,
+                'ranking_unique' => 3600,
+                'ranking_unique_monthly' => 3600,
+                'ranking_job' => 3600,
+                'ranking_honor' => 3600,
+                'ranking_fortress-player' => 3600,
+                'ranking_fortress-guild' => 3600,
             ]
         ],
         'sliders' => [
@@ -158,25 +157,30 @@ return [
         ],
     ],
     'widgets' => [
-        'global_history' => [
-            'enable' => false,
+        'globals_history' => [
+            'enable' => true,
             'limit' => 5,
         ],
         'unique_history' => [
-            'enable' => false,
+            'enable' => true,
             'limit' => 5,
         ],
         'top_player' => [
-            'enable' => false,
+            'enable' => true,
             'limit' => 5,
         ],
         'top_guild' => [
-            'enable' => false,
+            'enable' => true,
             'limit' => 5,
         ],
         'discord' => [
             'enable' => true,
             'server_id' => '1004443821570019338',
+        ],
+        'online_counter' => [
+            'enable' => true,
+            'max_player' => 250,
+            'fake_player' => 1000,
         ],
         'server_info' => [
             'enable' => true,
@@ -225,7 +229,7 @@ return [
             ],
         ],
         'event_schedule' => [
-            'enable' => false,
+            'enable' => true,
             'data' => [
                 'roc' => 'Roc',
                 'medusa' => 'Medusa',
@@ -244,7 +248,7 @@ return [
             ],
         ],
         'fortress_war' => [
-            'enable' => false,
+            'enable' => true,
             'data' => [
                 1 => [
                     'name' => 'Jangan',

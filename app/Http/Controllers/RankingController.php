@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Http\Services\InventoryService;
-use App\Models\Download;
 use App\Models\SRO\Shard\Char;
 use App\Models\SRO\Shard\Guild;
 use Illuminate\Support\Facades\Cache;

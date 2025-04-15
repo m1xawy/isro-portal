@@ -3,7 +3,7 @@
 @include('partials.fortress-war')
 @include('partials.event-schedule')
 @include('partials.unique-history')
-@include('partials.global-history')
+@include('partials.globals-history')
 @include('partials.top-player')
 @include('partials.top-guild')
 @include('partials.discord')

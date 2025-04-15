@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Download;
 use App\Models\Post;
 use App\Models\SRO\Shard\Char;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
 use Outl1ne\PageManager\Helpers\NPMHelpers;
 
