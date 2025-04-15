@@ -5,14 +5,11 @@
     <div class="container">
         <div class="col-md-12">
             <div class="d-flex mb-4">
-                <button class="btn btn-primary ranking-main-button mx-2" data-link="{{ route('ranking.player') }}">{{ __('Player Ranking') }}</button>
-                <button class="btn btn-primary ranking-main-button mx-2" data-link="{{ route('ranking.guild') }}">{{ __('Guild Ranking') }}</button>
-                <button class="btn btn-primary ranking-main-button mx-2" data-link="{{ route('ranking.job') }}">{{ __('Job Ranking') }}</button>
-                <button class="btn btn-primary ranking-main-button mx-2" data-link="{{ route('ranking.honor') }}">{{ __('Honor Ranking') }}</button>
-                <button class="btn btn-primary ranking-main-button mx-2" data-link="{{ route('ranking.unique') }}">{{ __('Unique Ranking') }}</button>
-                <button class="btn btn-primary ranking-main-button mx-2" data-link="{{ route('ranking.unique.monthly') }}">{{ __('Unique Ranking (Monthly)') }}</button>
-                <button class="btn btn-primary ranking-main-button mx-2" data-link="{{ route('ranking.fortress.player') }}">{{ __('Fortress War (Player)') }}</button>
-                <button class="btn btn-primary ranking-main-button mx-2" data-link="{{ route('ranking.fortress.guild') }}">{{ __('Fortress War (Guild)') }}</button>
+                @foreach(config('constants.ranking.menu') as $value)
+                    @if($value['enable'])
+                        <button class="btn btn-primary ranking-main-button mx-2" data-link="{{ route($value['route']) }}">{{ $value['name'] }}</button>
+                    @endif
+                @endforeach
             </div>
         </div>
 

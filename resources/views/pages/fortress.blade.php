@@ -13,7 +13,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @forelse($fortressHistory as $value)
+                    @forelse($data as $value)
                         <tr>
                             <td>
                                 <img src="{{ config('constants.widgets.fortress_war.data')[$value->FortressID]['icon'] }}" alt="">

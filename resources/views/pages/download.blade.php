@@ -4,7 +4,7 @@
 @section('content')
     <div class="container">
         <div class="row">
-            @forelse($downloads as $value)
+            @forelse($data as $value)
             <div class="col-md-3 mb-4">
                 <div class="card">
                     @if ($value->icon)

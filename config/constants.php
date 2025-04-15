@@ -47,8 +47,8 @@ return [
         'cache' => [
             'enable' => true,
             'data' => [
-                'news' => 3600,
-                'download' => 3600,
+                'news' => 86400, //1 day
+                'download' => 604800, //1 week
                 'pages' => 3600,
                 'event-schedule' => 3600,
                 'fortress-war' => 3600,
@@ -265,15 +265,81 @@ return [
         ],
     ],
     'ranking' => [
-        'enable' => [
-            'ranking-player' => true,
-            'ranking-guild' => true,
-            'ranking-unique' => true,
-            'ranking-unique-monthly' => true,
-            'ranking-job' => true,
-            'ranking-honor' => true,
-            'ranking-fortress-player' => true,
-            'ranking-fortress-guild' => true,
+        'menu' => [
+            'ranking_player' => [
+                'enable' => true,
+                'name' => 'Player Ranking',
+                'icon' => 'fa fa-users',
+                'route' => 'ranking.player',
+            ],
+            'ranking_guild' => [
+                'enable' => true,
+                'name' => 'Guild Ranking',
+                'icon' => 'fa fa-users',
+                'route' => 'ranking.guild',
+            ],
+            'ranking_unique' => [
+                'enable' => true,
+                'name' => 'Unique Ranking',
+                'icon' => 'fa fa-users',
+                'route' => 'ranking.unique',
+            ],
+            'ranking_unique-monthly' => [
+                'enable' => true,
+                'name' => 'Unique Ranking (Monthly)',
+                'icon' => 'fa fa-users',
+                'route' => 'ranking.unique-monthly',
+            ],
+            'ranking_job' => [
+                'enable' => true,
+                'name' => 'Job Ranking',
+                'icon' => 'fa fa-users',
+                'route' => 'ranking.job',
+            ],
+            'ranking-honor' => [
+                'enable' => true,
+                'name' => 'Honor Ranking',
+                'icon' => 'fa fa-users',
+                'route' => 'ranking.honor',
+            ],
+            'ranking-fortress-player' => [
+                'enable' => true,
+                'name' => 'Fortress War (Player)',
+                'icon' => 'fa fa-users',
+                'route' => 'ranking.fortress-player',
+            ],
+            'ranking-fortress-guild' => [
+                'enable' => true,
+                'name' => 'Fortress War (Guild)',
+                'icon' => 'fa fa-users',
+                'route' => 'ranking.fortress-guild',
+            ],
+        ],
+        'job_menu' => [
+            'ranking_job_all' => [
+                'enable' => true,
+                'name' => 'All',
+                'icon' => 'fa fa-users',
+                'route' => 'ranking.job-all',
+            ],
+            'ranking_job_hunters' => [
+                'enable' => true,
+                'name' => 'Hunters',
+                'icon' => 'fa fa-users',
+                'route' => 'ranking.job-hunter',
+            ],
+            'ranking_job_thieves' => [
+                'enable' => true,
+                'name' => 'Thieves',
+                'icon' => 'fa fa-users',
+                'route' => 'ranking.job-thieve',
+            ],
+            'ranking_job_traders' => [
+                'enable' => false,
+                'name' => 'Traders',
+                'icon' => 'fa fa-users',
+                'route' => 'ranking.job-trader',
+            ],
         ],
         'top_icons' => [
             1 => 'images/rank1.png',

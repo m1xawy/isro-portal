@@ -6,6 +6,7 @@ use App\Models\Download;
 use App\Models\Post;
 use App\Models\SRO\Shard\Char;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 use Outl1ne\PageManager\Helpers\NPMHelpers;
 
 class PageController extends Controller
@@ -55,57 +56,50 @@ class PageController extends Controller
 
     public function download()
     {
-        $downloads = cache()->remember('download', setting('cache_download', 600), function() {
+        $data = Cache::remember('download', config('constants.general.cache.data.download'), function () {
             return Download::all();
         });
 
         return view('pages.download', [
-            'downloads' => $downloads,
+            'data' => $data,
         ]);
     }
 
     public function timers()
     {
-        $timers = cache()->remember('page_timers', setting('cache_page', 600), function() {
-            return getServerTimes();
-        });
+        $data = getServerTimes();
 
         return view('pages.timers', [
-            'timers' => $timers,
+            'data' => $data,
         ]);
     }
 
     public function uniques()
     {
-        $uniques = cache()->remember('page_uniques', setting('cache_page', 600), function() {
-            return getFullUniqueHistory();
-        });
-
-        $uniques_name = cache()->remember('page_uniques_name', setting('cache_page', 600), function() {
-            return getUniqueHistoryNamesCode();
-        });
+        $data = getFullUniqueHistory();
+        $unique_names = getUniqueHistoryNamesCode();
 
         return view('pages.uniques', [
-            'uniques' => $uniques,
-            'uniques_name' => $uniques_name
+            'data' => $data,
+            'unique_names' => $unique_names
         ]);
     }
 
     public function fortress()
     {
-        $fortressHistory = (new Char)->getFortressHistoryRanking();
+        $data = Char::getFortressHistoryRanking();
 
         return view('pages.fortress', [
-            'fortressHistory' => $fortressHistory,
+            'data' => $data,
         ]);
     }
 
-    public function global()
+    public function globals()
     {
-        $globalHistory = getGlobalHistory(50);
+        $data = getGlobalHistory();
 
-        return view('pages.global', [
-            'globalHistory' => $globalHistory,
+        return view('pages.globals', [
+            'data' => $data,
         ]);
     }
 }

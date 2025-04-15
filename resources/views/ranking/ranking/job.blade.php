@@ -1,10 +1,11 @@
 <div class="container">
     <div class="col-md-12">
         <div class="d-flex mb-4">
-            <button class="btn btn-primary ranking-main-button-job mx-2" data-link="{{ route('ranking.job.all') }}">{{ __('All') }}</button>
-            <button class="btn btn-primary ranking-main-button-job mx-2" data-link="{{ route('ranking.job.hunter') }}">{{ __('Hunters') }}</button>
-            <button class="btn btn-primary ranking-main-button-job mx-2" data-link="{{ route('ranking.job.thieve') }}">{{ __('Thieves') }}</button>
-            <button class="btn btn-primary ranking-main-button-job mx-2" data-link="{{ route('ranking.job.trader') }}">{{ __('Traders') }}</button>
+            @foreach(config('constants.ranking.job_menu') as $value)
+                @if($value['enable'])
+                    <button class="btn btn-primary ranking-main-button-job mx-2" data-link="{{ route($value['route']) }}">{{ $value['name'] }}</button>
+                @endif
+            @endforeach
         </div>
     </div>
 

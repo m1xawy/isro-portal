@@ -10,102 +10,83 @@ class RankingController extends Controller
 {
     public function index()
     {
-        $rankings = Char::getPlayerRanking();
+        $data = Char::getPlayerRanking();
         return view('ranking.index', [
-            'data' => $rankings,
+            'data' => $data,
         ]);
     }
 
     public function player()
     {
-        $players = Char::getPlayerRanking();
+        $data = Char::getPlayerRanking();
         return view('ranking.ranking.player', [
-            'data' => $players,
+            'data' => $data,
         ]);
     }
 
     public function guild()
     {
-        $guilds = Char::getGuildRanking();
+        $data = Char::getGuildRanking();
         return view('ranking.ranking.guild', [
-            'data' => $guilds,
+            'data' => $data,
         ]);
     }
 
     public function unique()
     {
-        $unique_list_settings = cache()->remember('ranking_unique_list', setting('cache_ranking_unique', 600), function() { return json_decode(setting('ranking_unique_list')); });
-        if(!empty($unique_list_settings)) {
-            $uniques = Char::getUniqueRanking();
-            $unique_lists = $unique_list_settings;
-        } else {
-            $uniques = [];
-            $unique_lists = [];
-        }
-
+        $data = Char::getUniqueRanking();
+        $unique_points = config('constants.ranking.ranking.unique_points');
         return view('ranking.ranking.unique', [
-            'data' => $uniques,
-            'unique_lists' => $unique_lists,
+            'data' => $data,
+            'unique_points' => $unique_points,
         ]);
     }
 
     public function unique_monthly()
     {
-        $unique_list_settings = cache()->remember('ranking_unique_monthly_list', setting('cache_ranking_unique', 600), function() { return json_decode(setting('ranking_unique_list')); });
-        if(!empty($unique_list_settings)) {
-            $uniquesMonthly = Char::getUniqueMonthlyRanking();
-            $unique_lists = $unique_list_settings;
-        } else {
-            $uniquesMonthly = [];
-            $unique_lists = [];
-        }
-
+        $data = Char::getUniqueMonthlyRanking();
+        $unique_points = config('constants.ranking.ranking.unique_points');
         return view('ranking.ranking.unique-monthly', [
-            'data' => $uniquesMonthly,
-            'unique_lists' => $unique_lists,
+            'data' => $data,
+            'unique_points' => $unique_points,
         ]);
     }
 
     public function fortress_player()
     {
-        $fortressPlayer = Char::getFortressPlayerRanking();
-
+        $data = Char::getFortressPlayerRanking();
         return view('ranking.ranking.fortress-player', [
-            'data' => $fortressPlayer,
+            'data' => $data,
         ]);
     }
 
     public function fortress_guild()
     {
-        $fortressGuild = Char::getFortressGuildRanking();
-
+        $data = Char::getFortressGuildRanking();
         return view('ranking.ranking.fortress-guild', [
-            'data' => $fortressGuild,
+            'data' => $data,
         ]);
     }
 
     public function honor()
     {
-        $honor = Char::getHonorRanking();
-
+        $data = Char::getHonorRanking();
         return view('ranking.ranking.honor', [
-            'data' => $honor,
+            'data' => $data,
         ]);
     }
 
     public function job()
     {
-        $job = Char::getJobRanking();
-
+        $data = Char::getJobRanking();
         return view('ranking.ranking.job', [
-            'data' => $job,
+            'data' => $data,
         ]);
     }
 
     public function job_all()
     {
         $jobAll = Char::getJobRanking();
-
         return view('ranking.ranking.job-all', [
             'data' => $jobAll,
         ]);
