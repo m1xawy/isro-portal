@@ -18,7 +18,7 @@ class ViewServiceProvider extends ServiceProvider
                     return getServerTimes();
                 });
 
-                View::composer('layouts.sidebar', function ($view) use ($event_schedule) {
+                View::composer(['layouts.sidebar', 'layouts.sidebar-right'], function ($view) use ($event_schedule) {
                     $view->with('event_schedule', $event_schedule);
                 });
             }
@@ -27,7 +27,7 @@ class ViewServiceProvider extends ServiceProvider
                     return getFortress();
                 });
 
-                View::composer('layouts.sidebar', function ($view) use ($fortress_war) {
+                View::composer(['layouts.sidebar', 'layouts.sidebar-right'], function ($view) use ($fortress_war) {
                     $view->with('fortress_war', $fortress_war);
                 });
             }
@@ -36,7 +36,7 @@ class ViewServiceProvider extends ServiceProvider
                     return getGlobalHistory();
                 });
 
-                View::composer('layouts.sidebar', function ($view) use ($globals_history) {
+                View::composer(['layouts.sidebar', 'layouts.sidebar-right'], function ($view) use ($globals_history) {
                     $view->with('globals_history', $globals_history);
                 });
             }
@@ -45,7 +45,7 @@ class ViewServiceProvider extends ServiceProvider
                     return getFullUniqueHistory();
                 });
 
-                View::composer('layouts.sidebar', function ($view) use ($unique_history) {
+                View::composer(['layouts.sidebar', 'layouts.sidebar-right'], function ($view) use ($unique_history) {
                     $view->with('unique_history', $unique_history);
                 });
             }
@@ -54,7 +54,7 @@ class ViewServiceProvider extends ServiceProvider
                     return getOnlineCount();
                 });
 
-                View::composer('layouts.sidebar', function ($view) use ($online_counter) {
+                View::composer(['layouts.sidebar', 'layouts.sidebar-right'], function ($view) use ($online_counter) {
                     $view->with('online_counter', $online_counter);
                 });
             }
@@ -63,7 +63,7 @@ class ViewServiceProvider extends ServiceProvider
                     return Char::getPlayerRanking(5);
                 });
 
-                View::composer('layouts.sidebar', function ($view) use ($top_player) {
+                View::composer(['layouts.sidebar', 'layouts.sidebar-right'], function ($view) use ($top_player) {
                     $view->with('top_player', $top_player);
                 });
             }
@@ -72,7 +72,7 @@ class ViewServiceProvider extends ServiceProvider
                     return Char::getGuildRanking(5);
                 });
 
-                View::composer('layouts.sidebar', function ($view) use ($top_guild) {
+                View::composer(['layouts.sidebar', 'layouts.sidebar-right'], function ($view) use ($top_guild) {
                     $view->with('top_guild', $top_guild);
                 });
             }
