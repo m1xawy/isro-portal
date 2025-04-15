@@ -49,6 +49,7 @@ class NewPasswordController extends Controller
             function ($user) use ($request) {
 
                 $user = User::where('email', $request->email)->first();
+
                 DB::beginTransaction();
                 try {
                     MuUser::where('JID', $user->jid)->update(['UserPwd' => md5($request->password)]);
@@ -56,7 +57,6 @@ class NewPasswordController extends Controller
 
                 } catch (Exception $e) {
                     DB::rollBack();
-                    return back()->withErrors(['email' => ["Something went wrong, Please try again later."]]);
                 }
                 DB::commit();
 

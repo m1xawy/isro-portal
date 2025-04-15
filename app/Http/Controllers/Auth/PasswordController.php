@@ -33,7 +33,6 @@ class PasswordController extends Controller
 
         } catch (Exception $e) {
             DB::rollBack();
-            return back()->withErrors(['current_password' => ["Something went wrong, Please try again later."]]);
         }
         DB::commit();
 

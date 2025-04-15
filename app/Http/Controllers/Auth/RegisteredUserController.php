@@ -53,12 +53,6 @@ class RegisteredUserController extends Controller
             ],
         ]);
 
-        /*
-         * TODO: The code want be more clean.
-         * Can't find the best way for getting Binary IP
-         * Also about CountryCode it needs hard code
-         * */
-
         DB::beginTransaction();
         try {
 
