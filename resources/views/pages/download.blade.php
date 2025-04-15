@@ -5,21 +5,21 @@
     <div class="container">
         <div class="row">
             @forelse($data as $value)
-            <div class="col-md-3 mb-4">
-                <div class="card">
-                    @if ($value->icon)
-                        <img src="{{ Storage::url($value->icon) }}" class="card-img-top" alt="...">
-                    @endif
-                    <div class="card-body text-center">
-                        <h5 class="card-title">{{ $value->name }}</h5>
-                        <p class="card-text">{{ $value->desc }}</p>
+                <div class="col-md-3 mb-4">
+                    <div class="card">
+                        @if ($value->icon)
+                            <img src="{{ Storage::url($value->icon) }}" class="card-img-top" alt="...">
+                        @endif
+                        <div class="card-body text-center">
+                            <h5 class="card-title">{{ $value->name }}</h5>
+                            <p class="card-text">{{ $value->desc }}</p>
 
-                        <div class="d-grid mx-auto">
-                            <a href="{{ $value->url }}" target="_blank" class="btn btn-primary">{{ __('Download') }}</a>
+                            <div class="d-grid mx-auto">
+                                <a href="{{ $value->url }}" target="_blank" class="btn btn-primary">{{ __('Download') }}</a>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
             @empty
                 <div class="alert alert-danger text-center" role="alert">
                     {{ __('No Downloads Available!') }}

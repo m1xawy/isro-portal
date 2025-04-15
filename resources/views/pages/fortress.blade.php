@@ -29,7 +29,9 @@
                             <td>{{ $value->EventTime }}</td>
                         </tr>
                     @empty
-                        <tr><td colspan="3" class="text-center">{{ __('No Records Found!') }}</td></tr>
+                        <tr>
+                            <td colspan="3" class="text-center">{{ __('No Records Found!') }}</td>
+                        </tr>
                     @endforelse
                 </tbody>
             </table>

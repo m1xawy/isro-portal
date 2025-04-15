@@ -3,14 +3,19 @@
 namespace App\Http\Controllers;
 
 use App\Http\Services\InventoryService;
+use App\Models\Download;
 use App\Models\SRO\Shard\Char;
 use App\Models\SRO\Shard\Guild;
+use Illuminate\Support\Facades\Cache;
 
 class RankingController extends Controller
 {
     public function index()
     {
-        $data = Char::getPlayerRanking();
+        $data = Cache::remember('ranking', config('global.general.cache.data.ranking-player'), function () {
+            return Char::getPlayerRanking();
+        });
+
         return view('ranking.index', [
             'data' => $data,
         ]);
@@ -86,49 +91,45 @@ class RankingController extends Controller
 
     public function job_all()
     {
-        $jobAll = Char::getJobRanking();
+        $data = Char::getJobRanking();
         return view('ranking.ranking.job-all', [
-            'data' => $jobAll,
+            'data' => $data,
         ]);
     }
 
     public function job_trader()
     {
-        $jobTrader = Char::getJobTraderRanking();
-
+        $data = Char::getJobTraderRanking();
         return view('ranking.ranking.job-trader', [
-            'data' => $jobTrader,
+            'data' => $data,
         ]);
     }
 
     public function job_hunter()
     {
-        $jobHunter = Char::getJobHunterRanking();
-
+        $data = Char::getJobHunterRanking();
         return view('ranking.ranking.job-hunter', [
-            'data' => $jobHunter,
+            'data' => $data,
         ]);
     }
 
     public function job_thieve()
     {
-        $jobThieve = Char::getJobThieveRanking();
-
+        $data = Char::getJobThieveRanking();
         return view('ranking.ranking.job-thieve', [
-            'data' => $jobThieve,
+            'data' => $data,
         ]);
     }
 
     public function character_view($name, InventoryService $inventoryService)
     {
         $charID = Char::select('CharID')->where('CharName16', $name)->first()->CharID ?? null;
-
         if ($charID > 0) {
 
-            $characters = (new Char)->getCharInfo($charID);
-            $charUniqueHistory = (new Char)->getCharUniqueHistory($charID);
-            $charGlobalHistory = (new Char)->getCharGlobalHistory($name);
-            $charBuildInfo = (new Char)->getCharBuildInfo($charID);
+            $characters = Char::getCharInfo($charID);
+            $charUniqueHistory = Char::getCharUniqueHistory($charID);
+            $charGlobalHistory = Char::getCharGlobalHistory($name);
+            $charBuildInfo = Char::getCharBuildInfo($charID);
 
             $playerInventory = cache()->remember('char_inventory_' . $name, setting('cache_info_char', 600), function() use ($inventoryService, $charID) {
                 return $inventoryService->getInventorySet($charID, 13, 0);

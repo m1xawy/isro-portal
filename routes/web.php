@@ -22,7 +22,7 @@ Route::get('/page/{slug}', [PageController::class, 'page'])->name('pages.page.sh
 Route::get('/timers', [PageController::class, 'timers'])->name('pages.timers');
 Route::get('/uniques', [PageController::class, 'uniques'])->name('pages.uniques');
 Route::any('/fortress', [PageController::class, 'fortress'])->name('pages.fortress');
-Route::any('/global', [PageController::class, 'global'])->name('pages.global');
+Route::any('/globals', [PageController::class, 'globals'])->name('pages.globals');
 Route::get('/download', [PageController::class, 'download'])->name('pages.download');
 
 Route::get('/ranking', [RankingController::class, 'index'])->name('ranking');

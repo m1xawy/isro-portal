@@ -14,7 +14,7 @@
                 </thead>
                 <tbody>
                     @php $i = 0; @endphp
-                    @foreach($timers as $key => $value)
+                    @foreach($data as $key => $value)
                         @if(is_null($value)) @continue @endif
                         <tr>
                             <td>{{ config('global.widgets.event_schedule.data')[$key] }}</td>

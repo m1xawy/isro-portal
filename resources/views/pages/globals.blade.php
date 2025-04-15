@@ -13,8 +13,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @if (!empty($globalHistory))
-                        @foreach($globalHistory as $value)
+                    @forelse($data as $value)
                         <tr>
                             <td>[{{ $value->Comment }}]</td>
                             <td>
@@ -26,10 +25,11 @@
                             </td>
                             <td>{{ $value->EventTime }}</td>
                         </tr>
-                        @endforeach
-                    @else
-                        <tr><td colspan="3" class="text-center">{{ __('No Records Found!') }}</td></tr>
-                    @endif
+                    @empty
+                        <tr>
+                            <td colspan="3" class="text-center">{{ __('No Records Found!') }}</td>
+                        </tr>
+                    @endforelse
                 </tbody>
             </table>
         </div>

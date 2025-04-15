@@ -13,24 +13,24 @@ class PageController extends Controller
 {
     public function index()
     {
-        $posts = cache()->remember('posts', setting('cache_news', 600), function() {
+        $data = Cache::remember('news', config('global.general.cache.data.news'), function () {
             return Post::where('published_at', '<=', now())->orderBy('published_at', 'DESC')->get();
         });
 
         return view('pages.index', [
-            'posts' => $posts,
+            'data' => $data,
         ]);
     }
 
     public function post($slug)
     {
-        $post = cache()->remember('posts.view_'.$slug, setting('cache_news', 600), function() use ($slug) {
+        $data = Cache::remember('news_view_'.$slug, config('global.general.cache.data.news'), function () use ($slug) {
             return Post::where('slug', $slug)->first();
         });
 
-        if ($post) {
+        if ($data) {
             return view('pages.view', [
-                'post' => $post
+                'post' => $data
             ]);
         }
 
@@ -39,19 +39,21 @@ class PageController extends Controller
 
     public function page($slug)
     {
-        $pages = cache()->remember('page', setting('cache_page', 600), function() {
+        $data = Cache::remember('page_view_'.$slug, config('global.general.cache.data.pages'), function () use ($slug) {
             return NPMHelpers::getPages();
         });
 
-        foreach ($pages as $page){
-            if ($page['slug']['en'] == $slug) {
-                return view('pages.page', [
-                    'page' => $page,
-                ]);
+        foreach ($data as $value){
+            if ($value['slug']['en'] == $slug) {
+                $data = $value;
+            } else {
+                return redirect()->back();
             }
         }
 
-        return redirect()->back();
+        return view('pages.page', [
+            'data' => $data,
+        ]);
     }
 
     public function download()
@@ -67,7 +69,9 @@ class PageController extends Controller
 
     public function timers()
     {
-        $data = getServerTimes();
+        $data = Cache::remember('event-schedule', config('global.general.cache.data.event-schedule'), function () {
+            return getServerTimes();
+        });
 
         return view('pages.timers', [
             'data' => $data,
@@ -76,18 +80,24 @@ class PageController extends Controller
 
     public function uniques()
     {
-        $data = getFullUniqueHistory();
-        $unique_names = getUniqueHistoryNamesCode();
+        $data = Cache::remember('unique-history', config('global.general.cache.data.unique-history'), function () {
+            return getFullUniqueHistory();
+        });
+
+        if (!$data) {
+            $data = [];
+        }
 
         return view('pages.uniques', [
             'data' => $data,
-            'unique_names' => $unique_names
         ]);
     }
 
     public function fortress()
     {
-        $data = Char::getFortressHistoryRanking();
+        $data = Cache::remember('fortress-war', config('global.general.cache.data.fortress-war'), function () {
+            return Char::getFortressHistoryRanking();
+        });
 
         return view('pages.fortress', [
             'data' => $data,
@@ -96,7 +106,9 @@ class PageController extends Controller
 
     public function globals()
     {
-        $data = getGlobalHistory();
+        $data = Cache::remember('global-history', config('global.general.cache.data.global-history'), function () {
+            return getGlobalHistory();
+        });
 
         return view('pages.globals', [
             'data' => $data,
