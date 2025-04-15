@@ -36,7 +36,7 @@ class MuhAlteredInfo extends Model
 
     public static function setAlteredInfo($jid, $username, $email, $bip)
     {
-        if(config('global.general.options.register_confirmation')) {
+        if(config('global.options.register_confirmation')) {
             $EmailReceptionStatus = 'N';
             $EmailCertificationStatus = 'N';
 

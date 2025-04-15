@@ -47,17 +47,17 @@ class RegisteredUserController extends Controller
             'password' => ['required', 'confirmed', 'min:6', 'max:32'],
             'g-recaptcha-response' => [
                 Rule::requiredIf(function () {
-                    return config('global.general.captcha.enable');
+                    return config('global.captcha.enable');
                 }),
                 'captcha'
             ],
         ]);
 
-        //Fixing local registration
-        $userBinIP = ($request->ip() == "::1") ? ip2long('127.0.0.1') : ip2long($request->ip());
-
         DB::beginTransaction();
         try {
+
+            //Fixing local registration
+            $userBinIP = ($request->ip() == "::1") ? ip2long('127.0.0.1') : ip2long($request->ip());
 
             $portalUser = MuUser::setPortalAccount($request->username, $request->password);
             MuEmail::setEmail($portalUser->JID, $portalUser->Email);
@@ -70,7 +70,7 @@ class RegisteredUserController extends Controller
             TbUser::setGameAccount($portalUser->JID, $request->username, $request->password, $request->ip());
 
             $user = User::create([
-                'jid' => $portalJID,
+                'jid' => $portalUser->JID,
                 'username' => $request->username,
                 'email' => $request->email,
                 'password' => Hash::make($request->password),

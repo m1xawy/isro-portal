@@ -11,7 +11,7 @@
                 <label for="username" class="col-md-4 col-form-label text-md-end">{{ __('Username') }}</label>
 
                 <div class="col-md-6">
-                    <input id="username" type="text" class="form-control @error('username') is-invalid @enderror" name="username" value="{{ old('username') }}" required autocomplete="username" autofocus>
+                    <input id="username" type="text" class="form-control @error('username') is-invalid @enderror" name="username" value="{{ old('username') }}" required>
 
                     @error('username')
                     <span class="invalid-feedback" role="alert">
@@ -25,7 +25,7 @@
                 <label for="email" class="col-md-4 col-form-label text-md-end">{{ __('Email') }}</label>
 
                 <div class="col-md-6">
-                    <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
+                    <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required>
 
                     @error('email')
                     <span class="invalid-feedback" role="alert">
@@ -39,7 +39,7 @@
                 <label for="password" class="col-md-4 col-form-label text-md-end">{{ __('Password') }}</label>
 
                 <div class="col-md-6">
-                    <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
+                    <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required>
 
                     @error('password')
                     <span class="invalid-feedback" role="alert">
@@ -57,7 +57,7 @@
                 </div>
             </div>
 
-            @if (!config('global.general.captcha.enable'))
+            @if (config('global.captcha.enable'))
                 <!-- google recaptch -->
                 <div class="row mb-3">
                     {!! NoCaptcha::renderJs() !!}
@@ -82,10 +82,8 @@
             </div>
         </form>
         @else
-            <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg w-full">
-                <div class="p-6 text-gray-900 dark:text-gray-100 text-center">
-                    {{ __('Register page is disabled!') }}
-                </div>
+            <div class="alert alert-danger text-center" role="alert">
+                {{ __('Register page is disabled!') }}
             </div>
         @endif
     </div>

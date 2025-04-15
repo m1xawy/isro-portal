@@ -12,8 +12,6 @@ class AphChangedSilk extends Model
 
     protected $connection = 'portal';
 
-    public $timestamps = false;
-
     protected $table = 'dbo.APH_ChangedSilk';
 
     protected $primaryKey = 'CSID';

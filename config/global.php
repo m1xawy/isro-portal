@@ -38,7 +38,7 @@ return [
             'encryption' => 'tls',
         ],
         'captcha' => [
-            'enable' => true,
+            'enable' => false,
             'sitekey' => '',
             'secret' => '',
         ],
