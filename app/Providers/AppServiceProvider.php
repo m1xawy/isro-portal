@@ -25,15 +25,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        $this->configureApp();
-
-        if (!app()->runningInConsole()) {
-            Theme::set(config('global.general.options.theme'));
-        }
-    }
-
-    private function configureApp(): void
-    {
         try {
             Config::set('app.name', config('global.general.options.server_name'));
             Config::set('app.url', config('global.general.options.server_url'));
@@ -43,6 +34,10 @@ class AppServiceProvider extends ServiceProvider
 
         } catch (QueryException $e) {
             // Error: Something Wrong.
+        }
+
+        if (!app()->runningInConsole()) {
+            Theme::set(config('global.general.options.theme'));
         }
     }
 }
