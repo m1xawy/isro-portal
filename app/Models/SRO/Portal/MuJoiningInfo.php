@@ -24,4 +24,15 @@ class MuJoiningInfo extends Model
         'CountryCode',
         'JoiningPath'
     ];
+
+    public static function setJoiningInfo($jid, $bip)
+    {
+        return self::create([
+            'JID' => $jid,
+            'UserIP' => $bip,
+            'JoiningDate' => now(),
+            'CountryCode' => 'EG',
+            'JoiningPath' => 'JOYMAX'
+        ]);
+    }
 }

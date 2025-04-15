@@ -53,109 +53,21 @@ class RegisteredUserController extends Controller
             ],
         ]);
 
+        //Fixing local registration
+        $userBinIP = ($request->ip() == "::1") ? ip2long('127.0.0.1') : ip2long($request->ip());
+
         DB::beginTransaction();
         try {
 
-            $portalUser = MuUser::create([
-                'UserID' => $request->username,
-                'UserPwd' => md5($request->password),
-                'Gender' => 'M',
-                'Birthday' => now(),
-                'NickName' => $request->username,
-                'CountryCode' => 'EG',
-                'AbusingCount' => 0,
-            ]);
-
-            $portalJID = $portalUser->JID;
-            $userBinIP = ($request->ip() == "::1") ? ip2long('127.0.0.1') : ip2long($request->ip()); //Fixing local registration
-
-            MuEmail::create([
-                'JID' => $portalJID,
-                'EmailAddr' => $request->email,
-            ]);
-
-            MuhAlteredInfo::create([
-                'JID' => $portalJID,
-                'AlterationDate' => now(),
-                'LastName' => $request->username,
-                'FirstName' => $request->username,
-                'EmailAddr' => $request->email,
-                'EmailReceptionStatus' => 'N',
-                'EmailCertificationStatus' => 'N',
-                'UserIP' => $userBinIP,
-                'CountryCode' => 'EG',
-                'NickName' => $request->username,
-                'ATypeCode' => 1,
-                'CountryCodeChangingStatus' => 'N',
-            ]);
-
-            if(config('global.general.options.register_confirmation')) {
-                MuhAlteredInfo::where('JID',$portalJID)->update(['EmailReceptionStatus'=>'N', 'EmailCertificationStatus'=>'N']);
-
-            } else {
-                MuhAlteredInfo::where('JID',$portalJID)->update(['EmailReceptionStatus'=>'Y', 'EmailCertificationStatus'=>'Y']);
-            }
-
-            AuhAgreedService::create([
-                'JID' => $portalJID,
-                'ServiceCode' => 2,
-                'StartDate' => now(),
-                'EndDate' => '9999-12-31 00:00:00',
-                'UserIP' => $userBinIP
-            ]);
-
-            MuJoiningInfo::create([
-                'JID' => $portalJID,
-                'UserIP' => $userBinIP,
-                'JoiningDate' => now(),
-                'CountryCode' => 'EG',
-                'JoiningPath' => 'JOYMAX'
-            ]);
-
-            MuVIPInfo::create([
-                'JID' => $portalJID,
-                'VIPUserType' => 2,
-                'VIPLv' => 1,
-                'UpdateDate' => now(),
-                'ExpireDate' => now()->addMonths(1),
-            ]);
-
-            AphChangedSilk::create([
-                'JID' => $portalJID,
-                'RemainedSilk' => 0,
-                'ChangedSilk' => config('global.general.options.free_silk'),
-                'SilkType' => 1,
-                'SellingTypeID' => 2,
-                'ChangeDate' => now(),
-                'AvailableDate' => now()->addYears(1),
-                'AvailableStatus' => 'Y',
-            ]);
-
-            AphChangedSilk::create([
-                'JID' => $portalJID,
-                'RemainedSilk' => 0,
-                'ChangedSilk' => config('global.general.options.free_premium_silk'),
-                'SilkType' => 3,
-                'SellingTypeID' => 2,
-                'ChangeDate' => now(),
-                'AvailableDate' => now()->addYears(1),
-                'AvailableStatus' => 'Y',
-            ]);
-
-            TbUser::create([
-                'PortalJID' => $portalJID,
-                'StrUserID' => $request->username,
-                'ServiceCompany' => 11,
-                'password' => md5($request->password),
-                'Active' => 1,
-                'UserIP' => $request->ip(),
-                'CountryCode' => 'EG',
-                'VisitDate' => now(),
-                'RegDate' => now(),
-                'sec_primary' => 3,
-                'sec_content' => 3,
-                'sec_grade' => 0,
-            ]);
+            $portalUser = MuUser::setPortalAccount($request->username, $request->password);
+            MuEmail::setEmail($portalUser->JID, $portalUser->Email);
+            MuhAlteredInfo::setAlteredInfo($portalUser->JID, $request->username, $portalUser->Email, $userBinIP);
+            AuhAgreedService::setAgreedService($portalUser->JID, $userBinIP);
+            MuJoiningInfo::setJoiningInfo($portalUser->JID, $userBinIP);
+            MuVIPInfo::setVIPInfo($portalUser->JID);
+            //type 1 = silk, type 3 = premium silk
+            AphChangedSilk::setChangedSilk($portalUser->JID, 3, 100);
+            TbUser::setGameAccount($portalUser->JID, $request->username, $request->password, $request->ip());
 
             $user = User::create([
                 'jid' => $portalJID,

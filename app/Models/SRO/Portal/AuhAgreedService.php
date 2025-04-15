@@ -24,4 +24,15 @@ class AuhAgreedService extends Model
         'EndDate',
         'UserIP'
     ];
+
+    public static function setAgreedService($jid, $bip)
+    {
+        return self::create([
+            'JID' => $jid,
+            'ServiceCode' => 2,
+            'StartDate' => now(),
+            'EndDate' => '9999-12-31 00:00:00',
+            'UserIP' => $bip
+        ]);
+    }
 }

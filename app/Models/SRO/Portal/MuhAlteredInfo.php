@@ -33,4 +33,31 @@ class MuhAlteredInfo extends Model
     ];
 
     protected $hidden = [];
+
+    public static function setAlteredInfo($jid, $username, $email, $bip)
+    {
+        if(config('global.general.options.register_confirmation')) {
+            $EmailReceptionStatus = 'N';
+            $EmailCertificationStatus = 'N';
+
+        } else {
+            $EmailReceptionStatus = 'Y';
+            $EmailCertificationStatus = 'Y';
+        }
+
+        return self::create([
+            'JID' => $jid,
+            'AlterationDate' => now(),
+            'LastName' => $username,
+            'FirstName' => $username,
+            'EmailAddr' => $email,
+            'EmailReceptionStatus' => $EmailReceptionStatus,
+            'EmailCertificationStatus' => $EmailCertificationStatus,
+            'UserIP' => $bip,
+            'CountryCode' => 'EG',
+            'NickName' => $username,
+            'ATypeCode' => 1,
+            'CountryCodeChangingStatus' => 'N',
+        ]);
+    }
 }

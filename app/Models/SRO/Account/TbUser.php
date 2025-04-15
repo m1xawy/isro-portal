@@ -36,6 +36,24 @@ class TbUser extends Model
         'password'
     ];
 
+    public static function setGameAccount($jid, $username, $password, $ip)
+    {
+        return self::create([
+            'PortalJID' => $jid,
+            'StrUserID' => $username,
+            'ServiceCompany' => 11,
+            'password' => md5($password),
+            'Active' => 1,
+            'UserIP' => $ip,
+            'CountryCode' => 'EG',
+            'VisitDate' => now(),
+            'RegDate' => now(),
+            'sec_primary' => 3,
+            'sec_content' => 3,
+            'sec_grade' => 0,
+        ]);
+    }
+
     public function getShardUser()
     {
         return $this->belongsToMany(Char::class, '_User', 'UserJID', 'CharID');

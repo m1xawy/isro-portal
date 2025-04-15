@@ -33,9 +33,7 @@ class ProfileController extends Controller
 
     public function donate_history(Request $request): View
     {
-        $data = Cache::remember('donate_history', config('global.general.cache.data.account'), static function () use ($request) {
-            return AphChangedSilk::where('JID', $request->user()->jid)->orderBy('ChangeDate', 'DESC')->get();
-        });
+        $data = AphChangedSilk::getDonateHistory($request->user()->jid);
 
         return view('profile.donate-history', [
             'user' => $request->user(),

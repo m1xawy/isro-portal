@@ -25,4 +25,15 @@ class MuVIPInfo extends Model
         'UpdateDate',
         'ExpireDate'
     ];
+
+    public static function setVIPInfo($jid)
+    {
+        return self::create([
+            'JID' => $jid,
+            'VIPUserType' => 2,
+            'VIPLv' => 1,
+            'UpdateDate' => now(),
+            'ExpireDate' => now()->addMonths(1),
+        ]);
+    }
 }

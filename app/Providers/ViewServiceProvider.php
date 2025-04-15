@@ -4,7 +4,6 @@ namespace App\Providers;
 
 use App\Models\SRO\Account\ShardCurrentUser;
 use App\Models\SRO\Log\LogChatMessage;
-use App\Models\SRO\Log\LogEventSiegeFortress;
 use App\Models\SRO\Log\LogInstanceWorldInfo;
 use App\Models\SRO\Shard\Char;
 use App\Models\SRO\Shard\SiegeFortress;

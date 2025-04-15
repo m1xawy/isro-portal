@@ -33,6 +33,19 @@ class MuUser extends Model
         'password'
     ];
 
+    public static function setPortalAccount($username, $password)
+    {
+        return self::create([
+            'UserID' => $username,
+            'UserPwd' => md5($password),
+            'Gender' => 'M',
+            'Birthday' => now(),
+            'NickName' => $username,
+            'CountryCode' => 'EG',
+            'AbusingCount' => 0,
+        ]);
+    }
+
     public function getEmailUser()
     {
         return $this->hasOne(MuEmail::class, 'JID', 'JID');

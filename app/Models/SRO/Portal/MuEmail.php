@@ -20,4 +20,12 @@ class MuEmail extends Model
         'JID',
         'EmailAddr',
     ];
+
+    public static function setEmail($jid, $email)
+    {
+        return self::create([
+            'JID' => $jid,
+            'EmailAddr' => $email,
+        ]);
+    }
 }
