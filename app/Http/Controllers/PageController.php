@@ -4,8 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Download;
 use App\Models\Post;
+use App\Models\SRO\Log\LogChatMessage;
+use App\Models\SRO\Log\LogEventSiegeFortress;
 use App\Models\SRO\Log\LogInstanceWorldInfo;
-use App\Models\SRO\Shard\Char;
 use App\Services\ScheduleService;
 use Illuminate\Support\Facades\Cache;
 use Outl1ne\PageManager\Helpers\NPMHelpers;
@@ -63,13 +64,13 @@ class PageController extends Controller
 
     public function fortress()
     {
-        $data = Char::getFortressHistoryRanking();
+        $data = LogEventSiegeFortress::getFortressHistory(25);
         return view('pages.fortress', compact('data'));
     }
 
     public function globals()
     {
-        $data = getGlobalHistory();
+        $data = LogChatMessage::getGlobalsHistory(25);
         return view('pages.globals', compact('data'));
     }
 }

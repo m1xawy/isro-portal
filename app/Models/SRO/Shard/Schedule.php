@@ -11,14 +11,8 @@ class Schedule extends Model
     use HasFactory;
 
     protected $connection = 'shard';
-
-    public $timestamps = false;
-
     protected $table = 'dbo._Schedule';
-
     protected $primaryKey = 'ScheduleIdx';
-
-    protected $fillable = [];
 
     public static function getSchedules($Type = [1], $Idx = [3])
     {

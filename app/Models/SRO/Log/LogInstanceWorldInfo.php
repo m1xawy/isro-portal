@@ -11,12 +11,7 @@ class LogInstanceWorldInfo extends Model
     use HasFactory;
 
     protected $connection = 'log';
-
-    public $timestamps = false;
-
     protected $table = 'dbo._LogInstanceWorldInfo';
-
-    protected $fillable = [];
 
     public static function getUniques($limit = 25, $CharID = 0)
     {

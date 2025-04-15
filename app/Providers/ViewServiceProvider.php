@@ -2,8 +2,12 @@
 
 namespace App\Providers;
 
+use App\Models\SRO\Account\ShardCurrentUser;
+use App\Models\SRO\Log\LogChatMessage;
+use App\Models\SRO\Log\LogEventSiegeFortress;
 use App\Models\SRO\Log\LogInstanceWorldInfo;
 use App\Models\SRO\Shard\Char;
+use App\Models\SRO\Shard\SiegeFortress;
 use App\Services\ScheduleService;
 use Illuminate\Database\QueryException;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
@@ -21,12 +25,12 @@ class ViewServiceProvider extends ServiceProvider
             }
             if(config('global.widgets.fortress_war.enable')) {
                 View::composer(['layouts.sidebar', 'layouts.sidebar-right'], function ($view) {
-                    $view->with('fortress_war', getFortress());
+                    $view->with('fortress_war', SiegeFortress::getFortress());
                 });
             }
             if(config('global.widgets.globals_history.enable')) {
                 View::composer(['layouts.sidebar', 'layouts.sidebar-right'], function ($view) {
-                    $view->with('globals_history', getGlobalHistory());
+                    $view->with('globals_history', LogChatMessage::getGlobalsHistory(5));
                 });
             }
             if(config('global.widgets.unique_history.enable')) {
@@ -36,7 +40,7 @@ class ViewServiceProvider extends ServiceProvider
             }
             if(config('global.widgets.online_counter.enable')) {
                 View::composer(['layouts.sidebar', 'layouts.sidebar-right'], function ($view) {
-                    $view->with('online_counter', getOnlineCount());
+                    $view->with('online_counter', ShardCurrentUser::getOnlineCounter());
                 });
             }
             if(config('global.widgets.top_player.enable')) {
