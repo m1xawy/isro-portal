@@ -1,4 +1,4 @@
-@if (config('constants.widgets.top_guild.enable'))
+@if (config('global.widgets.top_guild.enable'))
     <div class="card mb-4">
         <div class="card-header">
             {{ __('Top Guild') }}
@@ -19,7 +19,7 @@
                             <tr>
                                 <td>
                                     @if($i <= 3)
-                                        <img src="{{ asset(config('constants.ranking.top_icons')[$i]) }}" alt=""/>
+                                        <img src="{{ asset(config('global.ranking.top_icons')[$i]) }}" alt=""/>
                                     @else
                                         {{ $i }}
                                     @endif

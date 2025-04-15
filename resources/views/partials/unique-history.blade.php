@@ -1,4 +1,4 @@
-@if (config('constants.widgets.unique_history.enable'))
+@if (config('global.widgets.unique_history.enable'))
     <div class="card mb-4">
         <div class="card-header">
             {{ __('Unique History') }}
@@ -8,7 +8,7 @@
                 <ul class="list-unstyled">
                     @foreach($unique_history as $value)
                         <li class="mb-3">
-                            <p class="mb-0">{{ config('constants.ranking.unique_points')[$value->Value] }}</p>
+                            <p class="mb-0">{{ config('global.ranking.unique_points')[$value->Value] }}</p>
                             <small>
                                 {{ __('Killed by:') }}
                                 <a href="{{ route('ranking.character.view', ['name' => $value->CharName16]) }}" class="text-decoration-none">{{ $value->CharName16 }}</a>

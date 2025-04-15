@@ -15,7 +15,7 @@
                 <tr>
                     <td>
                         @if($i <= 3)
-                            <img src="{{ asset(config('constants.ranking.top_icons')[$i]) }}" alt=""/>
+                            <img src="{{ asset(config('global.ranking.top_icons')[$i]) }}" alt=""/>
                         @else
                             {{ $i }}
                         @endif
@@ -29,8 +29,8 @@
                         <a href="{{ route('ranking.character.view', ['name' => $value->CharName16]) }}" class="text-decoration-none">{{ $value->NickName16 }}</a>
                     </td>
                     <td>
-                        <img src="{{ asset(config('constants.ranking.job_type_icons')[$value->JobType]['icon']) }}" alt=""/>
-                        {{ config('constants.ranking.job_type_icons')[$value->JobType]['name'] }}
+                        <img src="{{ asset(config('global.ranking.job_type_icons')[$value->JobType]['icon']) }}" alt=""/>
+                        {{ config('global.ranking.job_type_icons')[$value->JobType]['name'] }}
                     </td>
                     <td>{{ $value->JobLevel }}</td>
                     <td>{{ $value->JobExp }}</td>

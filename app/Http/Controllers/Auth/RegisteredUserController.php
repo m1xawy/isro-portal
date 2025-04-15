@@ -47,7 +47,7 @@ class RegisteredUserController extends Controller
             'password' => ['required', 'confirmed', 'min:6', 'max:32'],
             'g-recaptcha-response' => [
                 Rule::requiredIf(function () {
-                    return config('constants.general.captcha.enable');
+                    return config('global.general.captcha.enable');
                 }),
                 'captcha'
             ],
@@ -95,7 +95,7 @@ class RegisteredUserController extends Controller
                 'CountryCodeChangingStatus' => 'N',
             ]);
 
-            if(config('constants.general.options.register_confirmation')) {
+            if(config('global.general.options.register_confirmation')) {
                 MuhAlteredInfo::where('JID',$portalJID)->update(['EmailReceptionStatus'=>'N', 'EmailCertificationStatus'=>'N']);
 
             } else {
@@ -129,7 +129,7 @@ class RegisteredUserController extends Controller
             AphChangedSilk::create([
                 'JID' => $portalJID,
                 'RemainedSilk' => 0,
-                'ChangedSilk' => config('constants.general.options.free_silk'),
+                'ChangedSilk' => config('global.general.options.free_silk'),
                 'SilkType' => 1,
                 'SellingTypeID' => 2,
                 'ChangeDate' => now(),
@@ -140,7 +140,7 @@ class RegisteredUserController extends Controller
             AphChangedSilk::create([
                 'JID' => $portalJID,
                 'RemainedSilk' => 0,
-                'ChangedSilk' => config('constants.general.options.free_premium_silk'),
+                'ChangedSilk' => config('global.general.options.free_premium_silk'),
                 'SilkType' => 3,
                 'SellingTypeID' => 2,
                 'ChangeDate' => now(),

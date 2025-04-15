@@ -3,7 +3,7 @@
 
 @section('content')
     <div class="container my-5">
-        @if (!config('constants.general.options.register_disable'))
+        @if (!config('global.general.options.register_disable'))
         <form method="POST" action="{{ route('register') }}">
             @csrf
 
@@ -57,7 +57,7 @@
                 </div>
             </div>
 
-            @if (!config('constants.general.captcha.enable'))
+            @if (!config('global.general.captcha.enable'))
                 <!-- google recaptch -->
                 <div class="row mb-3">
                     {!! NoCaptcha::renderJs() !!}

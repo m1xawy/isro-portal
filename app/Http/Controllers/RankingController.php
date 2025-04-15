@@ -35,7 +35,7 @@ class RankingController extends Controller
     public function unique()
     {
         $data = Char::getUniqueRanking();
-        $unique_points = config('constants.ranking.ranking.unique_points');
+        $unique_points = config('global.ranking.ranking.unique_points');
         return view('ranking.ranking.unique', [
             'data' => $data,
             'unique_points' => $unique_points,
@@ -45,7 +45,7 @@ class RankingController extends Controller
     public function unique_monthly()
     {
         $data = Char::getUniqueMonthlyRanking();
-        $unique_points = config('constants.ranking.ranking.unique_points');
+        $unique_points = config('global.ranking.ranking.unique_points');
         return view('ranking.ranking.unique-monthly', [
             'data' => $data,
             'unique_points' => $unique_points,

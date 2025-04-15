@@ -28,18 +28,18 @@ class AppServiceProvider extends ServiceProvider
         $this->configureApp();
 
         if (!app()->runningInConsole()) {
-            Theme::set(config('constants.general.options.theme'));
+            Theme::set(config('global.general.options.theme'));
         }
     }
 
     private function configureApp(): void
     {
         try {
-            Config::set('app.name', config('constants.general.options.server_name'));
-            Config::set('app.url', config('constants.general.options.server_url'));
-            Config::set('mail.default', config('constants.smtp.enable') ? env('MAIL_MAILER', 'smtp') : 'log');
+            Config::set('app.name', config('global.general.options.server_name'));
+            Config::set('app.url', config('global.general.options.server_url'));
+            Config::set('mail.default', config('global.smtp.enable') ? env('MAIL_MAILER', 'smtp') : 'log');
 
-            date_default_timezone_set(config('constants.general.options.timezone'));
+            date_default_timezone_set(config('global.general.options.timezone'));
 
         } catch (QueryException $e) {
             // Error: Something Wrong.

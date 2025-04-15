@@ -56,7 +56,7 @@ class PageController extends Controller
 
     public function download()
     {
-        $data = Cache::remember('download', config('constants.general.cache.data.download'), function () {
+        $data = Cache::remember('download', config('global.general.cache.data.download'), function () {
             return Download::all();
         });
 

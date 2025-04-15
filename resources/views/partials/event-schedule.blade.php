@@ -1,4 +1,4 @@
-@if (config('constants.widgets.event_schedule.enable'))
+@if (config('global.widgets.event_schedule.enable'))
     <div class="card mb-4">
         <div class="card-header">
             {{ __('Event Schedule') }}
@@ -9,7 +9,7 @@
                 @foreach($event_schedule as $key => $value)
                     @if(is_null($value)) @continue @endif
                     <li>
-                        <span>{{ config('constants.widgets.event_schedule.data')[$key] }}</span>
+                        <span>{{ config('global.widgets.event_schedule.data')[$key] }}</span>
                         <span class="float-end">
                             @if($value['status'])
                                 <span class="text-success">{{ __('Active') }}</span>

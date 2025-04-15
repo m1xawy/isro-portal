@@ -1,11 +1,11 @@
-@if (config('constants.widgets.server_info.enable'))
+@if (config('global.widgets.server_info.enable'))
     <div class="card mb-4">
         <div class="card-header">
             {{ __('Server Info') }}
         </div>
         <div class="card-body">
             <ul class="list-unstyled">
-                @foreach(config('constants.widgets.server_info.data') as $value)
+                @foreach(config('global.widgets.server_info.data') as $value)
                     <li>
                         <span>
                             {!! $value['icon'] !!}

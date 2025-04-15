@@ -12,7 +12,7 @@
             @forelse($data as $value)
                 <tr>
                     <td>
-                        <img src="{{ asset(config('constants.ranking.honor_level')[$value->Rank]) }}" alt=""/>
+                        <img src="{{ asset(config('global.ranking.honor_level')[$value->Rank]) }}" alt=""/>
                     </td>
                     <td>
                         @if($value->RefObjID > 2000)
