@@ -543,6 +543,16 @@ return [
                 32 => 'Military Engineer',
             ],
         ],
+        'race' => [
+            0 => [
+                'name' => 'Chinese',
+                'icon' => 'images/com_kindred_china.png',
+            ],
+            1 => [
+                'name' => 'Europe',
+                'icon' => 'images/com_kindred_europe.png',
+            ],
+        ],
         'character' => [
             1907 => "images/character/char_ch_man1.png",
             1908 => "images/character/char_ch_man2.png",

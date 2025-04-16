@@ -99,25 +99,25 @@
                                 <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                                     <td class="px-6 py-4">Guild:</td>
                                     <td class="px-6 py-4">
-                                        @php if($characters->GuildID > 0) : @endphp
-                                        <a href="{{ route('ranking.guild.view', ['name' => $characters->GuildName]) }}">{{ $characters->GuildName }}</a>
-                                        @php else : @endphp
-                                        <span>None</span>
-                                        @php endif; @endphp
+                                        @if($characters->GuildID > 0)
+                                            <a href="{{ route('ranking.guild.view', ['name' => $characters->GuildName]) }}">{{ $characters->GuildName }}</a>
+                                        @else
+                                            <span>None</span>
+                                        @endif
                                     </td>
                                 </tr>
                                 <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                                     <td class="px-6 py-4">Race:</td>
                                     <td class="px-6 py-4">
-                                        @php if($characters->RefObjID > 2000) : @endphp
-                                            <img src="{{ asset('images/ingame/european.png') }}" class="inline-block" style="vertical-align:text-top" alt="Rank 3"/>
-                                            <span>Europe</span>
+                                        @if($characters->RefObjID > 2000)
+                                            <img src="{{ asset(config('global.ranking.race')[1]['icon']) }}" class="inline-block" style="vertical-align:text-top" alt="Rank 3"/>
+                                            <span>{{ config('global.ranking.race')[1]['name'] }}</span>
                                             @php $race = 'EU'; @endphp
-                                        @php else : @endphp
-                                            <img src="{{ asset('images/ingame/chinese.png') }}" class="inline-block" style="vertical-align:text-top" alt="Rank 3"/>
-                                            <span>Chinese</span>
+                                        @else
+                                            <img src="{{ asset(config('global.ranking.race')[0]['icon']) }}" class="inline-block" style="vertical-align:text-top" alt="Rank 3"/>
+                                            <span>{{ config('global.ranking.race')[0]['name'] }}</span>
                                             @php $race = 'CH'; @endphp
-                                        @php endif; @endphp
+                                        @endif
                                     </td>
                                 </tr>
                                 <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
@@ -131,11 +131,9 @@
                                 <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                                     <td class="px-6 py-4">Title:</td>
                                     <td class="px-6 py-4" style="color: #ffc345">
-                                        [
-                                        @php if($characters->HwanLevel > 0) : @endphp
-                                            {{ config('global.ranking.hwan_titles')[$race][$characters->HwanLevel] }}
-                                        @php endif; @endphp
-                                        ]
+                                        @if($characters->HwanLevel > 0)
+                                            [{{ config('global.ranking.hwan_titles')[$race][$characters->HwanLevel] }}]
+                                        @endif
                                     </td>
                                 </tr>
                                 </tbody>
@@ -175,7 +173,7 @@
     @include('ranking.character.partials.character-unique-history')
 
 @endsection
-@section('styles')
+@push('styles')
     <link href="{{ asset('/css/main.css') }}" rel="stylesheet">
     <script src="{{ asset('/js/main.js') }}"></script>
     <style>
@@ -238,4 +236,4 @@
             float: right;
         }
     </style>
-@endsection
+@endpush
