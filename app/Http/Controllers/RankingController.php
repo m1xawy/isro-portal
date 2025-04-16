@@ -126,9 +126,9 @@ class RankingController extends Controller
         if ($charID > 0) {
 
             $characters = Char::getCharInfo($charID);
-            $charUniqueHistory = Char::getCharUniqueHistory($charID);
-            $charGlobalHistory = Char::getCharGlobalHistory($name);
-            $charBuildInfo = Char::getCharBuildInfo($charID);
+            $charUniqueHistory = Char::getCharUniqueHistory($charID) ?? [];
+            $charGlobalHistory = Char::getCharGlobalHistory($name) ?? [];
+            $charBuildInfo = Char::getCharBuildInfo($charID) ?? [];
 
             $playerInventory = cache()->remember('char_inventory_' . $name, setting('cache_info_char', 600), function() use ($inventoryService, $charID) {
                 return $inventoryService->getInventorySet($charID, 13, 0);
