@@ -109,54 +109,6 @@ class Char extends Model
         });
     }
 
-    public static function getGuildRanking($limit = 25)
-    {
-        return Cache::remember('ranking_guild_'.$limit, config('global.general.cache.data.ranking-guild'), function () use ($limit) {
-            return self::select(
-                '_Guild.ID',
-                '_Guild.Name',
-                '_Guild.Lvl',
-                '_Guild.GatheredSP',
-                DB::raw("(SELECT CharID FROM _GuildMember WHERE GuildID = _Guild.ID AND MemberClass = 0) AS LeaderID"),
-                DB::raw("(SELECT CharName FROM _GuildMember WHERE GuildID = _Guild.ID AND MemberClass = 0) AS LeaderName"),
-                DB::raw("(SELECT COUNT(CharID) FROM _GuildMember WHERE GuildID = _Guild.ID) AS TotalMember"),
-                DB::raw("ISNULL((
-                    SUM(ISNULL(_BindingOptionWithItem.nOptValue, 0)) +
-                    SUM(ISNULL(_Items.OptLevel, 0)) +
-                    SUM(ISNULL(_RefObjCommon.ReqLevel1, 0)) +
-                    SUM(ISNULL(CASE WHEN _RefObjCommon.CodeName128 LIKE '%_A_RARE%' THEN 5 ELSE 0 END, 0)) +
-                    SUM(ISNULL(CASE WHEN _RefObjCommon.CodeName128 LIKE '%_B_RARE%' THEN 10 ELSE 0 END, 0)) +
-                    SUM(ISNULL(CASE WHEN _RefObjCommon.CodeName128 LIKE '%_C_RARE%' THEN 15 ELSE 0 END, 0))
-                ), 0) AS ItemPoints"))
-
-                ->join('_GuildMember', '_GuildMember.GuildID', '=', '_Guild.ID')
-                ->join('_Inventory', '_Inventory.CharID', '=', '_GuildMember.CharID')
-                ->join('_Items', '_Items.ID64', '=', '_Inventory.ItemID')
-                ->join('_RefObjCommon', '_RefObjCommon.ID', '=', '_Items.RefItemID')
-                ->leftJoin('_BindingOptionWithItem', function ($join) {
-                    $join->on('_BindingOptionWithItem.nItemDBID', '=', '_Items.ID64')
-                        ->where('_BindingOptionWithItem.nOptValue', '>', 0)
-                        ->where('_BindingOptionWithItem.bOptType', '=', 2);
-                })
-                ->where('_Inventory.Slot', '<', 13)
-                ->where('_Inventory.Slot', '!=', 8)
-                ->where('_Inventory.Slot', '!=', 7)
-                ->where('_Inventory.ItemID', '>', 0)
-                ->groupBy(
-                    '_Guild.ID',
-                    '_Guild.Name',
-                    '_Guild.Lvl',
-                    '_Guild.GatheredSP'
-                )
-                ->orderByDesc('ItemPoints')
-                ->orderByDesc('_Guild.Lvl')
-                ->orderByDesc('_Guild.GatheredSP')
-                ->limit($limit)
-                ->get();
-
-        });
-    }
-
     public static function getUniqueRanking($limit = 25)
     {
         $unique_list_settings = cache()->remember('ranking_unique_list', setting('cache_ranking_unique', 600), function() { return json_decode(setting('ranking_unique_list')); });

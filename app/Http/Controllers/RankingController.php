@@ -23,7 +23,7 @@ class RankingController extends Controller
 
     public function guild()
     {
-        $data = Char::getGuildRanking();
+        $data = Guild::getGuildRanking();
         return view('ranking.ranking.guild', [
             'data' => $data,
         ]);
