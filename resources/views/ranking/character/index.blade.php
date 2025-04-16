@@ -88,19 +88,17 @@
                     </div>
                     <div class="col-md-6">
                         <div class="card">
-                            <div class="card-body d-flex justify-content-center">
-                                <div class="bg-center bg-no-repeat" id="display-inventory-set" style="background-image: url({{ asset('images/ingame/inventory_bg.png') }}); width: 178px; height: 315px">
+                            <div class="card-body d-flex justify-content-center" id="display-inventory">
+                                <div class="" id="display-inventory-set">
                                     @include('ranking.character.partials.inventory.inventory-view', ['inventorySetList' => $playerInventory])
                                 </div>
-                                <div class="bg-center bg-no-repeat d-none" id="display-inventory-avatar" style="background-image: url({{ asset('images/ingame/inventory_bg.png') }}); width: 178px; height: 315px;">
+                                <div class="d-none" id="display-inventory-avatar">
                                     @include('ranking.character.partials.inventory.inventory-job-view', ['inventoryJobList' => $playerJob])
                                 </div>
-                                <div class="bg-equipment-job-main bg-center bg-no-repeat flex flex-col justify-end" style="background-image: url({{ asset('images/ingame/accessory_bg.png') }}); width: 206px; background-position: bottom">
-                                    <button id="display-inventory-switch" data-type="set" class="inline-flex items-center px-4 py-2 bg-gray-800 dark:bg-gray-200 border border-transparent rounded-md font-semibold text-xs text-white dark:text-gray-800 uppercase tracking-widest hover:bg-gray-700 dark:hover:bg-white focus:bg-gray-700 dark:focus:bg-white active:bg-gray-900 dark:active:bg-gray-300 transition ease-in-out duration-150 ml-3" style="margin-bottom: 1rem">
-                                        Job Equip
-                                    </button>
+                                <div class="" id="display-inventory-avatar-accessory">
+                                    <button id="display-inventory-switch" data-type="set" class="btn btn-secondary position-absolute" style="top: -50px;">Job Equip</button>
 
-                                    <p class="text-capitalize text-left" style="color: #ffc345; margin-left: 1.6rem; margin-bottom: 0.6rem">Accessories</p>
+                                    <p id="display-inventory-avatar-accessory-label">Accessories</p>
                                     @include('ranking.character.partials.inventory.inventory-avatar-view', ['inventoryAvatarList' => $playerAvatar])
                                 </div>
                             </div>
@@ -173,6 +171,43 @@
         }
         .table.table-inventory-avatar td:last-child {
             float: right;
+        }
+        .table.table-inventory td, .table.table-inventory th {
+            background: none;
+        }
+    </style>
+    <style>
+        #display-inventory {
+            width: 459px;
+            height: 355px;
+            background: url({{ asset('images/inventoryDiv_bg.png') }}) 0 0 no-repeat;
+            border-right: 1px solid #252525;
+            border-bottom: 1px solid #252525;
+            float: left;
+            position: relative;
+        }
+        #display-inventory-set,
+        #display-inventory-avatar {
+            width: 178px;
+            height: 315px;
+            background: url({{ asset('images/inventory_bg.png') }}) 0 0 no-repeat;
+            position: absolute;
+            top: 21px;
+            left: 59px;
+        }
+        #display-inventory-avatar-accessory {
+            width: 172px;
+            height: 129px;
+            background: url({{ asset('images/accessory_bg.png') }}) 0 0 no-repeat;
+            position: absolute;
+            top: 206px;
+            left: 260px;
+        }
+        #display-inventory-avatar-accessory-label {
+            color: #ffc345;
+            font-size: 14px;
+            margin-top: 10px;
+            margin-left: 10px;
         }
     </style>
 @endpush
