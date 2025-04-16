@@ -27,16 +27,19 @@
                         </div>
                     </div>
                     <div class="col-md-6">
-                        <div class="row mt-4 justify-content-end">
+                        <div class="row mt-5 justify-content-end">
                             @if($characters->JobType > 0)
                                 <div class="col-md-4">
                                     <div class="d-flex">
-                                        <img src="{{ asset(config('global.ranking.job_type_icons')[$characters->JobType]['icon']) }}" alt=""/>
+                                        <div class="d-flex align-items-center">
+                                            <img src="{{ asset(config('global.ranking.job_type_icons')[$characters->JobType]['icon']) }}" width="50" height="" alt=""/>
+                                        </div>
+
                                         <ul class="list-unstyled mt-3">
-                                            <li class="mb-2">
+                                            <li class="mb-0">
                                                 <span>{{ config('global.ranking.job_type_icons')[$characters->JobType]['name'] }}</span>
                                             </li>
-                                            <li class="mb-2">Job Level: <span class="">{{ $characters->JobLevel }}</span></li>
+                                            <li class="mb-0">Job Level: <span class="">{{ $characters->JobLevel }}</span></li>
                                         </ul>
                                     </div>
                                 </div>
