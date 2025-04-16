@@ -29,7 +29,7 @@
                         <a href="{{ route('ranking.character.view', ['name' => $value->CharName16]) }}" class="text-decoration-none">{{ $value->NickName16 }}</a>
                     </td>
                     <td>
-                        <img src="{{ asset(config('global.ranking.job_type_icons')[$value->JobType]['icon']) }}" alt=""/>
+                        <img src="{{ asset(config('global.ranking.job_type_icons')[$value->JobType]['small_icon']) }}" alt=""/>
                         {{ config('global.ranking.job_type_icons')[$value->JobType]['name'] }}
                     </td>
                     <td>{{ $value->JobLevel }}</td>

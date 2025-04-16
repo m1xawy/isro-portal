@@ -254,19 +254,19 @@ return [
             'data' => [
                 1 => [
                     'name' => 'Jangan',
-                    'icon' => 'images/sro/etc/fort_jangan.jpg',
+                    'icon' => 'images/sro/etc/fort_jangan.png',
                 ],
                 3 => [
                     'name' => 'Hotan',
-                    'icon' => 'images/sro/etc/fort_hotan.jpg',
+                    'icon' => 'images/sro/etc/fort_hotan.png',
                 ],
                 4 => [
                     'name' => 'Constantinople',
-                    'icon' => 'images/sro/etc/fort_constantinople.jpg',
+                    'icon' => 'images/sro/etc/fort_constantinople.png',
                 ],
                 6 => [
                     'name' => 'Bandit',
-                    'icon' => 'images/sro/etc/fort_bijeokdan.jpg',
+                    'icon' => 'images/sro/etc/fort_bijeokdan.png',
                 ],
             ],
         ],
@@ -421,67 +421,67 @@ return [
         'skill_mastery' => [
             257 => [
                 "name" => "Blade",
-                "icon" => "mastery_sword.png"
+                "icon" => "images/sro/skillmastery/china/mastery_sword.png"
             ],
             258 => [
                 "name" => "Glavie",
-                "icon" => "mastery_spear.png"
+                "icon" => "images/sro/skillmastery/china/mastery_spear.png"
             ],
             259 => [
                 "name" => "Bow",
-                "icon" => "mastery_bow.png"
+                "icon" => "images/sro/skillmastery/china/mastery_bow.png"
             ],
             273 => [
                 "name" => "Cold",
-                "icon" => "mastery_cold.png"
+                "icon" => "images/sro/skillmastery/china/mastery_cold.png"
             ],
             274 => [
                 "name" => "Lightning",
-                "icon" => "mastery_lightning.png"
+                "icon" => "images/sro/skillmastery/china/mastery_lightning.png"
             ],
             275 => [
                 "name" => "Fire",
-                "icon" => "mastery_fire.png"
+                "icon" => "images/sro/skillmastery/china/mastery_fire.png"
             ],
             276 => [
                 "name" => "Force",
-                "icon" => "mastery_gigong.png"
+                "icon" => "images/sro/skillmastery/china/mastery_gigong.png"
             ],
             277 => [
                 "name" => "Recovery",
-                "icon" => "mastery_water.png"
+                "icon" => "images/sro/skillmastery/china/mastery_water.png"
             ],
             513 => [
                 "name" => "Warrior",
-                "icon" => "eu_warrior.png"
+                "icon" => "images/sro/skillmastery/europe/eu_warrior.png"
             ],
             514 => [
                 "name" => "Wizard",
-                "icon" => "eu_wizard.png"
+                "icon" => "images/sro/skillmastery/europe/eu_wizard.png"
             ],
             515 => [
                 "name" => "Rogue",
-                "icon" => "eu_rog.png"
+                "icon" => "images/sro/skillmastery/europe/eu_rog.png"
             ],
             516 => [
                 "name" => "Warlock",
-                "icon" => "eu_warlock.png"
+                "icon" => "images/sro/skillmastery/europe/eu_warlock.png"
             ],
             517 => [
                 "name" => "Bard",
-                "icon" => "eu_bard.png"
+                "icon" => "images/sro/skillmastery/europe/eu_bard.png"
             ],
             518 => [
                 "name" => "Cleric",
-                "icon" => "eu_cleric.png"
+                "icon" => "images/sro/skillmastery/europe/eu_cleric.png"
             ],
         ],
         'honor_level' => [
-            1 => 'images/com_honor_level_1.PNG',
-            2 => 'images/com_honor_level_2.PNG',
-            3 => 'images/com_honor_level_3.PNG',
-            4 => 'images/com_honor_level_4.PNG',
-            5 => 'images/com_honor_level_5.PNG',
+            1 => 'images/com_honor_level_1.png',
+            2 => 'images/com_honor_level_2.png',
+            3 => 'images/com_honor_level_3.png',
+            4 => 'images/com_honor_level_4.png',
+            5 => 'images/com_honor_level_5.png',
         ],
         'job_type' => [
             0 => 'None',
@@ -492,15 +492,18 @@ return [
         'job_type_icons' => [
             1 => [
                 'name' => 'Thief',
-                'icon' => 'images/ingame/com_job_thief.PNG'
+                'small_icon' => 'images/com_job_thief.png',
+                'icon' => 'images/job_teaf_icon.png',
             ],
             2 => [
                 'name' => 'Hunter',
-                'icon' => 'images/ingame/com_job_hunter.PNG',
+                'small_icon' => 'images/com_job_hunter.png',
+                'icon' => 'images/job_hunter_icon.png',
             ],
             3 => [
                 'name' => 'Trader',
-                'icon' => 'images/ingame/com_job_merchant.PNG',
+                'small_icon' => 'images/com_job_merchant.png',
+                'icon' => 'images/job_trader_icon.png',
             ],
         ],
         'vip_level' => [
@@ -539,6 +542,63 @@ return [
                 16 => 'Training Administrator',
                 32 => 'Military Engineer',
             ],
+        ],
+        'character' => [
+            1907 => "images/character/char_ch_man1.png",
+            1908 => "images/character/char_ch_man2.png",
+            1909 => "images/character/char_ch_man3.png",
+            1910 => "images/character/char_ch_man4.png",
+            1911 => "images/character/char_ch_man5.png",
+            1912 => "images/character/char_ch_man6.png",
+            1913 => "images/character/char_ch_man7.png",
+            1914 => "images/character/char_ch_man8.png",
+            1915 => "images/character/char_ch_man9.png",
+            1916 => "images/character/char_ch_man10.png",
+            1917 => "images/character/char_ch_man11.png",
+            1918 => "images/character/char_ch_man12.png",
+            1919 => "images/character/char_ch_man13.png",
+
+            1920 => "images/character/char_ch_woman1.png",
+            1921 => "images/character/char_ch_woman2.png",
+            1922 => "images/character/char_ch_woman3.png",
+            1923 => "images/character/char_ch_woman4.png",
+            1924 => "images/character/char_ch_woman5.png",
+            1925 => "images/character/char_ch_woman6.png",
+            1926 => "images/character/char_ch_woman7.png",
+            1927 => "images/character/char_ch_woman8.png",
+            1928 => "images/character/char_ch_woman9.png",
+            1929 => "images/character/char_ch_woman10.png",
+            1930 => "images/character/char_ch_woman11.png",
+            1931 => "images/character/char_ch_woman12.png",
+            1932 => "images/character/char_ch_woman13.png",
+
+            14717 => "images/character/char_eu_man1.png",
+            14718 => "images/character/char_eu_man2.png",
+            14719 => "images/character/char_eu_man3.png",
+            14720 => "images/character/char_eu_man4.png",
+            14721 => "images/character/char_eu_man5.png",
+            14722 => "images/character/char_eu_man6.png",
+            14723 => "images/character/char_eu_man7.png",
+            14724 => "images/character/char_eu_man8.png",
+            14725 => "images/character/char_eu_man9.png",
+            14726 => "images/character/char_eu_man10.png",
+            14727 => "images/character/char_eu_man11.png",
+            14728 => "images/character/char_eu_man12.png",
+            14729 => "images/character/char_eu_man13.png",
+
+            14730 => "images/character/char_eu_woman1.png",
+            14731 => "images/character/char_eu_woman2.png",
+            14732 => "images/character/char_eu_woman3.png",
+            14733 => "images/character/char_eu_woman4.png",
+            14734 => "images/character/char_eu_woman5.png",
+            14735 => "images/character/char_eu_woman6.png",
+            14736 => "images/character/char_eu_woman7.png",
+            14737 => "images/character/char_eu_woman8.png",
+            14738 => "images/character/char_eu_woman9.png",
+            14739 => "images/character/char_eu_woman10.png",
+            14740 => "images/character/char_eu_woman11.png",
+            14741 => "images/character/char_eu_woman12.png",
+            14742 => "images/character/char_eu_woman13.png",
         ],
     ],
     'item' => [

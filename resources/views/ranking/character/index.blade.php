@@ -11,14 +11,14 @@
                         <div class="w-full">
                             <div class="flex flex-row items-center pb-1">
                                 <div class="w-24 h-24 rounded-md shadow-lg border-2 overflow-hidden">
-                                    <img class="object-cover scale-125" src="{{ asset('images/ingame/chars/'. $characters->RefObjID .'.png') }}" alt="{{ $characters->CharName16 }}"/>
+                                    <img class="object-cover scale-125" src="{{ asset(config('global.ranking.character')[$characters->RefObjID]) }}" alt="{{ $characters->CharName16 }}"/>
                                 </div>
                                 <div class="ml-4">
                                     <h5 class="mb-1 text-xl font-medium text-gray-900 dark:text-white">{{ $characters->CharName16 }}</h5>
                                     <span class="text-sm text-gray-500 dark:text-gray-400">Item Points: <span style="color: #ffc345">{{ $characters->ItemPoints }}</span></span>
                                     <ul class="character-build flex flex-row mt-3">
                                         @foreach($charBuildInfo as $build)
-                                            <li><img src="{{ asset('images/ingame/skillmastery/'. config('global.ranking.skill_mastery')[$build->MasteryID]['icon']) }}" title="{{ config('global.ranking.skill_mastery')[$build->MasteryID]['name'] }}"></li>
+                                            <li><img src="{{ asset(config('global.ranking.skill_mastery')[$build->MasteryID]['icon']) }}" title="{{ config('global.ranking.skill_mastery')[$build->MasteryID]['name'] }}"></li>
                                         @endforeach
                                     </ul>
                                 </div>
@@ -31,29 +31,12 @@
                             <div class="md:w-1/3">
                                 <div class="w-full">
                                     <h4 class="pb-4 text-sm" style="color: #ffc345">Job informations</h4>
-
                                     <div class="flex flex-row items-center pb-2 mt-2">
-                                        @php if($characters->JobType == 1) : @endphp
-                                        <img class="inline" src="{{ asset('images/ingame/com_job_teaf02_icon.PNG') }}" alt=""/>
-                                        @php elseif($characters->JobType == 2) : @endphp
-                                        <img class="inline" src="{{ asset('images/ingame/com_job_hunter02_icon.PNG') }}" alt=""/>
-                                        @php elseif($characters->JobType == 3) : @endphp
-                                        <img class="inline" src="{{ asset('images/ingame/com_job_trader02_icon.png') }}" alt=""/>
-                                        @php else : @endphp
-                                        <img class="" src="{{ asset('images/ingame/.png') }}" alt=""/>
-                                        @php endif; @endphp
+                                        <img src="{{ asset(config('global.ranking.job_type_icons')[$characters->JobType]['icon']) }}" alt=""/>
 
                                         <div class="ml-3">
                                             <h5 class="text-xs font-bold text-black dark:text-white text-left">
-                                                @php if($characters->JobType == 1) : @endphp
-                                                <span>Thief</span>
-                                                @php elseif($characters->JobType == 2) : @endphp
-                                                <span>Hunter</span>
-                                                @php elseif($characters->JobType == 3) : @endphp
-                                                <span>Trader</span>
-                                                @php else : @endphp
-                                                <span>None</span>
-                                                @php endif; @endphp
+                                                <span>{{ config('global.ranking.job_type_icons')[$characters->JobType]['name'] }}</span>
                                             </h5>
                                             <h5 class="text-xs font-bold text-black dark:text-white text-center">Job Level: {{ $characters->JobLevel }}</h5>
                                         </div>

@@ -1,4 +1,4 @@
-<img src="{{ asset('/images/sro/equipment/com_itemsign.PNG') }}" class="img-clear" style="display: inline-block">
+<img src="{{ asset('/images/com_itemsign.PNG') }}" class="img-clear" style="display: inline-block">
 
 @if($item['info']['sox'] || count($item['blues']) >= 1)
     <span style="color:#{{ $item['info']['sox'] ? 'f2e43d' : '50cecd' }};font-weight: bold;margin-left: 20px">
