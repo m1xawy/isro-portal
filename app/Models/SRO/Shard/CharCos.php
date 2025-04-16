@@ -53,4 +53,27 @@ class CharCos extends Model
         'PetOption',
         'RentEndTime'
     ];
+
+    public function getPet($iPetId)
+    {
+        return self::where('_CharCOS.ID', '=', $iPetId)
+            ->leftJoin('_TimedJobForPet as TimedJob', static function ($join) {
+                $join->on('TimedJob.CharID', '_CharCOS.ID');
+                $join->where('TimedJob.Category', '=', 5);
+                $join->where('TimedJob.JobID', '=', 22926);
+            })
+            ->join('_Items as Items', 'Items.Serial64', 'TimedJob.Serial64')
+            ->join('_RefObjCommon as Common', 'Items.RefItemId', 'Common.ID')
+            ->join('_RefObjItem as ObjItem', 'Common.Link', 'ObjItem.ID')
+            ->select(
+                '_CharCOS.*',
+                'TimedJob.*',
+                'TimedJob.Data3 as inventorysize',
+                'TimedJob.TimeToKeep as inventorykeep',
+                'Items.*',
+                'Common.*',
+                'ObjItem.*'
+            )
+            ->first();
+    }
 }

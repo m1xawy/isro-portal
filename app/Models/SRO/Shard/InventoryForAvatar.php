@@ -3,6 +3,7 @@
 namespace App\Models\SRO\Shard;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Cache;
 
 class InventoryForAvatar extends Model
 {
@@ -44,6 +45,23 @@ class InventoryForAvatar extends Model
         'slot',
         'ItemID'
     ];
+
+    public static function getInventoryForAvatar($characterId): array
+    {
+        return Cache::remember('InventoryForAvatar_'.$characterId, now()->addMinutes(config('global.general.cache.data.character')), static function () use ($characterId) {
+            return self::where('CharID', '=', $characterId)
+            ->where('ItemID', '>', 1)
+            ->join('_Items as Items', 'Items.ID64', 'ItemID')
+            ->leftJoin('_BindingOptionWithItem as Binding', static function ($join) {
+                $join->on('Binding.nItemDBID', 'Items.ID64');
+                $join->where('Binding.nOptValue', '>', '0');
+            })
+            ->join('_RefObjCommon as Common', 'Items.RefItemId', 'Common.ID')
+            ->join('_RefObjItem as ObjItem', 'Common.Link', 'ObjItem.ID')
+            ->get()
+            ->toArray();
+        });
+    }
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany

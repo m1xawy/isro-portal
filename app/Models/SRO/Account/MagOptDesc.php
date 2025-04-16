@@ -3,6 +3,7 @@
 namespace App\Models\SRO\Account;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Cache;
 
 class MagOptDesc extends Model
 {
@@ -39,4 +40,22 @@ class MagOptDesc extends Model
         'extension',
         'sortkey'
     ];
+
+    public static function getBlues($aItem, &$aSpecialInfo): array
+    {
+        return Cache::remember('MagOptDesc', now()->addMinutes(config('global.general.cache.data.character')), static function () {
+            $aData = self::all()->sortBy('id');
+            $aList = [];
+            foreach ($aData as $iKey => $aCurData) {
+                $aList[$aCurData['id']] = [
+                    'name' => $aCurData['name'],
+                    'desc' => $aCurData['desc'],
+                    'mLevel' => $aCurData['mLevel'],
+                    'extension' => $aCurData['extension'],
+                    'sortkey' => $aCurData['sortkey'],
+                ];
+            }
+            return $aList;
+        });
+    }
 }

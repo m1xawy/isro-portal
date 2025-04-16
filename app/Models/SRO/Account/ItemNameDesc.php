@@ -3,6 +3,7 @@
 namespace App\Models\SRO\Account;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Cache;
 
 class ItemNameDesc extends Model
 {
@@ -51,4 +52,26 @@ class ItemNameDesc extends Model
         'ESP',
         'GER'
     ];
+
+    public static function getItemRealName($CodeName128): string
+    {
+        $mappingList = Cache::remember('ItemNameDesc_'.$CodeName128, now()->addMinutes(config('global.general.cache.data.character')), static function () {
+            $q = self::all();
+
+            $aList = [];
+            foreach ($q as $iKey => $aCurData) {
+                $aList[$aCurData['StrID']] = [
+                    'realName' => $aCurData['ENG'],
+                    'codeName' => $aCurData['StrID']
+                ];
+            }
+            return $aList;
+        });
+
+        if (array_key_exists($CodeName128, $mappingList)) {
+            return $mappingList[$CodeName128]['realName'];
+        }
+
+        return $CodeName128;
+    }
 }

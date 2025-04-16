@@ -3,6 +3,7 @@
 namespace App\Models\SRO\Shard;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Cache;
 
 class Inventory extends Model
 {
@@ -111,6 +112,26 @@ class Inventory extends Model
         'MagParam11' => 'integer',
         'MagParam12' => 'integer',
     ];
+
+    public static function getInventory($characterId, $maxSlot, $minSlot): array
+    {
+        return Cache::remember('Inventory_'.$characterId, now()->addMinutes(config('global.general.cache.data.character')), static function () use ($minSlot, $maxSlot, $characterId) {
+            return self::where('CharID', '=', $characterId)
+            ->where('ItemID', '>', '0')
+            ->where('slot', '<', $maxSlot)
+            ->where('slot', '>=', $minSlot)
+            ->where('slot', '!=', 8)
+            ->join('_Items as Items', 'Items.ID64', '_Inventory.ItemID')
+            ->leftJoin('_BindingOptionWithItem as Binding', static function ($join) {
+                $join->on('Binding.nItemDBID', 'Items.ID64');
+                $join->where('Binding.nOptValue', '>', '0');
+            })
+            ->join('_RefObjCommon as Common', 'Items.RefItemId', 'Common.ID')
+            ->join('_RefObjItem as ObjItem', 'Common.Link', 'ObjItem.ID')
+            ->get()
+            ->toArray();
+        });
+    }
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany

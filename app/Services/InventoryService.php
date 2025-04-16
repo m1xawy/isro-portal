@@ -12,7 +12,6 @@ use Illuminate\Support\Facades\Cache;
 
 class InventoryService
 {
-
     const WEAPON = 6;
     const SHIELD = 4;
     const ACC = 5;
@@ -28,21 +27,7 @@ class InventoryService
      */
     public function getInventorySet($characterId, $maxSlot, $minSlot): array
     {
-        $inventory = Inventory::where('CharID', '=', $characterId)
-            ->where('ItemID', '>', '0')
-            ->where('slot', '<', $maxSlot)
-            ->where('slot', '>=', $minSlot)
-            ->where('slot', '!=', 8)
-            ->join('_Items as Items', 'Items.ID64', '_Inventory.ItemID')
-            ->leftJoin('_BindingOptionWithItem as Binding', static function ($join) {
-                $join->on('Binding.nItemDBID', 'Items.ID64');
-                $join->where('Binding.nOptValue', '>', '0');
-            })
-            ->join('_RefObjCommon as Common', 'Items.RefItemId', 'Common.ID')
-            ->join('_RefObjItem as ObjItem', 'Common.Link', 'ObjItem.ID')
-            ->get();
-
-        return $this->convertItemList($inventory);
+        return $this->convertItemList(Inventory::getInventory($characterId, $maxSlot, $minSlot));
     }
 
     /**
@@ -51,18 +36,7 @@ class InventoryService
      */
     public function getInventoryAvatar($characterId): array
     {
-        $avatar = InventoryForAvatar::where('CharID', '=', $characterId)
-            ->where('ItemID', '>', 1)
-            ->join('_Items as Items', 'Items.ID64', 'ItemID')
-            ->leftJoin('_BindingOptionWithItem as Binding', static function ($join) {
-                $join->on('Binding.nItemDBID', 'Items.ID64');
-                $join->where('Binding.nOptValue', '>', '0');
-            })
-            ->join('_RefObjCommon as Common', 'Items.RefItemId', 'Common.ID')
-            ->join('_RefObjItem as ObjItem', 'Common.Link', 'ObjItem.ID')
-            ->get();
-
-        return $this->convertItemList($avatar);
+        return $this->convertItemList(InventoryForAvatar::getInventoryForAvatar($characterId));
     }
 
     /**
@@ -71,45 +45,7 @@ class InventoryService
      */
     public function getInventoryJob($characterId): array
     {
-        $job = TradeEquipInventory::where('CharID', '=', $characterId)
-            ->where('ItemID', '>', 1)
-            ->join('_Items as Items', 'Items.ID64', 'ItemID')
-            ->leftJoin('_BindingOptionWithItem as Binding', static function ($join) {
-                $join->on('Binding.nItemDBID', 'Items.ID64');
-                $join->where('Binding.nOptValue', '>', '0');
-            })
-            ->join('_RefObjCommon as Common', 'Items.RefItemId', 'Common.ID')
-            ->join('_RefObjItem as ObjItem', 'Common.Link', 'ObjItem.ID')
-            ->get();
-
-        return $this->convertItemList($job);
-    }
-
-    /**
-     * @param $iPetId
-     * @return mixed
-     */
-    public function getPet($iPetId)
-    {
-        return CharCos::where('_CharCOS.ID', '=', $iPetId)
-            ->leftJoin('_TimedJobForPet as TimedJob', static function ($join) {
-                $join->on('TimedJob.CharID', '_CharCOS.ID');
-                $join->where('TimedJob.Category', '=', 5);
-                $join->where('TimedJob.JobID', '=', 22926);
-            })
-            ->join('_Items as Items', 'Items.Serial64', 'TimedJob.Serial64')
-            ->join('_RefObjCommon as Common', 'Items.RefItemId', 'Common.ID')
-            ->join('_RefObjItem as ObjItem', 'Common.Link', 'ObjItem.ID')
-            ->select(
-                '_CharCOS.*',
-                'TimedJob.*',
-                'TimedJob.Data3 as inventorysize',
-                'TimedJob.TimeToKeep as inventorykeep',
-                'Items.*',
-                'Common.*',
-                'ObjItem.*'
-            )
-            ->first();
+        return $this->convertItemList(TradeEquipInventory::getInventoryForJob($characterId));
     }
 
     /**
@@ -184,7 +120,7 @@ class InventoryService
         $iconPath = str_replace('\\', '/', $iconPath);
 
         if (substr($iconPath, -4) == '.ddj') {
-            $iconPath = sprintf('%s.jpg', substr($iconPath, 0, strlen($iconPath) - 4));
+            $iconPath = sprintf('%s.png', substr($iconPath, 0, strlen($iconPath) - 4));
         }
 
         return sprintf('/images/sro/%s', $iconPath);
@@ -208,7 +144,7 @@ class InventoryService
         $aData['sox'] = null; // For Blade
         $aData['OptLevel'] = data_get($aItem, 'OptLevel', 0);
         $aData['Degree'] = data_get($aItem, 'ItemClass', '0'); // For Blade
-        $aData['WebName'] = $this->getItemRealName($aItem['NameStrID128']);
+        $aData['WebName'] = ItemNameDesc::getItemRealName($aItem['NameStrID128']);
 
         if (!in_array($aItem['TypeID2'], [1, 4])) {
             return $aData;
@@ -376,28 +312,6 @@ class InventoryService
      * @param $CodeName128
      * @return mixed
      */
-    protected function getItemRealName($CodeName128): string
-    {
-        $oneDay = 86400;
-        $mappingList = Cache::remember('ItemNameDesc', $oneDay * 7, static function () {
-            $q = ItemNameDesc::all();
-
-            $aList = [];
-            foreach ($q as $iKey => $aCurData) {
-                $aList[$aCurData['StrID']] = [
-                    'realName' => $aCurData['ENG'],
-                    'codeName' => $aCurData['StrID']
-                ];
-            }
-            return $aList;
-        });
-
-        if (array_key_exists($CodeName128, $mappingList)) {
-            return $mappingList[$CodeName128]['realName'];
-        }
-
-        return $CodeName128;
-    }
 
     /**
      * @param $aItem
@@ -406,21 +320,7 @@ class InventoryService
      */
     protected function getBluesStats($aItem, &$aSpecialInfo): array
     {
-        $oneDay = 86400;
-        $_aMagOptLevel = Cache::remember('MagOptDesc', $oneDay * 7, static function () {
-            $aData = MagOptDesc::all()->sortBy('id');
-            $aList = [];
-            foreach ($aData as $iKey => $aCurData) {
-                $aList[$aCurData['id']] = [
-                    'name' => $aCurData['name'],
-                    'desc' => $aCurData['desc'],
-                    'mLevel' => $aCurData['mLevel'],
-                    'extension' => $aCurData['extension'],
-                    'sortkey' => $aCurData['sortkey'],
-                ];
-            }
-            return $aList;
-        });
+        $_aMagOptLevel = MagOptDesc::getBlues($aItem,$aSpecialInfo);
 
         $aBlues = [];
         $aWheel = ($aItem['MagParam1'] >= 4611686018427387904) ? 2 : 1;

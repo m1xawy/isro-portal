@@ -16,9 +16,9 @@
     <b style="color:#f2e43d;">{{ $item['info']['sox'] }}</b><br />
 @endif
 
-@if($item['SoxClass'])
+@isset($item['SoxClass'])
     <span style="color:#53EE92;font-weight: bold;">{{ $item['SoxClass'] }}</span><br />
-@endif
+@endisset
 
 <span style="color:#efdaa4;">
     @if(count(array_intersect([4], explode(',', $item['info']['TypeID2']))))
@@ -139,7 +139,7 @@
 @if($item['blues'])
     <br />
     @foreach($item['blues'] as $aBlues)
-        <b style="color:#{{ $aBlues['color'] }}">{{ $aBlues['name'] }} @if($item['mLevel'] > 0) (+{{ round($aBlues['mValue'] / $aBlues['mLevel']) * 100 }}%) @endif</b><br />
+        <b style="color:#{{ $aBlues['color'] }}">{{ $aBlues['name'] }} @if(isset($item['mLevel']) && $item['mLevel'] > 0) (+{{ round($aBlues['mValue'] / $aBlues['mLevel']) * 100 }}%) @endif</b><br />
     @endforeach
 @endif
 
