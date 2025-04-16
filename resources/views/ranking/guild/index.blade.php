@@ -14,7 +14,7 @@
                                         <img src="/ranking/guild-crest/{{ $guilds->Icon }}" alt="" width="32" height="32">
                                         {{ $guilds->Name }}
                                     </h2>
-                                    <p class="m-0">Foundation Date: <span class="">{{ date('d-m-Y', strtotime($guilds->FoundationDate)) }}</span></p>
+                                    <p class="m-0">{{ __('Foundation Date:') }} <span class="">{{ date('d-m-Y', strtotime($guilds->FoundationDate)) }}</span></p>
                                 </div>
                             </div>
                         </div>
@@ -23,25 +23,25 @@
                                 <div class="col-md-3">
                                     <ul class="list-unstyled mt-3">
                                         <li class="mb-2"><h4>{{ $guilds->Leader }}</h4></li>
-                                        <li class="mb-2">Leader</li>
+                                        <li class="mb-2">{{ __('Leader') }}</li>
                                     </ul>
                                 </div>
                                 <div class="col-md-3">
                                     <ul class="list-unstyled mt-3">
                                         <li class="mb-2"><h4>{{ $guilds->ItemPoints }}</h4></li>
-                                        <li class="mb-2">Item Points</li>
+                                        <li class="mb-2">{{ __('Item Points') }}</li>
                                     </ul>
                                 </div>
                                 <div class="col-md-3">
                                     <ul class="list-unstyled mt-3">
                                         <li class="mb-2"><h4>{{ $guilds->Lvl }}</h4></li>
-                                        <li class="mb-2">Level</li>
+                                        <li class="mb-2">{{ __('Level') }}</li>
                                     </ul>
                                 </div>
                                 <div class="col-md-3">
                                     <ul class="list-unstyled mt-3">
                                         <li class="mb-2"><h4>{{ $guilds->Members }}</h4></li>
-                                        <li class="mb-2">Members</li>
+                                        <li class="mb-2">{{ __('Members') }}</li>
                                     </ul>
                                 </div>
                             </div>

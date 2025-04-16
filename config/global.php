@@ -160,19 +160,19 @@ return [
     ],
     'widgets' => [
         'globals_history' => [
-            'enable' => true,
+            'enable' => false,
             'limit' => 5,
         ],
         'unique_history' => [
-            'enable' => true,
+            'enable' => false,
             'limit' => 5,
         ],
         'top_player' => [
-            'enable' => true,
+            'enable' => false,
             'limit' => 5,
         ],
         'top_guild' => [
-            'enable' => true,
+            'enable' => false,
             'limit' => 5,
         ],
         'discord' => [
@@ -231,7 +231,7 @@ return [
             ],
         ],
         'event_schedule' => [
-            'enable' => true,
+            'enable' => false,
             'data' => [
                 'roc' => 'Roc',
                 'medusa' => 'Medusa',
@@ -250,7 +250,7 @@ return [
             ],
         ],
         'fortress_war' => [
-            'enable' => true,
+            'enable' => false,
             'data' => [
                 1 => [
                     'name' => 'Jangan',

@@ -20,9 +20,9 @@
                     </td>
                     <td>
                         @if($value->RefObjID > 2000)
-                            <img src="{{ asset('images/com_kindred_europe.png') }}" width="16" height="16" alt=""/>
+                            <img src="{{ asset(config('global.ranking.race')[1]['icon']) }}" width="16" height="16" alt=""/>
                         @else
-                            <img src="{{ asset('images/com_kindred_china.png') }}" width="16" height="16" alt=""/>
+                            <img src="{{ asset(config('global.ranking.race')[0]['icon']) }}" width="16" height="16" alt=""/>
                         @endif
                         <a href="{{ route('ranking.character.view', ['name' => $value->CharName16]) }}" class="text-decoration-none">{{ $value->CharName16 }}</a>
                     </td>
@@ -33,7 +33,7 @@
                 @php $i++ @endphp
             @empty
                 <tr>
-                    <td colspan="4" class="text-center">{{ __('No Records Found!') }}</td>
+                    <td colspan="3" class="text-center">{{ __('No Records Found!') }}</td>
                 </tr>
             @endforelse
         </tbody>

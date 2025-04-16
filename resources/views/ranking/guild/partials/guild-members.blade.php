@@ -2,11 +2,11 @@
     <table class="table table-striped">
         <thead class="table-dark">
             <tr>
-                <th scope="col">Rank</th>
-                <th scope="col">Character Name</th>
-                <th scope="col">Join Date</th>
-                <th scope="col">Title</th>
-                <th scope="col">Donation (GB)</th>
+                <th scope="col">{{ __('Rank') }}</th>
+                <th scope="col">{{ __('Character Name') }}</th>
+                <th scope="col">{{ __('Join Date') }}</th>
+                <th scope="col">{{ __('Title') }}</th>
+                <th scope="col">{{ __('Donation (GB)') }}</th>
             </tr>
         </thead>
         <tbody>
@@ -27,7 +27,7 @@
                         @if($guildMember->SiegeAuthority > 0)
                             {{ config('global.ranking.guild.authority')[$guildMember->SiegeAuthority] }}
                         @else
-                            Member
+                            {{ __('Member') }}
                         @endif
                     </td>
                     <td>{{ $guildMember->GP_Donation }}</td>
@@ -35,7 +35,7 @@
                 @php $i++ @endphp
             @empty
                 <tr>
-                    <td colspan="5" class="text-center">No Records Found!</td>
+                    <td colspan="5" class="text-center">{{ __('No Records Found!') }}</td>
                 </tr>
             @endforelse
         </tbody>

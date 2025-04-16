@@ -2,9 +2,9 @@
     <table class="table table-striped">
         <thead class="table-dark">
         <tr>
-            <th scope="col">Unique Name</th>
-            <th scope="col">Points</th>
-            <th scope="col">ago</th>
+            <th scope="col">{{ __('Unique Name') }}</th>
+            <th scope="col">{{ __('Points') }}</th>
+            <th scope="col">{{ __('Time') }}</th>
         </tr>
         </thead>
         <tbody>
@@ -16,7 +16,7 @@
             </tr>
         @empty
             <tr>
-                <td colspan="3" class="text-center">No Records Found!</td>
+                <td colspan="3" class="text-center">{{ __('No Records Found!') }}</td>
             </tr>
         @endforelse
         </tbody>

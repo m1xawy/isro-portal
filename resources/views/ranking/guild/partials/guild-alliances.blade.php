@@ -2,7 +2,7 @@
     <table class="table table-striped">
         <thead class="table-dark">
             <tr class="text-center">
-                <th scope="col">Name</th>
+                <th scope="col">{{ __('Name') }}</th>
             </tr>
         </thead>
         <tbody>
@@ -14,7 +14,7 @@
                 </tr>
             @empty
                 <tr>
-                    <td colspan="1" class="text-center">No Records Found!</td>
+                    <td colspan="1" class="text-center">{{ __('No Records Found!') }}</td>
                 </tr>
             @endforelse
         </tbody>

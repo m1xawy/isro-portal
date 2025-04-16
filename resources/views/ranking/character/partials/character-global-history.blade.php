@@ -2,8 +2,8 @@
     <table class="table table-striped">
         <thead class="table-dark">
             <tr>
-                <th scope="col">Message</th>
-                <th scope="col">Time</th>
+                <th scope="col">{{ __('Message') }}</th>
+                <th scope="col">{{ __('Time') }}</th>
             </tr>
         </thead>
         <tbody>
@@ -14,7 +14,7 @@
                 </tr>
             @empty
                 <tr>
-                    <td colspan="2" class="text-center">No Records Found!</td>
+                    <td colspan="2" class="text-center">{{ __('No Records Found!') }}</td>
                 </tr>
             @endforelse
         </tbody>
