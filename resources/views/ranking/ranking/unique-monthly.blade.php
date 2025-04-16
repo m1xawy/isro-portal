@@ -50,8 +50,8 @@
 
 
 <p class="mb-2 text-center">
-    @forelse($unique_lists as $unique_list)
-        <span>{{ $unique_list->attributes->ranking_unique_name }} [{{ $unique_list->attributes->ranking_unique_point }} points]</span>,
+    @forelse($unique_points as $value)
+        <span>{{ $value['name'] }} [{{ $value['points'] }} points]</span>,
     @empty
     @endforelse
 </p>

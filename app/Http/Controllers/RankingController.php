@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\SRO\Log\LogInstanceWorldInfo;
 use App\Models\SRO\Shard\Char;
 use App\Models\SRO\Shard\Guild;
 use App\Services\InventoryService;
@@ -18,21 +19,19 @@ class RankingController extends Controller
     public function player()
     {
         $data = Char::getPlayerRanking();
-        return view('ranking.index', compact('data'));
+        return view('ranking.ranking.player', compact('data'));
     }
 
     public function guild()
     {
         $data = Guild::getGuildRanking();
-        return view('ranking.ranking.guild', [
-            'data' => $data,
-        ]);
+        return view('ranking.ranking.guild', compact('data'));
     }
 
     public function unique()
     {
-        $data = Char::getUniqueRanking();
-        $unique_points = config('global.ranking.ranking.unique_points');
+        $data = LogInstanceWorldInfo::getUniqueRanking();
+        $unique_points = config('global.ranking.unique_points');
         return view('ranking.ranking.unique', [
             'data' => $data,
             'unique_points' => $unique_points,
@@ -41,8 +40,8 @@ class RankingController extends Controller
 
     public function unique_monthly()
     {
-        $data = Char::getUniqueMonthlyRanking();
-        $unique_points = config('global.ranking.ranking.unique_points');
+        $data = LogInstanceWorldInfo::getUniqueRanking(25, 1);
+        $unique_points = config('global.ranking.unique_points');
         return view('ranking.ranking.unique-monthly', [
             'data' => $data,
             'unique_points' => $unique_points,

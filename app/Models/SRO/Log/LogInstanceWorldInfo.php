@@ -2,9 +2,11 @@
 
 namespace App\Models\SRO\Log;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\DB;
 
 class LogInstanceWorldInfo extends Model
 {
@@ -12,6 +14,47 @@ class LogInstanceWorldInfo extends Model
 
     protected $connection = 'log';
     protected $table = 'dbo._LogInstanceWorldInfo';
+
+    public static function getUniqueRanking($limit = 25, $month = 0)
+    {
+        $uniquePoints = config('global.ranking.unique_points');
+
+        $caseExpression = 'SUM(CASE ';
+        foreach ($uniquePoints as $mobCode => $points) {
+            $points = $points['points'];
+            $caseExpression .= "WHEN _LogInstanceWorldInfo.Value = '$mobCode' THEN $points ";
+        }
+        $caseExpression .= 'ELSE 0 END) AS Points';
+        $startOfMonth = Carbon::now()->startOfMonth();
+
+        return Cache::remember('ranking_unique_'.$limit.'_'.$month, now()->addMinutes(config('global.general.cache.data.ranking_unique')), function () use ($month, $startOfMonth, $uniquePoints, $caseExpression, $limit) {
+            return self::join('SILKROAD_R_SHARD.dbo._Char', '_Char.CharID', '=', '_LogInstanceWorldInfo.CharID')
+                ->join('SILKROAD_R_SHARD.dbo._Guild', '_Char.GuildID', '=', '_Guild.ID')
+                ->select(
+                    '_Char.CharName16',
+                    '_Char.RefObjID',
+                    '_Char.CurLevel',
+                    '_Guild.ID',
+                    '_Guild.Name',
+                    DB::raw($caseExpression)
+                )
+                ->whereIn('_LogInstanceWorldInfo.Value', array_keys($uniquePoints))
+                ->where('_LogInstanceWorldInfo.ValueCodeName128', 'KILL_UNIQUE_MONSTER')
+                ->when($month == 1, function ($query) use ($startOfMonth) {
+                    $query->where('_LogInstanceWorldInfo.EventTime', '>=', $startOfMonth);
+                })
+                ->groupBy(
+                    '_Char.CharName16',
+                    '_Char.RefObjID',
+                    '_Char.CurLevel',
+                    '_Guild.ID',
+                    '_Guild.Name'
+                )
+                ->orderByDesc('Points')
+                ->limit(25)
+                ->get();
+        });
+    }
 
     public static function getUniques($limit = 25, $CharID = 0)
     {
