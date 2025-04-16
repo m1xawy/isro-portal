@@ -11,21 +11,14 @@ class RankingController extends Controller
 {
     public function index()
     {
-        $data = Cache::remember('ranking', config('global.general.cache.data.ranking-player'), function () {
-            return Char::getPlayerRanking();
-        });
-
-        return view('ranking.index', [
-            'data' => $data,
-        ]);
+        $data = Char::getPlayerRanking();
+        return view('ranking.index', compact('data'));
     }
 
     public function player()
     {
         $data = Char::getPlayerRanking();
-        return view('ranking.ranking.player', [
-            'data' => $data,
-        ]);
+        return view('ranking.index', compact('data'));
     }
 
     public function guild()

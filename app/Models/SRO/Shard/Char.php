@@ -4,20 +4,46 @@ namespace App\Models\SRO\Shard;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 
 class Char extends Model
 {
     use HasFactory;
 
+    /**
+     * The Database connection name for the model.
+     *
+     * @var string
+     */
     protected $connection = 'shard';
 
+    /**
+     * Indicates if the model should be timestamped.
+     *
+     * @var bool
+     */
     public $timestamps = false;
 
+    /**
+     * The table associated with the model.
+     *
+     * @var string
+     */
     protected $table = 'dbo._Char';
 
+    /**
+     * The table primary Key
+     *
+     * @var string
+     */
     protected $primaryKey = 'CharID';
 
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
     protected $fillable = [
         'CharID',
         'Deleted',
@@ -36,104 +62,99 @@ class Char extends Model
 
     public static function getPlayerRanking($limit = 25)
     {
-        $playerRanking = cache()->remember('player_ranking_'.$limit, setting('cache_ranking_player', 600), function() use ($limit) {
-            return collect(DB::connection('shard')->select("
-                    SELECT TOP(" . $limit . ")
-                        _Char.CharID, _Char.CharName16, _Char.CurLevel, _Char.RefObjID, _Guild.ID, _Guild.Name,
+        return Cache::remember('ranking_player_'.$limit, config('global.general.cache.data.ranking-player'), function () use ($limit) {
+            return self::select(
+                '_Char.CharID',
+                '_Char.CharName16',
+                '_Char.CurLevel',
+                '_Char.RefObjID',
+                '_Guild.ID',
+                '_Guild.Name',
+                DB::raw("ISNULL((
+                    SUM(ISNULL(_BindingOptionWithItem.nOptValue, 0)) +
+                    SUM(ISNULL(_Items.OptLevel, 0)) +
+                    SUM(ISNULL(_RefObjCommon.ReqLevel1, 0)) +
+                    SUM(ISNULL(CASE WHEN _RefObjCommon.CodeName128 LIKE '%_A_RARE%' THEN 5 ELSE 0 END, 0)) +
+                    SUM(ISNULL(CASE WHEN _RefObjCommon.CodeName128 LIKE '%_B_RARE%' THEN 10 ELSE 0 END, 0)) +
+                    SUM(ISNULL(CASE WHEN _RefObjCommon.CodeName128 LIKE '%_C_RARE%' THEN 15 ELSE 0 END, 0))
+                ), 0) AS ItemPoints"))
 
-                        (SUM(_Items.OptLevel)
-                        + SUM(_RefObjItem.ItemClass)
-                        + SUM(_RefObjCommon.Rarity)
-                        + SUM(CASE WHEN _BindingOptionWithItem.nItemDBID IS NULL THEN 0 ELSE _BindingOptionWithItem.nOptValue END))
-                        AS ItemPoints
-
-                    FROM
-                        _Char
-                        INNER JOIN _Guild ON _Char.GuildID = _Guild.ID
-                        INNER JOIN _Inventory ON _Char.CharID = _Inventory.CharID
-                        INNER JOIN _Items ON _Inventory.ItemID = _Items.ID64
-                        INNER JOIN _RefObjCommon WITH (NOLOCK) ON _Items.RefItemID = _RefObjCommon.ID
-                        INNER JOIN _RefObjItem WITH (NOLOCK) ON _RefObjCommon.Link = _RefObjItem.ID
-                        LEFT OUTER JOIN _BindingOptionWithItem ON _Inventory.ItemID = _BindingOptionWithItem.nItemDBID
-
-                    WHERE
-                        _Inventory.Slot IN(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12)
-                        and _Inventory.ItemID > 0
-                        AND _Char.deleted = 0
-                        AND _Char.CharID > 0
-
-                    GROUP BY
-                        _Char.CharID,
-                        _Char.CharName16,
-                        _Char.CurLevel,
-                        _Char.RefObjID,
-                        _Guild.ID,
-                        _Guild.Name
-
-                    ORDER BY
-                        ItemPoints DESC,
-                        _Char.CurLevel DESC
-            "
-            ));
+                ->join('_Guild', '_Char.GuildID', '=', '_Guild.ID')
+                ->join('_Inventory', '_Inventory.CharID', '=', '_Char.CharID')
+                ->join('_Items', '_Items.ID64', '=', '_Inventory.ItemID')
+                ->join('_RefObjCommon', '_RefObjCommon.ID', '=', '_Items.RefItemID')
+                ->leftJoin('_BindingOptionWithItem', function ($join) {
+                    $join->on('_BindingOptionWithItem.nItemDBID', '=', '_Items.ID64')
+                        ->where('_BindingOptionWithItem.nOptValue', '>', 0)
+                        ->where('_BindingOptionWithItem.bOptType', '=', 2);
+                })
+                ->where('_Inventory.Slot', '<', 13)
+                ->where('_Inventory.Slot', '!=', 8)
+                ->where('_Inventory.Slot', '!=', 7)
+                ->where('_Inventory.ItemID', '>', 0)
+                ->where('_Char.deleted', '=', 0)
+                ->where('_Char.CharID', '>', 0)
+                ->groupBy(
+                    '_Char.CharID',
+                    '_Char.CharName16',
+                    '_Char.CurLevel',
+                    '_Char.RefObjID',
+                    '_Guild.ID',
+                    '_Guild.Name'
+                )
+                ->orderByDesc('ItemPoints')
+                ->orderByDesc('_Char.CurLevel')
+                ->limit($limit)
+                ->get();
         });
-
-        if(empty($playerRanking)) {
-            return null;
-        }
-
-        return $playerRanking;
     }
 
     public static function getGuildRanking($limit = 25)
     {
-        $guildRanking = cache()->remember('guild_ranking_'.$limit, setting('cache_ranking_guild', 600), function() use ($limit) {
-            return collect(DB::connection('shard')->select("
-                    SELECT TOP(" . $limit . ")
-                         _Guild.ID, _Guild.Name,  _Guild.Lvl, _Guild.GatheredSP,
+        return Cache::remember('ranking_guild_'.$limit, config('global.general.cache.data.ranking-guild'), function () use ($limit) {
+            return self::select(
+                '_Guild.ID',
+                '_Guild.Name',
+                '_Guild.Lvl',
+                '_Guild.GatheredSP',
+                DB::raw("(SELECT CharID FROM _GuildMember WHERE GuildID = _Guild.ID AND MemberClass = 0) AS LeaderID"),
+                DB::raw("(SELECT CharName FROM _GuildMember WHERE GuildID = _Guild.ID AND MemberClass = 0) AS LeaderName"),
+                DB::raw("(SELECT COUNT(CharID) FROM _GuildMember WHERE GuildID = _Guild.ID) AS TotalMember"),
+                DB::raw("ISNULL((
+                    SUM(ISNULL(_BindingOptionWithItem.nOptValue, 0)) +
+                    SUM(ISNULL(_Items.OptLevel, 0)) +
+                    SUM(ISNULL(_RefObjCommon.ReqLevel1, 0)) +
+                    SUM(ISNULL(CASE WHEN _RefObjCommon.CodeName128 LIKE '%_A_RARE%' THEN 5 ELSE 0 END, 0)) +
+                    SUM(ISNULL(CASE WHEN _RefObjCommon.CodeName128 LIKE '%_B_RARE%' THEN 10 ELSE 0 END, 0)) +
+                    SUM(ISNULL(CASE WHEN _RefObjCommon.CodeName128 LIKE '%_C_RARE%' THEN 15 ELSE 0 END, 0))
+                ), 0) AS ItemPoints"))
 
-                        (select CharID from _GuildMember where GuildID = _Guild.ID and MemberClass = 0) as MasterID,
-                        (select CharName from _GuildMember where GuildID = _Guild.ID and MemberClass = 0) as MasterName,
-                        (select COUNT(CharID) from _GuildMember where GuildID = _Guild.ID) AS TotalMember,
+                ->join('_GuildMember', '_GuildMember.GuildID', '=', '_Guild.ID')
+                ->join('_Inventory', '_Inventory.CharID', '=', '_GuildMember.CharID')
+                ->join('_Items', '_Items.ID64', '=', '_Inventory.ItemID')
+                ->join('_RefObjCommon', '_RefObjCommon.ID', '=', '_Items.RefItemID')
+                ->leftJoin('_BindingOptionWithItem', function ($join) {
+                    $join->on('_BindingOptionWithItem.nItemDBID', '=', '_Items.ID64')
+                        ->where('_BindingOptionWithItem.nOptValue', '>', 0)
+                        ->where('_BindingOptionWithItem.bOptType', '=', 2);
+                })
+                ->where('_Inventory.Slot', '<', 13)
+                ->where('_Inventory.Slot', '!=', 8)
+                ->where('_Inventory.Slot', '!=', 7)
+                ->where('_Inventory.ItemID', '>', 0)
+                ->groupBy(
+                    '_Guild.ID',
+                    '_Guild.Name',
+                    '_Guild.Lvl',
+                    '_Guild.GatheredSP'
+                )
+                ->orderByDesc('ItemPoints')
+                ->orderByDesc('_Guild.Lvl')
+                ->orderByDesc('_Guild.GatheredSP')
+                ->limit($limit)
+                ->get();
 
-                        (SUM(_Items.OptLevel)
-                        + SUM(_RefObjItem.ItemClass)
-                        + SUM(_RefObjCommon.Rarity)
-                        + SUM(CASE WHEN _BindingOptionWithItem.nItemDBID IS NULL THEN 0 ELSE _BindingOptionWithItem.nOptValue END))
-                        AS ItemPoints
-
-                    FROM
-                        _Guild
-                        INNER JOIN _GuildMember ON _Guild.ID = _GuildMember.GuildID
-                        INNER JOIN _Inventory ON _GuildMember.CharID = _Inventory.CharID
-                        INNER JOIN _Items ON _Inventory.ItemID = _Items.ID64
-                        INNER JOIN _RefObjCommon ON _Items.RefItemID = _RefObjCommon.ID
-                        INNER JOIN _RefObjItem ON _RefObjCommon.Link = _RefObjItem.ID
-                        LEFT OUTER JOIN _BindingOptionWithItem ON _Inventory.ItemID = _BindingOptionWithItem.nItemDBID
-
-                    WHERE
-                        _Inventory.Slot IN(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12)
-                        and _Inventory.ItemID > 0
-                        AND _Guild.ID > 0
-
-                    GROUP BY
-                        _Guild.ID,
-                        _Guild.Name,
-                        _Guild.Lvl,
-                        _Guild.GatheredSP
-
-                    ORDER BY
-                        ItemPoints DESC,
-                        _Guild.Lvl DESC,
-                        _Guild.GatheredSP DESC
-            "
-            ));
         });
-
-        if(empty($guildRanking)) {
-            return null;
-        }
-
-        return $guildRanking;
     }
 
     public static function getUniqueRanking($limit = 25)
