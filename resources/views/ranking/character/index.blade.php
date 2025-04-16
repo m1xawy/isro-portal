@@ -127,6 +127,11 @@
             box-shadow: none;
             z-index: 999;
         }
+        .sro-item-detail .item > img {
+            position: absolute;
+            width: 32px;
+            height: 32px;
+        }
     </style>
     <style>
         /********INVENTORY********/
@@ -174,7 +179,7 @@
         #display-inventory {
             width: 100%;
             height: 355px;
-            background: url({{ asset('images/inventoryDiv_bg.png') }}) 0 0 no-repeat;
+            background: url({{ asset('images/inventoryDiv_bg.png') }}) 50% 50% no-repeat;
             background-size: cover;
             border-right: 1px solid #252525;
             border-bottom: 1px solid #252525;
