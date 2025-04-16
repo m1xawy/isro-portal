@@ -28,9 +28,6 @@ class DatabaseSeeder extends Seeder
         $this->call(DonationMethodsSeeder::class);
         $this->call(MaxiCardSeeder::class);
         $this->call(PaypalSeeder::class);
-        $this->call(StripeSeeder::class);
-        $this->call(PayOpSeeder::class);
-        $this->call(CoinbaseSeeder::class);
         //$this->call(MagOptSeeder::class);
         //$this->call(ItemNameSeeder::class);
     }

@@ -1,3 +1,37 @@
+USE [SILKROAD_R_ACCOUNT]
+GO
+
+/****** Object:  Table [dbo].[_Rigid_ItemNameDesc]    Script Date: 4/16/2025 9:56:41 AM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+DROP TABLE [dbo].[_Rigid_ItemNameDesc]
+CREATE TABLE [dbo].[_Rigid_ItemNameDesc](
+	[Service] [int] NOT NULL,
+	[ID] [int] NOT NULL,
+	[StrID] [varchar](255) NOT NULL,
+	[KOR] [varchar](max) NOT NULL,
+	[UNK0] [varchar](max) NOT NULL,
+	[UNK1] [varchar](max) NOT NULL,
+	[UNK2] [varchar](max) NOT NULL,
+	[UNK3] [varchar](max) NOT NULL,
+	[VNM] [varchar](max) NOT NULL,
+	[ENG] [varchar](max) NOT NULL,
+	[UNK4] [varchar](max) NOT NULL,
+	[UNK5] [varchar](max) NOT NULL,
+	[UNK6] [varchar](max) NOT NULL,
+	[TUR] [varchar](max) NOT NULL,
+	[ARA] [varchar](max) NOT NULL,
+	[ESP] [varchar](max) NOT NULL,
+	[GER] [varchar](max) NOT NULL
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+
+
+
 INSERT [dbo].[_Rigid_ItemNameDesc] VALUES
 (1, 1, N'SN_ITEM_CH_SWORD_01_A_DEF', N'구리 장검 (기본)', N'0', N'0', N'0', N'0', N'0', N'Copper Sword', N'0', N'0', N'0', N'0', N'0', N'0', N'0'),
 (1, 2, N'SN_ITEM_CH_BLADE_01_A_DEF', N'유엽도 (기본)', N'0', N'0', N'0', N'0', N'0', N'Copper Blade', N'0', N'0', N'0', N'0', N'0', N'0', N'0'),
