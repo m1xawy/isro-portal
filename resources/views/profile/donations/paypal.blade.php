@@ -19,7 +19,29 @@
             </div>
         @endif
 
-        <div class="row mb-3 text-center">
+        @if($invoices->count() > 0)
+            <div class="row mb-3">
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <h4>{{ __('You have pending payments!') }}</h4>
+
+                        <div class="table-responsive">
+                            <table class="table table-striped">
+                                <tbody>
+                                @foreach($invoices as $data)
+                                    <tr>
+                                        <td>{{ $data->name }}<span>[{{ $data->created_at->diffForHumans() }}]</span></td>
+                                    </tr>
+                                @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        @endif
+
+        <div class="row text-center">
             @forelse($paypal as $data)
                 <div class="col-md-3">
                     <div class="card mb-4 rounded-3 shadow-sm">
@@ -38,23 +60,5 @@
                 </div>
             @endforelse
         </div>
-
-        @if($invoices->count() > 0)
-        <div class="row mb-3">
-            <h4>{{ __('You have pending payments!') }}</h4>
-
-            <div class="table-responsive">
-                <table class="table table-striped">
-                    <tbody>
-                        @foreach($invoices as $data)
-                            <tr>
-                                <td>{{ $data->name }}<span>[{{ $data->created_at->diffForHumans() }}]</span></td>
-                            </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-            </div>
-        </div>
-        @endif
     </div>
 @endsection

@@ -3,7 +3,17 @@
 
 @section('content')
     <div class="container">
-        <div class="row mb-3 text-center">
+        <div class="row mb-3">
+            <div class="card">
+                <div class="card-body">
+                    <div class="col-md-12 text-center">
+                        <a href="{{ route('donate-maxicard-buy') }}" class="btn btn-primary">{{ __('Buy Now') }}</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row text-center">
             @forelse($maxicard as $data)
                 <div class="col-md-3">
                     <div class="card mb-4 rounded-3 shadow-sm">
@@ -20,12 +30,6 @@
                     {{ __('No Packages Available!') }}
                 </div>
             @endforelse
-        </div>
-
-        <div class="row mb-0">
-            <div class="col-md-8 offset-md-4">
-                <a href="{{ route('donate-maxicard-buy') }}" class="btn btn-primary">{{ __('Buy Now') }}</a>
-            </div>
         </div>
     </div>
 @endsection
