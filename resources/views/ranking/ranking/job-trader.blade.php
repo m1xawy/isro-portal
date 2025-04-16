@@ -21,9 +21,9 @@
                     </td>
                     <td>
                         @if($value->RefObjID > 2000)
-                            <img src="{{ asset('images/european.png') }}" alt=""/>
+                            <img src="{{ asset('images/com_kindred_europe.png') }}" width="16" height="16" alt=""/>
                         @else
-                            <img src="{{ asset('images/chinese.png') }}" alt=""/>
+                            <img src="{{ asset('images/com_kindred_china.png') }}" width="16" height="16" alt=""/>
                         @endif
                         <a href="{{ route('ranking.character.view', ['name' => $value->CharName16]) }}" class="text-decoration-none">{{ $value->NickName16 }}</a>
                     </td>
