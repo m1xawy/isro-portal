@@ -20,7 +20,7 @@
                         @else
                             <img src="{{ asset('images/com_kindred_china.png') }}" width="16" height="16" alt=""/>
                         @endif
-                        <a href="{{ route('ranking.character.view', ['name' => $guildMember->CharName]) }}">{{ $guildMember->CharName }}</a>
+                        <a href="{{ route('ranking.character.view', ['name' => $guildMember->CharName]) }}" class="text-decoration-none">{{ $guildMember->CharName }}</a>
                     </td>
                     <td>{{ date('d-m-Y', strtotime($guildMember->JoinDate)) }}</td>
                     <td>

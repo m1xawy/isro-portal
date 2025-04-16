@@ -353,6 +353,9 @@ return [
             2 => 'images/rank2.png',
             3 => 'images/rank3.png',
         ],
+        'unique_icons' => [
+            1 => 'images/tw_icon_unique.png',
+        ],
         'unique_points' => [
             'MOB_CH_TIGERWOMAN' => [
                 'id' => 1954,
