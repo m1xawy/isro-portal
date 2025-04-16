@@ -98,7 +98,7 @@
                                 <div class="" id="display-inventory-avatar-accessory">
                                     <button id="display-inventory-switch" data-type="set" class="btn btn-secondary position-absolute" style="top: -50px;">Job Equip</button>
 
-                                    <p id="display-inventory-avatar-accessory-label">Accessories</p>
+                                    <p class="mb-0" id="display-inventory-avatar-accessory-label">Accessories</p>
                                     @include('ranking.character.partials.inventory.inventory-avatar-view', ['inventoryAvatarList' => $playerAvatar])
                                 </div>
                             </div>
@@ -114,7 +114,6 @@
     <link href="{{ asset('/css/main.css') }}" rel="stylesheet">
     <script src="{{ asset('/js/main.js') }}"></script>
     <style>
-        /********CUSTOM INV********/
         .sro-item-detail .tooltip {
             text-align: left !important;
             font-size: 12px;
@@ -128,37 +127,38 @@
             box-shadow: none;
             z-index: 999;
         }
-
+    </style>
+    <style>
+        /********INVENTORY********/
         .table.table-inventory {
-            margin: 0;
-            width: 178px;
+            margin: 0 0 !important;
         }
         .table.table-inventory tr:first-child td {
             padding: 12px 12px 35px;
         }
         .table.table-inventory td, .table.table-inventory th {
-            padding: 5.5px 5px;
-        }
-        .sro-item-detail.sro-item-special {
-            background: 0;
-        }
-        .sro-item-detail {
-            background: 0;
-            width: auto;
-            margin: 0;
+            padding: 6px;
+            background: none;
         }
         .table.table-inventory td:last-child {
             float: right;
         }
         .sro-item-detail .item {
             margin: 0;
-            background: 0;
+            background: none;
         }
-
-        /********CUSTOM INV AVATAR********/
+        .sro-item-detail.sro-item-special {
+            background: none;
+        }
+        .sro-item-detail {
+            background: none;
+            width: auto;
+            margin: 0;
+        }
+        /********AVATAR********/
         .table.table-inventory-avatar {
-            margin: -5px auto 12px;
-            width: 158px;
+            margin: 0 5px !important;
+            width: 162px;
         }
         .table.table-inventory-avatar tbody {
             display: flex;
@@ -169,18 +169,13 @@
         .table.table-inventory-avatar td, .table.table-inventory-avatar th {
             padding: 6px;
         }
-        .table.table-inventory-avatar td:last-child {
-            float: right;
-        }
-        .table.table-inventory td, .table.table-inventory th {
-            background: none;
-        }
     </style>
     <style>
         #display-inventory {
-            width: 459px;
+            width: 100%;
             height: 355px;
             background: url({{ asset('images/inventoryDiv_bg.png') }}) 0 0 no-repeat;
+            background-size: cover;
             border-right: 1px solid #252525;
             border-bottom: 1px solid #252525;
             float: left;

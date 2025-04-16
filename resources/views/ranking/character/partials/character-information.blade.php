@@ -23,10 +23,10 @@
             <td>Race:</td>
             <td>
                 @if($characters->RefObjID > 2000)
-                    <img src="{{ asset(config('global.ranking.race')[1]['icon']) }}" alt=""/>
+                    <img src="{{ asset(config('global.ranking.race')[1]['icon']) }}" width="16" height="16" alt=""/>
                     <span>{{ config('global.ranking.race')[1]['name'] }}</span>
                 @else
-                    <img src="{{ asset(config('global.ranking.race')[0]['icon']) }}" alt=""/>
+                    <img src="{{ asset(config('global.ranking.race')[0]['icon']) }}" width="16" height="16" alt=""/>
                     <span>{{ config('global.ranking.race')[0]['name'] }}</span>
                 @endif
             </td>
