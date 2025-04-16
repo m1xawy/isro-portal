@@ -8,10 +8,13 @@
                 <div class="row">
                     <div class="col-md-6">
                         <div class="d-flex">
-                            <img class="object-fit-cover rounded border me-4" src="{{ asset(config('global.ranking.character')[$characters->RefObjID]) }}" alt=""/>
+                            <div class="d-flex me-3 overflow-hidden align-items-center">
+                                <img class="object-fit-cover rounded border" src="{{ asset(config('global.ranking.character')[$characters->RefObjID]) }}" width="100" height="100" alt=""/>
+                            </div>
+
                             <div class="mt-4">
                                 <h2>{{ $characters->CharName16 }}</h2>
-                                <p>Item Points: <span class="">{{ $characters->ItemPoints }}</span></p>
+                                <p class="m-0">Item Points: <span class="">{{ $characters->ItemPoints }}</span></p>
 
                                 <ul class="list-unstyled d-flex">
                                     @foreach($charBuildInfo as $build)
@@ -24,7 +27,7 @@
                         </div>
                     </div>
                     <div class="col-md-6">
-                        <div class="row mt-5 justify-content-end">
+                        <div class="row mt-4 justify-content-end">
                             @if($characters->JobType > 0)
                                 <div class="col-md-4">
                                     <div class="d-flex">
