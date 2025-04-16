@@ -2,6 +2,67 @@
 @section('title', __('Character') . ' - ' .$characters->CharName16)
 
 @section('content')
+    <div class="container">
+        <div class="card mb-4">
+            <div class="card-header">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="d-flex">
+                            <img class="object-fit-cover rounded border me-4" src="{{ asset(config('global.ranking.character')[$characters->RefObjID]) }}" alt=""/>
+
+                            <div class="mt-4">
+                                <h2>{{ $characters->CharName16 }}</h2>
+                                <p>Item Points: <span class="">{{ $characters->ItemPoints }}</span></p>
+
+                                <ul class="list-unstyled d-flex">
+                                    @foreach($charBuildInfo as $build)
+                                        <li class="me-1">
+                                            <img src="{{ asset(config('global.ranking.skill_mastery')[$build->MasteryID]['icon']) }}" title="{{ config('global.ranking.skill_mastery')[$build->MasteryID]['name'] }}" alt="">
+                                        </li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="row mt-5 justify-content-end">
+                            @if($characters->JobType > 0)
+                                <div class="col-md-4">
+                                    <div class="d-flex">
+                                        <img src="{{ asset(config('global.ranking.job_type_icons')[$characters->JobType]['icon']) }}" alt=""/>
+                                        <ul class="list-unstyled mt-3">
+                                            <li class="mb-2">
+                                                <span>{{ config('global.ranking.job_type_icons')[$characters->JobType]['name'] }}</span>
+                                            </li>
+                                            <li class="mb-2">Job Level: <span class="">{{ $characters->JobLevel }}</span></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            @endif
+                            <div class="col-md-4">
+                                <ul class="list-unstyled mt-3">
+                                    <li class="mb-2"><i class="fa-solid fa-heart text-danger"></i> Health: <span>{{ $characters->HP }}</span></li>
+                                    <li class="mb-2"><i class="fa-solid fa-star-of-life text-primary"></i> Mana: <span>{{ $characters->MP }}</span></li>
+                                </ul>
+                            </div>
+                            <div class="col-md-4">
+                                <ul class="list-unstyled mt-3">
+                                    <li class="mb-2"><i class="fa-solid fa-hand-fist text-warning"></i> Strength: <span>{{ $characters->Strength }}</span></li>
+                                    <li class="mb-2"><i class="fa-solid fa-brain text-warning"></i> Intellect: <span>{{ $characters->Intellect }}</span></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <h5 class="card-title">Special title treatment</h5>
+                <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                <a href="#" class="btn btn-primary">Go somewhere</a>
+            </div>
+        </div>
+    </div>
+
     <div class="space-y-6">
         <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
             <div class="p-6 text-gray-900 dark:text-gray-100">
@@ -11,7 +72,6 @@
                         <div class="w-full">
                             <div class="flex flex-row items-center pb-1">
                                 <div class="w-24 h-24 rounded-md shadow-lg border-2 overflow-hidden">
-                                    <img class="object-cover scale-125" src="{{ asset(config('global.ranking.character')[$characters->RefObjID]) }}" alt="{{ $characters->CharName16 }}"/>
                                 </div>
                                 <div class="ml-4">
                                     <h5 class="mb-1 text-xl font-medium text-gray-900 dark:text-white">{{ $characters->CharName16 }}</h5>
