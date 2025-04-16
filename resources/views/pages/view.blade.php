@@ -1,14 +1,14 @@
 @extends('layouts.full')
-@section('title', $post->title)
+@section('title', $data->title)
 
 @section('content')
     <div class="container">
         <div class="card mb-4 p-0">
             <div class="card-header">
-                {{ $post->title }}
+                {{ $data->title }}
             </div>
             <div class="card-body">
-                {!! $post->content !!}
+                {!! $data->content !!}
             </div>
         </div>
     </div>

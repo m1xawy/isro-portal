@@ -32,11 +32,15 @@
                                 <div class="w-full">
                                     <h4 class="pb-4 text-sm" style="color: #ffc345">Job informations</h4>
                                     <div class="flex flex-row items-center pb-2 mt-2">
-                                        <img src="{{ asset(config('global.ranking.job_type_icons')[$characters->JobType]['icon']) }}" alt=""/>
+                                        @if($characters->JobType > 0)
+                                            <img src="{{ asset(config('global.ranking.job_type_icons')[$characters->JobType]['icon']) }}" alt=""/>
+                                        @endif
 
                                         <div class="ml-3">
                                             <h5 class="text-xs font-bold text-black dark:text-white text-left">
+                                                @if($characters->JobType > 0)
                                                 <span>{{ config('global.ranking.job_type_icons')[$characters->JobType]['name'] }}</span>
+                                                @endif
                                             </h5>
                                             <h5 class="text-xs font-bold text-black dark:text-white text-center">Job Level: {{ $characters->JobLevel }}</h5>
                                         </div>
