@@ -1,5 +1,5 @@
 @extends('layouts.full')
-@section('title', __('Character') . ' - ' .$characters->CharName16)
+@section('title', __('Character') . ' - ' .$data->CharName16)
 
 @section('content')
     <div class="container">
@@ -9,12 +9,12 @@
                     <div class="col-md-6">
                         <div class="d-flex">
                             <div class="d-flex me-3 overflow-hidden align-items-center">
-                                <img class="object-fit-cover rounded border" src="{{ asset(config('global.ranking.character')[$characters->RefObjID]) }}" width="100" height="100" alt=""/>
+                                <img class="object-fit-cover rounded border" src="{{ asset(config('global.ranking.character')[$data->RefObjID]) }}" width="100" height="100" alt=""/>
                             </div>
 
                             <div class="mt-4">
-                                <h2>{{ $characters->CharName16 }}</h2>
-                                <p class="m-0">{{ __('Item Points:') }} <span class="">{{ $characters->ItemPoints }}</span></p>
+                                <h2>{{ $data->CharName16 }}</h2>
+                                <p class="m-0">{{ __('Item Points:') }} <span class="">{{ $data->ItemPoints }}</span></p>
 
                                 <ul class="list-unstyled d-flex">
                                     @foreach($charBuildInfo as $build)
@@ -28,32 +28,32 @@
                     </div>
                     <div class="col-md-6">
                         <div class="row mt-5 justify-content-end">
-                            @if($characters->JobType > 0)
+                            @if($data->JobType > 0)
                                 <div class="col-md-4">
                                     <div class="d-flex">
                                         <div class="d-flex align-items-center">
-                                            <img src="{{ asset(config('global.ranking.job_type_icons')[$characters->JobType]['icon']) }}" width="50" height="" alt=""/>
+                                            <img src="{{ asset(config('global.ranking.job_type_icons')[$data->JobType]['icon']) }}" width="50" height="" alt=""/>
                                         </div>
 
                                         <ul class="list-unstyled mt-3">
                                             <li class="mb-0">
-                                                <span>{{ config('global.ranking.job_type_icons')[$characters->JobType]['name'] }}</span>
+                                                <span>{{ config('global.ranking.job_type_icons')[$data->JobType]['name'] }}</span>
                                             </li>
-                                            <li class="mb-0">{{ __('Job Level:') }} <span class="">{{ $characters->JobLevel }}</span></li>
+                                            <li class="mb-0">{{ __('Job Level:') }} <span class="">{{ $data->JobLevel }}</span></li>
                                         </ul>
                                     </div>
                                 </div>
                             @endif
                             <div class="col-md-4">
                                 <ul class="list-unstyled mt-3">
-                                    <li class="mb-2"><i class="fa-solid fa-heart text-danger"></i> {{ __('Health:') }} <span>{{ $characters->HP }}</span></li>
-                                    <li class="mb-2"><i class="fa-solid fa-star-of-life text-primary"></i> {{ __('Mana:') }} <span>{{ $characters->MP }}</span></li>
+                                    <li class="mb-2"><i class="fa-solid fa-heart text-danger"></i> {{ __('Health:') }} <span>{{ $data->HP }}</span></li>
+                                    <li class="mb-2"><i class="fa-solid fa-star-of-life text-primary"></i> {{ __('Mana:') }} <span>{{ $data->MP }}</span></li>
                                 </ul>
                             </div>
                             <div class="col-md-4">
                                 <ul class="list-unstyled mt-3">
-                                    <li class="mb-2"><i class="fa-solid fa-hand-fist text-warning"></i> {{ __('Strength:') }} <span>{{ $characters->Strength }}</span></li>
-                                    <li class="mb-2"><i class="fa-solid fa-brain text-warning"></i> {{ __('Intellect:') }} <span>{{ $characters->Intellect }}</span></li>
+                                    <li class="mb-2"><i class="fa-solid fa-hand-fist text-warning"></i> {{ __('Strength:') }} <span>{{ $data->Strength }}</span></li>
+                                    <li class="mb-2"><i class="fa-solid fa-brain text-warning"></i> {{ __('Intellect:') }} <span>{{ $data->Intellect }}</span></li>
                                 </ul>
                             </div>
                         </div>

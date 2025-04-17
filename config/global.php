@@ -62,8 +62,8 @@ return [
                 'ranking_unique_monthly' => 3600,
                 'ranking_job' => 3600,
                 'ranking_honor' => 3600,
-                'ranking_fortress-player' => 3600,
-                'ranking_fortress-guild' => 3600,
+                'ranking_fortress_player' => 3600,
+                'ranking_fortress_guild' => 3600,
             ]
         ],
         'sliders' => [

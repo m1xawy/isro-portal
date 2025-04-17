@@ -11,10 +11,12 @@
                             <div class="d-flex">
                                 <div class="mt-3">
                                     <h2>
-                                        <img src="/ranking/guild-crest/{{ $guilds->Icon }}" alt="" width="32" height="32">
-                                        {{ $guilds->Name }}
+                                        @if(isset($data->CrestIcon))
+                                        <img src="/ranking/guild-crest/{{ $data->CrestIcon }}" alt="" width="32" height="32">
+                                        @endif
+                                        {{ $data->Name }}
                                     </h2>
-                                    <p class="m-0">{{ __('Foundation Date:') }} <span class="">{{ date('d-m-Y', strtotime($guilds->FoundationDate)) }}</span></p>
+                                    <p class="m-0">{{ __('Foundation Date:') }} <span class="">{{ date('d-m-Y', strtotime($data->FoundationDate)) }}</span></p>
                                 </div>
                             </div>
                         </div>
@@ -22,25 +24,25 @@
                             <div class="row mt-2 justify-content-end text-center">
                                 <div class="col-md-3">
                                     <ul class="list-unstyled mt-3">
-                                        <li class="mb-2"><h4>{{ $guilds->Leader }}</h4></li>
+                                        <li class="mb-2"><h4>{{ $data->LeaderName }}</h4></li>
                                         <li class="mb-2">{{ __('Leader') }}</li>
                                     </ul>
                                 </div>
                                 <div class="col-md-3">
                                     <ul class="list-unstyled mt-3">
-                                        <li class="mb-2"><h4>{{ $guilds->ItemPoints }}</h4></li>
+                                        <li class="mb-2"><h4>{{ $data->ItemPoints }}</h4></li>
                                         <li class="mb-2">{{ __('Item Points') }}</li>
                                     </ul>
                                 </div>
                                 <div class="col-md-3">
                                     <ul class="list-unstyled mt-3">
-                                        <li class="mb-2"><h4>{{ $guilds->Lvl }}</h4></li>
+                                        <li class="mb-2"><h4>{{ $data->Lvl }}</h4></li>
                                         <li class="mb-2">{{ __('Level') }}</li>
                                     </ul>
                                 </div>
                                 <div class="col-md-3">
                                     <ul class="list-unstyled mt-3">
-                                        <li class="mb-2"><h4>{{ $guilds->Members }}</h4></li>
+                                        <li class="mb-2"><h4>{{ $data->TotalMember }}</h4></li>
                                         <li class="mb-2">{{ __('Members') }}</li>
                                     </ul>
                                 </div>

@@ -2,11 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\SRO\Log\LogChatMessage;
 use App\Models\SRO\Log\LogInstanceWorldInfo;
 use App\Models\SRO\Shard\Char;
+use App\Models\SRO\Shard\CharSkillMastery;
+use App\Models\SRO\Shard\CharTradeConflictJob;
 use App\Models\SRO\Shard\Guild;
+use App\Models\SRO\Shard\GuildMember;
+use App\Models\SRO\Shard\TrainingCampHonorRank;
 use App\Services\InventoryService;
-use Illuminate\Support\Facades\Cache;
 
 class RankingController extends Controller
 {
@@ -50,93 +54,71 @@ class RankingController extends Controller
 
     public function fortress_player()
     {
-        $data = Char::getFortressPlayerRanking();
-        return view('ranking.ranking.fortress-player', [
-            'data' => $data,
-        ]);
+        $data = GuildMember::getFortressPlayerRanking();
+        return view('ranking.ranking.fortress-player', compact('data'));
     }
 
     public function fortress_guild()
     {
-        $data = Char::getFortressGuildRanking();
-        return view('ranking.ranking.fortress-guild', [
-            'data' => $data,
-        ]);
+        $data = Guild::getFortressGuildRanking();
+        return view('ranking.ranking.fortress-guild', compact('data'));
     }
 
     public function honor()
     {
-        $data = Char::getHonorRanking();
-        return view('ranking.ranking.honor', [
-            'data' => $data,
-        ]);
+        $data = TrainingCampHonorRank::getHonorRanking();
+        return view('ranking.ranking.honor', compact('data'));
     }
 
     public function job()
     {
-        $data = Char::getJobRanking();
-        return view('ranking.ranking.job', [
-            'data' => $data,
-        ]);
+        $data = CharTradeConflictJob::getJobRanking();
+        return view('ranking.ranking.job', compact('data'));
     }
 
     public function job_all()
     {
-        $data = Char::getJobRanking();
-        return view('ranking.ranking.job-all', [
-            'data' => $data,
-        ]);
+        $data = CharTradeConflictJob::getJobRanking();
+        return view('ranking.ranking.job-all', compact('data'));
     }
 
     public function job_trader()
     {
-        $data = Char::getJobTraderRanking();
-        return view('ranking.ranking.job-trader', [
-            'data' => $data,
-        ]);
+        $data = CharTradeConflictJob::getJobRanking(25, 3);
+        return view('ranking.ranking.job-trader', compact('data'));
     }
 
     public function job_hunter()
     {
-        $data = Char::getJobHunterRanking();
-        return view('ranking.ranking.job-hunter', [
-            'data' => $data,
-        ]);
+        $data = CharTradeConflictJob::getJobRanking(25, 2);
+        return view('ranking.ranking.job-hunter', compact('data'));
     }
 
     public function job_thieve()
     {
-        $data = Char::getJobThieveRanking();
-        return view('ranking.ranking.job-thieve', [
-            'data' => $data,
-        ]);
+        $data = CharTradeConflictJob::getJobRanking(25, 1);
+        return view('ranking.ranking.job-thieve', compact('data'));
     }
 
     public function character_view($name, InventoryService $inventoryService)
     {
-        $charID = Char::select('CharID')->where('CharName16', $name)->first()->CharID ?? null;
+        $charID = Char::getCharIDByName($name);
         if ($charID > 0) {
+            $data = Char::getPlayerRanking(1, $charID);
+            $charUniqueHistory = LogInstanceWorldInfo::getUniques(10, $charID);
+            $charGlobalHistory = LogChatMessage::getGlobalsHistory(10, $name);
+            $charBuildInfo = CharSkillMastery::getCharBuildInfo($charID);
 
-            $characters = Char::getCharInfo($charID);
-            $charUniqueHistory = Char::getCharUniqueHistory($charID) ?? [];
-            $charGlobalHistory = Char::getCharGlobalHistory($name) ?? [];
-            $charBuildInfo = Char::getCharBuildInfo($charID) ?? [];
+            $playerInventory = $inventoryService->getInventorySet($charID, 13, 0);
+            $playerJobInventory = $inventoryService->getInventoryJob($charID);
+            $playerAvatar = $inventoryService->getInventoryAvatar($charID);
 
-            $playerInventory = cache()->remember('char_inventory_' . $name, setting('cache_info_char', 600), function() use ($inventoryService, $charID) {
-                return $inventoryService->getInventorySet($charID, 13, 0);
-            });
-
-            $playerJobInventory = cache()->remember('char_inventory_job_' . $name, setting('cache_info_char', 600), function() use ($inventoryService, $charID) {
-                return $inventoryService->getInventoryJob($charID);
-            });
-
-            $playerAvatar = cache()->remember('char_inventory_avatar_' . $name, setting('cache_info_char', 600), function() use ($inventoryService, $charID) {
-                return $inventoryService->getInventoryAvatar($charID);
-            });
-
-            if ($characters) {
+            if ($data) {
+                foreach ($data as $value) {
+                    $data = $value;
+                }
                 return view('ranking.character.index', [
-                    'characters' => $characters,
+                    'data' => $data,
                     'charUniqueHistory' => $charUniqueHistory,
                     'charGlobalHistory' => $charGlobalHistory,
                     'charBuildInfo' => $charBuildInfo,
@@ -151,19 +133,21 @@ class RankingController extends Controller
 
     public function guild_view($name)
     {
-        $guildID = Guild::select('ID')->where('Name', $name)->first()->ID ?? null;
-
+        $guildID = Guild::getGuildIDByName($name);
         if ($guildID > 0) {
 
-            $guilds = (new Guild)->getGuildInfo($guildID);
-            $guildMembers = (new Guild)->getGuildInfoMembers($guildID);
-            $guildAlliances = (new Guild)->getGuildInfoAlliance($guildID);
+            $data = Guild::getGuildRanking(1, $guildID);
+            $data_members = GuildMember::getGuildInfoMembers($guildID);
+            $data_alliances = Guild::getGuildInfoAlliance($guildID);
 
-            if ($guilds) {
+            if ($data) {
+                foreach ($data as $value) {
+                    $data = $value;
+                }
                 return view('ranking.guild.index', [
-                    'guilds' => $guilds,
-                    'guildMembers' => $guildMembers,
-                    'guildAlliances' => $guildAlliances,
+                    'data' => $data,
+                    'data_members' => $data_members,
+                    'data_alliances' => $data_alliances,
                 ]);
             }
         }
