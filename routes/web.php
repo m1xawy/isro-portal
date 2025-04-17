@@ -54,9 +54,4 @@ Route::middleware(['auth', config('global.general.options.register_confirmation'
 });
 
 require __DIR__.'/auth.php';
-
-Route::middleware(['auth', 'admin'])->group(function () {
-    Route::get('/admin2', function () {
-        return view('dashboard.index');
-    })->name('admin.dashboard');
-});
+require __DIR__.'/admin.php';

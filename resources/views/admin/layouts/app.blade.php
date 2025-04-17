@@ -16,12 +16,12 @@
 </head>
 <body data-bs-theme="{{ config('global.general.options.theme_color_mode') }}">
 
-@include('dashboard.layouts.header')
+@include('admin.layouts.header')
 
 <div class="container-fluid">
     <div class="row">
         <div class="sidebar border border-right col-md-3 col-lg-2 p-0 bg-body-tertiary">
-            @include('dashboard.layouts.sidebar')
+            @include('admin.layouts.sidebar')
         </div>
 
         <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
@@ -29,6 +29,7 @@
         </main>
     </div>
 </div>
+
 <script defer src="{{ asset('js/bootstrap.bundle.min.js') }}" integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq"></script>
 <script src="{{ asset('js/color-modes.js') }}"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/chart.js@4.3.2/dist/chart.umd.js" integrity="sha384-eI7PSr3L1XLISH8JdDII5YN/njoSsxfbrkCTnJrzXt+ENP5MOVBxD+l6sEG4zoLp" crossorigin="anonymous"></script>
