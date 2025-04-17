@@ -106,13 +106,13 @@ class RankingController extends Controller
         $charID = Char::getCharIDByName($name);
         if ($charID > 0) {
             $data = Char::getPlayerRanking(1, $charID);
-            $charUniqueHistory = LogInstanceWorldInfo::getUniques(5, $charID);
-            $charGlobalHistory = LogChatMessage::getGlobalsHistory(5, $name);
-            $charBuildInfo = CharSkillMastery::getCharBuildInfo($charID);
+            $unique_history = LogInstanceWorldInfo::getUniques(5, $charID);
+            $globals_history = LogChatMessage::getGlobalsHistory(5, $name);
+            $build_info = CharSkillMastery::getCharBuildInfo($charID);
 
-            $playerInventory = $inventoryService->getInventorySet($charID, 13, 0);
-            $playerJobInventory = $inventoryService->getInventoryJob($charID);
-            $playerAvatar = $inventoryService->getInventoryAvatar($charID);
+            $inventory_set = $inventoryService->getInventorySet($charID, 13, 0);
+            $inventory_job = $inventoryService->getInventoryJob($charID);
+            $inventory_avatar = $inventoryService->getInventoryAvatar($charID);
 
             if ($data) {
                 foreach ($data as $value) {
@@ -120,12 +120,12 @@ class RankingController extends Controller
                 }
                 return view('ranking.character.index', [
                     'data' => $data,
-                    'charUniqueHistory' => $charUniqueHistory,
-                    'charGlobalHistory' => $charGlobalHistory,
-                    'charBuildInfo' => $charBuildInfo,
-                    'playerInventory' => $playerInventory,
-                    'playerJob' => $playerJobInventory,
-                    'playerAvatar' => $playerAvatar
+                    'unique_history' => $unique_history,
+                    'globals_history' => $globals_history,
+                    'build_info' => $build_info,
+                    'inventory_set' => $inventory_set,
+                    'inventory_job' => $inventory_job,
+                    'inventory_avatar' => $inventory_avatar
                 ]);
             }
         }

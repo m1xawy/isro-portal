@@ -17,9 +17,9 @@
                                 <p class="m-0">{{ __('Item Points:') }} <span class="">{{ $data->ItemPoints }}</span></p>
 
                                 <ul class="list-unstyled d-flex">
-                                    @foreach($charBuildInfo as $build)
+                                    @foreach($build_info as $value)
                                         <li class="me-1">
-                                            <img src="{{ asset(config('global.ranking.skill_mastery')[$build->MasteryID]['icon']) }}" title="{{ config('global.ranking.skill_mastery')[$build->MasteryID]['name'] }}" alt="">
+                                            <img src="{{ asset(config('global.ranking.skill_mastery')[$value->MasteryID]['icon']) }}" title="{{ config('global.ranking.skill_mastery')[$value->MasteryID]['name'] }}" alt="">
                                         </li>
                                     @endforeach
                                 </ul>
@@ -90,16 +90,16 @@
                         <div class="card">
                             <div class="card-body d-flex justify-content-center" id="display-inventory">
                                 <div class="" id="display-inventory-set">
-                                    @include('ranking.character.partials.inventory.inventory-view', ['inventorySetList' => $playerInventory])
+                                    @include('ranking.character.partials.inventory.inventory-view', ['inventorySetList' => $inventory_set])
                                 </div>
                                 <div class="d-none" id="display-inventory-avatar">
-                                    @include('ranking.character.partials.inventory.inventory-job-view', ['inventoryJobList' => $playerJob])
+                                    @include('ranking.character.partials.inventory.inventory-job-view', ['inventoryJobList' => $inventory_job])
                                 </div>
                                 <div class="" id="display-inventory-avatar-accessory">
                                     <button id="display-inventory-switch" data-type="set" class="btn btn-secondary position-absolute" style="top: -50px;">{{ __('Job Equip') }}</button>
 
                                     <p class="mb-0" id="display-inventory-avatar-accessory-label">{{ __('Accessories') }}</p>
-                                    @include('ranking.character.partials.inventory.inventory-avatar-view', ['inventoryAvatarList' => $playerAvatar])
+                                    @include('ranking.character.partials.inventory.inventory-avatar-view', ['inventoryAvatarList' => $inventory_avatar])
                                 </div>
                             </div>
                         </div>

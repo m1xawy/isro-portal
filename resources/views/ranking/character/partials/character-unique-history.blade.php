@@ -8,7 +8,7 @@
             </tr>
         </thead>
         <tbody>
-            @forelse($charUniqueHistory as $value)
+            @forelse($unique_history as $value)
                 <tr>
                     <td>{{ config('global.ranking.unique_points')[$value->Value]['name'] }}</td>
                     <td>+{{ config('global.ranking.unique_points')[$value->Value]['points'] }}</td>

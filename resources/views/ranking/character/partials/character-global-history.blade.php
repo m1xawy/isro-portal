@@ -7,7 +7,7 @@
             </tr>
         </thead>
         <tbody>
-            @forelse($charGlobalHistory as $value)
+            @forelse($globals_history as $value)
                 <tr>
                     <td>{{ $value->Comment }}</td>
                     <td>{{ $value->EventTime }}</td>
