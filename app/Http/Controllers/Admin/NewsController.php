@@ -42,4 +42,31 @@ class NewsController extends Controller
 
         return redirect()->route('admin.news.index')->with('success', 'News created successfully!');
     }
+
+    public function destroy(Post $post)
+    {
+        $post->delete();
+
+        return redirect()->route('admin.news.index')->with('success', 'News deleted successfully.');
+    }
+
+    public function edit(Post $post)
+    {
+        return view('admin.posts.edit', compact('post'));
+    }
+
+    public function update(Request $request, Post $post)
+    {
+        $validated = $request->validate([
+            'title' => 'required|string',
+            'slug' => 'unique:posts|string',
+            'news_content' => 'required',
+            'published_at' => 'required',
+            'category' => 'required',
+        ]);
+
+        $post->update($validated);
+
+        return redirect()->route('admin.news.index')->with('success', 'News updated successfully.');
+    }
 }

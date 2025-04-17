@@ -37,7 +37,14 @@
                             <td>{{ $value->title }}</td>
                             <td>{{ $value->slug }}</td>
                             <td>{{ $value->category }}</td>
-                            <td><a href="#">Edit</a> / <a href="#">Delete</a></td>
+                            <td>
+                                <a href="{{ route('admin.news.edit', $value->id) }}" class="btn btn-secondary btn-sm">Edit</a>
+                                <form action="{{ route('admin.news.destroy', $value->id) }}" method="POST" class="d-inline" onsubmit="return confirm('Are you sure you want to delete this News?');">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-secondary btn-sm">Delete</button>
+                                </form>
+                            </td>
                         </tr>
                     @empty
                         <tr>
