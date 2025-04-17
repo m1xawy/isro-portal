@@ -113,10 +113,10 @@ class Guild extends Model
     public static function getGuildInfoAlliance($GuildID)
     {
         return Cache::remember('guild_alliance_'.$GuildID, config('global.general.cache.data.guild'), function () use ($GuildID) {
-            return self::where('Alliance', function ($query) {
+            return self::where('Alliance', function ($query) use ($GuildID) {
                 $query->select('Alliance')
                     ->from('_Guild')
-                    ->where('ID', 1)
+                    ->where('ID', $GuildID)
                     ->where('Alliance', '>', 0);
             })
             ->pluck('Name');

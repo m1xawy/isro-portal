@@ -9,7 +9,7 @@
             @forelse($data_alliances as $value)
                 <tr class="text-center">
                     <td>
-                        <a href="{{ route('ranking.guild.view', ['name' => $value->Name]) }}" class="text-decoration-none">{{ $value->Name }}</a>
+                        <a href="{{ route('ranking.guild.view', ['name' => $value]) }}" class="text-decoration-none">{{ $value }}</a>
                     </td>
                 </tr>
             @empty

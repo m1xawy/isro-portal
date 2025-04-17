@@ -21,6 +21,9 @@
                         @endif
                     </td>
                     <td>
+                        @if(isset($value->CrestIcon))
+                            <img src="/ranking/guild-crest/{{ $value->CrestIcon }}" alt="" width="16" height="16">
+                        @endif
                         <a href="{{ route('ranking.guild.view', ['name' => $value->Name]) }}" class="text-decoration-none">{{ $value->Name }}</a>
                     </td>
                     <td>{{ $value->Lvl }}</td>
