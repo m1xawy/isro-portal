@@ -105,7 +105,7 @@ class RankingController extends Controller
     {
         $charID = Char::getCharIDByName($name);
         if ($charID > 0) {
-            $data = Char::getPlayerRanking(1, $charID);
+            $data = Char::getPlayerRanking(1, $charID)->first();
             $unique_history = LogInstanceWorldInfo::getUniques(5, $charID);
             $globals_history = LogChatMessage::getGlobalsHistory(5, $name);
             $build_info = CharSkillMastery::getCharBuildInfo($charID);
@@ -115,9 +115,6 @@ class RankingController extends Controller
             $inventory_avatar = $inventoryService->getInventoryAvatar($charID);
 
             if ($data) {
-                foreach ($data as $value) {
-                    $data = $value;
-                }
                 return view('ranking.character.index', [
                     'data' => $data,
                     'unique_history' => $unique_history,
@@ -137,14 +134,11 @@ class RankingController extends Controller
         $guildID = Guild::getGuildIDByName($name);
         if ($guildID > 0) {
 
-            $data = Guild::getGuildRanking(1, $guildID);
+            $data = Guild::getGuildRanking(1, $guildID)->first();
             $data_members = GuildMember::getGuildInfoMembers($guildID);
             $data_alliances = Guild::getGuildInfoAlliance($guildID);
 
             if ($data) {
-                foreach ($data as $value) {
-                    $data = $value;
-                }
                 return view('ranking.guild.index', [
                     'data' => $data,
                     'data_members' => $data_members,
