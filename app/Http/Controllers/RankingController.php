@@ -10,6 +10,7 @@ use App\Models\SRO\Shard\CharTradeConflictJob;
 use App\Models\SRO\Shard\Guild;
 use App\Models\SRO\Shard\GuildMember;
 use App\Models\SRO\Shard\TrainingCampHonorRank;
+use App\Services\GuildService;
 use App\Services\InventoryService;
 
 class RankingController extends Controller
@@ -105,8 +106,8 @@ class RankingController extends Controller
         $charID = Char::getCharIDByName($name);
         if ($charID > 0) {
             $data = Char::getPlayerRanking(1, $charID);
-            $charUniqueHistory = LogInstanceWorldInfo::getUniques(10, $charID);
-            $charGlobalHistory = LogChatMessage::getGlobalsHistory(10, $name);
+            $charUniqueHistory = LogInstanceWorldInfo::getUniques(5, $charID);
+            $charGlobalHistory = LogChatMessage::getGlobalsHistory(5, $name);
             $charBuildInfo = CharSkillMastery::getCharBuildInfo($charID);
 
             $playerInventory = $inventoryService->getInventorySet($charID, 13, 0);
@@ -155,11 +156,9 @@ class RankingController extends Controller
         return redirect()->back();
     }
 
-    public function guild_crest($hex)
+    public function guild_crest($hex, GuildService $guildService)
     {
-        if ($hex) {
-            return drawGuildIconToPNG($hex);
-        }
+        if ($hex) return $guildService->drawGuildIconToPNG($hex);
 
         abort(404);
     }

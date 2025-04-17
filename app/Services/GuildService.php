@@ -2,9 +2,6 @@
 
 namespace App\Services;
 
-use App\Models\SRO\Shard\Schedule;
-use Carbon\Carbon;
-
 class GuildService
 {
     public static function drawGuildIconToPNG($hex): void
