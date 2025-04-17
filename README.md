@@ -42,21 +42,19 @@ git clone https://github.com/m1xawy/isro-portal.git
 ```sh
 composer install
 ```
-3. Rename `.env.example` to `.env` and fill it with your website URL and Silkroad database info
+3. Rename `.env.example` to `.env` and fill it with your website URL and go in `config/global.php` and fill it with Silkroad database info
    ```ini
-    APP_NAME=Laravel
-    APP_URL=https://localhost
-   
-    DB_CONNECTION=sqlsrv
-    DB_HOST=192.168.1.101
-    DB_PORT=1433
-    DB_USERNAME=sa
-    DB_PASSWORD=123456
-    DB_DATABASE=SRO_Portal
-    DB_DATABASE_PORTAL=GB_JoymaxPortal
-    DB_DATABASE_ACCOUNT=SILKROAD_R_ACCOUNT
-    DB_DATABASE_SHARD=SILKROAD_R_SHARD
-    DB_DATABASE_LOG=SILKROAD_R_SHARD_LOG
+        'connection' => [
+            'host' => '192.168.1.101',
+            'port' => '1433',
+            'user' => 'sa',
+            'password' => '123456',
+            'db_website' => 'SRO_Portal',
+            'db_portal' => 'GB_JoymaxPortal',
+            'db_account' => 'SILKROAD_R_ACCOUNT',
+            'db_shard' => 'SILKROAD_R_SHARD',
+            'db_log' => 'SILKROAD_R_SHARD_LOG',
+        ],
    ```
 4. Create new database `SRO_Portal` and run Laravel commands for migrate website tables
 ```sh
@@ -77,7 +75,7 @@ Finally, Congratulation!
 
 to access admin panel change role `user` to `admin` from users table or execute this query
    ```sql
-   UPDATE [SRO_Portal].[dbo].[users] SET [role] = 'admin' WHERE [username] = 'mixawy'
+   updating ..
    ```
 
 Get new updates:
