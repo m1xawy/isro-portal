@@ -13,9 +13,9 @@
             </div>
         </div>
 
-        @if (session('status'))
+        @if (session('success'))
             <div class="alert alert-success" role="alert">
-                {{ session('status') }}
+                {{ session('success') }}
             </div>
         @endif
 
@@ -37,7 +37,7 @@
                             <td>{{ $value->title }}</td>
                             <td>{{ $value->slug }}</td>
                             <td>{{ $value->category }}</td>
-                            <td><a href="#">View</a>/<a href="#">Edit</a> </td>
+                            <td><a href="#">Edit</a> / <a href="#">Delete</a></td>
                         </tr>
                     @empty
                         <tr>
