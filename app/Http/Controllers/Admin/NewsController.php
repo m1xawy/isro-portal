@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Models\Post;
+use Illuminate\Support\Str;
 
 class NewsController extends Controller
 {
@@ -23,17 +24,17 @@ class NewsController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'title' => 'required|string|max:255',
-            'slug' => 'unique:posts|required|string|max:255',
-            'news_content' => 'required|string',
-            'published_at' => 'required|string|max:255',
-            'category' => 'required|string|max:255',
+            'title' => 'required|string',
+            'slug' => 'unique:posts|string',
+            'news_content' => 'required',
+            'published_at' => 'required',
+            'category' => 'required',
         ]);
 
         Post::create([
             'author_id' => auth()->user()->id,
             'title' => $request->title,
-            'slug' => $request->slug,
+            'slug' => Str::slug($request->slug,'-'),
             'content' => $request->news_content,
             'published_at' => $request->published_at,
             'category' => $request->category,

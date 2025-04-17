@@ -17,7 +17,7 @@ return new class extends Migration
             $table->char('title');
             $table->char('slug')->index();
             $table->text('content');
-            $table->char('featured_image')->nullable();
+            $table->char('image')->nullable();
             $table->dateTime('published_at');
             $table->string('category')->nullable();
             $table->softDeletesTz();

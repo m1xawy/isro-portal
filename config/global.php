@@ -45,7 +45,7 @@ return [
         'cache' => [
             'enable' => true,
             'data' => [
-                'news' => 86400, //1 day
+                'news' => 0, //1 day
                 'download' => 604800, //1 week
                 'pages' => 3600,
                 'account' => 3600,
