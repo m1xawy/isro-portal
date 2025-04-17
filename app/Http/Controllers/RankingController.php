@@ -10,7 +10,7 @@ use App\Models\SRO\Shard\CharTradeConflictJob;
 use App\Models\SRO\Shard\Guild;
 use App\Models\SRO\Shard\GuildMember;
 use App\Models\SRO\Shard\TrainingCampHonorRank;
-use App\Services\GuildService;
+use App\Services\CrestService;
 use App\Services\InventoryService;
 
 class RankingController extends Controller
@@ -156,7 +156,7 @@ class RankingController extends Controller
         return redirect()->back();
     }
 
-    public function guild_crest($hex, GuildService $guildService)
+    public function guild_crest($hex, CrestService $guildService)
     {
         if ($hex) return $guildService->drawGuildIconToPNG($hex);
 

@@ -89,12 +89,12 @@ class User extends Authenticatable implements MustVerifyEmail
         });
     }
 
-    public function getMuUser()
+    public function getMuUser(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany(MuUser::class, 'jid', 'JID');
     }
 
-    public function posts()
+    public function posts(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany(Post::class);
     }

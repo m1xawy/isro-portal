@@ -38,7 +38,7 @@ return [
             'encryption' => 'tls',
         ],
         'captcha' => [
-            'enable' => false,
+            'enable' => false, # Obtaining reCAPTCHA Keys, Go to the Google reCAPTCHA website (https://www.google.com/recaptcha)
             'sitekey' => '',
             'secret' => '',
         ],
@@ -154,6 +154,103 @@ return [
                     'name' => 'SroCave',
                     'url' => 'https://srocave.com/forum/sro-private-server-advertising.34/',
                     'image' => '',
+                ],
+            ],
+        ],
+    ],
+    'donation' => [
+        'paypal' => [
+            'enable' => false,
+            'api' => [
+                'mode' => 'sandbox',
+                'sandbox' => [
+                    'clientId' => '',
+                    'secret' => '',
+                ],
+                'live' => [
+                    'clientId' => '',
+                    'secret' => '',
+                ],
+            ],
+            'prices' => [
+                5 => [
+                    'name' => '5 Silk',
+                    'description' => 'Pay 5 USD for 500 Silk',
+                    'currency' => 'USD',
+                    'price' => 5,
+                    'silk' => 500,
+                ],
+                10 => [
+                    'name' => '10 Silk',
+                    'description' => 'Pay 10 USD for 1000 Silk',
+                    'currency' => 'USD',
+                    'amount' => 10,
+                    'value' => 1000,
+                ],
+                25 => [
+                    'name' => '25 Silk',
+                    'description' => 'Pay 25 USD for 2500 Silk',
+                    'currency' => 'USD',
+                    'amount' => 25,
+                    'value' => 2500,
+                ],
+                50 => [
+                    'name' => '50 Silk',
+                    'description' => 'Pay 50 USD for 5000 Silk',
+                    'currency' => 'USD',
+                    'amount' => 50,
+                    'value' => 5000,
+                ],
+                100 => [
+                    'name' => '100 Silk',
+                    'description' => 'Pay 100 USD for 10000 Silk',
+                    'currency' => 'USD',
+                    'amount' => 100,
+                    'value' => 10000,
+                ],
+            ],
+        ],
+        'maxicard' => [
+            'enable' => false,
+            'api' => [
+                'key' => '',
+                'password' => '',
+            ],
+            'prices' => [
+                5 => [
+                    'name' => '5 Silk',
+                    'description' => 'Pay 5 USD for 500 Silk',
+                    'currency' => 'USD',
+                    'price' => 5,
+                    'silk' => 500,
+                ],
+                10 => [
+                    'name' => '10 Silk',
+                    'description' => 'Pay 10 USD for 1000 Silk',
+                    'currency' => 'USD',
+                    'amount' => 10,
+                    'value' => 1000,
+                ],
+                25 => [
+                    'name' => '25 Silk',
+                    'description' => 'Pay 25 USD for 2500 Silk',
+                    'currency' => 'USD',
+                    'amount' => 25,
+                    'value' => 2500,
+                ],
+                50 => [
+                    'name' => '50 Silk',
+                    'description' => 'Pay 50 USD for 5000 Silk',
+                    'currency' => 'USD',
+                    'amount' => 50,
+                    'value' => 5000,
+                ],
+                100 => [
+                    'name' => '100 Silk',
+                    'description' => 'Pay 100 USD for 10000 Silk',
+                    'currency' => 'USD',
+                    'amount' => 100,
+                    'value' => 10000,
                 ],
             ],
         ],

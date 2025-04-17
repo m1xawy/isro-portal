@@ -2,7 +2,7 @@
 
 namespace App\Services;
 
-class GuildService
+class CrestService
 {
     public static function drawGuildIconToPNG($hex): void
     {

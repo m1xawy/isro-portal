@@ -6,6 +6,7 @@ use App\Models\SRO\Account\ShardCurrentUser;
 use App\Models\SRO\Log\LogChatMessage;
 use App\Models\SRO\Log\LogInstanceWorldInfo;
 use App\Models\SRO\Shard\Char;
+use App\Models\SRO\Shard\Guild;
 use App\Models\SRO\Shard\SiegeFortress;
 use App\Services\ScheduleService;
 use Illuminate\Database\QueryException;
@@ -44,12 +45,12 @@ class ViewServiceProvider extends ServiceProvider
             }
             if(config('global.widgets.top_player.enable')) {
                 View::composer(['layouts.sidebar', 'layouts.sidebar-right'], function ($view) {
-                    $view->with('top_player', Char::getPlayerRanking(5));
+                    $view->with('top_player', Char::getPlayerRanking(5, 0));
                 });
             }
             if(config('global.widgets.top_guild.enable')) {
                 View::composer(['layouts.sidebar', 'layouts.sidebar-right'], function ($view) {
-                    $view->with('top_guild', Char::getGuildRanking(5));
+                    $view->with('top_guild', Guild::getGuildRanking(5, 0));
                 });
             }
 

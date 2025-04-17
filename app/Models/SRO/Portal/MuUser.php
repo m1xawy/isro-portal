@@ -72,22 +72,22 @@ class MuUser extends Model
         ]);
     }
 
-    public function getEmailUser()
+    public function getEmailUser(): \Illuminate\Database\Eloquent\Relations\HasOne
     {
         return $this->hasOne(MuEmail::class, 'JID', 'JID');
     }
 
-    public function getVipLevel()
+    public function getVipLevel(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany(MuVIPInfo::class, 'JID', 'JID');
     }
 
-    public function getChangedSilk()
+    public function getChangedSilk(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(AphChangedSilk::class, 'JID', 'JID');
     }
 
-    public function getWebUser()
+    public function getWebUser(): \Illuminate\Database\Eloquent\Relations\HasOne
     {
         return $this->hasOne(User::class, 'jid', 'JID');
     }

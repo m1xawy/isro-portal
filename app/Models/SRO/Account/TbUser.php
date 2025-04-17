@@ -81,12 +81,12 @@ class TbUser extends Model
         ]);
     }
 
-    public function getShardUser()
+    public function getShardUser(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
     {
         return $this->belongsToMany(Char::class, '_User', 'UserJID', 'CharID');
     }
 
-    public function getPortalUser()
+    public function getPortalUser(): \Illuminate\Database\Eloquent\Relations\HasOne
     {
         return $this->hasOne(MuUser::class, 'JID', 'PortalJID');
     }
