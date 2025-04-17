@@ -153,14 +153,6 @@ class InventoryService
         $aStats = explode('_', $aItem['CodeName128']);
         $aData['Race'] = config('global.item.race')[$aStats[1]] ?? null;
 
-        if (isset($aStats[4], $aStats[5], $aStats[6])) {
-            $setKey = $aStats[4] . '_' . $aStats[5] . '_' . $aStats[6];
-
-            if (array_key_exists($setKey, config('global.item.sox_class'))) {
-                $aItem['SoxClass'] = config('global.item.sox_class')[$setKey][$aItem['Slot']] ?? null;
-            }
-        }
-
         if ($aItem['TypeID2'] == 4) {
             if ($aItem['TypeID3'] > 0 && $aItem['TypeID4'] > 0) {
                 if (array_key_exists($aItem['TypeID3'], config('global.item.job_type'))) {
@@ -182,6 +174,14 @@ class InventoryService
         if ($aItem['TypeID3'] == 14) {
             $aTime = self::diffTime($aItem['Data'] - time());
             $aData['devilTimeEnd'] = $aItem['Data'] === 0 ? '28Day' : ((time() > $aItem['Data']) ? '0Day 0Hour 0Minute' : $aTime['day'] . 'Day ' . $aTime['hour'] . 'Hour ' . $aTime['min'] . 'Minute');
+        }
+
+        if (isset($aStats[4], $aStats[5], $aStats[6])) {
+            $setKey = $aStats[4] . '_' . $aStats[5] . '_' . $aStats[6];
+
+            if (array_key_exists($setKey, config('global.item.rare_name'))) {
+                $aItem['RareName'] = config('global.item.rare_name')[$setKey][$aItem['Slot']];
+            }
         }
 
         switch ($aItem['TypeID3']) {

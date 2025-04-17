@@ -638,7 +638,7 @@ return [
             1 => 'Seal of Moon',
             0 => 'Seal of Sun'
         ],
-        'sox_class' => [
+        'rare_name' => [
             'SET_A_RARE' => [
                 0 => 'Destruction',
                 1 => 'Destruction',

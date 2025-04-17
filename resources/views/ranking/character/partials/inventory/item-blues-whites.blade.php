@@ -12,14 +12,12 @@
 <br />
 <br />
 
-{{ var_dump($item['CodeName128']) }}<br />
-
 @if($item['info']['sox'])
     <b style="color:#f2e43d;">{{ $item['info']['sox'] }}</b><br />
 @endif
 
-@isset($item['SoxClass'])
-    <span style="color:#53EE92;font-weight: bold;">{{ $item['SoxClass'] }}</span><br />
+@isset($item['RareName'])
+    <span style="color:#53EE92;font-weight: bold;">{{ $item['RareName'] }}</span><br />
 @endisset
 
 <span style="color:#efdaa4;">
