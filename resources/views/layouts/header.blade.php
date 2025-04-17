@@ -113,6 +113,10 @@
                                     <li><hr class="dropdown-divider"></li>
                                     <li><a class="dropdown-item" href="{{ url('/admin') }}">{{ __('Admin panel') }}</a></li>
                                 @endif
+                                @if (Auth::user()->role == 'admin')
+                                    <li><hr class="dropdown-divider"></li>
+                                    <li><a class="dropdown-item" href="{{ url('/admin2') }}">{{ __('Admin New') }}</a></li>
+                                @endif
                                 <li><hr class="dropdown-divider"></li>
                                 <li>
                                     <form method="POST" action="{{ route('logout') }}">

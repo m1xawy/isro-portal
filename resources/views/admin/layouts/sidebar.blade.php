@@ -6,15 +6,15 @@
     <div class="offcanvas-body d-md-flex flex-column p-0 pt-lg-3 overflow-y-auto">
         <ul class="nav flex-column">
             <li class="nav-item">
-                <a class="nav-link d-flex align-items-center gap-2 active" aria-current="page" href="#">
+                <a class="nav-link d-flex align-items-center gap-2 {{ request()->routeIs('admin.home') ? 'active' : '' }}" aria-current="page" href="{{ route('admin.home') }}">
                     <svg class="bi" aria-hidden="true"><use xlink:href="#house-fill"/></svg>
-                    Dashboard
+                    {{ __('Dashboard') }}
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link d-flex align-items-center gap-2" href="#">
+                <a class="nav-link d-flex align-items-center gap-2 {{ request()->routeIs('admin.news.index') ? 'active' : '' }}" href="{{ route('admin.news.index') }}">
                     <svg class="bi" aria-hidden="true"><use xlink:href="#file-earmark"/></svg>
-                    News
+                    {{ __('News') }}
                 </a>
             </li>
             <li class="nav-item">
