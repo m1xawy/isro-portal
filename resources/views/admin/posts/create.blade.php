@@ -96,7 +96,7 @@
 
 @push('styles')
     <link rel="stylesheet" href="https://cdn.ckeditor.com/ckeditor5/43.2.0/ckeditor5.css">
-
+    <style>.ck-editor__editable_inline { height:400px; }</style>
 @endpush
 @push('scripts')
     <script type="importmap">
@@ -440,11 +440,10 @@
             table: {
                 contentToolbar: ['tableColumn', 'tableRow', 'mergeTableCells', 'tableProperties', 'tableCellProperties']
             },
-            translations: [translations]
+            translations: [translations],
+
         };
 
         ClassicEditor.create(document.querySelector('#editor'), editorConfig);
-
-
     </script>
 @endpush
