@@ -12,6 +12,8 @@
 <br />
 <br />
 
+{{ var_dump($item['CodeName128']) }}<br />
+
 @if($item['info']['sox'])
     <b style="color:#f2e43d;">{{ $item['info']['sox'] }}</b><br />
 @endif
