@@ -65,6 +65,7 @@ class NewsController extends Controller
             'category' => 'required',
         ]);
 
+        $validated['content'] = $request->news_content;
         $post->update($validated);
 
         return redirect()->route('admin.news.index')->with('success', 'News updated successfully.');

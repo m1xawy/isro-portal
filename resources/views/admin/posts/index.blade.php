@@ -42,7 +42,7 @@
                                 <form action="{{ route('admin.news.destroy', $value->id) }}" method="POST" class="d-inline" onsubmit="return confirm('Are you sure you want to delete this News?');">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" class="btn btn-secondary btn-sm">Delete</button>
+                                    <button type="submit" class="btn btn-danger btn-sm">Delete</button>
                                 </form>
                             </td>
                         </tr>
