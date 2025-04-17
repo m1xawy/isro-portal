@@ -3,6 +3,43 @@
 
 @section('content')
     <div class="container">
-        {{ $data }}
+        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+            <h1 class="h2">Dashboard</h1>
+        </div>
+
+        <div class="row">
+            <div class="col-md-3">
+                <div class="card">
+                    <div class="card-body">
+                        <p>Total Accounts Registered</p>
+                        <h2>50</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card">
+                    <div class="card-body">
+                        <p>Total In-game Characters</p>
+                        <h2>50</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card">
+                    <div class="card-body">
+                        <p>Total Amount of Silk</p>
+                        <h2>50</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card">
+                    <div class="card-body">
+                        <p>Total Amount of Gold</p>
+                        <h2>50</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 @endsection
