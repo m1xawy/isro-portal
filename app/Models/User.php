@@ -8,6 +8,7 @@ use App\Models\SRO\Portal\MuVIPInfo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 use Laravel\Sanctum\HasApiTokens;
 
@@ -49,7 +50,7 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function getJCash()
     {
-        $JCash = cache()->remember('j_cash_'.$this->jid, $seconds = 60, function() {
+        return Cache::remember('account_j_cash_'.$this->jid, config('global.general.cache.data.account'), function () {
             return collect(DB::select("
             Declare @ReturnValue Int
             Declare @PremiumSilk Int
@@ -76,30 +77,21 @@ class User extends Authenticatable implements MustVerifyEmail
             "
             ))->first();
         });
-
-        if($JCash->ErrorCode != 0) {
-            return null;
-        }
-
-        return $JCash;
     }
 
-    public function getVIPInfo()
+    public function getVipLevel()
     {
-        $VIPInfo = cache()->remember('vip_info_'.$this->jid, $seconds = 60, function() {
-            return collect(DB::select("Select * From [GB_JoymaxPortal].[dbo].[MU_VIP_Info] with(nolock) Where JID = ".$this->jid." AND ExpireDate >= GETDATE()"))->first();
+        return Cache::remember('account_vip_level_'.$this->jid, config('global.general.cache.data.account'), function () {
+            return DB::connection('portal')
+            ->table('MU_VIP_Info')
+                ->where('JID', $this->jid)
+                ->first();
         });
-
-        if(empty($VIPInfo)) {
-            return null;
-        }
-
-        return $VIPInfo;
     }
 
     public function getMuUser()
     {
-        return $this->belongsTo(MuUser::class, 'jid', 'JID');
+        return $this->hasMany(MuUser::class, 'jid', 'JID');
     }
 
     public function posts()

@@ -32,12 +32,13 @@
                             <th scope="row">{{ __('Silk') }}</th>
                             <td>{{ Auth::user()->getJCash()->Silk }}</td>
                         </tr>
+
                         <tr>
                             <th scope="row">{{ __('VIP') }}</th>
                             <td>
-                                @if(Auth::user()->getVIPInfo() !== null && Auth::user()->getVIPInfo()->VIPUserType > 0)
-                                    <img src="{{ asset('images/ingame/viplevel_'.Auth::user()->getVIPInfo()->VIPLv.'.jpg') }}" alt="">
-                                    <span>{{ config('global.ranking.vip_level.level')[Auth::user()->getVIPInfo()->VIPLv] }}</span>
+                                @if(Auth::user()->getVipLevel() !== null && Auth::user()->getVipLevel()->VIPUserType > 0)
+                                    <img src="{{ asset('images/ingame/viplevel_'.Auth::user()->getVipLevel()->VIPLv.'.jpg') }}" width="24" height="24" alt="">
+                                    <span>{{ config('global.ranking.vip_level.level')[Auth::user()->getVipLevel()->VIPLv] }}</span>
                                 @else
                                     <span>{{ __('None') }}</span>
                                 @endif

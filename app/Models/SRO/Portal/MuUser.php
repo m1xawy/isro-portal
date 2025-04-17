@@ -5,6 +5,7 @@ namespace App\Models\SRO\Portal;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 
 class MuUser extends Model
@@ -74,6 +75,11 @@ class MuUser extends Model
     public function getEmailUser()
     {
         return $this->hasOne(MuEmail::class, 'JID', 'JID');
+    }
+
+    public function getVipLevel()
+    {
+        return $this->hasMany(MuVIPInfo::class, 'JID', 'JID');
     }
 
     public function getChangedSilk()

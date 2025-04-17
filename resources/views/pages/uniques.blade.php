@@ -10,7 +10,7 @@
                         <thead class="table-dark">
                         <tr>
                             <th scope="col">{{ __('Unique') }}</th>
-                            <th scope="col">{{ __('Dead Time') }}</th>
+                            <th scope="col">{{ __('Dead/Spawn Time') }}</th>
                             <th scope="col">{{ __('Killer') }}</th>
                             <th scope="col">{{ __('Area') }}</th>
                             <th scope="col">{{ __('Status') }}</th>
