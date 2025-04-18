@@ -5,7 +5,7 @@ return [
         'options' => [
             'server_name' => 'Silkroad Online',
             'server_desc' => "Silkroad Online is a World's first blockbuster Free to play MMORPG. Silkroad Olnine puts players deep into ancient Chinese, Islamic, and European civilization. Enjoy Silkroad's hardcore PvP, personal dungeon system, never ending fortress war and be the top of the highest heroes!",
-            'server_url' => 'https://isro-portal/',
+            'server_url' => 'https://isro-cms/',
             'favicon' => 'images/favicon.ico',
             'logo' => 'images/logo.png',
             'timezone' => 'Africa/Cairo',

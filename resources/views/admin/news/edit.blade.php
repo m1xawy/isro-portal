@@ -72,8 +72,8 @@
 
                 <div class="col-md-10">
                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" name="active" value="{{ old('active', $news->active ?? 0) ? '1' : '0' }}" id="flexCheckChecked" {{ old('active', $news->active ?? 0) ? 'checked' : '' }}>
-                        <label class="form-check-label" for="flexCheckChecked">
+                        <input class="form-check-input" type="checkbox" name="active" value="{{ old('active', $news->active ?? 0) ? '1' : '0' }}" id="active" {{ old('active', $news->active ?? 0) ? 'checked' : '' }}>
+                        <label class="form-check-label" for="active">
                             Active
                         </label>
                     </div>
@@ -128,6 +128,14 @@
             height: 400,
             codeviewFilter: false, // allows raw HTML
             codeviewIframeFilter: true
+        });
+    </script>
+
+    <script>
+        const checkbox = document.getElementById('active');
+
+        checkbox.addEventListener('change', function () {
+            checkbox.value = this.checked ? '1' : '0';
         });
     </script>
 @endpush

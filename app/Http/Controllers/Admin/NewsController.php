@@ -27,7 +27,6 @@ class NewsController extends Controller
             'title' => 'required|string',
             'category' => 'required',
             'published_at' => 'required|date',
-            'active' => 'required',
             'news_content' => 'required',
         ]);
 
@@ -41,13 +40,6 @@ class NewsController extends Controller
         return redirect()->route('admin.news.index')->with('success', 'News created successfully!');
     }
 
-    public function destroy(News $news)
-    {
-        $news->delete();
-
-        return redirect()->route('admin.news.index')->with('success', 'News deleted successfully.');
-    }
-
     public function edit(News $news)
     {
         return view('admin.news.edit', compact('news'));
@@ -59,7 +51,6 @@ class NewsController extends Controller
             'title' => 'required|string',
             'category' => 'required',
             'published_at' => 'required',
-            'active' => 'required',
             'news_content' => 'required',
         ]);
 
@@ -69,5 +60,17 @@ class NewsController extends Controller
         $news->update($validated);
 
         return redirect()->route('admin.news.index')->with('success', 'News updated successfully.');
+    }
+
+    public function delete(News $news)
+    {
+        return view('admin.news.delete', compact('news'));
+    }
+
+    public function destroy(News $news)
+    {
+        $news->delete();
+
+        return redirect()->route('admin.news.index')->with('success', 'News deleted successfully.');
     }
 }

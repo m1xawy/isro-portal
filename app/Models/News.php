@@ -37,7 +37,7 @@ class News extends Model
     public static function getPosts()
     {
         return Cache::remember('news', now()->addMinutes(config('global.general.cache.data.news')), function () {
-            return self::where('published_at', '<=', now())->orderBy('published_at', 'DESC')->get();
+            return self::where('active', '=', 1)->where('published_at', '<=', now())->orderBy('created_at', 'DESC')->get();
         });
     }
 
