@@ -1,5 +1,5 @@
 @extends('admin.layouts.app')
-@section('title', __('Home DashBoard'))
+@section('title', __('News'))
 
 @section('content')
     <div class="container">

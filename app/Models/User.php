@@ -89,6 +89,13 @@ class User extends Authenticatable implements MustVerifyEmail
         });
     }
 
+    public static function getUserCount()
+    {
+        return Cache::remember('account_count', config('global.general.cache.data.account'), function () {
+            return self::count();
+        });
+    }
+
     public function getMuUser()
     {
         return $this->hasMany(MuUser::class, 'jid', 'JID');

@@ -144,6 +144,20 @@ class Char extends Model
         });
     }
 
+    public static function getCharCount()
+    {
+        return Cache::remember('character_count', config('global.general.cache.data.character'), function () {
+            return self::count();
+        });
+    }
+
+    public static function getGoldSum()
+    {
+        return Cache::remember('character_gold_sum', config('global.general.cache.data.character'), function () {
+            return self::all()->sum('RemainGold');
+        });
+    }
+
     public function getGuildMemberUser()
     {
         return $this->hasOne(GuildMember::class, 'CharID', 'CharID');
