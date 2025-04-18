@@ -55,6 +55,8 @@ class AppServiceProvider extends ServiceProvider
     private function configureApp(): void
     {
         try {
+            Theme::set(setting('site_theme', 'default'));
+
             Cache::remember('global_config', now()->addMinutes(config('global.general.cache.data.global_config')), function () {
                 return array_merge(config('global'), Setting::pluck('value', 'key')->toArray());
             });
