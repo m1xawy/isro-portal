@@ -3,7 +3,7 @@
 
 @section('content')
     <div class="container my-5">
-        @if (!config('settings.general.options.register_disable'))
+        @if (!config('settings.disable_register'))
         <form method="POST" action="{{ route('register') }}">
             @csrf
 

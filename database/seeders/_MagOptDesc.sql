@@ -1,13 +1,3 @@
-USE [SILKROAD_R_ACCOUNT]
-GO
-
-/****** Object:  Table [dbo].[_Rigid_MagOptDesc]    Script Date: 4/16/2025 9:57:11 AM ******/
-SET ANSI_NULLS ON
-GO
-
-SET QUOTED_IDENTIFIER ON
-GO
-
 DROP TABLE [dbo].[_Rigid_MagOptDesc]
 CREATE TABLE [dbo].[_Rigid_MagOptDesc](
     [id] [int] NOT NULL,
@@ -17,9 +7,6 @@ CREATE TABLE [dbo].[_Rigid_MagOptDesc](
     [extension] [nvarchar](255) NULL,
     [sortkey] [int] NOT NULL
     ) ON [PRIMARY]
-    GO
-
-
 
 INSERT INTO [dbo].[_Rigid_MagOptDesc] VALUES
 ('594', N'MATTR_SELF_PARTY_DAMAGE_ABS_INC_TITLE', N'MATTR_SELF_PARTY_DAMAGE_ABS_INC_TITLE', '1', N'', '0'),

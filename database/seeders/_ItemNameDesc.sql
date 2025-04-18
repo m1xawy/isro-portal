@@ -1,13 +1,3 @@
-USE [SILKROAD_R_ACCOUNT]
-GO
-
-/****** Object:  Table [dbo].[_Rigid_ItemNameDesc]    Script Date: 4/16/2025 9:56:41 AM ******/
-SET ANSI_NULLS ON
-GO
-
-SET QUOTED_IDENTIFIER ON
-GO
-
 DROP TABLE [dbo].[_Rigid_ItemNameDesc]
 CREATE TABLE [dbo].[_Rigid_ItemNameDesc](
 	[Service] [int] NOT NULL,
@@ -28,9 +18,6 @@ CREATE TABLE [dbo].[_Rigid_ItemNameDesc](
 	[ESP] [varchar](max) NOT NULL,
 	[GER] [varchar](max) NOT NULL
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
-GO
-
-
 
 INSERT [dbo].[_Rigid_ItemNameDesc] VALUES
 (1, 1, N'SN_ITEM_CH_SWORD_01_A_DEF', N'구리 장검 (기본)', N'0', N'0', N'0', N'0', N'0', N'Copper Sword', N'0', N'0', N'0', N'0', N'0', N'0', N'0'),

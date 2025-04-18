@@ -34,6 +34,10 @@ class AppServiceProvider extends ServiceProvider
 
         date_default_timezone_set(config('global.general.options.timezone'));
 
+        if (!app()->runningInConsole()) {
+            $this->configureApp();
+        }
+
         //Databases
         Config::set('database.connections.sqlsrv.host', config('global.general.connection.host'));
         Config::set('database.connections.sqlsrv.port', config('global.general.connection.port'));
@@ -46,14 +50,17 @@ class AppServiceProvider extends ServiceProvider
         Config::set('database.connections.account.database', config('global.general.connection.db_account'));
         Config::set('database.connections.shard.database', config('global.general.connection.db_shard'));
         Config::set('database.connections.log.database', config('global.general.connection.db_log'));
+    }
 
-        Cache::remember('global_config', now()->addMinutes(config('global.general.cache.data.global_config')), function () {
-            return array_merge(config('global'), Setting::pluck('value', 'key')->toArray());
-        });
-        Config::set('settings', Cache::get('global_config'));
-        //dd(config('settings'));
-
+    private function configureApp(): void
+    {
         try {
+            Cache::remember('global_config', now()->addMinutes(config('global.general.cache.data.global_config')), function () {
+                return array_merge(config('global'), Setting::pluck('value', 'key')->toArray());
+            });
+            Config::set('settings', Cache::get('global_config'));
+            //dd(config('settings'));
+
             //General
             Config::set('mail.default', config('settings.general.smtp.enable') ? 'smtp' : 'log');
 
@@ -72,7 +79,7 @@ class AppServiceProvider extends ServiceProvider
             Config::set('maxicard.password', config('settings.donation.maxicard.api.password'));
 
         } catch (QueryException $e) {
-            // Error: Something Wrong.
+            // Error: Something Error.
         }
     }
 }

@@ -40,9 +40,9 @@
 
                 <div class="col-md-10">
                     <select class="form-select" name="category" aria-label="Default select example">
-                        <option value="news">News</option>
-                        <option value="event">Event</option>
-                        <option value="update">Update</option>
+                        <option value="news" {{ $news->category == 'news' ? 'selected' : '' }}>News</option>
+                        <option value="event" {{ $news->category == 'event' ? 'selected' : '' }}>Event</option>
+                        <option value="update" {{ $news->category == 'update' ? 'selected' : '' }}>Update</option>
                     </select>
 
                     @error('category')

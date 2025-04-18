@@ -47,10 +47,13 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link d-flex align-items-center gap-2" href="#">
-                    <svg class="bi" aria-hidden="true"><use xlink:href="#door-closed"/></svg>
-                    Sign out
-                </a>
+                <form method="POST" action="{{ route('logout') }}">
+                    @csrf
+                    <a class="nav-link d-flex align-items-center gap-2" href="{{ route('logout') }}" onsubmit="return confirm('Are you sure you want to Sign out?')" onclick="event.preventDefault();this.closest('form').submit();">
+                        <svg class="bi" aria-hidden="true"><use xlink:href="#door-closed"/></svg>
+                        {{ __('Log Out') }}
+                    </a>
+                </form>
             </li>
         </ul>
     </div>

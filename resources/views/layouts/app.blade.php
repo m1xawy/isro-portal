@@ -6,8 +6,8 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>{{ config('settings.site_title') }} - @yield('title')</title>
-    <meta name="description" content="{{ config('settings.general.options.server_desc') }}">
-    <link rel="shortcut icon" href="{{ asset(config('settings.general.options.favicon')) }}">
+    <meta name="description" content="{{ config('settings.site_desc') }}">
+    <link rel="shortcut icon" href="{{ asset(config('settings.site_favicon')) }}">
 
     <!-- SEO -->
     @include('partials.seo')
@@ -21,7 +21,7 @@
     @stack('styles')
 </head>
 
-<body data-bs-theme="{{ config('settings.general.options.theme_color_mode') }}">
+<body data-bs-theme="{{ config('settings.dark_mode') }}">
 @include('layouts.header')
 
 <main>
