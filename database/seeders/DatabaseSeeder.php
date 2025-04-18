@@ -3,12 +3,6 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
-use Database\Seeders\Donate\CoinbaseSeeder;
-use Database\Seeders\Donate\DonationMethodsSeeder;
-use Database\Seeders\Donate\MaxiCardSeeder;
-use Database\Seeders\Donate\PayOpSeeder;
-use Database\Seeders\Donate\PaypalSeeder;
-use Database\Seeders\Donate\StripeSeeder;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder

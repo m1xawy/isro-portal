@@ -15,6 +15,8 @@ Route::middleware(['auth', 'admin'])->group(function () {
         Route::post('/settings/clear-cache', [SettingController::class, 'clear_cache'])->name('settings.clear-cache');
 
         Route::get('/users', [UsersController::class, 'index'])->name('users.index');
+        Route::get('/users/{user}/view', [UsersController::class, 'view'])->name('users.view');
+        Route::put('/users/{user}', [UsersController::class, 'update'])->name('users.update');
 
         Route::get('/news', [NewsController::class, 'index'])->name('news.index');
         Route::get('/news/create', [NewsController::class, 'create'])->name('news.create');

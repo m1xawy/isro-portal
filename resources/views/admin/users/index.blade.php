@@ -32,7 +32,7 @@
                             <td>{{ $value->username }}</td>
                             <td>{{ $value->email }}</td>
                             <td>
-                                <a href="#" class="btn btn-secondary btn-sm">View</a>
+                                <a href="{{ route('admin.users.view', $value->id) }}" class="btn btn-secondary btn-sm">View</a>
                             </td>
                         </tr>
                     @empty
