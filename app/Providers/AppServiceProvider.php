@@ -34,10 +34,6 @@ class AppServiceProvider extends ServiceProvider
 
         date_default_timezone_set(config('global.general.options.timezone'));
 
-        if (!app()->runningInConsole()) {
-            $this->configureApp();
-        }
-
         //Databases
         Config::set('database.connections.sqlsrv.host', config('global.general.connection.host'));
         Config::set('database.connections.sqlsrv.port', config('global.general.connection.port'));
@@ -50,6 +46,10 @@ class AppServiceProvider extends ServiceProvider
         Config::set('database.connections.account.database', config('global.general.connection.db_account'));
         Config::set('database.connections.shard.database', config('global.general.connection.db_shard'));
         Config::set('database.connections.log.database', config('global.general.connection.db_log'));
+
+        if (!app()->runningInConsole()) {
+            $this->configureApp();
+        }
     }
 
     private function configureApp(): void
