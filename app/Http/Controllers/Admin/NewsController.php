@@ -26,12 +26,13 @@ class NewsController extends Controller
         $validated = $request->validate([
             'title' => 'required|string',
             'category' => 'required',
-            'published_at' => 'required',
+            'published_at' => 'required|date',
             'active' => 'required',
             'news_content' => 'required',
         ]);
 
         $validated['author_id'] = auth()->user()->id;
+        $validated['title'] = preg_replace('/\s+/', ' ', trim($validated['title']));
         $validated['slug'] = Str::slug($validated['title']) . '-' . now()->timestamp;
         $validated['content'] = $validated['news_content'];
 
@@ -40,19 +41,19 @@ class NewsController extends Controller
         return redirect()->route('admin.news.index')->with('success', 'News created successfully!');
     }
 
-    public function destroy(News $post)
+    public function destroy(News $news)
     {
-        $post->delete();
+        $news->delete();
 
         return redirect()->route('admin.news.index')->with('success', 'News deleted successfully.');
     }
 
-    public function edit(News $post)
+    public function edit(News $news)
     {
-        return view('admin.news.edit', compact('post'));
+        return view('admin.news.edit', compact('news'));
     }
 
-    public function update(Request $request, News $post)
+    public function update(Request $request, News $news)
     {
         $validated = $request->validate([
             'title' => 'required|string',
@@ -62,8 +63,10 @@ class NewsController extends Controller
             'news_content' => 'required',
         ]);
 
+        $validated['title'] = preg_replace('/\s+/', ' ', trim($validated['title']));
+        $validated['slug'] = Str::slug($validated['title']) . '-' . now()->timestamp;
         $validated['content'] = $validated['news_content'];
-        $post->update($validated);
+        $news->update($validated);
 
         return redirect()->route('admin.news.index')->with('success', 'News updated successfully.');
     }

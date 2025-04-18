@@ -55,7 +55,7 @@
                 <label for="published_at" class="col-md-2 col-form-label text-md-end">{{ __('Published At') }}</label>
 
                 <div class="col-md-10">
-                    <input id="published_at" type="date" class="form-control @error('published_at') is-invalid @enderror" name="published_at" value="{{ old('published_at') }}" required>
+                    <input id="published_at" type="date" class="form-control @error('published_at') is-invalid @enderror" name="published_at" value="{{ old('published_at', now()->format('Y-m-d')) }}" required>
 
                     @error('published_at')
                     <span class="invalid-feedback" role="alert">
@@ -70,8 +70,8 @@
 
                 <div class="col-md-10">
                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" name="active" value="" id="flexCheckChecked" checked>
-                        <label class="form-check-label" for="flexCheckChecked">
+                        <input class="form-check-input" type="checkbox" name="active" value="1" id="active" checked>
+                        <label class="form-check-label" for="active">
                             Active
                         </label>
                     </div>
@@ -126,6 +126,14 @@
             height: 400,
             codeviewFilter: false, // allows raw HTML
             codeviewIframeFilter: true
+        });
+    </script>
+
+    <script>
+        const checkbox = document.getElementById('active');
+
+        checkbox.addEventListener('change', function () {
+            checkbox.value = this.checked ? '1' : '0';
         });
     </script>
 @endpush

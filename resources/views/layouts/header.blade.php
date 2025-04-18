@@ -109,13 +109,9 @@
                                 <li><a class="dropdown-item" href="{{ route('profile.edit') }}">{{ __('Settings') }}</a></li>
                                 <li><a class="dropdown-item" href="{{ route('profile.donate') }}">{{ __('Donate') }}</a></li>
                                 <li><a class="dropdown-item" href="{{ route('profile.donate.history') }}">{{ __('Donate History') }}</a></li>
-                                @if (Auth::user()->role == 'admin')
+                                @if (auth()->user()->role->is_admin)
                                     <li><hr class="dropdown-divider"></li>
-                                    <li><a class="dropdown-item" href="{{ url('/admin') }}">{{ __('Admin panel') }}</a></li>
-                                @endif
-                                @if (Auth::user()->role == 'admin')
-                                    <li><hr class="dropdown-divider"></li>
-                                    <li><a class="dropdown-item" href="{{ url('/admin2') }}">{{ __('Admin New') }}</a></li>
+                                    <li><a class="dropdown-item" href="{{ url('/admin2') }}">{{ __('Admin panel') }}</a></li>
                                 @endif
                                 <li><hr class="dropdown-divider"></li>
                                 <li>

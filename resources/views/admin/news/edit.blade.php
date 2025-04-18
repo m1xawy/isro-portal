@@ -17,7 +17,7 @@
             </div>
         @endif
 
-        <form method="POST" action="{{ route('admin.news.update', $post->id) }}">
+        <form method="POST" action="{{ route('admin.news.update', $news->id) }}">
             @csrf
             @method('PUT')
 
@@ -25,7 +25,7 @@
                 <label for="title" class="col-md-2 col-form-label text-md-end">{{ __('Title') }}</label>
 
                 <div class="col-md-10">
-                    <input id="title" type="text" class="form-control @error('title') is-invalid @enderror" name="title" value="{{ old('title', $post->title) }}" required>
+                    <input id="title" type="text" class="form-control @error('title') is-invalid @enderror" name="title" value="{{ old('title', $news->title) }}" required>
 
                     @error('title')
                     <span class="invalid-feedback" role="alert">
@@ -57,7 +57,7 @@
                 <label for="published_at" class="col-md-2 col-form-label text-md-end">{{ __('Published At') }}</label>
 
                 <div class="col-md-10">
-                    <input id="published_at" type="date" class="form-control @error('published_at') is-invalid @enderror" name="published_at" value="{{ old('published_at', $post->published_at) }}" required>
+                    <input id="published_at" type="date" class="form-control @error('published_at') is-invalid @enderror" name="published_at" value="{{ old('published_at', $news->published_at ? $news->published_at->format('Y-m-d') : '') }}" required>
 
                     @error('published_at')
                     <span class="invalid-feedback" role="alert">
@@ -72,7 +72,7 @@
 
                 <div class="col-md-10">
                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" name="active" value="" id="flexCheckChecked" checked>
+                        <input class="form-check-input" type="checkbox" name="active" value="{{ old('active', $news->active ?? 0) ? '1' : '0' }}" id="flexCheckChecked" {{ old('active', $news->active ?? 0) ? 'checked' : '' }}>
                         <label class="form-check-label" for="flexCheckChecked">
                             Active
                         </label>
@@ -90,7 +90,7 @@
                 <label for="content" class="col-md-2 col-form-label text-md-end">{{ __('Content') }}</label>
 
                 <div class="col-md-10">
-                    <textarea id="summernote" rows="10" class="form-control" name="news_content">{{ old('content', $post->content) }}</textarea>
+                    <textarea id="summernote" rows="10" class="form-control" name="news_content">{{ old('content', $news->content) }}</textarea>
 
                     @error('news_content')
                     <span class="invalid-feedback" role="alert">

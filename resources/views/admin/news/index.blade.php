@@ -27,6 +27,7 @@
                         <th scope="col">Title</th>
                         <th scope="col">Slug</th>
                         <th scope="col">Category</th>
+                        <th scope="col">Status</th>
                         <th scope="col">Options</th>
                     </tr>
                 </thead>
@@ -37,6 +38,13 @@
                             <td>{{ $value->title }}</td>
                             <td>{{ $value->slug }}</td>
                             <td>{{ $value->category }}</td>
+                            <td>
+                                @if($value->active == 1)
+                                    <span class="text-success">Active</span>
+                                @elseif($value->active == 0)
+                                    <span class="text-danger">Not Active</span>
+                                @endif
+                            </td>
                             <td>
                                 <a href="{{ route('admin.news.edit', $value->id) }}" class="btn btn-secondary btn-sm">Edit</a>
                                 <form action="{{ route('admin.news.destroy', $value->id) }}" method="POST" class="d-inline" onsubmit="return confirm('Are you sure you want to delete this News?');">
