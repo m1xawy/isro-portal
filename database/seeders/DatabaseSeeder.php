@@ -25,7 +25,7 @@ class DatabaseSeeder extends Seeder
         //     'email' => 'test@example.com',
         // ]);
 
-        $this->call(MagOptSeeder::class);
+        //$this->call(MagOptSeeder::class);
         //$this->call(ItemNameSeeder::class);
         $this->call(SettingSeeder::class);
     }
