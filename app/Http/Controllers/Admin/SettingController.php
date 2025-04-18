@@ -22,4 +22,10 @@ class SettingController extends Controller
 
         return back()->with('success', 'Settings updated!');
     }
+
+    public function clear_cache()
+    {
+        \Artisan::call('optimize:clear');
+        return back()->with('success', 'All caches have been cleared!');
+    }
 }
