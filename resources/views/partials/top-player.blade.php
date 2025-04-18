@@ -1,4 +1,4 @@
-@if (config('global.widgets.top_player.enable'))
+@if (config('settings.widgets.top_player.enable'))
     <div class="card mb-4">
         <div class="card-header">
             {{ __('Top Players') }}
@@ -19,7 +19,7 @@
                             <tr>
                                 <td>
                                     @if($i <= 3)
-                                        <img src="{{ asset(config('global.ranking.top_icons')[$i]) }}" alt=""/>
+                                        <img src="{{ asset(config('settings.ranking.top_icons')[$i]) }}" alt=""/>
                                     @else
                                         {{ $i }}
                                     @endif

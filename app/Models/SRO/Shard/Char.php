@@ -62,7 +62,7 @@ class Char extends Model
 
     public static function getPlayerRanking($limit = 25, $CharID = 0)
     {
-        return Cache::remember('ranking_player_'.$limit.'_'.$CharID, config('global.general.cache.data.ranking-player'), function () use ($CharID, $limit) {
+        return Cache::remember('ranking_player_'.$limit.'_'.$CharID, config('settings.general.cache.data.ranking-player'), function () use ($CharID, $limit) {
             return self::select(
                 '_Char.CharID',
                 '_Char.CharName16',
@@ -139,21 +139,21 @@ class Char extends Model
 
     public static function getCharIDByName($CharName)
     {
-        return Cache::remember('character_name_'.$CharName, config('global.general.cache.data.character'), function () use ($CharName) {
+        return Cache::remember('character_name_'.$CharName, config('settings.general.cache.data.character'), function () use ($CharName) {
             return self::select('CharID')->where('CharName16', $CharName)->first()->CharID ?? null;
         });
     }
 
     public static function getCharCount()
     {
-        return Cache::remember('character_count', config('global.general.cache.data.character'), function () {
+        return Cache::remember('character_count', config('settings.general.cache.data.character'), function () {
             return self::count();
         });
     }
 
     public static function getGoldSum()
     {
-        return Cache::remember('character_gold_sum', config('global.general.cache.data.character'), function () {
+        return Cache::remember('character_gold_sum', config('settings.general.cache.data.character'), function () {
             return self::all()->sum('RemainGold');
         });
     }

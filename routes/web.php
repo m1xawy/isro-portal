@@ -43,7 +43,7 @@ Route::get('/ranking/character/{name}', [RankingController::class, 'character_vi
 Route::get('/ranking/guild/{name}', [RankingController::class, 'guild_view'])->name('ranking.guild.view');
 Route::any('/ranking/guild-crest/{hex}', [RankingController::class, 'guild_crest'])->name('ranking.guild-crest');
 
-Route::middleware(['auth', config('global.general.options.register_confirmation') ? 'verified' : 'throttle'])->group(function () {
+Route::middleware(['auth', config('settings.general.options.register_confirmation') ? 'verified' : 'throttle'])->group(function () {
     Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
     Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile/edit', [ProfileController::class, 'update'])->name('profile.update');

@@ -1,7 +1,7 @@
 <div class="container">
     <div class="col-md-12">
         <div class="d-flex mb-4">
-            @foreach(config('global.ranking.job_menu') as $value)
+            @foreach(config('settings.ranking.job_menu') as $value)
                 @if($value['enable'])
                     <button class="btn btn-primary ranking-main-button-job mx-2" data-link="{{ route($value['route']) }}">{{ $value['name'] }}</button>
                 @endif

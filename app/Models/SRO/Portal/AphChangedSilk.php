@@ -72,14 +72,14 @@ class AphChangedSilk extends Model
 
     public static function getDonateHistory($jid)
     {
-        return Cache::remember('donate_history', now()->addMinutes(config('global.general.cache.data.account')), function () use ($jid) {
+        return Cache::remember('donate_history', now()->addMinutes(config('settings.general.cache.data.account')), function () use ($jid) {
             return self::where('JID', $jid)->orderBy('ChangeDate', 'DESC')->get();
         });
     }
 
     public static function getSilkSum()
     {
-        return Cache::remember('silk_sum', config('global.general.cache.data.account'), function () {
+        return Cache::remember('silk_sum', config('settings.general.cache.data.account'), function () {
             return self::all()->sum('ChangedSilk');
         });
     }

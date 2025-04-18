@@ -48,7 +48,7 @@ class InventoryForAvatar extends Model
 
     public static function getInventoryForAvatar($characterId): array
     {
-        return Cache::remember('InventoryForAvatar_'.$characterId, now()->addMinutes(config('global.general.cache.data.character')), static function () use ($characterId) {
+        return Cache::remember('InventoryForAvatar_'.$characterId, now()->addMinutes(config('settings.general.cache.data.character')), static function () use ($characterId) {
             return self::where('CharID', '=', $characterId)
             ->where('ItemID', '>', 1)
             ->join('_Items as Items', 'Items.ID64', 'ItemID')

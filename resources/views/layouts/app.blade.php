@@ -6,8 +6,8 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>{{ config('settings.site_title') }} - @yield('title')</title>
-    <meta name="description" content="{{ config('global.general.options.server_desc') }}">
-    <link rel="shortcut icon" href="{{ asset(config('global.general.options.favicon')) }}">
+    <meta name="description" content="{{ config('settings.general.options.server_desc') }}">
+    <link rel="shortcut icon" href="{{ asset(config('settings.general.options.favicon')) }}">
 
     <!-- SEO -->
     @include('partials.seo')
@@ -21,15 +21,15 @@
     @stack('styles')
 </head>
 
-<body data-bs-theme="{{ config('global.general.options.theme_color_mode') }}">
+<body data-bs-theme="{{ config('settings.general.options.theme_color_mode') }}">
 @include('layouts.header')
 
 <main>
     @section('hero')
         <div class="mb-5">
-            <div class="p-5 text-center bg-body-tertiary" style="background-image: url({{ config('global.general.hero.hero_background') }}) !important; background-repeat: no-repeat; background-size: cover; background-position: center;">
+            <div class="p-5 text-center bg-body-tertiary" style="background-image: url({{ config('settings.general.hero.hero_background') }}) !important; background-repeat: no-repeat; background-size: cover; background-position: center;">
                 <div class="container py-5">
-                    <h1 class="display-5 fw-bold text-body-emphasis" style="color: {{ config('global.general.hero.hero_label_color') }} !important;">@yield('title')</h1>
+                    <h1 class="display-5 fw-bold text-body-emphasis" style="color: {{ config('settings.general.hero.hero_label_color') }} !important;">@yield('title')</h1>
                     <p class="col-lg-8 mx-auto lead"></p>
                 </div>
             </div>

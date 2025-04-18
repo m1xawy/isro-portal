@@ -36,14 +36,14 @@ class News extends Model
 
     public static function getPosts()
     {
-        return Cache::remember('news', now()->addMinutes(config('global.general.cache.data.news')), function () {
+        return Cache::remember('news', now()->addMinutes(config('settings.general.cache.data.news')), function () {
             return self::where('active', '=', 1)->where('published_at', '<=', now())->orderBy('created_at', 'DESC')->get();
         });
     }
 
     public static function getPost($slug)
     {
-        return Cache::remember('news_view_'.$slug, now()->addMinutes(config('global.general.cache.data.news')), function () use ($slug) {
+        return Cache::remember('news_view_'.$slug, now()->addMinutes(config('settings.general.cache.data.news')), function () use ($slug) {
             return self::where('slug', $slug)->first();
         });
     }

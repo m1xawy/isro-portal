@@ -65,7 +65,7 @@ class ProfileController extends Controller
         DB::beginTransaction();
         try {
             MuEmail::where('JID', $request->user()->jid)->update(['EmailAddr' => $request->user()->email]);
-            if(config('global.general.options.register_confirmation')) {
+            if(config('settings.general.options.register_confirmation')) {
                 MuhAlteredInfo::where('JID', $request->user()->jid)->update(['EmailAddr' => $request->user()->email, 'EmailReceptionStatus'=>'N', 'EmailCertificationStatus'=>'N']);
             } else {
                 MuhAlteredInfo::where('JID', $request->user()->jid)->update(['EmailAddr' => $request->user()->email, 'EmailReceptionStatus'=>'Y', 'EmailCertificationStatus'=>'Y']);

@@ -19,7 +19,7 @@
                             @foreach($data as $key => $value)
                                 @if(is_null($value)) @continue @endif
                                 <tr>
-                                    <td>{{ config('global.widgets.event_schedule.data')[$key] }}</td>
+                                    <td>{{ config('settings.widgets.event_schedule.data')[$key] }}</td>
                                     <td>
                                         <span class="timerCountdown" id="idTimeCountdown_{{ $i }}" data-time="{{ $value['start'] }}"></span>
                                     </td>

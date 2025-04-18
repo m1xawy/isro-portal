@@ -33,7 +33,7 @@ class TrainingCampHonorRank extends Model
 
     public static function getHonorRanking($limit = 25)
     {
-        return Cache::remember('ranking_fortress_honor_'.$limit, config('global.general.cache.data.ranking_fortress_honor'), function () use ($limit) {
+        return Cache::remember('ranking_fortress_honor_'.$limit, config('settings.general.cache.data.ranking_fortress_honor'), function () use ($limit) {
             return self::join('_TrainingCampMember', '_TrainingCampMember.CampID', '=', '_TrainingCampHonorRank.CampID')
                 ->join('_Char', '_Char.CharID', '=', '_TrainingCampMember.CharID')
                 ->join('_RefObjCommon', '_RefObjCommon.ID', '=', '_TrainingCampMember.RefObjID')

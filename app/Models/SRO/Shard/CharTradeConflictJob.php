@@ -33,7 +33,7 @@ class CharTradeConflictJob extends Model
 
     public static function getJobRanking($limit = 25, $type = 0)
     {
-        return Cache::remember('ranking_fortress_job_all_'.$limit.'_'.$type, config('global.general.cache.data.ranking_fortress_job'), function () use ($type, $limit) {
+        return Cache::remember('ranking_fortress_job_all_'.$limit.'_'.$type, config('settings.general.cache.data.ranking_fortress_job'), function () use ($type, $limit) {
             return self::join('_Char', '_Char.CharID', '=', '_CharTradeConflictJob.CharID')
                 ->join('_User', '_User.CharID', '=', '_Char.CharID')
                 ->join('_UserTradeConflictJob', '_UserTradeConflictJob.UserJID', '=', '_User.UserJID')

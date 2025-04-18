@@ -51,7 +51,7 @@ class SiegeFortress extends Model
 
     public static function getFortress()
     {
-        return Cache::remember('fortress_war_widget', now()->addMinutes(config('global.general.cache.data.fortress_war')), function () {
+        return Cache::remember('fortress_war_widget', now()->addMinutes(config('settings.general.cache.data.fortress_war')), function () {
             return self::select(["FortressID", "GuildID", "TaxRatio", "_Guild.Name"])
                 ->join("_Guild", "_SiegeFortress.GuildID", "=", "_Guild.ID")
                 ->get();

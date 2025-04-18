@@ -25,7 +25,7 @@
                     <td>{{ date('d-m-Y', strtotime($value->JoinDate)) }}</td>
                     <td>
                         @if($value->SiegeAuthority > 0)
-                            {{ config('global.ranking.guild.authority')[$value->SiegeAuthority] }}
+                            {{ config('settings.ranking.guild.authority')[$value->SiegeAuthority] }}
                         @else
                             {{ __('Member') }}
                         @endif

@@ -36,7 +36,7 @@ class RankingController extends Controller
     public function unique()
     {
         $data = LogInstanceWorldInfo::getUniqueRanking();
-        $unique_points = config('global.ranking.unique_points');
+        $unique_points = config('settings.ranking.unique_points');
         return view('ranking.ranking.unique', [
             'data' => $data,
             'unique_points' => $unique_points,
@@ -46,7 +46,7 @@ class RankingController extends Controller
     public function unique_monthly()
     {
         $data = LogInstanceWorldInfo::getUniqueRanking(25, 1);
-        $unique_points = config('global.ranking.unique_points');
+        $unique_points = config('settings.ranking.unique_points');
         return view('ranking.ranking.unique-monthly', [
             'data' => $data,
             'unique_points' => $unique_points,

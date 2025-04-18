@@ -50,7 +50,7 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function getJCash()
     {
-        return Cache::remember('account_j_cash_'.$this->jid, config('global.general.cache.data.account'), function () {
+        return Cache::remember('account_j_cash_'.$this->jid, config('settings.general.cache.data.account'), function () {
             return collect(DB::select("
             Declare @ReturnValue Int
             Declare @PremiumSilk Int
@@ -81,7 +81,7 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function getVipLevel()
     {
-        return Cache::remember('account_vip_level_'.$this->jid, config('global.general.cache.data.account'), function () {
+        return Cache::remember('account_vip_level_'.$this->jid, config('settings.general.cache.data.account'), function () {
             return DB::connection('portal')
             ->table('MU_VIP_Info')
                 ->where('JID', $this->jid)
@@ -91,7 +91,7 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public static function getUserCount()
     {
-        return Cache::remember('account_count', config('global.general.cache.data.account'), function () {
+        return Cache::remember('account_count', config('settings.general.cache.data.account'), function () {
             return self::count();
         });
     }

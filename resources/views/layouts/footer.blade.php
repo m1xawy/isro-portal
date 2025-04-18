@@ -3,17 +3,17 @@
     <footer class="row py-5 my-5 border-top">
         <div class="col-md-6 mb-3">
             <a href="{{ url('/') }}" class="d-flex align-items-center me-3 mb-2 mb-lg-0 text-white text-decoration-none" aria-label="Bootstrap">
-                @if (!empty(config('global.general.options.logo')))
-                    <img src="{{ asset(config('global.general.options.logo')) }}" alt="" width="" height="40" class="">
+                @if (!empty(config('settings.general.options.logo')))
+                    <img src="{{ asset(config('settings.general.options.logo')) }}" alt="" width="" height="40" class="">
                 @else
                     <img src="{{ asset('images/bootstrap-logo.svg') }}" alt="" width="" height="40" class="">
                 @endif
             </a>
-            <p class="text-body-secondary mb-0 mt-2">© 2025 <a href="{{ config('global.general.options.server_url') }}">{{ config('global.general.options.server_name') }}</a>, Inc - All Rights Reserved.</p>
+            <p class="text-body-secondary mb-0 mt-2">© 2025 <a href="{{ config('settings.general.options.server_url') }}">{{ config('settings.site_title') }}</a>, Inc - All Rights Reserved.</p>
             <p class="text-body-secondary">Coded by <a class="link-default" href="https://github.com/m1xawy" target="_blank">m1xawy</a></p>
         </div>
 
-        @php $footer_links = config('global.general.footer'); @endphp
+        @php $footer_links = config('settings.general.footer'); @endphp
         @if (!empty($footer_links))
         <div class="col-md-2 mb-3">
             <h5>{{ __('General') }}</h5>

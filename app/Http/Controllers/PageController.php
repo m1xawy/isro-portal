@@ -31,7 +31,7 @@ class PageController extends Controller
 
     public function page($slug)
     {
-        $data = Cache::remember('page_view_'.$slug, now()->addMinutes(config('global.general.cache.data.pages')), function () use ($slug) {
+        $data = Cache::remember('page_view_'.$slug, now()->addMinutes(config('settings.general.cache.data.pages')), function () use ($slug) {
             foreach (NPMHelpers::getPages() as $value){
                 if (!$value['slug']['en'] == $slug) {
                     return redirect()->back();

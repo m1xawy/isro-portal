@@ -33,7 +33,7 @@ class LogChatMessage extends Model
 
     public static function getGlobalsHistory($limit = 25, $CharName = null)
     {
-        return Cache::remember('globals_history_'.$limit.'_'.$CharName, now()->addMinutes(config('global.general.cache.data.globals_history')), function () use ($CharName, $limit) {
+        return Cache::remember('globals_history_'.$limit.'_'.$CharName, now()->addMinutes(config('settings.general.cache.data.globals_history')), function () use ($CharName, $limit) {
             return self::select(['CharName', 'EventTime', 'Comment'])
                 ->where('TargetName', '[YELL]')
                 ->when(!is_null($CharName), function ($query) use ($CharName) {

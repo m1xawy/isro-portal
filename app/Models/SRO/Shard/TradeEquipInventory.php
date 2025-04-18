@@ -48,7 +48,7 @@ class TradeEquipInventory extends Model
 
     public static function getInventoryForJob($characterId): array
     {
-        return Cache::remember('MagOptDesc_'.$characterId, now()->addMinutes(config('global.general.cache.data.character')), static function () use ($characterId) {
+        return Cache::remember('MagOptDesc_'.$characterId, now()->addMinutes(config('settings.general.cache.data.character')), static function () use ($characterId) {
             return self::where('CharID', '=', $characterId)
             ->where('ItemID', '>', 1)
             ->join('_Items as Items', 'Items.ID64', 'ItemID')

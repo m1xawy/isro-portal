@@ -14,16 +14,16 @@
                 <tr>
                     <td>
                         @if($i <= 3)
-                            <img src="{{ asset(config('global.ranking.top_icons')[$i]) }}" alt=""/>
+                            <img src="{{ asset(config('settings.ranking.top_icons')[$i]) }}" alt=""/>
                         @else
                             {{ $i }}
                         @endif
                     </td>
                     <td>
                         @if($value->RefObjID > 2000)
-                            <img src="{{ asset(config('global.ranking.race')[1]['icon']) }}" width="16" height="16" alt=""/>
+                            <img src="{{ asset(config('settings.ranking.race')[1]['icon']) }}" width="16" height="16" alt=""/>
                         @else
-                            <img src="{{ asset(config('global.ranking.race')[0]['icon']) }}" width="16" height="16" alt=""/>
+                            <img src="{{ asset(config('settings.ranking.race')[0]['icon']) }}" width="16" height="16" alt=""/>
                         @endif
                         <a href="{{ route('ranking.character.view', ['name' => $value->CharName16]) }}" class="text-decoration-none">{{ $value->NickName16 }}</a>
                     </td>

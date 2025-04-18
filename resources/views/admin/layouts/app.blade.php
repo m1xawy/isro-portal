@@ -5,16 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('global.general.options.server_name') }} - @yield('title')</title>
-    <meta name="description" content="{{ config('global.general.options.server_desc') }}">
-    <link rel="shortcut icon" href="{{ asset(config('global.general.options.favicon')) }}">
+    <title>{{ config('settings.site_title') }} - @yield('title')</title>
+    <meta name="description" content="{{ config('settings.general.options.server_desc') }}">
+    <link rel="shortcut icon" href="{{ asset(config('settings.general.options.favicon')) }}">
 
     <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
     <link href="{{ asset('dashboard/css/dashboard.css') }}" rel="stylesheet">
     <!-- Inline Styles -->
     @stack('styles')
 </head>
-<body data-bs-theme="{{ config('global.general.options.theme_color_mode') }}">
+<body data-bs-theme="{{ config('settings.general.options.theme_color_mode') }}">
 
 @include('admin.layouts.header')
 

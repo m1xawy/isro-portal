@@ -1,4 +1,4 @@
-@if (config('global.widgets.fortress_war.enable'))
+@if (config('settings.widgets.fortress_war.enable'))
     <div class="card mb-4">
         <div class="card-header">
             {{ __('Fortress War') }}
@@ -8,8 +8,8 @@
                 @forelse($fortress_war as $value)
                     <li>
                         <span>
-                            <img src="{{ config('global.widgets.fortress_war.data')[$value->FortressID]['icon'] }}" alt="">
-                            {{ config('global.widgets.fortress_war.data')[$value->FortressID]['name'] }}
+                            <img src="{{ config('settings.widgets.fortress_war.data')[$value->FortressID]['icon'] }}" alt="">
+                            {{ config('settings.widgets.fortress_war.data')[$value->FortressID]['name'] }}
                         </span>
                         <span class="float-end">
                             @if($value->Name !== 'DummyGuild')

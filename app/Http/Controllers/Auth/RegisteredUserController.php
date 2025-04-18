@@ -47,7 +47,7 @@ class RegisteredUserController extends Controller
             'password' => ['required', 'confirmed', 'min:6', 'max:32'],
             'g-recaptcha-response' => [
                 Rule::requiredIf(function () {
-                    return config('global.captcha.enable');
+                    return config('settings.captcha.enable');
                 }),
                 'captcha'
             ],
@@ -66,8 +66,8 @@ class RegisteredUserController extends Controller
             MuJoiningInfo::setJoiningInfo($portalUser->JID, $userBinIP);
             MuVIPInfo::setVIPInfo($portalUser->JID);
 
-            $free_silk = config('global.general.options.free_silk');
-            $free_premium_silk = config('global.general.options.free_premium_silk');
+            $free_silk = config('settings.general.options.free_silk');
+            $free_premium_silk = config('settings.general.options.free_premium_silk');
             //type 1 = silk, type 3 = premium silk
             AphChangedSilk::setChangedSilk($portalUser->JID, 1, $free_silk);
             AphChangedSilk::setChangedSilk($portalUser->JID, 3, $free_premium_silk);

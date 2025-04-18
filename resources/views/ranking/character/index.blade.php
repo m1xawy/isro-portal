@@ -9,7 +9,7 @@
                     <div class="col-md-6">
                         <div class="d-flex">
                             <div class="d-flex me-3 overflow-hidden align-items-center">
-                                <img class="object-fit-cover rounded border" src="{{ asset(config('global.ranking.character')[$data->RefObjID]) }}" width="100" height="100" alt=""/>
+                                <img class="object-fit-cover rounded border" src="{{ asset(config('settings.ranking.character')[$data->RefObjID]) }}" width="100" height="100" alt=""/>
                             </div>
 
                             <div class="mt-4">
@@ -19,7 +19,7 @@
                                 <ul class="list-unstyled d-flex">
                                     @foreach($build_info as $value)
                                         <li class="me-1">
-                                            <img src="{{ asset(config('global.ranking.skill_mastery')[$value->MasteryID]['icon']) }}" title="{{ config('global.ranking.skill_mastery')[$value->MasteryID]['name'] }}" alt="">
+                                            <img src="{{ asset(config('settings.ranking.skill_mastery')[$value->MasteryID]['icon']) }}" title="{{ config('settings.ranking.skill_mastery')[$value->MasteryID]['name'] }}" alt="">
                                         </li>
                                     @endforeach
                                 </ul>
@@ -32,12 +32,12 @@
                                 <div class="col-md-4">
                                     <div class="d-flex">
                                         <div class="d-flex align-items-center">
-                                            <img src="{{ asset(config('global.ranking.job_type_icons')[$data->JobType]['icon']) }}" width="50" height="" alt=""/>
+                                            <img src="{{ asset(config('settings.ranking.job_type_icons')[$data->JobType]['icon']) }}" width="50" height="" alt=""/>
                                         </div>
 
                                         <ul class="list-unstyled mt-3">
                                             <li class="mb-0">
-                                                <span>{{ config('global.ranking.job_type_icons')[$data->JobType]['name'] }}</span>
+                                                <span>{{ config('settings.ranking.job_type_icons')[$data->JobType]['name'] }}</span>
                                             </li>
                                             <li class="mb-0">{{ __('Job Level:') }} <span class="">{{ $data->JobLevel }}</span></li>
                                         </ul>

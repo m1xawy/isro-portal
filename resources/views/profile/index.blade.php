@@ -38,7 +38,7 @@
                             <td>
                                 @if(Auth::user()->getVipLevel() !== null && Auth::user()->getVipLevel()->VIPUserType > 0)
                                     <img src="{{ asset('images/ingame/viplevel_'.Auth::user()->getVipLevel()->VIPLv.'.jpg') }}" width="24" height="24" alt="">
-                                    <span>{{ config('global.ranking.vip_level.level')[Auth::user()->getVipLevel()->VIPLv] }}</span>
+                                    <span>{{ config('settings.ranking.vip_level.level')[Auth::user()->getVipLevel()->VIPLv] }}</span>
                                 @else
                                     <span>{{ __('None') }}</span>
                                 @endif

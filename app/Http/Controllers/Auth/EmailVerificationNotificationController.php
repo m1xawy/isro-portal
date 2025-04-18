@@ -18,7 +18,7 @@ class EmailVerificationNotificationController extends Controller
             return redirect()->intended(RouteServiceProvider::HOME);
         }
 
-        if (!config('global.general.options.register_confirmation')) {
+        if (!config('settings.general.options.register_confirmation')) {
             return redirect()->intended(RouteServiceProvider::HOME);
         }
 

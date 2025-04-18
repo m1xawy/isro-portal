@@ -55,7 +55,7 @@ class ItemNameDesc extends Model
 
     public static function getItemRealName($CodeName128): string
     {
-        $mappingList = Cache::remember('ItemNameDesc_'.$CodeName128, now()->addMinutes(config('global.general.cache.data.character')), static function () {
+        $mappingList = Cache::remember('ItemNameDesc_'.$CodeName128, now()->addMinutes(config('settings.general.cache.data.character')), static function () {
             $q = self::all();
 
             $aList = [];

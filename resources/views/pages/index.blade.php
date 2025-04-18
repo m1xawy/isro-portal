@@ -17,7 +17,7 @@
                         <h5 class="card-title">{{ $value->title }}</h5>
                     </a>
                     <p class="card-text">
-                        {!! config('global.general.news-category')[$value->category] !!}
+                        {!! config('settings.general.news-category')[$value->category] !!}
                         {{ __('Published on') }} {{ $value->published_at->format("M j, Y") }}
                     </p>
                 </div>

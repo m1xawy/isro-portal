@@ -2,8 +2,8 @@
     <div class="container-fluid">
         <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
             <a href="{{ url('/') }}" class="d-flex align-items-center me-3 mb-2 mb-lg-0 text-white text-decoration-none">
-                @if (!empty(config('global.general.options.logo')))
-                    <img src="{{ asset(config('global.general.options.logo')) }}" alt="" width="" height="40" class="">
+                @if (!empty(config('settings.general.options.logo')))
+                    <img src="{{ asset(config('settings.general.options.logo')) }}" alt="" width="" height="40" class="">
                 @else
                     <img src="{{ asset('images/bootstrap-logo-white.svg') }}" alt="" width="" height="40" class="">
                 @endif
@@ -39,7 +39,7 @@
             </ul>
 
             <div class="d-flex text-end">
-                @if(config('global.general.options.theme_color_mode') == 'switch')
+                @if(config('settings.general.options.theme_color_mode') == 'switch')
                 <div class="dropdown bd-mode-toggle">
                     <svg xmlns="http://www.w3.org/2000/svg" class="d-none">
                         <symbol id="check2" viewBox="0 0 16 16">

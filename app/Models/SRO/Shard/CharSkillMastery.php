@@ -33,7 +33,7 @@ class CharSkillMastery extends Model
 
     public static function getCharBuildInfo($CharID)
     {
-        return Cache::remember('character_build_'.$CharID, now()->addMinutes(config('global.general.cache.data.character')), function () use ($CharID) {
+        return Cache::remember('character_build_'.$CharID, now()->addMinutes(config('settings.general.cache.data.character')), function () use ($CharID) {
             return self::where('Level', '>', 0)->where('CharID', $CharID)->get();
         });
     }

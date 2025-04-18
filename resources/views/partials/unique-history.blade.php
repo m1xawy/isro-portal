@@ -1,4 +1,4 @@
-@if (config('global.widgets.unique_history.enable'))
+@if (config('settings.widgets.unique_history.enable'))
     <div class="card mb-4">
         <div class="card-header">
             {{ __('Unique History') }}
@@ -7,7 +7,7 @@
             <ul class="list-unstyled">
                 @forelse($unique_history as $value)
                     <li class="mb-3">
-                        <p class="mb-0">{{ config('global.ranking.unique_points')[$value->Value]['name'] }}</p>
+                        <p class="mb-0">{{ config('settings.ranking.unique_points')[$value->Value]['name'] }}</p>
                         <small>
                             {{ __('Killed by:') }}
                             @if(!empty($value->CharName16))
