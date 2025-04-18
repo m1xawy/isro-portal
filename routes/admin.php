@@ -38,5 +38,8 @@ Route::middleware(['auth', 'admin'])->group(function () {
         Route::put('/download/{download}', [DownloadController::class, 'update'])->name('download.update');
         Route::get('/download/{download}/delete', [DownloadController::class, 'delete'])->name('download.delete');
         Route::delete('/download/{download}', [DownloadController::class, 'destroy'])->name('download.destroy');
+
+        //Pages
+
     });
 });
