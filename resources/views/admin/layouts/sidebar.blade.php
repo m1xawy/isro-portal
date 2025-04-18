@@ -18,9 +18,9 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link d-flex align-items-center gap-2" href="#">
+                <a class="nav-link d-flex align-items-center gap-2 {{ request()->routeIs('admin.download.index') ? 'active' : '' }}" href="{{ route('admin.download.index') }}">
                     <svg class="bi" aria-hidden="true"><use xlink:href="#cart"/></svg>
-                    Download
+                    {{ __('Download') }}
                 </a>
             </li>
             <li class="nav-item">
