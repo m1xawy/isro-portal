@@ -47,9 +47,10 @@ class AppServiceProvider extends ServiceProvider
         Config::set('database.connections.shard.database', config('global.general.connection.db_shard'));
         Config::set('database.connections.log.database', config('global.general.connection.db_log'));
 
-        Cache::rememberForever('config', fn () => array_merge(config('global'), Setting::pluck('value', 'key')->toArray()));
-        Config::set('settings', Cache::get('config'));
-
+        Cache::remember('global_config', now()->addMinutes(config('global.general.cache.data.global_config')), function () {
+            return array_merge(config('global'), Setting::pluck('value', 'key')->toArray());
+        });
+        Config::set('settings', Cache::get('global_config'));
         //dd(config('settings'));
 
         try {
