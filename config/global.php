@@ -609,13 +609,34 @@ return [
         'vip_level' => [
             "level_access" => 4,
             "level" => [
-                0 => "Normal",
-                1 => "Iron",
-                2 => "Bronze",
-                3 => "Silver",
-                4 => "Gold",
-                5 => "Platinum",
-                6 => "VIP"
+                0 => [
+                    'name' => "Normal",
+                    'icon' => "",
+                ],
+                1 => [
+                    'name' => "Iron",
+                    'icon' => "images/viplevel_1.jpg",
+                ],
+                2 => [
+                    'name' => "Bronze",
+                    'icon' => "images/viplevel_2.jpg",
+                ],
+                3 => [
+                    'name' => "Silver",
+                    'icon' => "images/viplevel_3.jpg",
+                ],
+                4 => [
+                    'name' => "Gold",
+                    'icon' => "images/viplevel_4.jpg",
+                ],
+                5 => [
+                    'name' => "Platinum",
+                    'icon' => "images/viplevel_5.jpg",
+                ],
+                6 => [
+                    'name' => "VIP",
+                    'icon' => "images/viplevel_6.jpg",
+                ],
             ],
             "type" => [
                 0 => "General",
