@@ -1,10 +1,10 @@
 @extends('admin.layouts.app')
-@section('title', __('Delete News'))
+@section('title', __('Delete Download'))
 
 @section('content')
     <div class="container">
         <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-            <h1 class="h2">Delete News</h1>
+            <h1 class="h2">Delete Download</h1>
         </div>
 
         @if ($errors->any())
@@ -17,14 +17,14 @@
             </div>
         @endif
 
-        <form method="POST" action="{{ route('admin.news.destroy', $news->id) }}">
+        <form method="POST" action="{{ route('admin.download.destroy', $download->id) }}">
             @csrf
             @method('DELETE')
 
             <div class="row mb-0">
                 <div class="col-md-10 offset-md-2">
                     <button type="submit" class="btn btn-danger">{{ __('Yes, Delete') }}</button>
-                    <a href="{{ route('admin.news.index') }}" class="btn btn-secondary">{{ __('Cancel') }}</a>
+                    <a href="{{ route('admin.download.index') }}" class="btn btn-secondary">{{ __('Cancel') }}</a>
                 </div>
             </div>
         </form>
