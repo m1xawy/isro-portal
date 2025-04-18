@@ -47,7 +47,7 @@ class SettingSeeder extends Seeder
         DB::table('settings')->updateOrInsert(
             [
                 'key' => 'dark_mode',
-                'value' => 'switch',
+                'value' => 'dark',
             ]
         );
         DB::table('settings')->updateOrInsert(
