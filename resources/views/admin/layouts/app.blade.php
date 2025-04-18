@@ -10,7 +10,7 @@
     <link rel="shortcut icon" href="{{ asset(config('settings.general.options.favicon')) }}">
 
     <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('dashboard/css/dashboard.css') }}" rel="stylesheet">
+    <link href="{{ asset('admin/css/dashboard.css') }}" rel="stylesheet">
     <!-- Inline Styles -->
     @stack('styles')
 </head>
@@ -34,7 +34,7 @@
 <script defer src="{{ asset('js/bootstrap.bundle.min.js') }}" integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq"></script>
 <script src="{{ asset('js/color-modes.js') }}"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/chart.js@4.3.2/dist/chart.umd.js" integrity="sha384-eI7PSr3L1XLISH8JdDII5YN/njoSsxfbrkCTnJrzXt+ENP5MOVBxD+l6sEG4zoLp" crossorigin="anonymous"></script>
-<link href="{{ asset('dashboard/js/dashboard.js') }}" rel="stylesheet">
+<link href="{{ asset('admin/js/dashboard.js') }}" rel="stylesheet">
 <!-- Inline Scripts -->
 @stack('scripts')
 
