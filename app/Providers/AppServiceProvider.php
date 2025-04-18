@@ -51,6 +51,7 @@ class AppServiceProvider extends ServiceProvider
             Config::set('database.connections.sqlsrv.port', config('global.general.connection.port'));
             Config::set('database.connections.sqlsrv.username', config('global.general.connection.user'));
             Config::set('database.connections.sqlsrv.password', config('global.general.connection.password'));
+            Config::set('database.connections.sqlsrv.database', config('global.general.connection.db_website'));
             Config::set('database.connections.web.database', config('global.general.connection.db_website'));
             //SRO
             Config::set('database.connections.portal.database', config('global.general.connection.db_portal'));

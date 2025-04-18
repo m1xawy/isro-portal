@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Download;
-use App\Models\Post;
+use App\Models\News;
 use App\Models\SRO\Log\LogChatMessage;
 use App\Models\SRO\Log\LogEventSiegeFortress;
 use App\Models\SRO\Log\LogInstanceWorldInfo;
@@ -15,13 +15,13 @@ class PageController extends Controller
 {
     public function index()
     {
-        $data = Post::getPosts();
+        $data = News::getPosts();
         return view('pages.index', compact('data'));
     }
 
     public function post($slug)
     {
-        $data = Post::getPost($slug);
+        $data = News::getPost($slug);
         if (!$data) {
             return redirect()->back();
         }

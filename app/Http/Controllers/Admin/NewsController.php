@@ -5,67 +5,64 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
-use App\Models\Post;
+use App\Models\News;
 use Illuminate\Support\Str;
 
 class NewsController extends Controller
 {
     public function index()
     {
-        $data = Post::get();
-        return view('admin.posts.index', compact('data'));
+        $data = News::get();
+        return view('admin.news.index', compact('data'));
     }
 
     public function create()
     {
-        return view('admin.posts.create');
+        return view('admin.news.create');
     }
 
     public function store(Request $request)
     {
-        $request->validate([
+        $validated = $request->validate([
             'title' => 'required|string',
-            'slug' => 'unique:posts|string',
-            'news_content' => 'required',
-            'published_at' => 'required',
             'category' => 'required',
+            'published_at' => 'required',
+            'active' => 'required',
+            'news_content' => 'required',
         ]);
 
-        Post::create([
-            'author_id' => auth()->user()->id,
-            'title' => $request->title,
-            'slug' => Str::slug($request->slug,'-'),
-            'content' => $request->news_content,
-            'published_at' => $request->published_at,
-            'category' => $request->category,
-        ]);
+        $validated['author_id'] = auth()->user()->id;
+        $validated['slug'] = Str::slug($validated['title']) . '-' . now()->timestamp;
+        $validated['content'] = $validated['news_content'];
+
+        News::create($validated);
 
         return redirect()->route('admin.news.index')->with('success', 'News created successfully!');
     }
 
-    public function destroy(Post $post)
+    public function destroy(News $post)
     {
         $post->delete();
 
         return redirect()->route('admin.news.index')->with('success', 'News deleted successfully.');
     }
 
-    public function edit(Post $post)
+    public function edit(News $post)
     {
-        return view('admin.posts.edit', compact('post'));
+        return view('admin.news.edit', compact('post'));
     }
 
-    public function update(Request $request, Post $post)
+    public function update(Request $request, News $post)
     {
         $validated = $request->validate([
             'title' => 'required|string',
-            'slug' => 'unique:posts|string',
-            'news_content' => 'required',
-            'published_at' => 'required',
             'category' => 'required',
+            'published_at' => 'required',
+            'active' => 'required',
+            'news_content' => 'required',
         ]);
 
-        $validated['content'] = $request->news_content;
+        $validated['content'] = $validated['news_content'];
         $post->update($validated);
 
         return redirect()->route('admin.news.index')->with('success', 'News updated successfully.');

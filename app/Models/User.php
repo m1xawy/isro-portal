@@ -96,7 +96,7 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function posts(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
-        return $this->hasMany(Post::class);
+        return $this->hasMany(News::class);
     }
 
     public function role()

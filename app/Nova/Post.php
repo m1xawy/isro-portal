@@ -21,9 +21,9 @@ class Post extends Resource
     /**
      * The model the resource corresponds to.
      *
-     * @var class-string<\App\Models\Post>
+     * @var class-string<\App\Models\News>
      */
-    public static $model = \App\Models\Post::class;
+    public static $model = \App\Models\News::class;
 
     /**
      * The single value that should be used to represent the resource when being displayed.

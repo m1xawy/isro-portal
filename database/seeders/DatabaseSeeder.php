@@ -25,9 +25,6 @@ class DatabaseSeeder extends Seeder
         //     'email' => 'test@example.com',
         // ]);
 
-        $this->call(DonationMethodsSeeder::class);
-        $this->call(MaxiCardSeeder::class);
-        $this->call(PaypalSeeder::class);
         //$this->call(MagOptSeeder::class);
         //$this->call(ItemNameSeeder::class);
     }

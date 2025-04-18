@@ -23,7 +23,7 @@ return [
             'port' => '1433',
             'user' => 'sa',
             'password' => '123456',
-            'db_website' => 'SRO_Portal',
+            'db_website' => 'ISRO_CMS',
             'db_portal' => 'GB_JoymaxPortal',
             'db_account' => 'SILKROAD_R_ACCOUNT',
             'db_shard' => 'SILKROAD_R_SHARD',
