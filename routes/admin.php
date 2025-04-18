@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\NewsController;
 use App\Http\Controllers\Admin\SettingController;
+use App\Http\Controllers\Admin\UsersController;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware(['auth', 'admin'])->group(function () {
@@ -12,6 +13,8 @@ Route::middleware(['auth', 'admin'])->group(function () {
         Route::get('/settings', [SettingController::class, 'index'])->name('settings.index');
         Route::post('/settings', [SettingController::class, 'update'])->name('settings.update');
         Route::post('/settings/clear-cache', [SettingController::class, 'clear_cache'])->name('settings.clear-cache');
+
+        Route::get('/users', [UsersController::class, 'index'])->name('users.index');
 
         Route::get('/news', [NewsController::class, 'index'])->name('news.index');
         Route::get('/news/create', [NewsController::class, 'create'])->name('news.create');
