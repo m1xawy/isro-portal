@@ -28,12 +28,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        Blade::if('admin', function () {
-            return auth()->check() && auth()->user()->role?->is_admin;
-        });
-
-        date_default_timezone_set(config('global.general.options.timezone'));
-
         //Databases
         Config::set('database.connections.sqlsrv.host', config('global.general.connection.host'));
         Config::set('database.connections.sqlsrv.port', config('global.general.connection.port'));
@@ -47,6 +41,12 @@ class AppServiceProvider extends ServiceProvider
         Config::set('database.connections.shard.database', config('global.general.connection.db_shard'));
         Config::set('database.connections.log.database', config('global.general.connection.db_log'));
 
+        Blade::if('admin', function () {
+            return auth()->check() && auth()->user()->role?->is_admin;
+        });
+
+        date_default_timezone_set(config('global.general.options.timezone'));
+
         if (!app()->runningInConsole()) {
             $this->configureApp();
         }
@@ -57,10 +57,14 @@ class AppServiceProvider extends ServiceProvider
         try {
             Theme::set(setting('site_theme', 'default'));
 
-            Cache::remember('global_config', now()->addMinutes(config('global.general.cache.data.global_config')), function () {
-                return array_merge(config('global'), Setting::pluck('value', 'key')->toArray());
-            });
-            Config::set('settings', Cache::get('global_config'));
+            if(config('global.general.cache.config')){
+                $global_config = Cache::remember('global_config', now()->addMinutes(config('global.general.cache.data.global_config')), function () {
+                    return array_merge(config('global'), Setting::pluck('value', 'key')->toArray());
+                });
+            }else {
+                $global_config = array_merge(config('global'), Setting::pluck('value', 'key')->toArray());
+            }
+            Config::set('settings', $global_config);
             //dd(config('settings'));
 
             //General

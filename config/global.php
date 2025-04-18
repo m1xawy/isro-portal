@@ -43,7 +43,8 @@ return [
             'secret' => '',
         ],
         'cache' => [
-            'enable' => true,
+            'config' => false,
+            'sql' => true,
             'data' => [
                 'global_config' => 1, //1 minute
                 'news' => 1440, //1 day
