@@ -30,7 +30,7 @@ return [
             'db_log' => 'SILKROAD_R_SHARD_LOG',
         ],
         'smtp' => [
-            'enable' => true,
+            'enable' => false,
             'host' => 'smtp.mailtrap.io',
             'port' => 2525,
             'username' => '',

@@ -109,10 +109,10 @@
                                 <li><a class="dropdown-item" href="{{ route('profile.edit') }}">{{ __('Settings') }}</a></li>
                                 <li><a class="dropdown-item" href="{{ route('profile.donate') }}">{{ __('Donate') }}</a></li>
                                 <li><a class="dropdown-item" href="{{ route('profile.donate.history') }}">{{ __('Donate History') }}</a></li>
-                                @if (auth()->user()->role->is_admin)
+                                @admin
                                     <li><hr class="dropdown-divider"></li>
                                     <li><a class="dropdown-item" href="{{ url('/admin2') }}">{{ __('Admin panel') }}</a></li>
-                                @endif
+                                @endadmin
                                 <li><hr class="dropdown-divider"></li>
                                 <li>
                                     <form method="POST" action="{{ route('logout') }}">
