@@ -62,6 +62,27 @@ class PageController extends Controller
         return view('pages.uniques', compact('data'));
     }
 
+    public function uniques_advanced()
+    {
+        $data = LogInstanceWorldInfo::getUniques(9999, 0);
+        $data_ranking = LogInstanceWorldInfo::getUniqueRanking(9999, 0);
+        $unique_list = config('settings.ranking.unique_points');
+
+        foreach ($data as $value) {
+            $data_adv[$value->Value][] = $value;
+        }
+
+        foreach ($data_ranking as $value) {
+            $data_rank[$value->CharName16][] = $value;
+        }
+
+        return view('pages.uniques-advanced', [
+            'data' => $data_adv,
+            'data_rank' => $data_rank,
+            'unique_list' => $unique_list,
+        ]);
+    }
+
     public function fortress()
     {
         $data = LogEventSiegeFortress::getFortressHistory(25);

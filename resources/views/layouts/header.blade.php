@@ -19,6 +19,7 @@
                     <ul class="dropdown-menu" style="">
                         <li><a class="dropdown-item" href="{{ route('pages.timers') }}">{{ __('Event Times') }}</a></li>
                         <li><a class="dropdown-item" href="{{ route('pages.uniques') }}">{{ __('Unique Tracker') }}</a></li>
+                        <li><a class="dropdown-item" href="{{ route('pages.uniques-advanced') }}">{{ __('Advanced Unique Tracker') }}</a></li>
                         <li><a class="dropdown-item" href="{{ route('pages.fortress') }}">{{ __('Fortress History') }}</a></li>
                         <li><a class="dropdown-item" href="{{ route('pages.globals') }}">{{ __('Global History') }}</a></li>
                     </ul>

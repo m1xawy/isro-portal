@@ -21,6 +21,7 @@ Route::get('/post/{slug}', [PageController::class, 'post'])->name('pages.post.sh
 Route::get('/page/{slug}', [PageController::class, 'page'])->name('pages.page.show');
 Route::get('/timers', [PageController::class, 'timers'])->name('pages.timers');
 Route::get('/uniques', [PageController::class, 'uniques'])->name('pages.uniques');
+Route::get('/uniques-advanced', [PageController::class, 'uniques_advanced'])->name('pages.uniques-advanced');
 Route::any('/fortress', [PageController::class, 'fortress'])->name('pages.fortress');
 Route::any('/globals', [PageController::class, 'globals'])->name('pages.globals');
 Route::get('/download', [PageController::class, 'download'])->name('pages.download');

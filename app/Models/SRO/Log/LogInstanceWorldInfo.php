@@ -78,7 +78,7 @@ class LogInstanceWorldInfo extends Model
     {
         $unique_points = array_keys(config('settings.ranking.unique_points'));
         return Cache::remember('unique_history_'.$limit.'_'.$CharID, now()->addMinutes(config('settings.general.cache.data.unique_history')), function () use ($CharID, $limit, $unique_points) {
-            return self::select(['_LogInstanceWorldInfo.CharID', '_Char.CharName16', '_Char.RefObjID', '_LogInstanceWorldInfo.ValueCodeName128', '_LogInstanceWorldInfo.Value', '_LogInstanceWorldInfo.WorldID', '_RefRegion.wRegionID', '_RefRegion.AreaName', '_LogInstanceWorldInfo.EventTime',])
+            return self::select(['_LogInstanceWorldInfo.CharID', '_Char.CharName16', '_Char.RefObjID', '_Char.CurLevel', '_LogInstanceWorldInfo.ValueCodeName128', '_LogInstanceWorldInfo.Value', '_LogInstanceWorldInfo.WorldID', '_RefRegion.wRegionID', '_RefRegion.AreaName', '_LogInstanceWorldInfo.EventTime',])
                 ->leftJoin('SILKROAD_R_SHARD.dbo._Char', '_Char.CharID', '=', '_LogInstanceWorldInfo.CharID')
                 ->leftJoin('SILKROAD_R_SHARD.dbo._RefRegion', '_RefRegion.wRegionID', '=', '_LogInstanceWorldInfo.WorldID')
                 ->whereIn('_LogInstanceWorldInfo.Value', $unique_points)
