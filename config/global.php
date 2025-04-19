@@ -162,7 +162,11 @@ return [
     ],
     'donation' => [
         'paypal' => [
-            'enable' => false,
+            'enable' => true,
+            'name' => 'Paypal',
+            'method' => 'paypal',
+            'currency' => 'USD',
+            'image' => 'images/donations/paypal.png',
             'api' => [
                 'mode' => 'sandbox',
                 'sandbox' => [
@@ -214,6 +218,10 @@ return [
         ],
         'maxicard' => [
             'enable' => false,
+            'name' => 'MaxiCard',
+            'method' => 'maxicard',
+            'currency' => 'TL',
+            'image' => 'images/donations/maxicard.png',
             'api' => [
                 'key' => '',
                 'password' => '',
