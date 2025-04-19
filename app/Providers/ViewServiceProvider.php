@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Models\Pages;
 use App\Models\SRO\Account\ShardCurrentUser;
 use App\Models\SRO\Log\LogChatMessage;
 use App\Models\SRO\Log\LogInstanceWorldInfo;
@@ -48,11 +49,10 @@ class ViewServiceProvider extends ServiceProvider
                     $view->with('top_player', Char::getPlayerRanking(5, 0));
                 });
             }
-            if(config('settings.widgets.top_guild.enable')) {
-                View::composer(['layouts.sidebar', 'layouts.sidebar-right'], function ($view) {
-                    $view->with('top_guild', Guild::getGuildRanking(5, 0));
-                });
-            }
+            //Pages
+            View::composer(['layouts.header'], function ($view) {
+                $view->with('pages', Pages::get());
+            });
 
         } catch (QueryException $e) {
             // Error: Something Wrong.

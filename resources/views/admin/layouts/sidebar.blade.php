@@ -30,9 +30,9 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link d-flex align-items-center gap-2" href="#">
+                <a class="nav-link d-flex align-items-center gap-2 {{ request()->routeIs('admin.pages.index') ? 'active' : '' }}" href="{{ route('admin.pages.index') }}">
                     <svg class="bi" aria-hidden="true"><use xlink:href="#graph-up"/></svg>
-                    Pages
+                    {{ __('Pages') }}
                 </a>
             </li>
         </ul>

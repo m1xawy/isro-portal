@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\DownloadController;
 use App\Http\Controllers\Admin\NewsController;
+use App\Http\Controllers\Admin\PagesController;
 use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\UsersController;
 use Illuminate\Support\Facades\Route;
@@ -40,6 +41,12 @@ Route::middleware(['auth', 'admin'])->group(function () {
         Route::delete('/download/{download}', [DownloadController::class, 'destroy'])->name('download.destroy');
 
         //Pages
-
+        Route::get('/pages', [PagesController::class, 'index'])->name('pages.index');
+        Route::get('/pages/create', [PagesController::class, 'create'])->name('pages.create');
+        Route::post('/pages', [PagesController::class, 'store'])->name('pages.store');
+        Route::get('/pages/{pages}/edit', [PagesController::class, 'edit'])->name('pages.edit');
+        Route::put('/pages/{pages}', [PagesController::class, 'update'])->name('pages.update');
+        Route::get('/pages/{pages}/delete', [PagesController::class, 'delete'])->name('pages.delete');
+        Route::delete('/pages/{pages}', [PagesController::class, 'destroy'])->name('pages.destroy');
     });
 });

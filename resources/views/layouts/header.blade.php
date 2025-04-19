@@ -27,14 +27,11 @@
                 <li class="dropdown">
                     <a href="#" class="nav-link px-2 text-white dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">{{ __('Pages') }}</a>
                     <ul class="dropdown-menu" style="">
-                        @php $pages = Outl1ne\PageManager\Helpers\NPMHelpers::getPages(); @endphp
-                        @if (!empty($pages) && count($pages) !== 0)
-                            @foreach ($pages as $page)
-                                <li><a class="dropdown-item" href="{{ route('pages.page.show', ['slug' => $page['slug']['en']]) }}">{{ $page['name']['en'] }}</a></li>
-                            @endforeach
-                        @else
+                        @forelse ($pages as $page)
+                            <li><a class="dropdown-item" href="{{ route('pages.page.show', ['slug' => $page->slug]) }}">{{ $page->title }}</a></li>
+                        @empty
                             <li><a class="dropdown-item" href="#">{{ __('No Pages') }}</a></li>
-                        @endif
+                        @endforelse
                     </ul>
                 </li>
             </ul>

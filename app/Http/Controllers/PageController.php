@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Download;
 use App\Models\News;
+use App\Models\Pages;
 use App\Models\SRO\Log\LogChatMessage;
 use App\Models\SRO\Log\LogEventSiegeFortress;
 use App\Models\SRO\Log\LogInstanceWorldInfo;
@@ -31,16 +32,7 @@ class PageController extends Controller
 
     public function page($slug)
     {
-        $data = Cache::remember('page_view_'.$slug, now()->addMinutes(config('settings.general.cache.data.pages')), function () use ($slug) {
-            foreach (NPMHelpers::getPages() as $value){
-                if (!$value['slug']['en'] == $slug) {
-                    return redirect()->back();
-                }
-                $page = $value;
-            }
-            return $page;
-        });
-
+        $data = Pages::getPage($slug);
         return view('pages.page', compact('data'));
     }
 
