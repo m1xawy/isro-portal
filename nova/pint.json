@@ -1,7 +1,0 @@
-{
-  "preset": "laravel",
-  "rules": {
-    "method_chaining_indentation": false,
-    "no_superfluous_phpdoc_tags": false
-  }
-}
